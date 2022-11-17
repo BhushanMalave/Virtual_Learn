@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="377px" height="255px" viewBox="0 0 377 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>E88EFEC7-16AF-430A-B58B-D51C4C6F8795@1.5x</title>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="04.3_VirtualLearn_Verify_typing" transform="translate(1.000000, -558.000000)">
+            <g id="Numeric-Keyboard" transform="translate(0.000000, 559.000000)">
+                <rect id="Rectangle-1" fill="#87878A" x="0" y="0" width="375" height="253.125"></rect>
+                <g id="Dividers" stroke="#5A5A5E" stroke-linecap="square" stroke-width="0.5859375">
+                    <line x1="252.539062" y1="0" x2="252.539062" y2="253.125" id="Line-2"></line>
+                    <line x1="122.460938" y1="0" x2="122.460938" y2="253.125" id="Line-1"></line>
+                    <line x1="375" y1="190.429688" x2="0" y2="190.429688" id="Line-5"></line>
+                    <line x1="375" y1="126.5625" x2="0" y2="126.5625" id="Line-7"></line>
+                    <line x1="375" y1="63.28125" x2="0" y2="63.28125" id="Line-8"></line>
+                </g>
+                <rect id="Rectangle-2" fill="#545457" x="0" y="190.429688" width="122.460938" height="62.6953125"></rect>
+                <rect id="Rectangle-3" fill="#545457" x="252.539062" y="190.429688" width="122.460938" height="62.6953125"></rect>
+                <text id="1" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="55.078125" y="35.1015625">1</tspan>
+                </text>
+                <text id="2" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="178.125" y="34.515625">2</tspan>
+                </text>
+                <text id="3" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="307.617188" y="34.515625">3</tspan>
+                </text>
+                <text id="6" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="307.617188" y="97.796875">6</tspan>
+                </text>
+                <text id="5" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="178.125" y="97.796875">5</tspan>
+                </text>
+                <text id="4" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="55.078125" y="97.796875">4</tspan>
+                </text>
+                <text id="9" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="307.617188" y="161.078125">9</tspan>
+                </text>
+                <text id="8" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="178.125" y="161.078125">8</tspan>
+                </text>
+                <text id="0" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="178.125" y="233.148438">0</tspan>
+                </text>
+                <text id="7" font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="55.078125" y="161.078125">7</tspan>
+                </text>
+                <text id="." font-family="HelveticaNeue, Helvetica Neue" font-size="32.8125" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="88.4765625" y="229.632812">.</tspan>
+                </text>
+                <text id="ABC" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="173.4375" y="52.4296875">AB</tspan>
+                    <tspan x="192.964453" y="52.4296875">C</tspan>
+                </text>
+                <text id="DEF" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="304.101562" y="52.4296875">DEF</tspan>
+                </text>
+                <text id="MNO" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="300.585938" y="115.710938">MNO</tspan>
+                </text>
+                <text id="JKL" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="175.78125" y="115.710938">JKL</tspan>
+                </text>
+                <text id="GHI" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="52.734375" y="115.710938">GHI</tspan>
+                </text>
+                <text id="PQRS" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="45.703125" y="178.992188">PQRS</tspan>
+                </text>
+                <text id="TUV" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="174.609375" y="178.992188">TUV</tspan>
+                </text>
+                <text id="WXYZ" font-family="HelveticaNeue, Helvetica Neue" font-size="12.890625" font-weight="normal" letter-spacing="1.171875" fill="#FFFFFF">
+                    <tspan x="297.070312" y="178.992188">WXYZ</tspan>
+                </text>
+                <g id="Delete" transform="translate(301.681394, 213.867188)">
+                    <rect id="Rectangle-4" fill="#FFFFFF" x="6.52173085" y="0" width="18.75" height="18.75" rx="3.515625"></rect>
+                    <path d="M7.61721654,0.955867767 L0.522736717,7.92506359 C-0.167133986,8.60275162 -0.178937709,9.71964053 0.49578213,10.4190929 L7.61721654,17.8015709 L7.61721654,0.955867767 Z" id="Path-6" fill="#FFFFFF"></path>
+                    <line x1="11.5021996" y1="5.56640625" x2="19.1250192" y2="13.1892258" id="Line" stroke="#545457" stroke-width="1.171875" stroke-linecap="square"></line>
+                    <line x1="19.1193871" y1="5.56640625" x2="11.4965675" y2="13.1892258" id="Line-6" stroke="#545457" stroke-width="1.171875" stroke-linecap="square"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

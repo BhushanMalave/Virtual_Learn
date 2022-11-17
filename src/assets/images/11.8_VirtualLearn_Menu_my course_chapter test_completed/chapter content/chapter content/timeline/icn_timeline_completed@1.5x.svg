@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>93015F13-BAE3-4D8A-986B-CCA5D47A9D81@1.5x</title>
+    <defs>
+        <path d="M7.9053574,0.0995991672 C7.77915424,-0.0331997224 7.57454482,-0.0331997224 7.44834166,0.0995991672 L2.62116861,5.17903749 L0.551652478,3.0013626 C0.425464948,2.86856371 0.220839898,2.86856371 0.0946523669,3.0013626 C-0.031550789,3.13416149 -0.031550789,3.34946438 0.0946523669,3.48226327 L2.39268418,5.90039672 C2.45577794,5.96680439 2.53849671,6 2.62119986,6 C2.703903,6 2.78662177,5.96680439 2.84971554,5.90038028 L7.90537302,0.580499839 C8.03154493,0.447717391 8.03154493,0.232414498 7.9053574,0.0995991672 Z" id="path-1"></path>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="11.8_VirtualLearn_Menu_my-course_chapter-test_completed" transform="translate(-24.000000, -523.000000)">
+            <g id="chapter-content" transform="translate(24.000000, 383.000000)">
+                <g id="icn_timeline_completed" transform="translate(0.000000, 140.000000)">
+                    <circle id="Oval" fill="#1EAB0D" cx="10" cy="10" r="10"></circle>
+                    <g id="Add-/-Rectangular-Copy-23" transform="translate(6.000000, 7.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Shape" stroke="#FFFFFF" stroke-width="0.8" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

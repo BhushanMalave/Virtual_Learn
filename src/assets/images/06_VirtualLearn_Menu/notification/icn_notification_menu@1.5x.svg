@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>5C3B963F-040F-4C26-BE11-8F64E75FA03B@1.5x</title>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="06_VirtualLearn_Menu" transform="translate(-23.000000, -381.000000)" stroke="#373737" stroke-width="1.4">
+            <g id="notification" transform="translate(24.000000, 380.000000)">
+                <g id="icn_notification_menu" transform="translate(0.000000, 2.000000)">
+                    <line x1="0" y1="13" x2="16" y2="13" id="Line-2" stroke-linecap="round"></line>
+                    <path d="M2,13 L2,5.73913043 C2,2.56949622 4.6862915,0 8,0 C11.3137085,0 14,2.56949622 14,5.73913043 L14,13" id="Path"></path>
+                    <path d="M5,13 C5,14.6568542 6.34314575,16 8,16 C9.65685425,16 11,14.6568542 11,13" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

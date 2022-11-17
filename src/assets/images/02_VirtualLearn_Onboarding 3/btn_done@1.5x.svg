@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>2B3EB570-3E8C-4C11-A93F-E113B16755C7@1.5x</title>
+    <defs>
+        <path d="M5.1725,10.1624856 L1.7025,6.69248561 C1.51566847,6.50523293 1.26201764,6.4 0.9975,6.4 C0.732982358,6.4 0.479331526,6.50523293 0.2925,6.69248561 C-0.0975,7.08248561 -0.0975,7.71248561 0.2925,8.10248561 L4.4725,12.2824856 C4.8625,12.6724856 5.4925,12.6724856 5.8825,12.2824856 L16.4625,1.70248561 C16.8525,1.31248561 16.8525,0.682485606 16.4625,0.292485606 C16.2756685,0.105232932 16.0220176,0 15.7575,0 C15.4929824,0 15.2393315,0.105232932 15.0525,0.292485606 L5.1725,10.1624856 Z" id="path-1"></path>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02_VirtualLearn_Onboarding-3" transform="translate(-305.000000, -732.000000)">
+            <g id="btn_done" transform="translate(305.000000, 732.000000)">
+                <circle id="Oval" fill="#EE5C4D" cx="23" cy="23" r="23"></circle>
+                <g id="icon-/-action-/-arrow" transform="translate(14.622500, 15.712507)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="icon/navigation/check_24px" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

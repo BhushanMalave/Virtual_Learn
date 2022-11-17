@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>BB982B47-8A2C-49BA-869B-DDC3BAF25108@1.5x</title>
+    <defs>
+        <path d="M4.56313381,4 L7.8833826,7.32023443 C8.03886575,7.47573658 8.0388717,7.72784624 7.88340148,7.88337397 C7.80778193,7.95901213 7.70669257,8 7.60183403,8 C7.49697196,8 7.39588346,7.95900946 7.32025841,7.88336581 L4,4.56312234 L0.679788928,7.88334331 C0.604142623,7.95900835 0.503069148,8 0.398206504,8 C0.293329864,8 0.192243221,7.95901522 0.116631225,7.88336576 C-0.0388758839,7.72785864 -0.0388758839,7.47573803 0.116631286,7.32023085 L3.4368776,4 L0.116631433,0.679750461 C-0.0388765487,0.52424273 -0.0388765487,0.272119291 0.116627859,0.116634387 C0.272120768,-0.0388775233 0.524262711,-0.0388775233 0.679751984,0.116630753 L4,3.43686819 L7.3202459,0.116630863 C7.47575309,-0.0388763486 7.72787395,-0.0388763486 7.88338472,0.116634437 C8.03887236,0.272141338 8.03887236,0.52425919 7.88338115,0.679750412 L4.56313381,4 Z" id="path-1"></path>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="11.7_VirtualLearn_Menu_my-course_chapter-test_test-result_check2" transform="translate(-44.000000, -516.000000)">
+            <g id="show-answer" transform="translate(0.000000, 317.000000)">
+                <g id="wrong-answer" transform="translate(24.000000, 186.000000)">
+                    <g id="icn_option-wrong" transform="translate(20.000000, 13.000000)">
+                        <circle id="Oval" fill="#FFFFFF" cx="10" cy="10" r="10"></circle>
+                        <g id="wrong" transform="translate(6.000000, 6.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Combined-Shape" stroke="#EA2626" stroke-width="0.8" fill="#EA2626" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

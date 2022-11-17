@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Biko_Black.otf",
+      "sha1": "087f693a4458184d0f5cd08a9f5fb5184ff91beb"
+    },
+    {
+      "path": "src/assets/fonts/Biko_Bold.otf",
+      "sha1": "8026f49cad2e681101424823605525cb404ebcd1"
+    },
+    {
+      "path": "src/assets/fonts/Biko_Regular.otf",
+      "sha1": "8fba383cfcbc4d82c200e6ce63abd5df64c901be"
+    },
+    {
+      "path": "src/assets/fonts/ProximaNova-Regular.otf",
+      "sha1": "28d04eb938c05b5158a69a709682d4f0517a59ab"
+    },
+    {
+      "path": "src/assets/fonts/ProximaNova.ttf",
+      "sha1": "b39be6d1b45b0bc0ad73c5048cf2fb66424ddcc1"
+    },
+    {
+      "path": "src/assets/fonts/proximanova-semibold.otf",
+      "sha1": "1fbed071180d360f01e78672affeea6a0a256fbc"
+    }
+  ]
+}

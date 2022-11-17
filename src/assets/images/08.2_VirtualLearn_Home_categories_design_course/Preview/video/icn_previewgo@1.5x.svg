@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ADDA76DC-24C4-4626-BF80-26A81D2F6295@1.5x</title>
+    <defs>
+        <path d="M302.842496,39.5956065 C303.051535,39.8164609 303.052382,40.1826877 302.845723,40.4014687 L297.893625,45.8279072 C297.691982,46.0570817 297.358188,46.0570817 297.150591,45.8295978 C296.949341,45.609582 296.950159,45.241785 297.152315,45.0125469 L301.322152,40.451889 L301.709727,39.9999819 L301.32525,39.5514308 L297.150591,34.9768122 C296.949818,34.7573184 296.949818,34.3904132 297.150499,34.1705074 C297.357952,33.9431815 297.690742,33.9429166 297.892831,34.1711986 L302.842496,39.5956065 Z" id="path-1"></path>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="08.2_VirtualLearn_Home_categories_design_course" transform="translate(-320.000000, -432.000000)">
+            <g id="Preview" transform="translate(24.000000, 363.000000)">
+                <g id="video" transform="translate(0.000000, 36.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="icn_previewgo" stroke="#FFFFFF" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

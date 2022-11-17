@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>0D040F30-699C-482A-A4E6-C57347F9CA38@1.5x</title>
+    <defs>
+        <path d="M9.0793705,2.84560655 C9.30582954,3.06646089 9.30674726,3.43268771 9.08286665,3.65146869 L3.71809377,9.0779072 C3.49964733,9.3070817 3.13803649,9.30708172 2.9131404,9.07959784 C2.69511925,8.859582 2.69600596,8.49178503 2.91500762,8.26254686 L7.4323311,3.70188896 L7.85220454,3.24998191 L7.43568804,2.8014308 L2.9131404,-1.77318776 C2.69563647,-1.99268165 2.69563647,-2.35958684 2.91304078,-2.57949261 C3.13778082,-2.80681853 3.49830341,-2.80708336 3.71723355,-2.57880141 L9.0793705,2.84560655 Z" id="path-1"></path>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="14_VirtualLearn_Menu_profile" transform="translate(-328.000000, -747.000000)">
+            <g id="Privacy" transform="translate(24.000000, 726.000000)">
+                <g id="icn_privacy_go" transform="translate(308.250000, 28.000000) rotate(-90.000000) translate(-308.250000, -28.000000) translate(302.250000, 24.750000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Shape" stroke="#042C5C" fill="#042C5C" fill-rule="nonzero" transform="translate(6.000000, 3.250000) rotate(90.000000) translate(-6.000000, -3.250000) " xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
