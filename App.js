@@ -19,7 +19,7 @@ import { HomeSearch } from './src/screens/HomeSearch';
 
 const App = () => {
   return(
-   <DrawerNav/>
+   <HomeSearch/>
   )
  
 
