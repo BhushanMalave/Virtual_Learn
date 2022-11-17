@@ -14,6 +14,7 @@ import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import { CompletedComponent } from '../components/CompletedComponent';
 import {OnGoingComponent} from '../components/OnGoingComponent';
 import { SearchComponent } from '../components/SearchFoundComponent';
+import MyCourseEmptyScreen from './MyCourseEmptyScreen';
 
 const data = [
   {
@@ -39,6 +40,8 @@ export const MyCourse = () => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
 
+  const[initial,setInitial]=useState(1)
+
   return (
     <SafeAreaView style={styles.container}>
       
@@ -52,7 +55,14 @@ export const MyCourse = () => {
           />
         </View>
         <Text style={styles.header}>My Course</Text>
-        <View style={styles.buttontabs}>
+
+        {initial === 1?(
+          <>
+          <MyCourseEmptyScreen/>
+          </>
+        ):(
+          <>
+             <View style={styles.buttontabs}>
           <TouchableOpacity
             onPress={() => {
               setClicked1(true), setClicked2(false);
@@ -109,6 +119,9 @@ export const MyCourse = () => {
               ):(<></>)
             }
 
+          </>
+        )}
+       
          
       
     </SafeAreaView>

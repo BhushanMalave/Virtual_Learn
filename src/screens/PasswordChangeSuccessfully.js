@@ -47,7 +47,7 @@ const styles=StyleSheet.create({
         height:60,
         maxWidth:"95%",
         color:"#7A7A7A",
-        fontFamily:"Proxima Nova",
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         fontSize:16,
         letterSpacing:0,
         lineHeight:20,
@@ -58,7 +58,7 @@ const styles=StyleSheet.create({
     button:{
         height:20,
         color:"#EE5C4D",
-        fontFamily:"Proxima Nova",
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         fontSize:16,
         fontWeight:"bold",
         letterSpacing:0.4,

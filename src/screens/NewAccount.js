@@ -24,15 +24,19 @@ export const NewAccount = ({navigation}) => {
   };
   const handleProcess = async () => {
     const obj ={
-        mobileNumber : "+917795287943"
+        mobileNumber : "+919591726087"
     }
     try {
       const response = await axios.put(
         'https://virtual-learn-app-java.herokuapp.com/User/Continue',
          obj,
       );
-      console.log("=====",response.data);
-      navigation.navigate('VerifyAccount');
+      console.log("=====",response.data.message);
+      if(response.data.message ===  "OTP Valid For 2 Minutes")
+      {
+        navigation.navigate('VerifyAccount');
+      }
+      
     } catch (error) {
       console.log('errrr occured');
     }
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
   textno: {
     height: 20,
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 10,
   },
@@ -135,14 +139,14 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginTop: 10,
   },
   text3: {
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
   },
   text4: {
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#EE5C4D',
     fontSize: 17,
-    fontFamily: 'ProximaNova-semibold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
    
     marginTop: Platform.OS == 'ios' ? 2 : -3,
   },

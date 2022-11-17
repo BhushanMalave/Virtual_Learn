@@ -17,7 +17,7 @@ export const Drawer = createDrawerNavigator();
 
 export const DrawerNav = () => {
   return (
-    <NavigationContainer>
+  
       <Drawer.Navigator
         screenOptions={{
           drawerStyle: {
@@ -97,6 +97,6 @@ export const DrawerNav = () => {
           }}
         />
       </Drawer.Navigator>
-    </NavigationContainer>
+   
   );
 };

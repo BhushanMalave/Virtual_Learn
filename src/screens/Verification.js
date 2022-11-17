@@ -19,9 +19,28 @@ import { ButtonComponent } from '../components/Buttons';
 export const Verification = ({navigation}) => {
     
     const [text,setText] =useState ('');
-    const handleText =string => {
+    const handleText = async string => {
         setText(string)
         console.log(text)
+        const obj ={
+            mobileNumber : "+919591726087",
+            oneTimePassword: text,
+        }
+
+        try {
+            const response = await axios.post(
+              'https://virtual-learn-app-java.herokuapp.com/User/Verify',
+               obj,
+            );
+            console.log("=====",response.data.message);
+            if(response.data.message ===   "Verified")
+            {
+                navigation.navigate('Personal Details');
+            }
+           
+          } catch (error) {
+            console.log(error);
+          }
     };
 
     const handleProcess = () => {
@@ -102,7 +121,7 @@ const styles = StyleSheet.create({
         fontSize:20,
         letterSpacing:45,
         // borderWidth:1,
-        fontFamily:'ProximaNova-Regular',
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         marginLeft:10,
     },
     textInputBorder:{
@@ -147,7 +166,7 @@ const styles = StyleSheet.create({
     textno:{
         height:20,
         fontSize:16,
-        fontFamily:'ProximaNova-Regular',
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         textAlign:'center',
         marginTop:10,
 
@@ -163,21 +182,22 @@ const styles = StyleSheet.create({
         height:40,
         color:'#7A7A7A',
         fontSize:16,
-        fontFamily:'ProximaNova-Regular',
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         marginTop:10,
     },
     text3:{
         height:35,
         color:'#7A7A7A',
         fontSize:16,
-        fontFamily:'ProximaNova-Regular',
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         textAlign:'center',
     },
     text4:{
       
         color:'#EE5C4D',
         fontSize:17,
-        fontFamily:'ProximaNova-semibold',
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+        fontWeight:'bold',
         textAlign:'center',
         marginBottom:Platform.OS == 'ios' ? 0 : 0,
     },

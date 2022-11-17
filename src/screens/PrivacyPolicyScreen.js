@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   text1:{
     color:"#7A7A7A",
-    fontFamily:"Proxima Nova",
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize:16,
     letterSpacing:0,
     lineHeight:20,

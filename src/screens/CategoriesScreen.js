@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 327,
     color: '#7A7A7A',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 20,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   categorytext: {
     height: 15,
     color: '#2B2B2B',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0,

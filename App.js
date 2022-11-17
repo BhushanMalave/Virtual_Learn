@@ -15,16 +15,14 @@ import { EditProfile } from './src/screens/EditProfile';
 import { OnboardingStack } from './src/navigation/OnboardingStack';
 import { DrawerNav } from './src/navigation/DrawerNav';
 import { HomeSearch } from './src/screens/HomeSearch';
+import { HomeStack } from './src/navigation/HomeStack';
+import { Router } from './src/navigation/Route';
 
 
 const App = () => {
   return(
-   <HomeSearch/>
+   <Router/>
   )
- 
-
-
-
 };
 
 
