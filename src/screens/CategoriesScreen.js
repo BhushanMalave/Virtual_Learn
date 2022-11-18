@@ -7,9 +7,8 @@ import {
   Text,
   ScrollView,
   Pressable,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
-
 
 const categories = [
   {
@@ -19,52 +18,52 @@ const categories = [
   },
   {
     id: 2,
-  source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Development',
   },
   {
     id: 3,
-  source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Business',
   },
   {
     id: 4,
-     source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Marketing',
   },
   {
     id: 5,
-      source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Photography',
   },
   {
     id: 6,
-      source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Finance',
   },
   {
     id: 7,
-     source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'IT & Software',
   },
   {
     id: 8,
-     source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'LifeStyle',
   },
   {
     id: 9,
-     source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Music',
   },
   {
     id: 10,
-      source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Training',
   },
   {
     id: 11,
-      source: require('../assets/images/icn_back_header.png'),
+    source: require('../assets/images/icn_back_header.png'),
     category: 'Health & Fitness',
   },
 ];
@@ -72,14 +71,12 @@ export const CategoriesScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mainheader}>
-        <Pressable  onPress={() => navigation.navigate("HomeScreen")}>
-
-        <Image source={require('../assets/images/icn_back_header.png')} />
+        <Pressable onPress={() => navigation.navigate('HomeScreen')}>
+          <Image source={require('../assets/images/icn_back_header.png')} />
         </Pressable>
 
         <Pressable>
-
-        <Image source={require('../assets/images/icn_search-Search.png')} />
+          <Image source={require('../assets/images/icn_search-Search.png')} />
         </Pressable>
       </View>
       <Text style={styles.name}>Categories</Text>
@@ -89,8 +86,8 @@ export const CategoriesScreen = ({navigation}) => {
 
       <View style={styles.middlecontainer}>
         {categories.map(item => (
-          <View style={styles.categorycontainer}>
-            <Image source={item.source} style={styles.icon}/>
+          <View style={styles.categorycontainer} key={item.id}>
+            <Image source={item.source} style={styles.icon} />
             <Text style={styles.categorytext}>{item.category}</Text>
           </View>
         ))}
@@ -153,20 +150,17 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 15,
-   
   },
   middlecontainer: {
     flexDirection: 'row',
     flex: 1,
     display: 'flex',
     flexWrap: 'wrap',
-    marginTop:25
-    
+    marginTop: 25,
   },
-  icon:{
+  icon: {
     // height:20,
-   
-    marginBottom:15
-    
-  }
+
+    marginBottom: 15,
+  },
 });
