@@ -40,11 +40,7 @@ export const MyCourse = () => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
 
-<<<<<<< HEAD
-  const[initial,setInitial]=useState(2)
-=======
   const[initial,setInitial]=useState(1)
->>>>>>> a136fdbd339d6052a64b7939ebb56a0f8238bfbf
 
   return (
     <SafeAreaView style={styles.container}>

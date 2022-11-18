@@ -17,6 +17,7 @@ import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import icn_warning from '../assets/images/05.1_VirtualLearn_Login_error/warning/icn_warning.png';
+import axios from 'axios';
 
 
 
@@ -64,27 +65,27 @@ export const Login = ({navigation}) => {
               }}
               onSubmit={ async values => {
                 console.log(values);
-                navigation.navigate('Drawer')
+                // navigation.navigate('Drawer')
 
-                // const obj ={
-                //   "userName"  :   values.username,
-                //   "password"  :   values.password,
-                // }
+                const obj ={
+                  "userName"  :   values.username,
+                  "password"  :   values.password,
+                }
                
-                // try {
-                //   const response = await axios.put(
-                //     'https://virtual-learn-app-java.herokuapp.com/Login',
-                //      obj,
-                //   );
-                //   console.log("=====",response.data.message);
-                //   if(response.data.message ===   "Verified")
-                //   {
-                //     navigation.navigate('Drawer')
-                //   }
+                try {
+                  const response = await axios.put(
+                    'https://virtual-learn-app-java.herokuapp.com/Login',
+                     obj,
+                  );
+                  console.log("=====",response.data);
+                  if(response.data.jwtToken)
+                  {
+                    navigation.navigate('Drawer')
+                  }
                  
-                // } catch (error) {
-                //   console.log(error);
-                // }
+                } catch (error) {
+                  console.log(error);
+                }
               }}>
               {({
                 handleChange,

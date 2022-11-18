@@ -124,11 +124,7 @@ const styles=StyleSheet.create({
     height: 22,
     // width: 167,
     color: '#2B2B2B',
-<<<<<<< HEAD
-    fontFamily: 'Proxima Nova',
-=======
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
->>>>>>> a136fdbd339d6052a64b7939ebb56a0f8238bfbf
     fontSize: 18,
     fontWeight: '600',
     letterSpacing: 0,

@@ -5,6 +5,8 @@ import { NewAccount } from '../screens/NewAccount';
 import { VerifyAccount } from '../screens/VerifyAccount';
 import { PersonalDetails } from '../screens/PersonalDetails';
 import { RegisterSuccessfully } from '../screens/RegisterSuccessfully';
+import { CreateNewPassword } from '../screens/CreateNewPassword';
+import { PasswordChange } from '../screens/PasswordChangeSuccessfully';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +31,9 @@ export const RegistrationStack = () => {
         component={PersonalDetails}
         options={{headerShown: false}}
       />
+
+   
+      
          <Stack.Screen
         options={{headerShown: false}}
         name="Registration Successfull"

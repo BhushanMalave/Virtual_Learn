@@ -61,11 +61,7 @@ export const Chapters = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{flex:1,marginHorizontal:24,}}>
-<<<<<<< HEAD
-        <View  style={{flex:1}}>
-=======
         <View  style={{flex:1,borderWidth:1}}>
->>>>>>> a136fdbd339d6052a64b7939ebb56a0f8238bfbf
         <Text style={styles.contentText}>Course Content</Text>
 
         <View style={styles.contentDetailsView}>
@@ -144,11 +140,7 @@ const styles = StyleSheet.create({
   container: {
     // margin: 24,
     flex: 1,
-<<<<<<< HEAD
-   
-=======
     borderWidth: 1,
->>>>>>> a136fdbd339d6052a64b7939ebb56a0f8238bfbf
   },
   contentText: {
     color: '#2B2B2B',

@@ -4,6 +4,7 @@ import { Login } from '../screens/Login';
 import { ForgotPassword } from '../screens/ForgotPassword';
 import { Verification } from '../screens/Verification';
 import { PasswordChange } from '../screens/PasswordChangeSuccessfully';
+import { CreateNewPassword } from '../screens/CreateNewPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,8 +29,13 @@ export const LoginStack = () => {
         options={{headerShown: false}}
       />
          <Stack.Screen
+        name="CreateNewPassword"
+        component={CreateNewPassword}
         options={{headerShown: false}}
-        name="Password Changed Successfull"
+      />
+         <Stack.Screen
+        options={{headerShown: false}}
+        name="Password Changed Successfully"
         component={PasswordChange}
       /> 
     </Stack.Navigator>

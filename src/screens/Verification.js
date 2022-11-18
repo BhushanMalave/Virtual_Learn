@@ -13,12 +13,14 @@ import {
   Platform,
 } from 'react-native';
 import { ButtonComponent } from '../components/Buttons';
+import axios from 'axios';
 
 
 
 export const Verification = ({navigation}) => {
     
     const [text,setText] =useState ('');
+
     const handleText = async string => {
         setText(string)
         console.log(text)
@@ -26,6 +28,7 @@ export const Verification = ({navigation}) => {
             mobileNumber : "+919591726087",
             oneTimePassword: text,
         }
+      
 
         try {
             const response = await axios.post(
@@ -35,18 +38,13 @@ export const Verification = ({navigation}) => {
             console.log("=====",response.data.message);
             if(response.data.message ===   "Verified")
             {
-                navigation.navigate('Personal Details');
+                navigation.navigate("CreateNewPassword");
             }
            
           } catch (error) {
             console.log(error);
           }
-    };
-
-    const handleProcess = () => {
-          console.log(text);
-          navigation.navigate('Password Changed Successfull')
-    };
+     };
 
   return(
     <SafeAreaView style={styles.body}>
@@ -79,10 +77,32 @@ export const Verification = ({navigation}) => {
 
         <View style={styles.textView2}>
         <Text style={styles.text3}>Didn’t recieve a code?</Text>
+        <TouchableOpacity
+          onPress={async () => {
+              const obj =
+              {
+                "mobileNumber"  :   "+919591726087"
+            }
+            
+
+            try {
+              const response = await axios.put(
+                'https://virtual-learn-app-java.herokuapp.com/User/Resend',
+                obj,
+              );
+              console.log('=====', response.data.message);
+              if (response.data.message === "OTP Valid For 2 Minutes") {
+                  
+              }
+            } catch (error) {
+              console.log(error);
+            }
+          }}>
         <Text style={styles.text4} >Resend</Text>
+        </TouchableOpacity>
         </View>
         <View style={styles.button}>
-        <ButtonComponent text ="Submit" onPress={() => handleProcess()} />
+        <ButtonComponent text ="Submit" onPress={() => handleText()} />
         </View>
        
     </SafeAreaView>
