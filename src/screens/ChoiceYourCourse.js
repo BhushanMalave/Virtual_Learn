@@ -170,8 +170,11 @@ export const ChoiceYourCourse = ({navigation}) => {
               marginLeft: 20,
               marginTop: 10,
             }}>
+
             {categories.map(item => (
+              <View key={item.id}>
               <CategoriesComponent img={item.source} category={item.category} />
+              </View>
             ))}
           </View>
         </ScrollView>
@@ -193,34 +196,20 @@ export const ChoiceYourCourse = ({navigation}) => {
             />
           )}/> */}
         {course.map(item => (
+          <View key={item.id}>
           <SearchFoundComponent
           name={item.courseName}
           chapter={item.chapters}
           category={item.category}
           source={item.source}
           key={item.id}
-        />
+          />
+          </View>
         ))}
       </View>
-{/* 
-      <VirtualizedList
-        data={course}
-        initialNumToRender={4}
-        renderItem={({ item }) => (
-            <SearchFoundComponent
-              name={item.courseName}
-              chapter={item.chapters}
-              category={item.category}
-            />
-          )}
-        keyExtractor={item => item.key}
-        getItemCount={course.length}
-        getItem={course}
-      /> */}
 
-<BottomPopup show={show}/>
+
       </ScrollView>
-      
     </SafeAreaView>
   );
 };
