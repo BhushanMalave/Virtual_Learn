@@ -9,6 +9,7 @@ import { PrivacyPolicyScreen } from '../screens/PrivacyPolicyScreen';
 import { TermServicesScreen } from '../screens/TermServicesScreen';
 import { RegistrationStack } from './RegistrationStack';
 import { LoginStack } from './LoginStack';
+import { CreateNewPassword } from '../screens/CreateNewPassword';
 
 const Stack = createNativeStackNavigator();
 

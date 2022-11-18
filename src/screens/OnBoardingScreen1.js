@@ -10,8 +10,15 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import { hsTopHeaders } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
+import { hsCategories } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
 
 export const OnBoardingScreen1 = ({navigation}) => {
+
+  const dispatch =useDispatch();
+  const token =useSelector(state=> state.userDetails.token);
+
   return (
     <SafeAreaView style={styles.container}>
       
@@ -42,7 +49,14 @@ export const OnBoardingScreen1 = ({navigation}) => {
           <View style={styles.bottomView}>
             <TouchableOpacity>
     <View>
-    <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+    <TouchableOpacity onPress={() => {
+        
+        //  dispatch(hsTopHeaders(token))
+        // dispatch(hsCategories(token))
+       navigation.navigate("Welcome");
+      // console.log(token);
+  
+  }}>
             <Text style={styles.skiptext}>SKIP</Text>
             </TouchableOpacity>
     </View>

@@ -18,6 +18,8 @@ import {CategoriesComponent} from '../components/CategoriesComponent';
 import img_course_all_course1 from '../assets/images/img_course_all_course1.png';
 import { SearchFoundComponent } from '../components/SearchFoundComponent';
 import { BottomPopup } from '../components/BottomPopup';
+import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
+import {useSelector, useDispatch} from 'react-redux';
 
 const categories = [
   {
@@ -116,8 +118,9 @@ const course = [
   },
 ];
 export const ChoiceYourCourse = ({navigation}) => {
+  const filterState = useSelector(state => state.filterState.state);
   const [text, setText] = useState('');
-  const [show,setShow] =useState(false)
+  const dispatch =useDispatch();
   const handleText = async string => {
     setText(string);
     console.log(text);
@@ -150,7 +153,7 @@ export const ChoiceYourCourse = ({navigation}) => {
               onChangeText={handleText}
             />
           </View>
-          <Pressable onPress={() => setShow(true)}>
+          <Pressable onPress={() => {dispatch(setFilterState())}}>
           <Image
             source={require('../assets/images/icn_filter_search.png')}
             style={styles.imgfilter}
@@ -207,9 +210,8 @@ export const ChoiceYourCourse = ({navigation}) => {
           </View>
         ))}
       </View>
-
-
       </ScrollView>
+      <BottomPopup show={filterState}/>
     </SafeAreaView>
   );
 };

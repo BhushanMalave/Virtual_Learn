@@ -13,19 +13,23 @@ import {
   Platform,
 } from 'react-native';
 import { ButtonComponent } from '../components/Buttons';
+import axios from 'axios';
 
 
 
 export const Verification = ({navigation}) => {
     
     const [text,setText] =useState ('');
+    const [showError,setShowError] =useState(false);
+
     const handleText = async string => {
         setText(string)
-        console.log(text)
+        setShowError(false);
         const obj ={
             mobileNumber : "+919591726087",
             oneTimePassword: text,
         }
+      
 
         try {
             const response = await axios.post(
@@ -35,21 +39,21 @@ export const Verification = ({navigation}) => {
             console.log("=====",response.data.message);
             if(response.data.message ===   "Verified")
             {
-                navigation.navigate('Personal Details');
+                navigation.navigate("CreateNewPassword");
+                setShowError(false);
+            }
+            else{
+                setShowError(true);
             }
            
           } catch (error) {
             console.log(error);
           }
-    };
-
-    const handleProcess = () => {
-          console.log(text);
-          navigation.navigate('Password Changed Successfull')
-    };
+     };
 
   return(
     <SafeAreaView style={styles.body}>
+        <View style={{  marginHorizontal:24,}}>
         <View style={styles.textView}>
             <Text style={styles.text1}>
                 Verification
@@ -79,11 +83,41 @@ export const Verification = ({navigation}) => {
 
         <View style={styles.textView2}>
         <Text style={styles.text3}>Didn’t recieve a code?</Text>
+        <TouchableOpacity
+          onPress={async () => {
+              const obj =
+              {
+                "mobileNumber"  :   "+919591726087"
+            }
+            
+
+            try {
+              const response = await axios.put(
+                'https://virtual-learn-app-java.herokuapp.com/User/Resend',
+                obj,
+              );
+              console.log('=====', response.data.message);
+              if (response.data.message === "OTP Valid For 2 Minutes") {
+                  
+              }
+            } catch (error) {
+              console.log(error);
+            }
+          }}>
         <Text style={styles.text4} >Resend</Text>
+        </TouchableOpacity>
         </View>
         <View style={styles.button}>
-        <ButtonComponent text ="Submit" onPress={() => handleProcess()} />
+        <ButtonComponent text ="Submit" onPress={() => handleText()} />
         </View>
+        </View>
+        {showError && 
+         <View style={styles.componentBody}>
+         <Text style={{fontSize:16 ,fontFamily:Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova', textAlign:'center' ,color:'#FFFFFF' }}>Invalid verification code, please try again</Text>
+          </View>
+      }
+      
+        
        
     </SafeAreaView>
      
@@ -94,7 +128,7 @@ export const Verification = ({navigation}) => {
 const styles = StyleSheet.create({
     body:{
         flex:1,
-        marginHorizontal:24,
+      
     },
     textView:{
         marginTop:50,
@@ -207,4 +241,10 @@ const styles = StyleSheet.create({
         marginTop:20,
         tintColor:'#373737',
     },
+    componentBody:{
+        height:55,
+        marginTop:Platform.OS ==='ios'? 280:225,
+        backgroundColor:'#E92020',
+        justifyContent:'center',
+      }
 });

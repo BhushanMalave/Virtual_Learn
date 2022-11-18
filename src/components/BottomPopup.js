@@ -12,6 +12,8 @@ import {
 import {CategoriesComponent} from './CategoriesComponent';
 import { ButtonComponent } from './Buttons';
 import { ButtonComponent3 } from './Buttons';
+import {useSelector, useDispatch} from 'react-redux';
+import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
 
 const categories = [
   {
@@ -67,21 +69,24 @@ const categories = [
 ];
 
 export const BottomPopup = ({show}) => {
-  const [modalVisible, setModalVisible] = useState(show);
+
+  const filterState = useSelector(state => state.filterState.state);
+
+  const dispatch =useDispatch();
   return (
     <Modal
       animationType="fade"
       transparent={true}
-      visible={show}
+      visible={filterState}
       onRequestClose={() => {
         Alert.alert('Modal has been closed.');
-        setModalVisible(!modalVisible);
+        {dispatch(setFilterState())}
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={{flexDirection: 'row' , }}>
             <Text style={styles.text1}> Search Filter</Text>
-            <Pressable  onPress={() => setModalVisible(!modalVisible)}>
+            <Pressable  onPress={() => {dispatch(setFilterState())}}>
             <Image
               source={require('../assets/images/icn_close_filter.png')}
               style={styles.img}
