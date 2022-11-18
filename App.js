@@ -10,24 +10,23 @@ import {
   View,
 } from 'react-native';
 
-import {PersonalDetails} from '../VirtualLearn/src/screens/PersonalDetails';
-import {EditProfile} from './src/screens/EditProfile';
-import {OnboardingStack} from './src/navigation/OnboardingStack';
-import {DrawerNav} from './src/navigation/DrawerNav';
-import {HomeSearch} from './src/screens/HomeSearch';
-
-import {HomeScreen} from './src/screens/HomeScreen';
-import {CourseScreen} from './src/screens/CourseScreen';
-import {MyCourse} from './src/screens/MyCourse';
-import MyCourseFirstScreen from './src/screens/MyCourseEmptyScreen';
-import MyCourseEmptyScreen from './src/screens/MyCourseEmptyScreen';
-import {OverviewScreen} from './src/screens/OverviewScreen';
-
-import {HomeStack} from './src/navigation/HomeStack';
+import store from "./src/redux/Store/store"
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
+import {ForgotPassword} from './src/screens/ForgotPassword';
+
+let persistor = persistStore(store);
 
 const App = () => {
-  return <Router />;
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Router />
+      </PersistGate>
+    </Provider>
+  );
 };
 
 export default App;

@@ -18,9 +18,10 @@ import axios from 'axios';
 
 export const VerifyAccount = ({navigation}) => {
   const [text, setText] = useState('');
+  const [showError,setShowError] =useState(false);
   const handleText = string => {
     setText(string);
-    console.log(text);
+    setShowError(false);
   };
 
   const handleProcess = async () => {
@@ -37,7 +38,10 @@ export const VerifyAccount = ({navigation}) => {
       );
       console.log('=====', response.data.message);
       if (response.data.message === 'Verified') {
+             setShowError(false);
         navigation.navigate('Personal Details');
+      } else{
+              setShowError(true);
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +50,7 @@ export const VerifyAccount = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.body}>
+      <View style={{ marginHorizontal: 24,}}>
       <TouchableOpacity onPress={() => navigation.navigate('New Account')}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -102,6 +107,13 @@ export const VerifyAccount = ({navigation}) => {
       <View style={styles.button}>
         <ButtonComponent text="Verify" onPress={() => handleProcess()} />
       </View>
+      </View>
+      {showError && 
+         <View style={styles.componentBody}>
+         <Text style={{fontSize:16 ,fontFamily:Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova', textAlign:'center' ,color:'#FFFFFF' }}>Invalid verification code, please try again</Text>
+          </View>
+      }
+      
     </SafeAreaView>
   );
 };
@@ -109,7 +121,7 @@ export const VerifyAccount = ({navigation}) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    marginHorizontal: 24,
+   
   },
   textView: {
     marginTop: 50,
@@ -212,4 +224,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     tintColor: '#373737',
   },
+  componentBody:{
+    height:55,
+    marginTop:Platform.OS ==='ios'? 280:225,
+    backgroundColor:'#E92020',
+    justifyContent:'center',
+  }
 });

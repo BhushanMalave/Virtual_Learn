@@ -20,10 +20,11 @@ import axios from 'axios';
 export const Verification = ({navigation}) => {
     
     const [text,setText] =useState ('');
+    const [showError,setShowError] =useState(false);
 
     const handleText = async string => {
         setText(string)
-        console.log(text)
+        setShowError(false);
         const obj ={
             mobileNumber : "+919591726087",
             oneTimePassword: text,
@@ -39,6 +40,10 @@ export const Verification = ({navigation}) => {
             if(response.data.message ===   "Verified")
             {
                 navigation.navigate("CreateNewPassword");
+                setShowError(false);
+            }
+            else{
+                setShowError(true);
             }
            
           } catch (error) {
@@ -48,6 +53,7 @@ export const Verification = ({navigation}) => {
 
   return(
     <SafeAreaView style={styles.body}>
+        <View style={{  marginHorizontal:24,}}>
         <View style={styles.textView}>
             <Text style={styles.text1}>
                 Verification
@@ -104,6 +110,14 @@ export const Verification = ({navigation}) => {
         <View style={styles.button}>
         <ButtonComponent text ="Submit" onPress={() => handleText()} />
         </View>
+        </View>
+        {showError && 
+         <View style={styles.componentBody}>
+         <Text style={{fontSize:16 ,fontFamily:Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova', textAlign:'center' ,color:'#FFFFFF' }}>Invalid verification code, please try again</Text>
+          </View>
+      }
+      
+        
        
     </SafeAreaView>
      
@@ -114,7 +128,7 @@ export const Verification = ({navigation}) => {
 const styles = StyleSheet.create({
     body:{
         flex:1,
-        marginHorizontal:24,
+      
     },
     textView:{
         marginTop:50,
@@ -227,4 +241,10 @@ const styles = StyleSheet.create({
         marginTop:20,
         tintColor:'#373737',
     },
+    componentBody:{
+        height:55,
+        marginTop:Platform.OS ==='ios'? 280:225,
+        backgroundColor:'#E92020',
+        justifyContent:'center',
+      }
 });

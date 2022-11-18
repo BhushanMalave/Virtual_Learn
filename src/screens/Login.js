@@ -18,12 +18,13 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import icn_warning from '../assets/images/05.1_VirtualLearn_Login_error/warning/icn_warning.png';
 import axios from 'axios';
-
-
-
+import {useDispatch, useSelector} from 'react-redux';
+import {setToken} from '../redux/ReduxPersist/UserDetails';
 
 export const Login = ({navigation}) => {
   const [warning, setWarning] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.userDetails.token);
 
   const registerValidationScheme = yup.object().shape({
     username: yup.string(),
@@ -63,26 +64,25 @@ export const Login = ({navigation}) => {
                 username: '',
                 password: '',
               }}
-              onSubmit={ async values => {
+              onSubmit={async values => {
                 console.log(values);
-                // navigation.navigate('Drawer')
 
-                const obj ={
-                  "userName"  :   values.username,
-                  "password"  :   values.password,
-                }
-               
+                const obj = {
+                  userName: values.username,
+                  password: values.password,
+                };
+
                 try {
                   const response = await axios.put(
                     'https://virtual-learn-app-java.herokuapp.com/Login',
-                     obj,
+                    obj,
                   );
-                  console.log("=====",response.data);
-                  if(response.data.jwtToken)
-                  {
-                    navigation.navigate('Drawer')
+                  console.log('=====', response.data);
+                  dispatch(setToken(response.data.jwtToken));
+                  console.log('token:', token);
+                  if (response.data.jwtToken) {
+                    navigation.navigate('Drawer');
                   }
-                 
                 } catch (error) {
                   console.log(error);
                 }
@@ -160,8 +160,7 @@ export const Login = ({navigation}) => {
                   <View style={styles.forgotPasswoordView}>
                     <TouchableOpacity
                       onPress={() => {
-                        console.log('Forgot Password');
-                        navigation.navigate('Forgot Password')
+                        navigation.navigate('Forgot Password');
                       }}>
                       <Text style={styles.forgotPasswoordStyle}>
                         Forgot password?
@@ -179,8 +178,7 @@ export const Login = ({navigation}) => {
               <Text style={styles.registerText1}>Don’t have a account?</Text>
               <TouchableOpacity
                 onPress={() => {
-                  console.log('register screen');
-                  navigation.navigate('RegisterStack')
+                  navigation.navigate('RegisterStack');
                 }}>
                 <Text style={styles.registerText2}>Register</Text>
               </TouchableOpacity>

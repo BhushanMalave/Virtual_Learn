@@ -1,6 +1,7 @@
 import React from 'react';
 import {ImageBackground, Text, View, Image, StyleSheet, Platform,TouchableOpacity} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Feather';
 
 export const MyProfile = ({navigation}) => {
   return (
@@ -18,10 +19,11 @@ export const MyProfile = ({navigation}) => {
         <View style={styles.topbar}>
           <Text style={styles.text}>Profile</Text>
           <TouchableOpacity  onPress={ () => {navigation.navigate('EditProfile');}}>
-          <Image
+          {/* <Image
             source={require('../assets/images/icn_edit profile.png')}
             style={styles.imgedit}
-          />
+          /> */}
+              <Icon name="edit-2" size={20} color='white'  />
           </TouchableOpacity>
         </View>
         <View style={styles.topinfo}>
