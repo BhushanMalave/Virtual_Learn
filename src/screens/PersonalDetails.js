@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Platform,
+  TextInput,
 } from 'react-native';
 
 import {Formik} from 'formik';
@@ -74,10 +75,10 @@ export const PersonalDetails = ({navigation}) => {
             
                   const obj ={
                     "mobileNumber"  :   "+917795287943",
-                    "fullName"      :   "AK Jeelan",
-                    "userName"      :   "justin",
-                    "email"         :   "AK mailto:jeelan@gmail.com",
-                    "password"      :   "justin@123"
+                    "fullName"      :   values.fullname,
+                    "userName"      :   values.username,
+                    "email"         :   values.email,
+                    "password"      :   values.password,
                   };
 
                   try {
@@ -85,8 +86,12 @@ export const PersonalDetails = ({navigation}) => {
                       'https://virtual-learn-app-java.herokuapp.com/Register',
                        obj,
                     );
-                    console.log("=====",response.data);
-                    navigation.navigate('Registration Successfull');
+                    console.log("=====",response.data.message);
+                    if(response.data.message === "User Created")
+                    {
+                      navigation.navigate('Registration Successfull');
+                    }
+                   
                   } catch (error) {
                     console.log(error);
                   }

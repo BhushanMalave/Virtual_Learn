@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
     height: 17,
     marginBottom: Platform.OS == 'ios' ? 10 : -2,
     color: '#7A7A7A',
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     letterSpacing: 0.29,
     lineHeight: 17,

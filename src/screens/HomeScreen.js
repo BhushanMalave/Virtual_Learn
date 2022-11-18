@@ -81,10 +81,12 @@ export const HomeScreen = ({navigation}) => {
           <Pressable onPress={()=> navigation.openDrawer()}>
           <Image source={require('../assets/images/icn_hamburgermenu.png')} />
           </Pressable>
+          <Pressable onPress={()=> navigation.navigate('HomeSearch')}>
           <Image
             source={require('../assets/images/icn_search-Search.png')}
             style={styles.search}
           />
+          </Pressable>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
         <Text style={styles.name}>Mahendra Singh Dhoni</Text>
@@ -130,7 +132,7 @@ export const HomeScreen = ({navigation}) => {
           <View style={styles.choiceview}>
             <View style={styles.categoryview}>
               <Text style={styles.category}>Choice your course</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('ChoiceCourse')}>
 
               <Text style={styles.all}>See All</Text>
               </TouchableOpacity>
@@ -304,7 +306,7 @@ const styles = StyleSheet.create({
   toptext: {
     height: 20,
     color: '#7A7A7As',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 18,
     letterSpacing: 0,
     lineHeight: 20,
@@ -337,7 +339,7 @@ const styles = StyleSheet.create({
   },
   courseText: {
     height: 34,
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 35,
@@ -357,7 +359,7 @@ const styles = StyleSheet.create({
     height: 22,
     // width: 167,
     color: '#2B2B2B',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 18,
     fontWeight: '600',
     letterSpacing: 0,
@@ -368,7 +370,7 @@ const styles = StyleSheet.create({
     height: 15,
     width: 37,
     color: '#7A7A7A',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
@@ -393,7 +395,7 @@ const styles = StyleSheet.create({
   categorytext: {
     height: 15,
     color: '#2B2B2B',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     fontWeight: 'bold',
     letterSpacing: 0,
@@ -428,7 +430,7 @@ const styles = StyleSheet.create({
     // borderRadius:20,
     // backgroundColor:"#DFE7F5",
     textAlign: 'center',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0,
@@ -449,7 +451,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     // backgroundColor:"#DFE7F5"
     textAlign: 'center',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0,

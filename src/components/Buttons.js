@@ -30,6 +30,16 @@ export const ButtonComponent2 = ({text,onPress}) => {
   );
 };
 
+export const ButtonComponent3 = ({text,onPress}) => {
+  return (
+    <Pressable onPress ={onPress}style={styles.body2}>
+      <View>
+        <Text style={styles.text2}>{text}</Text>
+      </View>
+    </Pressable>
+  );
+};
+
 const styles = StyleSheet.create({
   body: {
     backgroundColor: '#EE5C4D',
@@ -52,6 +62,13 @@ const styles = StyleSheet.create({
     borderWidth:2,
     borderColor:'#EE5C4D',
   },
+  body2: {
+    backgroundColor: '#FFFFFF',
+    height: 46,
+    borderRadius: 6,
+    borderWidth:1,
+    borderColor:'#373737',
+  },
   text1: {
     textAlign: 'center',
     height: 20,
@@ -59,6 +76,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Proxima Nova',
     fontWeight:'bold',
     color: '#EE5C4D',
+    marginTop: 13,
+  },
+  text2: {
+    textAlign: 'center',
+    height: 20,
+    fontSize: 16,
+    fontFamily: 'Proxima Nova',
+    fontWeight:'bold',
+    color: '#373737',
     marginTop: 13,
   },
 });

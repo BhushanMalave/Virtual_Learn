@@ -20,7 +20,7 @@ export const RegisterSuccessfully = ({navigation}) => {
             <Image source={require('../assets/images/04.8_VirtualLearn_Register_success/img_Register_sucess_illustration.png')} resizeMode="contain" style={styles.image}/>
             <Text style={styles.text}>Success!</Text>
             <Text style={styles.description}>Your VirtualLearn account has been successfully created!</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Drawer')}>
                 <Text style={styles.button}>Lets Get Started</Text>
             </TouchableOpacity>
             </ScrollView>
@@ -59,7 +59,7 @@ description:{
   height:40,
   maxWidth:"95%",
   color:"#7A7A7A",
-  fontFamily:"Proxima Nova",
+  fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
   fontSize:16,
   letterSpacing:0,
   lineHeight:20,
@@ -70,7 +70,7 @@ description:{
 button:{
   height:20,
   color:"#EE5C4D",
-  fontFamily:"Proxima Nova",
+  fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
   fontSize:16,
   fontWeight:"bold",
   letterSpacing:0.4,

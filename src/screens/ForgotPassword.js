@@ -25,16 +25,24 @@ export const ForgotPassword = ({navigation}) => {
         console.log(text)
     };
     const handleProcess =async () => {
-        // const obj ={
-        //     "mobileNumber" : "+919591726087"
-        // }
-        //   const options ={
-        //     method:'PUT',
-        //     body:JSON.stringify(obj),
-        //   };
-        //   const response =await fetch('https://vir14-11-2022.herokuapp.com/User/Continue',
-        //   options,);
-        //   console.log(response);
+        const obj ={
+            "mobileNumber" : "+919591726087"
+        }
+       try {
+            const response = await axios.put(
+              'https://virtual-learn-app-java.herokuapp.com/User/Resend',
+               obj,
+            );
+            console.log("=====",response.data.message);
+            if(response.data.message ===   "Verified")
+            {
+                navigation.navigate('Personal Details');
+            }
+           
+          } catch (error) {
+            console.log(error);
+          }
+        
         navigation.navigate('Verification');
         };
 
@@ -102,7 +110,7 @@ const styles = StyleSheet.create({
     textno:{
         height:20,
         fontSize:16,
-        fontFamily:'ProximaNova-Regular',
+        fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
         textAlign:'center',
         marginTop:10,
         color:'#042C5C',

@@ -13,11 +13,15 @@ import {
   TouchableOpacity,
   Pressable,
   Platform,
+  Modal,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {TopSearchComponent} from '../components/TopSearchComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
+import {BottomPopup} from '../components/BottomPopup';
+import { ButtonComponent } from './Buttons';
+import { ButtonComponent2 } from './Buttons';
 
 const categories = [
   {
@@ -57,9 +61,10 @@ const categories = [
   },
 ];
 
-export const HomeSearch = () => {
+export const HomeSearch = ({navigation}) => {
+  const [show, setShow] = useState(false);
   const [text, setText] = useState('');
-  const [componentrender, setComponentRender] = useState(3);
+  const [componentrender, setComponentRender] = useState(1);
   const handleText = async string => {
     setText(string);
     console.log(text);
@@ -67,10 +72,12 @@ export const HomeSearch = () => {
   return (
     <View style={styles.body}>
       <View style={styles.topView}>
+      <Pressable onPress={()=> navigation.goBack()}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
           style={styles.imgback}
         />
+        </Pressable>
         <Text style={styles.texttop}>Search</Text>
       </View>
 
@@ -88,10 +95,12 @@ export const HomeSearch = () => {
             onChangeText={handleText}
           />
         </View>
-        <Image
-          source={require('../assets/images/icn_filter_search.png')}
-          style={styles.imgfilter}
-        />
+        <TouchableOpacity onPress={() => setShow(true)}>
+          <Image
+            source={require('../assets/images/icn_filter_search.png')}
+            style={styles.imgfilter}
+          />
+        </TouchableOpacity>
       </View>
       {componentrender == 1 && (
         <View style={styles.defaultBody}>
@@ -152,8 +161,11 @@ export const HomeSearch = () => {
               ))}
             </View>
           </View>
+          
         </View>
+        
       )}
+      <BottomPopup show={show} />
     </View>
   );
 };

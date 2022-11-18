@@ -62,17 +62,28 @@ export const Login = ({navigation}) => {
                 username: '',
                 password: '',
               }}
-              onSubmit={values => {
+              onSubmit={ async values => {
                 console.log(values);
-                navigation.navigate('Forgot Password')
-                // try{
-                //     const obj ={
-                //         username:values.username,
-                //         password:values.password,
-                //     }
+                navigation.navigate('Drawer')
 
-                // } catch(err){
-
+                // const obj ={
+                //   "userName"  :   values.username,
+                //   "password"  :   values.password,
+                // }
+               
+                // try {
+                //   const response = await axios.put(
+                //     'https://virtual-learn-app-java.herokuapp.com/Login',
+                //      obj,
+                //   );
+                //   console.log("=====",response.data.message);
+                //   if(response.data.message ===   "Verified")
+                //   {
+                //     navigation.navigate('Drawer')
+                //   }
+                 
+                // } catch (error) {
+                //   console.log(error);
                 // }
               }}>
               {({
@@ -222,13 +233,13 @@ const styles = StyleSheet.create({
   textno: {
     height: 20,
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 10,
   },
   textinput: {
     color: Platform.OS == 'ios' ? '#042C5C' : '#042C5C',
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     letterSpacing: 0.4,
     lineHeight: 20,
@@ -253,14 +264,14 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginTop: 10,
   },
   text3: {
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
   },
   text4: {
@@ -268,7 +279,7 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#EE5C4D',
     fontSize: 17,
-    fontFamily: 'ProximaNova-semibold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginTop: 2,
     textAlign: 'center',
     marginBottom: Platform.OS == 'ios' ? 0 : 10,

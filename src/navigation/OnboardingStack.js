@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 
 export const OnboardingStack = () => {
   return (
-    <NavigationContainer>
+  
     <Stack.Navigator>
  
     
@@ -62,6 +62,6 @@ export const OnboardingStack = () => {
         component={LoginStack}
       />
     </Stack.Navigator>
-    </NavigationContainer>
+  
   );
 };

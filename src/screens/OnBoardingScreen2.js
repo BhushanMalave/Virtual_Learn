@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     height:85,
     width:"100%",
     color:"#7A7A7A",
-    fontFamily:"ProximaNova-Regular",
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize:14,
     letterSpacing:0,
     lineHeight:20
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   skiptext:{
     height:35,
     color:"#373737",
-    fontFamily:"Proxima Nova",
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize:14,
     letterSpacing:0,
     lineHeight:35,
