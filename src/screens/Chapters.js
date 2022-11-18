@@ -14,31 +14,54 @@ import {ButtonComponent} from '../components/Buttons';
 const chapterList = [
   {
     id: 1,
-    name: 'Chapter 1 - Introduction to the course',
+    number:1,
+    name: 'Introduction to the course',
+    lessons:[
+      {
+        id: 1,
+        number: 1,
+        name: 'Introduction',
+        duration: 0.34,
+      },
+      {
+        id: 2,
+        number: 2,
+        name: 'Using the Exercise Files',
+        duration: 1.06,
+      },
+      
+    ],
+status:true
   },
   {
     id: 2,
-    name: 'Chapter 2 - Learning the Figma Interface',
+    number:1,
+    name: 'Learning the Figma Interface',
   },
   {
     id: 3,
-    name: 'Chapter 3 - Setting up a new project',
+    number:1,
+    name: 'Setting up a new project',
   },
   {
     id: 4,
-    name: 'Chapter 4 - Adding and Editing Content',
+    number:1,
+    name: 'Adding and Editing Content',
   },
   {
     id: 5,
-    name: 'Chapter 5 - Completing the Design',
+    number:1,
+    name: 'Completing the Design',
   },
   {
     id: 6,
-    name: 'Chapter 6 - Prototyping, Sharing and Exporting',
+    number:1,
+    name: 'Prototyping, Sharing and Exporting',
   },
   {
     id: 7,
-    name: 'Chapter 7 - Conclusion',
+    number:1,
+    name: 'Conclusion',
   },
 ];
 const content = [
@@ -61,11 +84,7 @@ export const Chapters = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{flex:1,marginHorizontal:24,}}>
-<<<<<<< HEAD
-        <View  style={{flex:1}}>
-=======
         <View  style={{flex:1,borderWidth:1}}>
->>>>>>> a136fdbd339d6052a64b7939ebb56a0f8238bfbf
         <Text style={styles.contentText}>Course Content</Text>
 
         <View style={styles.contentDetailsView}>
@@ -78,7 +97,7 @@ export const Chapters = () => {
           {chapterList.map(item => (
             <View key={item.id}>
               <View style={styles.chapterList}>
-                <Text style={styles.chapterName}>{item.name}</Text>
+                <Text style={styles.chapterName}>Chapter {item.id} - {item.name}</Text>
                 <View style={{marginLeft: 4}}>
                   {!view ? (
                     <TouchableOpacity
@@ -144,11 +163,7 @@ const styles = StyleSheet.create({
   container: {
     // margin: 24,
     flex: 1,
-<<<<<<< HEAD
-   
-=======
     borderWidth: 1,
->>>>>>> a136fdbd339d6052a64b7939ebb56a0f8238bfbf
   },
   contentText: {
     color: '#2B2B2B',

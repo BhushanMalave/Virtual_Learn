@@ -8,7 +8,7 @@
         <g id="08.3_VirtualLearn_Home_categories_design_course_chapters" transform="translate(-311.000000, -514.000000)">
             <g id="course-content" transform="translate(24.000000, 303.000000)">
                 <g id="lesson2" transform="translate(0.000000, 187.000000)">
-                    <g id="icn_lessonplay_inactive" transform="translate(287.000000, 24.000000)">
+                    <g id="onplay_inactive" transform="translate(287.000000, 24.000000)">
                         <circle id="button-background-circle" stroke="#7A7A7A" fill-opacity="0.1" fill="#7A7A7A" cx="12" cy="12" r="11.5"></circle>
                         <g id="Add-/-Rectangular-Copy-81" transform="translate(8.800000, 7.200000)">
                             <mask id="mask-2" fill="white">
