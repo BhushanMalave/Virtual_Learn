@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
@@ -22,7 +23,10 @@ export const CourseScreen = () => {
         <ImageBackground
           source={require('../assets/images/img_designcoursedetail1_bg.png')}
           style={styles.header}>
+            <TouchableOpacity>
+
           <Image source={require('../assets/images/icn_close_white.png')} style={styles.image}/>
+            </TouchableOpacity>
           <Text style={styles.maintext}>
             Learn Figma - UI/UX Design Essential Training
           </Text>
