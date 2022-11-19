@@ -14,15 +14,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { ButtonComponent } from '../components/Buttons';
+import axios from 'axios';
 
 
 
 export const ForgotPassword = ({navigation}) => {
     
     const [text,setText] =useState ('');
+    const [showError,setShowError] =useState(true);
     const handleText =string => {
         setText(string)
-        console.log(text)
+        setShowError(false);
     };
     const handleProcess =async () => {
         const obj ={
@@ -37,6 +39,9 @@ export const ForgotPassword = ({navigation}) => {
             if(response.data.message ===   "Verified")
             {
                 navigation.navigate('Personal Details');
+                setShowError(false);
+            }else{
+                setShowError(true);
             }
            
           } catch (error) {
@@ -49,6 +54,9 @@ export const ForgotPassword = ({navigation}) => {
 
   return(
     <SafeAreaView style={styles.body}>
+        <View style={{  marginHorizontal:24,}}>
+
+       
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
          <Image source={require('../assets/images/icn_back_header.png')} style={styles.image}/>
          </TouchableOpacity>
@@ -74,6 +82,13 @@ export const ForgotPassword = ({navigation}) => {
         <View style={styles.button}>
         <ButtonComponent text ="Send" onPress={() => handleProcess()} />
         </View>
+        </View>
+        {showError && 
+         <View style={styles.componentBody}>
+         <Text style={{fontSize:16 ,fontFamily:Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova', textAlign:'center' ,color:'#FFFFFF' }}>Invalid mobile number, please try again</Text>
+          </View>
+      }
+        
     </SafeAreaView>
      
   );
@@ -82,7 +97,7 @@ export const ForgotPassword = ({navigation}) => {
 const styles = StyleSheet.create({
     body:{
         flex:1,
-        marginHorizontal:24,
+      
     },
     textView:{
         marginTop:Platform.OS == 'ios'? 25: 20,
@@ -135,5 +150,11 @@ const styles = StyleSheet.create({
         marginTop:Platform.OS=='ios'? 20:30,
         tintColor:'#373737',
     },
+    componentBody:{
+        height:55,
+        marginTop:Platform.OS ==='ios'? 390:330,
+        backgroundColor:'#E92020',
+        justifyContent:'center',
+      }
 });
 

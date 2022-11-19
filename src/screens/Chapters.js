@@ -132,7 +132,7 @@ export const Chapters = () => {
           ))}
         </View>
         </View>
-        </View>
+        
       </ScrollView>
       <View style={{bottom: 0}} >
         <ButtonComponent text={'Join Course'} onPress={()=>console.log('Join Course Pressed')}/>

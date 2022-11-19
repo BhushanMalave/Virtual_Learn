@@ -16,8 +16,9 @@ import {
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
 
-export const CreateNewPassword = () => {
+export const CreateNewPassword = ({navigation}) => {
   const [info, setInfo] = useState(false);
 
   const registerValidationScheme = yup.object().shape({
@@ -52,17 +53,30 @@ export const CreateNewPassword = () => {
                 newpassword: '',
                 confirmnewpassword: '',
               }}
-              onSubmit={values => {
+              onSubmit={async values => {
                 console.log(values);
-                // try{
-                //     const obj ={
-                //         newpassword:values.newpassword,
-                //         confirmnewpassword:values.confirmnewpassword,
-                //     }
 
-                // } catch(err){
+                const obj={
+                  "mobileNumber"  :  "+917795287943",
+                  "oneTimePassword"   : values.newpassword
+              }
+              console.log(obj)
 
-                // }
+                try {
+                  const response = await axios.post(
+                    'https://virtual-learn-app-java.herokuapp.com/User/ResetPassword',
+                     obj,
+                  );
+                  console.log("=====",response.data.message);
+                  if(response.data.message ===  "Password Changed Successfully")
+                  {
+                      navigation.navigate('Password Changed Successfully');
+                  }
+                 
+                } catch (error) {
+                  console.log(error);
+                }
+             
               }}>
               {({
                 handleChange,
@@ -219,7 +233,7 @@ const styles = StyleSheet.create({
   textno: {
     height: 20,
     fontSize: 16,
-    fontFamily: 'Proxima Nova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 10,
   },
@@ -234,7 +248,7 @@ const styles = StyleSheet.create({
     height: 17,
     marginBottom: 10,
     color: '#7A7A7A',
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     letterSpacing: 0.29,
     lineHeight: 17,
@@ -250,14 +264,14 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'Proxima Nova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginTop: Platform.OS == 'ios' ? 3 : 13,
   },
   text3: {
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
   },
   form: {

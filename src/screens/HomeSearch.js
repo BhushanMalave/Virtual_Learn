@@ -15,13 +15,16 @@ import {
   Platform,
   Modal,
 } from 'react-native';
+
 import {TextInput} from 'react-native-gesture-handler';
 import {TopSearchComponent} from '../components/TopSearchComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
 import {BottomPopup} from '../components/BottomPopup';
-import { ButtonComponent } from './Buttons';
-import { ButtonComponent2 } from './Buttons';
+import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
+import {useSelector, useDispatch} from 'react-redux';
+
+
 
 const categories = [
   {
@@ -62,9 +65,13 @@ const categories = [
 ];
 
 export const HomeSearch = ({navigation}) => {
-  const [show, setShow] = useState(false);
+  const filterState = useSelector(state => state.filterState.state);
   const [text, setText] = useState('');
+  const dispatch =useDispatch();
   const [componentrender, setComponentRender] = useState(1);
+
+
+
   const handleText = async string => {
     setText(string);
     console.log(text);
@@ -95,7 +102,7 @@ export const HomeSearch = ({navigation}) => {
             onChangeText={handleText}
           />
         </View>
-        <TouchableOpacity onPress={() => setShow(true)}>
+        <TouchableOpacity onPress={() =>{ {dispatch(setFilterState())}}}>
           <Image
             source={require('../assets/images/icn_filter_search.png')}
             style={styles.imgfilter}
@@ -165,7 +172,7 @@ export const HomeSearch = ({navigation}) => {
         </View>
         
       )}
-      <BottomPopup show={show} />
+      <BottomPopup show={filterState} />
     </View>
   );
 };

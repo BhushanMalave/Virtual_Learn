@@ -1,5 +1,5 @@
 import {TabRouter} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,8 +14,13 @@ import {
   Pressable,
 } from 'react-native';
 import {number} from 'yup';
-import { CourseComponent } from '../components/CourseComponent';
-import { CategoriesComponent } from '../components/CategoriesComponent';
+import {CourseComponent} from '../components/CourseComponent';
+import {CategoriesComponent} from '../components/CategoriesComponent';
+import {useSelector, useDispatch} from 'react-redux';
+import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
+import {setAllData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import {setNewestData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import {setPopularData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 
 const data = [
   {
@@ -73,19 +78,95 @@ export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
   const [clicked3, setClicked3] = useState(false);
+  const dispatch = useDispatch();
+  const topHeaderData = useSelector(state => state.topHeader.value);
+  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
+  const categoriesData =useSelector(state => state.categories.data);
+  const topCoursesData =useSelector(state => state.topCourses.data);
+  const token = useSelector(state => state.userDetails.token);
+
+  const all = async () => {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        'https://virtual-learn-app-java.herokuapp.com/user/home/course/all',
+        options,
+      
+      );
+      //console.log("=====",response.data);
+      if (response.data) {
+        dispatch(setAllData(response.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const newest = async () => {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        'https://virtual-learn-app-java.herokuapp.com/user/home/course/newest',
+        options,
+      );
+      //console.log("=====",response.data);
+      if (response.data) {
+        dispatch(setNewestData(response.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const popular = async () => {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        'https://virtual-learn-app-java.herokuapp.com/user/home/course/popular',
+        options,
+      );
+      //console.log("=====",response.data);
+      if (response.data) {
+        dispatch(setPopularData(response.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(hsTopHeaders());
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.view}>
-          <Pressable onPress={()=> navigation.openDrawer()}>
-          <Image source={require('../assets/images/icn_hamburgermenu.png')} />
+          <Pressable onPress={() => navigation.openDrawer()}>
+            <Image source={require('../assets/images/icn_hamburgermenu.png')} />
           </Pressable>
-          <Pressable onPress={()=> navigation.navigate('HomeSearch')}>
-          <Image
-            source={require('../assets/images/icn_search-Search.png')}
-            style={styles.search}
-          />
+          <Pressable onPress={() => navigation.navigate('HomeSearch')}>
+            <Image
+              source={require('../assets/images/icn_search-Search.png')}
+              style={styles.search}
+            />
           </Pressable>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
@@ -97,9 +178,15 @@ export const HomeScreen = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <View style={styles.itemContainer}>
-                <View style={{borderwidth:1,backgroundColor:"pink",height:45,width:240,marginTop:80}}>
-
-                <Text style={styles.courseText}>{item.courseName}</Text>
+                <View
+                  style={{
+                    borderwidth: 1,
+                    backgroundColor: 'pink',
+                    height: 45,
+                    width: 240,
+                    marginTop: 80,
+                  }}>
+                  <Text style={styles.courseText}>{item.courseName}</Text>
                 </View>
               </View>
             )}></FlatList>
@@ -107,8 +194,8 @@ export const HomeScreen = ({navigation}) => {
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
             <Text style={styles.category}>Categories</Text>
-            <Pressable onPress={() => navigation.navigate("CategoriesScreen")}>
-            <Text style={styles.all}>See All</Text>
+            <Pressable onPress={() => navigation.navigate('CategoriesScreen')}>
+              <Text style={styles.all}>See All</Text>
             </Pressable>
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -123,7 +210,8 @@ export const HomeScreen = ({navigation}) => {
                 marginTop: 10,
               }}>
               {categories.map(item => (
-                <CategoriesComponent  img={item.source}
+                <CategoriesComponent
+                  img={item.source}
                   category={item.category}
                 />
               ))}
@@ -132,9 +220,9 @@ export const HomeScreen = ({navigation}) => {
           <View style={styles.choiceview}>
             <View style={styles.categoryview}>
               <Text style={styles.category}>Choice your course</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('ChoiceCourse')}>
-
-              <Text style={styles.all}>See All</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ChoiceCourse')}>
+                <Text style={styles.all}>See All</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.buttontabs}>
@@ -207,9 +295,8 @@ export const HomeScreen = ({navigation}) => {
             {/* </View> */}
           </View>
         </View>
-        
 
-{/* 
+        {/* 
         <View style={styles.businessview}>
             <View style={styles.categoryview}>
               <Text style={styles.category}>Top courses in Business</Text>
@@ -242,7 +329,7 @@ export const HomeScreen = ({navigation}) => {
             )}></FlatList>
         </View>   
         </View> */}
-        <CourseComponent header="Top Courses in Design" chapter="5"/>
+        <CourseComponent header="Top Courses in Design" chapter="5" />
 
         {/* <View style={styles.businessview}>
             <View style={styles.categoryview}>
@@ -278,8 +365,7 @@ export const HomeScreen = ({navigation}) => {
             )}></FlatList>
         </View>   
         </View> */}
-        <CourseComponent header="Top Courses in Design" chapter="5"/>
-
+        <CourseComponent header="Top Courses in Design" chapter="5" />
       </ScrollView>
     </SafeAreaView>
   );
@@ -344,7 +430,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     lineHeight: 35,
     // marginTop: '35%',
-   
   },
   categoryview: {
     // height: 104,
@@ -470,7 +555,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 25,
     margin: 6,
-    
   },
   imgview: {
     width: 142,
@@ -508,9 +592,9 @@ const styles = StyleSheet.create({
   //   height: 140,
   //   width:600,
   //   backgroundColor:"black"
-    
+
   // }
-  businessContainer:{
+  businessContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     height: 134,
@@ -523,27 +607,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 20,
   },
-  businessview:{
-   
-      height: 223,
-      width: '100%',
-      // borderWidth:1,
-      // marginLeft:25,
-      // paddingLeft:
-      marginTop:25
-   
+  businessview: {
+    height: 223,
+    width: '100%',
+    // borderWidth:1,
+    // marginLeft:25,
+    // paddingLeft:
+    marginTop: 25,
   },
-  busnesstext:{
-    marginLeft:25,
-    margin:3,
-    fontWeight:"300",
-    letterSpacing:0,
-    lineHeight:20
+  busnesstext: {
+    marginLeft: 25,
+    margin: 3,
+    fontWeight: '300',
+    letterSpacing: 0,
+    lineHeight: 20,
   },
-  busnesschapter:{
-    fontSize:12,
-    color:"#7A7A7A",
-    fontWeight:"300"
+  busnesschapter: {
+    fontSize: 12,
+    color: '#7A7A7A',
+    fontWeight: '300',
   },
-
 });
