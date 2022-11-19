@@ -152,7 +152,7 @@ export const HomeScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    dispatch(hsTopHeaders());
+    // dispatch(hsTopHeaders());
   });
 
   return (
@@ -213,6 +213,9 @@ export const HomeScreen = ({navigation}) => {
                 <CategoriesComponent
                   img={item.source}
                   category={item.category}
+                  onPress ={() => {
+                    navigation.navigate('CategoryDisplayScreen');
+                  }}
                 />
               ))}
             </View>
@@ -221,7 +224,8 @@ export const HomeScreen = ({navigation}) => {
             <View style={styles.categoryview}>
               <Text style={styles.category}>Choice your course</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('ChoiceCourse')}>
+                onPress={() => navigation.navigate('ChoiceCourse')}
+                >
                 <Text style={styles.all}>See All</Text>
               </TouchableOpacity>
             </View>
@@ -276,6 +280,7 @@ export const HomeScreen = ({navigation}) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
+                <TouchableOpacity onPress={() => navigation.navigate('CourseScreen')}>
                 <View style={styles.btmcourseview}>
                   <View style={styles.imgview}></View>
                   <View style={styles.btmitemContainer}>
@@ -289,6 +294,7 @@ export const HomeScreen = ({navigation}) => {
                     </View>
                   </View>
                 </View>
+                </TouchableOpacity>
                 /* <Text style={{backgroundColor:"white",paddingTop:30,margin:10,marginTop:0,}}>k</Text>  */
               )}></FlatList>
 
@@ -329,7 +335,9 @@ export const HomeScreen = ({navigation}) => {
             )}></FlatList>
         </View>   
         </View> */}
-        <CourseComponent header="Top Courses in Design" chapter="5" />
+        <CourseComponent header="Top Courses in Design" chapter="5"
+           onPress={() => {navigation.navigate('ChoiceCourse')}
+        }/>
 
         {/* <View style={styles.businessview}>
             <View style={styles.categoryview}>
@@ -365,7 +373,7 @@ export const HomeScreen = ({navigation}) => {
             )}></FlatList>
         </View>   
         </View> */}
-        <CourseComponent header="Top Courses in Design" chapter="5" />
+        <CourseComponent header="Top Courses in Development" chapter="5"   onPress={() => {navigation.navigate('ChoiceCourse')}}/>
       </ScrollView>
     </SafeAreaView>
   );

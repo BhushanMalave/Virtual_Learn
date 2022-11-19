@@ -22,7 +22,7 @@ export const CourseComponent=(props)=>{
         <View style={styles.categoryview}>
           <Text style={styles.category}>{props.header}</Text>
          
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.onPress}>
               
           <Text style={styles.all}>See All</Text>
             </TouchableOpacity>
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
       margin:3,
       fontWeight:"300",
       letterSpacing:0,
-      lineHeight:20
+      lineHeight:20,
+      width:288,
     },
     busnesschapter:{
       fontSize:12,

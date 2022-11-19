@@ -1,15 +1,17 @@
 import React from "react";
-import { View,StyleSheet,Text,TouchableOpacity,FlatList,Image} from "react-native";
+import { View,StyleSheet,Text,TouchableOpacity,FlatList,Image, Pressable} from "react-native";
 
 
 export const CategoriesComponent =({
-       img,category
+       img,category,onPress
 }) => {
     return(
+      <Pressable onPress={onPress}>
         <View style={styles.categorycontainer}>
         <Image source={img} style={styles.img}/>
         <Text style={styles.categorytext}>{category}</Text>
-      </View>
+       </View>
+       </Pressable>
     );
 };
 

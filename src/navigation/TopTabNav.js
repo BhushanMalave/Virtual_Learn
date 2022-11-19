@@ -11,7 +11,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const TopTabNav = () => {
   return (
-    <NavigationContainer>
+  
 
     <Tab.Navigator screenOptions={{
    
@@ -19,7 +19,7 @@ const TopTabNav = () => {
       <Tab.Screen name="OverviewScreen" component={OverviewScreen} />
       <Tab.Screen name="Chapters" component={Chapters} />
     </Tab.Navigator>
-    </NavigationContainer>
+   
   );
 };
 export default TopTabNav;

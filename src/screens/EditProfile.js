@@ -53,9 +53,11 @@ export const EditProfile = ({navigation}) => {
 
             <Text style={styles.editText}>Edit Profile</Text>
 
-            <View style={{alignItems: 'center', marginTop: 30}}>
-              <Image source={img_profile_change} />
+            <View style={{alignItems: 'center', marginTop: 30 ,}}>
+              <Image source={img_profile_change} style={{height:110,width:110,marginRight:40,}} />
+              <Image source={require('../assets/images/icn_changeprofilepic.png')} style={{height:30,width:30,marginTop:-25,marginLeft:45}}/>
             </View>
+           
 
             <View style={{alignItems: 'flex-end', marginRight: 16}}>
               <Text style={styles.changeText}>Change image</Text>
