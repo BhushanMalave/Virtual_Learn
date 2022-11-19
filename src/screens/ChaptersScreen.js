@@ -1,3 +1,4 @@
+import {createEntityAdapter} from '@reduxjs/toolkit';
 import React, {useState} from 'react';
 
 import {
@@ -15,6 +16,7 @@ import {ChapterList} from '../components/chaptes/ChapterList';
 
 import {LessonList} from '../components/chaptes/LessonList';
 import {ModularTest} from '../components/chaptes/ModuleTest';
+import Icon from 'react-native-vector-icons/Feather';
 
 const enrolled = false;
 
@@ -30,8 +32,8 @@ const Chapter = {
       id: 1,
       number: 1,
       name: 'Introduction to the course',
-      status: true,
-      completed: false,
+      status: false,
+      completed: true,
       lessons: [
         {
           id: 1,
@@ -61,8 +63,8 @@ const Chapter = {
           number: 1,
           name: 'Introduction',
           duration: 0.34,
-          completed: false,
-          status: false,
+          completed: true,
+          status: true,
         },
         {
           id: 2,
@@ -248,7 +250,9 @@ const Chapter = {
 export const ChaptersScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.mainView}>
           <Text style={styles.contentText}>Course Content</Text>
 
@@ -291,16 +295,17 @@ export const ChaptersScreen = () => {
 
                 {item.status ? (
                   <>
-                  {item.modularTest? (<ModularTest
-                      test={item.modularTest.name}
-                      duration={item.modularTest.duration}
-                      questions={item.modularTest.questions}
-                      rate={item.modularTest.rate}
-                      id={item.modularTest.id}
-                    />):(
+                    {item.modularTest ? (
+                      <ModularTest
+                        test={item.modularTest.name}
+                        duration={item.modularTest.duration}
+                        questions={item.modularTest.questions}
+                        rate={item.modularTest.rate}
+                        id={item.modularTest.id}
+                      />
+                    ) : (
                       <></>
                     )}
-                    
                   </>
                 ) : (
                   <></>
@@ -309,6 +314,36 @@ export const ChaptersScreen = () => {
             ))}
           </View>
         </View>
+        {!Chapter.courseCompletedStatus ? (
+          <>
+            <View style={{backgroundColor: '#042C5C'}}>
+              <View style={{margin: 24, marginTop: 30}}>
+                <Text style={styles.courseText}>Course Result</Text>
+
+                <Text style={styles.percentText}>90%</Text>
+
+                <Text style={styles.aprrovalText}>approval rate</Text>
+
+                <View style={styles.certificateTextView}>
+                  <Text style={styles.courseText}>Course Certificate</Text>
+
+                  <TouchableOpacity style={{width:26}}>
+                  <Icon name='download' size={24} color='white'/>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.certificateView}>
+                  <Image
+                    source={require('../assets/images/img_designcoursedetail1_bg.png')}
+                    style={styles.certificate}
+                  />
+                </View>
+              </View>
+            </View>
+          </>
+        ) : (
+          <></>
+        )}
       </ScrollView>
 
       {Chapter.enrolled ? (
@@ -327,21 +362,21 @@ export const ChaptersScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   scrollContainer: {
     flex: 1,
-    marginHorizontal: 24,
   },
   mainView: {
     flex: 1,
+    marginHorizontal: 24,
     // borderWidth: 1,
   },
   contentText: {
     color: '#2B2B2B',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 18,
-    fontWeight:Platform.OS === 'ios' ? '600': '700',
+    fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 22,
   },
   contentDetailsView: {
@@ -352,12 +387,53 @@ const styles = StyleSheet.create({
     color: '#2B2B2B',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
-    fontWeight:Platform.OS === 'ios' ? '400': '500',
+    fontWeight: Platform.OS === 'ios' ? '400' : '500',
     lineHeight: 15,
   },
   chapterListContainer: {
     marginTop: Platform.OS == 'ios' ? 36 : 36,
     // borderWidth: 1,
     width: '100%',
+  },
+  courseText: {
+    height: 22,
+    color: '#FFFFFF',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 22,
+  },
+  percentText: {
+    height: 90,
+    color: '#1EAB0D',
+    fontFamily: 'Biko',
+    fontSize: 74,
+    lineHeight: 90,
+    marginTop: 10,
+  },
+  aprrovalText: {
+    height: 19,
+    color: '#DDDDDD',
+    fontFamily: 'Biko',
+    fontSize: 16,
+    lineHeight: 19,
+  },
+  certificateTextView: {
+    marginTop: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  downloadIcon: {
+    height: 24,
+    width: 24,
+  },
+  certificateView: {
+    alignItems: 'center',
+  },
+  certificate: {
+    height: 184,
+    width: 327,
+    marginTop: 16,
   },
 });
