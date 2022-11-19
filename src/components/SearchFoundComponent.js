@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 16,
+ 
   },
   chapters: {
     height: 12,
