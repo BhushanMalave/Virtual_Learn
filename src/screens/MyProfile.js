@@ -1,100 +1,130 @@
 import React from 'react';
-import {ImageBackground, Text, View, Image, StyleSheet, Platform,TouchableOpacity} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  ImageBackground,
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 
 export const MyProfile = ({navigation}) => {
   return (
     <ScrollView>
-    <View>
-      <ImageBackground
-        source={require('../assets/images/img_profiledetails_bg.png')}
-        style={styles.backgroundimg}>
-            <TouchableOpacity  onPress={ () => {navigation.openDrawer();}}>
-        <Image
-          source={require('../assets/images/icn_hamburgermenu_white.png')}
-          style={styles.imgbar}
-        />
-        </TouchableOpacity>
-        <View style={styles.topbar}>
-          <Text style={styles.text}>Profile</Text>
-          <TouchableOpacity  onPress={ () => {navigation.navigate('EditProfile');}}>
-          {/* <Image
+      <View>
+        <ImageBackground
+          source={require('../assets/images/img_profilepic.png')}
+          style={styles.backgroundimg}>
+          <View style={styles.imageBlur}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.openDrawer();
+              }}>
+              <Image
+                source={require('../assets/images/icn_hamburgermenu_white.png')}
+                style={styles.imgbar}
+              />
+            </TouchableOpacity>
+            <View style={styles.topbar}>
+              <Text style={styles.text}>Profile</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('EditProfile');
+                }}>
+                {/* <Image
             source={require('../assets/images/icn_edit profile.png')}
             style={styles.imgedit}
           /> */}
-              <Icon name="edit-2" size={20} color='white'  />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.topinfo}>
-          <Image
-            source={require('../assets/images/img_profilepic.png')}
-            style={styles.imgprofile}
-          />
-          <View style={styles.topinfotext}>
-            <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
-            <Text style={styles.textdesc}>Designer</Text>
+                <Icon name="edit-2" size={20} color="white" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.topinfo}>
+              <Image
+                source={require('../assets/images/img_profilepic.png')}
+                style={styles.imgprofile}
+              />
+              <View style={styles.topinfotext}>
+                <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
+                <Text style={styles.textdesc}>Designer</Text>
+              </View>
+            </View>
+          </View>
+        </ImageBackground>
+        <Text style={styles.textcom}> Has Completed</Text>
+        <View style={styles.viewcourseinfo}>
+          <View style={styles.viewcourseinfoin}>
+            <Text style={styles.textno}>06</Text>
+            <Text style={styles.textcourse}>Courses</Text>
+          </View>
+          <View style={styles.viewcourseinfoin}>
+            <Text style={styles.textno}>06</Text>
+            <Text style={styles.textcourse}>Chapters</Text>
+          </View>
+          <View style={styles.viewcourseinfoin}>
+            <Text style={styles.textno}>06</Text>
+            <Text style={styles.textcourse}>Test</Text>
           </View>
         </View>
-      </ImageBackground>
-      <Text style={styles.textcom}> Has Completed</Text>
-      <View style={styles.viewcourseinfo}>
-        <View style={styles.viewcourseinfoin}>
-          <Text style={styles.textno}>06</Text>
-          <Text style={styles.textcourse}>Courses</Text>
+        <Text style={styles.textdetails}>Personal Details</Text>
+        <View style={styles.viewinfo}>
+          <Text style={styles.texttag}>Name</Text>
+          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
         </View>
-        <View style={styles.viewcourseinfoin}>
-        <Text style={styles.textno}>06</Text>
-          <Text style={styles.textcourse}>Chapters</Text>
+        <View style={styles.viewinfo}>
+          <Text style={styles.texttag}>Username</Text>
+          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
         </View>
-        <View style={styles.viewcourseinfoin}>
-        <Text style={styles.textno}>06</Text>
-          <Text style={styles.textcourse}>Test</Text>
+        <View style={styles.viewinfo}>
+          <Text style={styles.texttag}>Email</Text>
+          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
         </View>
-      </View>
-      <Text style={styles.textdetails}>Personal Details</Text>
-      <View style={styles.viewinfo}>
-        <Text style={styles.texttag}>Name</Text>
-        <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
-      </View>
-      <View style={styles.viewinfo}>
-        <Text style={styles.texttag}>Username</Text>
-        <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
-      </View>
-      <View style={styles.viewinfo}>
-        <Text style={styles.texttag}>Email</Text>
-        <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
-      </View>
-      <View style={styles.viewinfo}>
-        <Text style={styles.texttag}>Mobile Number</Text>
-        <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
-      </View>
-      <View style={styles.viewinfo}>
-        <Text style={styles.texttag}>Occupation</Text>
-        <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
-      </View>
-      <View style={styles.viewinfo}>
-        <Text style={styles.texttag}>Date of Birth</Text>
-        <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
-      </View>
-      <TouchableOpacity  onPress={ () => {navigation.navigate('CreateNewPassword');}}>
-      <View style={styles.viewpass}>
-        <Image source={require('../assets/images/icn_privacy_img.png')} style={styles.imgpcy}/>
-        <View style={styles.viewpasstext}>
-          <Text style={styles.textpvy}>Privacy</Text>
-          <Text style={styles.textpvy1}>Change your password </Text>
+        <View style={styles.viewinfo}>
+          <Text style={styles.texttag}>Mobile Number</Text>
+          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
         </View>
-        <Image source={require('../assets/images/icn_privacy.png')} style={styles.imgpy}/>
+        <View style={styles.viewinfo}>
+          <Text style={styles.texttag}>Occupation</Text>
+          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+        </View>
+        <View style={styles.viewinfo}>
+          <Text style={styles.texttag}>Date of Birth</Text>
+          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('CreateNewPassword');
+          }}>
+          <View style={styles.viewpass}>
+            <Image
+              source={require('../assets/images/icn_privacy_img.png')}
+              style={styles.imgpcy}
+            />
+            <View style={styles.viewpasstext}>
+              <Text style={styles.textpvy}>Privacy</Text>
+              <Text style={styles.textpvy1}>Change your password </Text>
+            </View>
+            <Image
+              source={require('../assets/images/icn_privacy.png')}
+              style={styles.imgpy}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
-      </TouchableOpacity>
-    </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   backgroundimg: {
-    height:Platform.OS === 'ios'? 260:260,
+    height: Platform.OS === 'ios' ? 260 : 260,
+  },
+  imageBlur: {
+    backgroundColor: '#042C5C',
+    opacity: 0.9,
+    height: Platform.OS === 'ios' ? 260 : 260,
   },
   topbar: {
     flexDirection: 'row',
@@ -120,30 +150,29 @@ const styles = StyleSheet.create({
   viewcourseinfoin: {
     height: 85,
     width: 95,
-    backgroundColor:'#FEFEFF',
-    shadowOpacity:0.1,
-    borderRadius:6,
+    backgroundColor: '#FEFEFF',
+    shadowOpacity: 0.1,
+    borderRadius: 6,
   },
-  viewinfo:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginHorizontal:24,
-    marginTop:25,
-
+  viewinfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 24,
+    marginTop: 25,
   },
-  viewpass:{
-    height:56,
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginHorizontal:24,
-    marginVertical:30,
-    backgroundColor:'#FEFEFF',
-    shadowOpacity:0.1,
-    borderRadius:6,
+  viewpass: {
+    height: 56,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 24,
+    marginVertical: 30,
+    backgroundColor: '#FEFEFF',
+    shadowOpacity: 0.1,
+    borderRadius: 6,
   },
-  viewpasstext:{
-    marginTop:10,
-    marginRight:80,
+  viewpasstext: {
+    marginTop: 10,
+    marginRight: 80,
   },
   imgbar: {
     marginTop: 80,
@@ -153,7 +182,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 18,
     width: 18,
-    backgroundColor:'white'
+    backgroundColor: 'white',
   },
   text: {
     fontFamily: 'Biko',
@@ -183,7 +212,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
   },
-  textno:{
+  textno: {
     color: '#2BB5F4',
     fontFamily: 'Biko',
     fontWeight: 'bold',
@@ -191,59 +220,57 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
   },
-  textcourse:{
+  textcourse: {
     color: '#373737',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     marginTop: 3,
     textAlign: 'center',
   },
-  textdetails:{
+  textdetails: {
     color: '#2B2B2B',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight:'bold',
+    fontWeight: 'bold',
     fontSize: 18,
     marginTop: 30,
-    marginLeft:24,
-   
+    marginLeft: 24,
   },
-  texttag:{
+  texttag: {
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
   },
-  texttitle:{
+  texttitle: {
     color: '#373737',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight:'bold',
+    fontWeight: 'bold',
     fontSize: 16,
-    textAlign:'right',
+    textAlign: 'right',
   },
-  textpvy:{
+  textpvy: {
     color: ' #042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight:'bold',
+    fontWeight: 'bold',
     fontSize: 16,
   },
-  textpvy1:{
+  textpvy1: {
     color: ' #7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    letterSpacing:0.3,
+    letterSpacing: 0.3,
     fontSize: 13,
-    marginTop:5,
+    marginTop: 5,
   },
 
-  imgpcy:{
-       height:40,
-       width:40,
-       marginTop:10,
-       marginLeft:10,
+  imgpcy: {
+    height: 40,
+    width: 40,
+    marginTop: 10,
+    marginLeft: 10,
   },
-  imgpy:{
-    height:13,
-    width:15,
-    marginTop:30,
-    marginRight:15,
-  }
-
+  imgpy: {
+    height: 13,
+    width: 15,
+    marginTop: 30,
+    marginRight: 15,
+  },
 });

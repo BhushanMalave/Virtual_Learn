@@ -15,8 +15,11 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
-import {ForgotPassword} from './src/screens/ForgotPassword';
-import { Test } from './src/screens/Test';
+
+import {ChaptersScreen} from './src/screens/ChaptersScreen';
+import {PersonalDetails} from './src/screens/PersonalDetails';
+import {EditProfile} from './src/screens/EditProfile'
+import {HomeScreen} from './src/screens/HomeScreen';
 
 let persistor = persistStore(store);
 
@@ -24,7 +27,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Test/>
+        <ChaptersScreen/>
       </PersistGate>
     </Provider>
   

@@ -18,8 +18,6 @@ import * as yup from 'yup';
 import { ButtonComponent } from '../components/Buttons';
 import axios from 'axios';
 
-
-
 export const PersonalDetails = ({navigation}) => {
   const [info, setInfo] = useState(false);
 
@@ -114,31 +112,8 @@ export const PersonalDetails = ({navigation}) => {
                   ) : (
                     <View style={styles.form}></View>
                   )}
-                  <>
-                    {values.fullname ? (
-                      <View>
-                        <Text style={styles.text}>Full name</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
                   <View>
-                    <TextInput
-                      name="fullname"
-                      placeholder="FullName"
-                      placeholderTextColor={'#7A7A7A'}
-                      onChangeText={handleChange('fullname')}
-                      onBlur={handleBlur('fullname')}
-                      value={values.fullname}
-                      style={styles.textinput}
-                    />
-                    {values.fullname ? (
-                      <View style={styles.from1}></View>
-                    ) : (
-                      <View style={styles.form}></View>
-                    )}
-                    <>
+          
                       {values.fullname ? (
                         <View>
                           <Text style={styles.text}>Full name</Text>
@@ -146,7 +121,7 @@ export const PersonalDetails = ({navigation}) => {
                       ) : (
                         <></>
                       )}
-                    </>
+
                     <View>
                       <TextInput
                         name="fullname"
