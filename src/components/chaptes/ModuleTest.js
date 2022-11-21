@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const enrolled = true;
-
+const enrolled = false;
 export const ModularTest = (item) => {
+  const data = useSelector(state => state.chapterList.data)
   return (
     <>
       <View >
@@ -37,10 +38,11 @@ export const ModularTest = (item) => {
           ) : (
             <></>
           )}
-
         
 
           <View style={styles.container}>
+
+
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={{width: 40, marginLeft: 5}}>
                 <Image
@@ -48,15 +50,26 @@ export const ModularTest = (item) => {
                   style={styles.image}
                 />
               </View>
+              
 
-              <View style={{width: '65%'}}>
+              <View style={{width: '70%'}}>
                 {/* <View > */}
+                <TouchableOpacity disabled={!item.disable} onPress={()=> console.log(item.disable)}>
                 <Text style={styles.chapterText}>{item.test}</Text>
                 <Text style={styles.chapterTime}>
                   {item.duration} mins | {item.questions} Questions
                 </Text>
+                </TouchableOpacity>
               </View>
+
+
+
+
             </View>
+
+
+
+
             {item.rate ? (
               <View style={styles.rateView}>
                 <View style={styles.rateNumView}>
@@ -125,6 +138,7 @@ const styles = StyleSheet.create({
   rateView: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft:-5
   },
   rateNumView: {
     flexDirection: 'row',

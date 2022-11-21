@@ -10,7 +10,11 @@ import {
   Image,
 } from 'react-native';
 
+import { useDispatch } from 'react-redux';
+import { changeChapterListStatus } from '../../redux/ThunkToolkit/ChaptersApi/ChapterListRedux';
+
 export const ChapterList = item => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.chapterList}>
       {item.completed ? (
@@ -28,16 +32,19 @@ export const ChapterList = item => {
           <TouchableOpacity
             onPress={() => {
               console.log('set/disaptch status as false in chapterlist:status and close');
+              dispatch(changeChapterListStatus({id: item.id}))
             }}
-            style={{padding: 2}}>
+            style={{padding: 3}}>
             <Image
               source={require('../../assets/images/icn_chapter_minimise.png')}
+              
             />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             onPress={() => {
               console.log('set/disaptch status as true in chapterlist:status and expanded');
+              dispatch(changeChapterListStatus({id : item.id}))
             }}
             style={{padding: 2}}>
             <Image
