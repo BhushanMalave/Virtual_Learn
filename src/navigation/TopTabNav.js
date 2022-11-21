@@ -12,14 +12,13 @@ const Tab = createMaterialTopTabNavigator();
 
 const TopTabNav = () => {
   return (
-
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {height: 55},
           tabBarActiveTintColor: '#EE5C4D',
           tabBarInactiveTintColor: '#7A7A7A',
- 
+
           tabBarIndicatorContainerStyle: {marginLeft: 20},
           tabBarIndicatorStyle: {
             width: 164,
@@ -40,10 +39,6 @@ const TopTabNav = () => {
         <Tab.Screen name="Chapters" component={Chapters} />
       </Tab.Navigator>
     </NavigationContainer>
-
-  
-
-  
   );
 };
 export default TopTabNav;
