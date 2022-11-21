@@ -15,7 +15,7 @@ import {
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
-import { ButtonComponent } from '../components/Buttons';
+import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
 
 export const PersonalDetails = ({navigation}) => {
@@ -58,292 +58,293 @@ export const PersonalDetails = ({navigation}) => {
             <Text style={styles.number}>+919876543211</Text>
           </View>
 
-        <View>
-          <Formik
-            validationSchema={registerValidationScheme}
-            initialValues={{
-              fullname: '',
-              username: '',
-              email: '',
-              password: '',
-              confirmpassword: '',
-            }}
-            onSubmit={ async values => {
-              console.log(values);
-            
-                  const obj ={
-                    "mobileNumber"  :   "+917795287943",
-                    "fullName"      :   values.fullname,
-                    "userName"      :   values.username,
-                    "email"         :   values.email,
-                    "password"      :   values.password,
-                  };
+          <View>
+            <Formik
+              validationSchema={registerValidationScheme}
+              initialValues={{
+                fullname: '',
+                username: '',
+                email: '',
+                password: '',
+                confirmpassword: '',
+              }}
+              onSubmit={async values => {
+                console.log(values);
 
-                  try {
-                    const response = await axios.post(
-                      'https://virtual-learn-app-java.herokuapp.com/Register',
-                       obj,
-                    );
-                    console.log("=====",response.data.message);
-                    if(response.data.message === "User Created")
-                    {
-                      navigation.navigate('Registration Successfull');
-                    }
-                   
-                  } catch (error) {
-                    console.log(error);
+                const obj = {
+                  mobileNumber: '+917795287943',
+                  fullName: values.fullname,
+                  userName: values.username,
+                  email: values.email,
+                  password: values.password,
+                };
+
+                try {
+                  const response = await axios.post(
+                    'https://virtual-learn-app-java.herokuapp.com/Register',
+                    obj,
+                  );
+                  console.log('=====', response.data.message);
+                  if (response.data.message === 'User Created') {
+                    navigation.navigate('Registration Successfull');
                   }
-                
-                 
-             
-            }}>
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              isValid,
-            }) => (
-              <>
-                <View style={styles.formikView}>
-                  {values.fullname ? (
-                    <View style={styles.from1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <View>
-          
-                      {values.fullname ? (
-                        <View>
-                          <Text style={styles.text}>Full name</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-
-                    <View>
-                      <TextInput
-                        name="fullname"
-                        placeholder="FullName"
-                        placeholderTextColor={'#7A7A7A'}
-                        onChangeText={handleChange('fullname')}
-                        onBlur={handleBlur('fullname')}
-                        value={values.fullname}
-                        style={styles.textinput}
-                      />
-                      {values.fullname ? (
-                        <View style={styles.bottom}></View>
-                      ) : (
-                        <View style={styles.bottom2}></View>
-                      )}
-
-                      {errors.fullname && (
-                        <Text style={{fontSize: 10, color: 'red'}}>
-                          {errors.fullname}
-                        </Text>
-                      )}
-                    </View>
-
-                    {values.username ? (
+                } catch (error) {
+                  console.log(error);
+                }
+              }}>
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                values,
+                errors,
+                isValid,
+              }) => (
+                <>
+                  <View style={styles.formikView}>
+                    {values.fullname ? (
                       <View style={styles.from1}></View>
                     ) : (
                       <View style={styles.form}></View>
                     )}
-                    <>
-                      {values.username ? (
-                        <View>
-                          <Text style={styles.text}>Username</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-                    </>
-                    <View>
-                      <TextInput
-                        name="Username"
-                        placeholder="Username"
-                        // keyboardType='text'
-                        placeholderTextColor={'#7A7A7A'}
-                        onChangeText={handleChange('username')}
-                        onBlur={handleBlur('username')}
-                        value={values.username}
-                        style={styles.textinput}
-                      />
-                      {values.username ? (
-                        <View style={styles.bottom}></View>
-                      ) : (
-                        <View style={styles.bottom2}></View>
-                      )}
-                      {errors.username && (
-                        <Text style={{fontSize: 10, color: 'red'}}>
-                          {errors.username}
-                        </Text>
-                      )}
-                    </View>
 
                     <View>
-                      {values.email ? (
-                        <View style={styles.from1}></View>
-                      ) : (
-                        <View style={styles.form}></View>
-                      )}
                       <>
-                        {values.email ? (
+                        {values.fullname ? (
                           <View>
-                            <Text style={styles.text}>Email</Text>
+                            <Text style={styles.text}>Full name</Text>
                           </View>
                         ) : (
                           <></>
                         )}
                       </>
+                      <View>
+                        <TextInput
+                          name="fullname"
+                          placeholder="FullName"
+                          placeholderTextColor={'#7A7A7A'}
+                          onChangeText={handleChange('fullname')}
+                          onBlur={handleBlur('fullname')}
+                          value={values.fullname}
+                          style={styles.textinput}
+                        />
+                        {values.fullname ? (
+                          <View style={styles.bottom}></View>
+                        ) : (
+                          <View style={styles.bottom2}></View>
+                        )}
 
-                      <TextInput
-                        name="email"
-                        placeholder="Email"
-                        // keyboardType='text'
-                        placeholderTextColor={'#7A7A7A'}
-                        onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email}
-                        style={styles.textinput}
-                      />
-                      {values.email ? (
-                        <View style={styles.bottom}></View>
+                        {errors.fullname && (
+                          <Text style={{fontSize: 10, color: 'red'}}>
+                            {errors.fullname}
+                          </Text>
+                        )}
+                      </View>
+
+                      {values.username ? (
+                        <View style={styles.from1}></View>
                       ) : (
-                        <View style={styles.bottom2}></View>
+                        <View style={styles.form}></View>
                       )}
-                      {errors.email && (
-                        <Text style={{fontSize: 10, color: 'red'}}>
-                          {errors.email}
-                        </Text>
-                      )}
-                    </View>
+                      <>
+                        {values.username ? (
+                          <View>
+                            <Text style={styles.text}>Username</Text>
+                          </View>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                      <View>
+                        <TextInput
+                          name="Username"
+                          placeholder="Username"
+                          // keyboardType='text'
+                          placeholderTextColor={'#7A7A7A'}
+                          onChangeText={handleChange('username')}
+                          onBlur={handleBlur('username')}
+                          value={values.username}
+                          style={styles.textinput}
+                        />
+                        {values.username ? (
+                          <View style={styles.bottom}></View>
+                        ) : (
+                          <View style={styles.bottom2}></View>
+                        )}
+                        {errors.username && (
+                          <Text style={{fontSize: 10, color: 'red'}}>
+                            {errors.username}
+                          </Text>
+                        )}
+                      </View>
 
-                    {values.password ? (
-                      <View style={styles.from1}></View>
-                    ) : (
-                      <View style={styles.form3}></View>
-                    )}
-                    <>
+                      <View>
+                        {values.email ? (
+                          <View style={styles.from1}></View>
+                        ) : (
+                          <View style={styles.form}></View>
+                        )}
+                        <>
+                          {values.email ? (
+                            <View>
+                              <Text style={styles.text}>Email</Text>
+                            </View>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+
+                        <TextInput
+                          name="email"
+                          placeholder="Email"
+                          // keyboardType='text'
+                          placeholderTextColor={'#7A7A7A'}
+                          onChangeText={handleChange('email')}
+                          onBlur={handleBlur('email')}
+                          value={values.email}
+                          style={styles.textinput}
+                        />
+                        {values.email ? (
+                          <View style={styles.bottom}></View>
+                        ) : (
+                          <View style={styles.bottom2}></View>
+                        )}
+                        {errors.email && (
+                          <Text style={{fontSize: 10, color: 'red'}}>
+                            {errors.email}
+                          </Text>
+                        )}
+                      </View>
+
                       {values.password ? (
-                        <View>
-                          <Text style={styles.text}>Password</Text>
-                        </View>
+                        <View style={styles.from1}></View>
+                      ) : (
+                        <View style={styles.form3}></View>
+                      )}
+                      <>
+                        {values.password ? (
+                          <View>
+                            <Text style={styles.text}>Password</Text>
+                          </View>
+                        ) : (
+                          <>
+                            <View
+                              style={{
+                                flexDirection: 'row',
+                                marginBottom: Platform.OS == 'ios' ? 0 : -5,
+                              }}>
+                              <View style={{marginHorizontal: 42}}></View>
+                              <TouchableOpacity
+                                onPress={() => {
+                                  setInfo(!info);
+                                }}
+                                style={styles.infoView}>
+                                <Image
+                                  source={require('../assets/images/btn_info.png')}
+                                  style={styles.info}
+                                />
+                              </TouchableOpacity>
+                            </View>
+                          </>
+                        )}
+                      </>
+
+                      {!info ? (
+                        <>
+                          <View>
+                            <TextInput
+                              name="password"
+                              placeholder="Password"
+                              // keyboardType='text'
+                              // placeholderTextColor={'#7A7A7A'}
+                              onChangeText={handleChange('password')}
+                              onBlur={handleBlur('password')}
+                              value={values.password}
+                              style={styles.textinput}
+                            />
+                            {values.password ? (
+                              <View style={styles.bottom}></View>
+                            ) : (
+                              <View style={styles.bottom2}></View>
+                            )}
+                            {errors.password && (
+                              <Text style={{fontSize: 10, color: 'red'}}>
+                                {errors.password}
+                              </Text>
+                            )}
+                          </View>
+
+                          <View>
+                            {values.confirmpassword ? (
+                              <View style={styles.from1}></View>
+                            ) : (
+                              <View style={styles.form}></View>
+                            )}
+                            <>
+                              {values.confirmpassword ? (
+                                <Text style={styles.text}>
+                                  Confirm Password
+                                </Text>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+
+                            <TextInput
+                              name="confirm password"
+                              placeholder="confirm Password"
+                              // keyboardType='text'
+                              placeholderTextColor={'#7A7A7A'}
+                              onChangeText={handleChange('confirmpassword')}
+                              onBlur={handleBlur('confrmpassword')}
+                              value={values.confirmpassword}
+                              style={styles.textinput}
+                            />
+                            {values.confirmpassword ? (
+                              <View style={styles.bottom}></View>
+                            ) : (
+                              <View style={styles.bottom2}></View>
+                            )}
+                            {errors.confirmpassword && (
+                              <Text style={{fontSize: 10, color: 'red'}}>
+                                {errors.confirmpassword}
+                              </Text>
+                            )}
+                          </View>
+                        </>
                       ) : (
                         <>
                           <View
                             style={{
-                              flexDirection: 'row',
-                              marginBottom: Platform.OS == 'ios' ? 0 : -5,
+                              marginTop: 20,
+                              borderWidth: 1,
+                              borderRadius: 10,
+                              padding: 10,
                             }}>
-                            <View style={{marginHorizontal: 42}}></View>
-                            <TouchableOpacity
-                              onPress={() => {
-                                setInfo(!info);
-                              }}
-                              style={styles.infoView}>
-                              <Image
-                                source={require('../assets/images/btn_info.png')}
-                                style={styles.info}
-                              />
-                            </TouchableOpacity>
+                            <Text style={styles.infoText1}>
+                              Our minimum Reqiurement
+                            </Text>
+                            <View>
+                              <Text style={styles.infoText2}>
+                                At least 6 characters long with one number, one
+                                uppercase letter, and one lowercase letter.
+                              </Text>
+                            </View>
                           </View>
+                          <View style={styles.infobottom}></View>
                         </>
                       )}
-                    </>
+                    </View>
 
-                    {!info ? (
-                      <>
-                        <View>
-                          <TextInput
-                            name="password"
-                            placeholder="Password"
-                            // keyboardType='text'
-                            // placeholderTextColor={'#7A7A7A'}
-                            onChangeText={handleChange('password')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
-                            style={styles.textinput}
-                          />
-                          {values.password ? (
-                            <View style={styles.bottom}></View>
-                          ) : (
-                            <View style={styles.bottom2}></View>
-                          )}
-                          {errors.password && (
-                            <Text style={{fontSize: 10, color: 'red'}}>
-                              {errors.password}
-                            </Text>
-                          )}
-                        </View>
-
-                        <View>
-                          {values.confirmpassword ? (
-                            <View style={styles.from1}></View>
-                          ) : (
-                            <View style={styles.form}></View>
-                          )}
-                          <>
-                            {values.confirmpassword ? (
-                              <Text style={styles.text}>Confirm Password</Text>
-                            ) : (
-                              <></>
-                            )}
-                          </>
-
-                          <TextInput
-                            name="confirm password"
-                            placeholder="confirm Password"
-                            // keyboardType='text'
-                            placeholderTextColor={'#7A7A7A'}
-                            onChangeText={handleChange('confirmpassword')}
-                            onBlur={handleBlur('confrmpassword')}
-                            value={values.confirmpassword}
-                            style={styles.textinput}
-                          />
-                          {values.confirmpassword ? (
-                            <View style={styles.bottom}></View>
-                          ) : (
-                            <View style={styles.bottom2}></View>
-                          )}
-                          {errors.confirmpassword && (
-                            <Text style={{fontSize: 10, color: 'red'}}>
-                              {errors.confirmpassword}
-                            </Text>
-                          )}
-                        </View>
-                      </>
-                    ) : (
-                      <>
-                        <View
-                          style={{
-                            marginTop: 20,
-                            borderWidth: 1,
-                            borderRadius: 10,
-                            padding: 10,
-                          }}>
-                          <Text style={styles.infoText1}>
-                            Our minimum Reqiurement
-                          </Text>
-                          <View>
-                            <Text style={styles.infoText2}>
-                              At least 6 characters long with one number, one
-                              uppercase letter, and one lowercase letter.
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.infobottom}></View>
-                      </>
-                    )}
+                    <View style={styles.button}>
+                      <ButtonComponent
+                        text={'Register'}
+                        onPress={handleSubmit}
+                      />
+                    </View>
                   </View>
-
-                  <View style={styles.button}>
-                    <ButtonComponent text={'Register'} onPress={handleSubmit} />
-                  </View>
-                </View>
-              </>
-            )}
+                </>
+              )}
             </Formik>
           </View>
         </View>
