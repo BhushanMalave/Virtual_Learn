@@ -14,54 +14,31 @@ import {ButtonComponent} from '../components/Buttons';
 const chapterList = [
   {
     id: 1,
-    number:1,
-    name: 'Introduction to the course',
-    lessons:[
-      {
-        id: 1,
-        number: 1,
-        name: 'Introduction',
-        duration: 0.34,
-      },
-      {
-        id: 2,
-        number: 2,
-        name: 'Using the Exercise Files',
-        duration: 1.06,
-      },
-      
-    ],
-status:true
+    name: 'Chapter 1 - Introduction to the course',
   },
   {
     id: 2,
-    number:1,
-    name: 'Learning the Figma Interface',
+    name: 'Chapter 2 - Learning the Figma Interface',
   },
   {
     id: 3,
-    number:1,
-    name: 'Setting up a new project',
+    name: 'Chapter 3 - Setting up a new project',
   },
   {
     id: 4,
-    number:1,
-    name: 'Adding and Editing Content',
+    name: 'Chapter 4 - Adding and Editing Content',
   },
   {
     id: 5,
-    number:1,
-    name: 'Completing the Design',
+    name: 'Chapter 5 - Completing the Design',
   },
   {
     id: 6,
-    number:1,
-    name: 'Prototyping, Sharing and Exporting',
+    name: 'Chapter 6 - Prototyping, Sharing and Exporting',
   },
   {
     id: 7,
-    number:1,
-    name: 'Conclusion',
+    name: 'Chapter 7 - Conclusion',
   },
 ];
 const content = [
@@ -97,7 +74,7 @@ export const Chapters = () => {
           {chapterList.map(item => (
             <View key={item.id}>
               <View style={styles.chapterList}>
-                <Text style={styles.chapterName}>Chapter {item.id} - {item.name}</Text>
+                <Text style={styles.chapterName}>{item.name}</Text>
                 <View style={{marginLeft: 4}}>
                   {!view ? (
                     <TouchableOpacity
