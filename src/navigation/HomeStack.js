@@ -5,7 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { CategoriesScreen } from '../screens/CategoriesScreen';
 import { HomeSearch } from '../screens/HomeSearch';
 import { ChoiceYourCourse } from '../screens/ChoiceYourCourse';
-
+import { CategoryDisplayScreen } from '../screens/CategoryDisplayScreen';
+import { CourseScreen } from '../screens/CourseScreen';
 const Stack = createNativeStackNavigator();
 
 export const HomeStack = () => {
@@ -32,6 +33,17 @@ export const HomeStack = () => {
         component={ChoiceYourCourse}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="CategoryDisplayScreen"
+        component={CategoryDisplayScreen}
+        options={{headerShown: false}}
+      />
+        <Stack.Screen
+        name="CourseScreen"
+        component={CourseScreen}
+        options={{headerShown: false}}
+      />
+      
     </Stack.Navigator>
    
  

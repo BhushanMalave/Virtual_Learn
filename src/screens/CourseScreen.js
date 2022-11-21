@@ -11,7 +11,7 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
 
-export const CourseScreen = () => {
+export const CourseScreen = ({navigation}) => {
   return (
     
   
@@ -23,10 +23,16 @@ export const CourseScreen = () => {
         <ImageBackground
           source={require('../assets/images/img_designcoursedetail1_bg.png')}
           style={styles.header}>
+<<<<<<< HEAD
             <TouchableOpacity>
 
           <Image source={require('../assets/images/icn_close_white.png')} style={styles.image}/>
             </TouchableOpacity>
+=======
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={require('../assets/images/icn_close_white.png')} style={styles.image} />
+          </TouchableOpacity>
+>>>>>>> a01174a03262e6556c96ee1e0c5631187fa3333d
           <Text style={styles.maintext}>
             Learn Figma - UI/UX Design Essential Training
           </Text>

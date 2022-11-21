@@ -79,7 +79,7 @@ const requirements = [
     description: '• You should know your way around computer basics',
   },
 ];
-export const OverviewScreen = () => {
+export const OverviewScreen = ({navigation}) => {
   renderTruncatedFooter = handlePress => {
     return (
       <Text
@@ -208,7 +208,7 @@ export const OverviewScreen = () => {
 
           </View>
           <TouchableOpacity
-          style={styles.button}><Text style={styles.buttontext}>Join Course</Text>
+          style={styles.button}><Text style={styles.buttontext} onPress={() => navigation.navigate('Chapters')}>Join Course</Text>
           </TouchableOpacity>
       </ScrollView>
     </View>

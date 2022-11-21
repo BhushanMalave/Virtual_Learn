@@ -12,7 +12,7 @@ import {
 
 const enrolled = true;
 
-export const ModularTest = (item,key) => {
+export const ModularTest = (item) => {
   return (
     <>
       <View >
