@@ -51,15 +51,19 @@ export const EditProfile = ({navigation}) => {
     <View style={{flex: 1}}>
       <ScrollView>
         <ImageBackground
-          source={img_edit_profile_bg}
+          source={img_profile_change}
           resizeMode="cover"
           style={styles.image}>
-          <View style={styles.imageContainer}>
-          <TouchableOpacity  onPress={ () => {navigation.goBack();}}>
-            <Image source={icn_back_header} style={styles.back} />
-            </TouchableOpacity>
+          <View style={styles.imageBlur}>
+            <View style={styles.imageContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}>
+                <Image source={icn_back_header} style={styles.back} />
+              </TouchableOpacity>
 
-            <Text style={styles.editText}>Edit Profile</Text>
+              <Text style={styles.editText}>Edit Profile</Text>
 
             <View style={{alignItems: 'center', marginTop: 30 ,}}>
               <Image source={img_profile_change} style={{height:110,width:110,marginRight:40,}} />
@@ -74,6 +78,7 @@ export const EditProfile = ({navigation}) => {
               <Text style={styles.changeText}>Change image</Text>
               </TouchableOpacity>
             </View>
+          </View>
           </View>
         </ImageBackground>
 
@@ -379,6 +384,11 @@ export const EditProfile = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   image: {
+    width:'100%'
+  },
+  imageBlur: {
+    backgroundColor: '#042C5C',
+    opacity: 0.9,
     paddingBottom: 10,
   },
   imageContainer: {

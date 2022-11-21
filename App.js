@@ -16,7 +16,6 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
 
-
 let persistor = persistStore(store);
 
 const App = () => {
