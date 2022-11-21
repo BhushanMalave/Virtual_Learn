@@ -13,6 +13,13 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
 import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
+import { hsTopCourses } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
+import { all } from '../authorization/Auth';
+import { newest } from '../authorization/Auth';
+import { popular } from '../authorization/Auth';
+import { setAllData } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+
+
 
 export const OnBoardingScreen1 = ({navigation}) => {
   const dispatch = useDispatch();
@@ -46,11 +53,20 @@ export const OnBoardingScreen1 = ({navigation}) => {
         <TouchableOpacity>
           <View>
             <TouchableOpacity
-              onPress={() => {
-                //  dispatch(hsTopHeaders(token))
+              onPress={async () => {
+                // dispatch(hsTopHeaders(token))
                 // dispatch(hsCategories(token))
+                 //dispatch(hsTopCourses(token))
                 // navigation.navigate('Welcome');
-                navigation.navigate('Drawer');
+            
+                   const data = await popular(token);
+                   console.log(data);
+                   if(data)
+                   {
+                    dispatch(setAllData(data))
+                   }
+
+                
                 // console.log(token);
               }}>
               <Text style={styles.skiptext}>SKIP</Text>

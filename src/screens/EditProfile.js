@@ -9,6 +9,8 @@ import {
   ScrollView,
   Image,
   TextInput,
+  TouchableOpacity,
+
 } from 'react-native';
 
 import {Formik} from 'formik';
@@ -22,7 +24,8 @@ import img_profile_change from '../assets/images/img_profile_change.png';
 import icn_back_header from '../assets/images/icn_back_header.png';
 
 import {ButtonComponent} from '../components/Buttons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import ImagePicker from 'react-native-image-crop-picker';
 
 const data = {
   fullname: 'Mahendra Singh Dhoni',
@@ -38,6 +41,11 @@ export const EditProfile = ({navigation}) => {
   ];
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState('');
+  const [image,setImage] =useState({img_edit_profile_bg})
+
+  const changeProfileImageFromLibrary  = () => {
+
+  }
 
   return (
     <View style={{flex: 1}}>
@@ -55,12 +63,16 @@ export const EditProfile = ({navigation}) => {
 
             <View style={{alignItems: 'center', marginTop: 30 ,}}>
               <Image source={img_profile_change} style={{height:110,width:110,marginRight:40,}} />
+              <TouchableOpacity  onPress={() => changeProfileImageFromCamera()}>
               <Image source={require('../assets/images/icn_changeprofilepic.png')} style={{height:30,width:30,marginTop:-25,marginLeft:45}}/>
+              </TouchableOpacity>
             </View>
            
 
             <View style={{alignItems: 'flex-end', marginRight: 16}}>
+            <TouchableOpacity onPress={() => changeProfileImageFromLibrary()}>
               <Text style={styles.changeText}>Change image</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>

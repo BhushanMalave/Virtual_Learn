@@ -18,9 +18,7 @@ import {CourseComponent} from '../components/CourseComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
-import {setAllData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
-import {setNewestData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
-import {setPopularData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+
 
 const data = [
   {
@@ -85,71 +83,7 @@ export const HomeScreen = ({navigation}) => {
   const topCoursesData =useSelector(state => state.topCourses.data);
   const token = useSelector(state => state.userDetails.token);
 
-  const all = async () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
 
-    try {
-      const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/home/course/all',
-        options,
-      
-      );
-      //console.log("=====",response.data);
-      if (response.data) {
-        dispatch(setAllData(response.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-  const newest = async () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    try {
-      const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/home/course/newest',
-        options,
-      );
-      //console.log("=====",response.data);
-      if (response.data) {
-        dispatch(setNewestData(response.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-  const popular = async () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    try {
-      const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/home/course/popular',
-        options,
-      );
-      //console.log("=====",response.data);
-      if (response.data) {
-        dispatch(setPopularData(response.data));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     // dispatch(hsTopHeaders());

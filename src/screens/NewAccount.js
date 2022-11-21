@@ -20,28 +20,23 @@ export const NewAccount = ({navigation}) => {
   const [text, setText] = useState('');
   const handleText = string => {
     setText(string);
-    console.log(text);
   };
   const handleProcess = async () => {
-    const obj ={
-        mobileNumber : "+919591726087"
-    }
+    const obj = {
+      mobileNumber: `+91${text}`,
+    };
     try {
       const response = await axios.put(
         'https://virtual-learn-app-java.herokuapp.com/User/Continue',
-         obj,
+        obj,
       );
-      console.log("=====",response.data.message);
-      if(response.data.message ===  "OTP Valid For 2 Minutes")
-      {
+      console.log('=====', response.data.message);
+      if (response.data.message === 'OTP Valid For 2 Minutes') {
         navigation.navigate('VerifyAccount');
       }
-      
     } catch (error) {
-      console.log('errrr occured');
+      console.log(error);
     }
-
-    
   };
 
   return (
@@ -155,7 +150,7 @@ const styles = StyleSheet.create({
     color: '#EE5C4D',
     fontSize: 17,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-   
+
     marginTop: Platform.OS == 'ios' ? 2 : -3,
   },
   images: {

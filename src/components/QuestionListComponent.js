@@ -9,9 +9,11 @@ import {
   Text,
   useColorScheme,
   View,
-  Image
+  Image,
+  TouchableOpacity,
+
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 export const QuestionListComponent = ({state,onPress}) => {
     return(
