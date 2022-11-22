@@ -68,7 +68,7 @@ export const HomeSearch = ({navigation}) => {
   const filterState = useSelector(state => state.filterState.state);
   const [text, setText] = useState('');
   const dispatch =useDispatch();
-  const [componentrender, setComponentRender] = useState(1);
+  const [componentrender, setComponentRender] = useState(3);
 
 
 
