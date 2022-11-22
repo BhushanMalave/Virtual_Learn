@@ -7,74 +7,135 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import {TimerComponent} from '../components/TimerComponent';
 
 const data = [
   {
     questionId: 1,
     question: "What's the biggest planet in our solar system?",
-    options: ['Jupiter', 'Saturn', 'Neptune', 'Mercury'],
+    status: false,
+    options: [
+      {
+        option1: 'Jupiter',
+        option2: 'Saturn',
+        option3: 'Neptune',
+        option4: 'Mercury',
+      },
+    ],
+
     correctAnswer: 'Jupiter',
   },
   {
     questionId: 2,
     question: 'What attraction in India is one of the famus in the world?',
-    options: ['Jupiter', 'Saturn', 'Neptune', 'Mercury'],
+    status: false,
+    options: [
+      {
+        option1: 'taj mahal',
+        option2: 'paris',
+        option3: 'london',
+        option4: 'US',
+      },
+    ],
     correctAnswer: 'Taj mahal',
   },
   {
     questionId: 3,
     question: 'What land animal can open its mouth the widest?',
-    options: ['Jupiter', 'Saturn', 'Neptune', 'Mercury'],
+    status: false,
+    options: [
+      {
+        option1: 'Jupiter',
+        option2: 'Saturn',
+        option3: 'Neptune',
+        option4: 'Mercury',
+      },
+    ],
     correctAnswer: 'hippo',
   },
   {
     questionId: 4,
     question: 'What is the largest animal on Earth?',
-    options: ['Jupiter', 'Saturn', 'Neptune', 'Mercury'],
+    status: false,
+    options: [
+      {
+        option1: 'Jupiter',
+        option2: 'Saturn',
+        option3: 'Neptune',
+        option4: 'Mercury',
+      },
+    ],
     correctAnswer: 'elephant',
   },
   {
     questionId: 5,
     question: 'What is the only flying mammal?',
-    options: ['Jupiter', 'Saturn', 'Neptune', 'Mercury'],
+    status: false,
+    options: [
+      {
+        option1: 'Jupiter',
+        option2: 'Saturn',
+        option3: 'Neptune',
+        option4: 'Mercury',
+      },
+    ],
     correctAnswer: 'frog',
   },
 ];
 export const Test = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
-  const [correctAnswer,setCorrectAnswer]=useState(null);
-  const[score,setScore]=useState(0)
-  const [clicked,setClicked]=useState(false)
+  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [score, setScore] = useState(0);
+  const [clicked1, setClicked1] = useState(false);
+  const [clicked2, setClicked2] = useState(false);
+  const [clicked3, setClicked3] = useState(false);
+  const [clicked4, setClicked4] = useState(false);
+
+  const [nextClick, setNextClick] = useState();
+  const [previousQuestion, setPreviousQuestion] = useState();
 
   const handleNextButtonCLick = () => {
     const nextQuestion = currentQuestion + 1;
     setCurrentQuestion(nextQuestion);
+    setClicked1(false);
+    setClicked2(false);
+    setClicked3(false);
+    setClicked4(false);
   };
-  const handlePreviousClick=()=>{
+
+  const handlePreviousClick = () => {
     const PreviousQuestion = currentQuestion - 1;
     setCurrentQuestion(PreviousQuestion);
-  }
+  };
 
   const nextQuestion = currentQuestion + 1;
+  const PreviousQuestion = currentQuestion - 1;
 
-  const validateAnswer=(selectedOption)=>{
-    let correctAnswer = data[currentQuestion]['correctAnswer'];
-    setCurrentOptionSelected(currentOptionSelected);
-    setCorrectAnswer(correctAnswer)
+  // const validateAnswer=(selectedOption)=>{
+  //   let correctAnswer = data[currentQuestion]['correctAnswer'];
+  //   setCurrentOptionSelected(currentOptionSelected);
+  //   setCorrectAnswer(correctAnswer)
 
-    if(selectedOption==correctAnswer){
-      setScore(score+1)
+  //   if(selectedOption==correctAnswer){
+  //     setScore(score+1)
 
-    }
-    
-  }
+  //   }
+
+  // }
   return (
     <View style={styles.maincontainer}>
       <ScrollView>
         <View style={styles.container}>
-          <Image />
           <Text style={styles.testname}>Model Test</Text>
+          <View style={{flexDirection: 'row', marginLeft: 160, marginTop: 20}}>
+            <Image
+              source={require('../assets/images/icn_testduration.png')}
+              style={{marginTop: 9}}
+            />
+            <TimerComponent />
+            <Text style={styles.countdown}>secs remaining</Text>
+          </View>
 
           <View style={styles.middlecontainer}>
             <Text style={styles.questionnumber}>
@@ -85,16 +146,16 @@ export const Test = () => {
               <Text style={styles.question}>
                 {data[currentQuestion].question}
               </Text>
-              <View style={{marginTop:40}}>
 
-              {data[currentQuestion]?.options.map(option => (
-                  
-                 <View>
-                     <TouchableOpacity
+              <View style={{marginTop: 40}}>
+                {data[currentQuestion].options.map(item => (
+                  <View>
+                    {/* <TouchableOpacity
                      key={option.questionId}
                      onPress={()=>validateAnswer(option)}>
                          <View style={styles.option}>
-                       <Text>{option}</Text>
+                         <Image source={require('../assets/images/icn_optionunchecked.png')} style={styles.IconUnchecked}/>
+                       <Text style={styles.optionUncheck}>{option}</Text>
                        {option==currentOptionSelected?(
                         <>
                           <View style={styles.optionClicked}>
@@ -107,9 +168,134 @@ export const Test = () => {
                        
                     }
                        </View>
-                     </TouchableOpacity>
-                 </View>            
-              ))}
+                     </TouchableOpacity> */}
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        setClicked1(true),
+                          setClicked2(false),
+                          setClicked3(false),
+                          setClicked4(false);
+                        console.log(item.option1);
+                        // {data[currentQuestion].status===option1}
+                        console.log(data[currentQuestion].status);
+                      }}>
+                      {!clicked1 ? (
+                        <View style={styles.optionUncheckView}>
+                          <Image
+                            source={require('../assets/images/icn_optionunchecked.png')}
+                            style={styles.IconUnchecked}
+                          />
+                          <Text style={styles.optionUncheck}>
+                            {item.option1}
+                          </Text>
+                        </View>
+                      ) : (
+                        <View style={styles.optionCheckView}>
+                          <Image
+                            source={require('../assets/images/Simle.png')}
+                            style={styles.IconChecked}
+                          />
+                          <Text style={styles.optionCheck}>{item.option1}</Text>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        setClicked1(false),
+                          setClicked2(true),
+                          setClicked3(false),
+                          setClicked4(false);
+                        console.log(item.option2);
+                      }}>
+                      {!clicked2 ? (
+                        <View style={styles.optionUncheckView}>
+                          <Image
+                            source={require('../assets/images/icn_optionunchecked.png')}
+                            style={styles.IconUnchecked}
+                          />
+                          <Text style={styles.optionUncheck}>
+                            {item.option2}
+                          </Text>
+                        </View>
+                      ) : (
+                        <View style={styles.optionCheckView}>
+                          <Image
+                            source={require('../assets/images/Simle.png')}
+                            style={styles.IconChecked}
+                          />
+                          <Text style={styles.optionCheck}>{item.option2}</Text>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        setClicked1(false),
+                          setClicked2(false),
+                          setClicked3(true),
+                          setClicked4(false);
+                        console.log(item.option3);
+                      }}>
+                      {!clicked3 ? (
+                        <View style={styles.optionUncheckView}>
+                          <Image
+                            source={require('../assets/images/icn_optionunchecked.png')}
+                            style={styles.IconUnchecked}
+                          />
+                          <Text style={styles.optionUncheck}>
+                            {item.option3}
+                          </Text>
+                        </View>
+                      ) : (
+                        <View style={styles.optionCheckView}>
+                          <Image
+                            source={require('../assets/images/Simle.png')}
+                            style={styles.IconChecked}
+                          />
+                          <Text style={styles.optionCheck}>{item.option3}</Text>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        setClicked1(false),
+                          setClicked2(false),
+                          setClicked3(false),
+                          setClicked4(true);
+                        console.log(item.option4);
+                      }}>
+                      {!clicked4 ? (
+                        <View style={styles.optionUncheckView}>
+                          <Image
+                            source={require('../assets/images/icn_optionunchecked.png')}
+                            style={styles.IconUnchecked}
+                          />
+                          <Text style={styles.optionUncheck}>
+                            {item.option4}
+                          </Text>
+                        </View>
+                      ) : (
+                        <View style={styles.optionCheckView}>
+                          <Image
+                            source={require('../assets/images/Simle.png')}
+                            style={styles.IconChecked}
+                          />
+                          <Text style={styles.optionCheck}>{item.option4}</Text>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+
+                    {/* <TouchableOpacity>
+                     <View style={styles.optionCheckView}>
+                         <Image source={require('../assets/images/Simle.png')} style={styles.IconChecked}/>
+                         <Text style={styles.optionCheck}>{option}</Text>
+                      </View>
+                     </TouchableOpacity> */}
+                  </View>
+                ))}
               </View>
             </View>
           </View>
@@ -120,11 +306,20 @@ export const Test = () => {
             <Text style={styles.chapter}>Chapter 3</Text>
             <Text style={styles.topic}>Setting up a new project</Text>
           </View>
+
           <TouchableOpacity onPress={handlePreviousClick}>
-            <Image
-              source={require('../assets/images/Left.png')}
-              style={styles.left}
-            />
+            {PreviousQuestion === -1 ? (
+              <>
+              <View style={{marginLeft:33}}></View>
+              </>
+            ) : (
+              <>
+                <Image
+                  source={require('../assets/images/Left.png')}
+                  style={styles.left}
+                />
+              </>
+            )}
           </TouchableOpacity>
 
           {nextQuestion < data.length ? (
@@ -138,7 +333,7 @@ export const Test = () => {
             </>
           ) : (
             <>
-              <TouchableOpacity >
+              <TouchableOpacity>
                 <View style={styles.buttonview}>
                   <Text style={styles.button}>Submit</Text>
                 </View>
@@ -157,7 +352,7 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 25,
-    borderWidth: 1,
+
     height: 700,
   },
   testname: {
@@ -177,7 +372,7 @@ const styles = StyleSheet.create({
   bottomview: {
     height: 95,
     flexDirection: 'row',
-    borderWidth: 1,
+
     backgroundColor: '#2BB5F4',
   },
   innerbtm: {
@@ -224,6 +419,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     lineHeight: 20,
     alignSelf: 'center',
+    marginTop:8
   },
   questionnumber: {
     height: 17,
@@ -244,22 +440,79 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     marginTop: 15,
   },
-  option:{
-    height:46,
-    borderRadius:6,
-    backgroundColor:"white",
-    borderWidth:1,
-    marginBottom:20,
-    marginRight:10,
+  optionUncheckView: {
+    height: 46,
+    borderRadius: 6,
+    backgroundColor: 'white',
 
-   
+    marginBottom: 20,
+    marginRight: 10,
+    flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 5,
   },
-  optionClicked:{
-    height:46,
-    borderRadius:6,
-    backgroundColor:"pink",
-    borderWidth:1,
-   
-    marginRight:10,
-  }
+  optionClicked: {
+    height: 46,
+    borderRadius: 6,
+    backgroundColor: 'pink',
+
+    marginRight: 10,
+  },
+  optionUncheck: {
+    height: 20,
+    color: '#373737',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
+    fontWeight: '500',
+    letterSpacing: 0,
+    lineHeight: 20,
+    marginTop: 10,
+  },
+  IconUnchecked: {
+    height: 20,
+    borderRadius: 1,
+    margin: 10,
+  },
+  optionCheck: {
+    height: 20,
+    color: '#373737',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
+    fontWeight: '500',
+    letterSpacing: 0,
+    lineHeight: 20,
+    marginTop: 10,
+  },
+  IconChecked: {
+    height: 20,
+    borderRadius: 1,
+    margin: 10,
+  },
+  optionCheckView: {
+    height: 46,
+    borderRadius: 6,
+    backgroundColor: '#EE5C4D',
+
+    marginBottom: 20,
+    marginRight: 10,
+    flexDirection: 'row',
+  },
+  countdown: {
+    height: 20,
+    color: '#2BB5F4',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
+    fontWeight: '600',
+    letterSpacing: 0,
+    lineHeight: 20,
+    marginTop: 8,
+  },
+  leftlast: {
+    marginTop: 35,
+    marginLeft: 10,
+    opacity: 0.5,
+  },
 });

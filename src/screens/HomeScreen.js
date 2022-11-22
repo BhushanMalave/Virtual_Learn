@@ -23,7 +23,7 @@ import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenT
 const data = [
   {
     id: 1,
-    courseName: 'Product UX Design Course Sale hcujwedhuh',
+    courseName: 'Product UX Design Course Sale',
   },
   {
     id: 2,

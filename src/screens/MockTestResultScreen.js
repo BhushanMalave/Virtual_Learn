@@ -11,8 +11,13 @@ import {
   ImageBackground,
 } from 'react-native';
 import { QuestionListComponent } from '../components/QuestionListComponent';
+import { TestBottomPopUp } from '../components/TestBottomPopUp';
+import { setMockstate } from '../redux/ReduxPersist/FilterSlice';
+import { useDispatch,useSelector } from 'react-redux';
 
 export const MockTestResultScreen = () => {
+
+  const dispatch = useDispatch();
   return (
     <View style={{flex:1}}>
       <View style={styles.bodytop}>
@@ -75,19 +80,21 @@ export const MockTestResultScreen = () => {
         }}>
         <Text style={styles.textlist}>List of Questions</Text>
         <View style={{marginTop: 30}}>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={false}/>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={false}/>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={false}/>
-         <QuestionListComponent state={true}/>
-         <QuestionListComponent state={false}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
         </View>
+
       </ScrollView>
+      <TestBottomPopUp />
     </View>
   );
 };
