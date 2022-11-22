@@ -60,7 +60,6 @@ export const all = async token => {
         'https://virtual-learn-app-java.herokuapp.com/user/home/course/popular',
         options,
       );
-      //console.log("=====",response.data);
       if (response.data) {
         return response.data
       }
@@ -68,3 +67,56 @@ export const all = async token => {
       console.log(error);
     }
   };
+
+  export const mpChangePassword = async (token,objBody) => {
+    body = JSON.stringify(objBody);
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await axios.post(
+        'https://virtual-learn-app-java.herokuapp.com/ChangePassword',
+         body,
+        options,
+      );
+    
+      if (response.data) {
+        return response.data
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  export const mpChangeUserData = async (token,formBody) => {
+    
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type':'multipart/form-data',
+      },
+    };
+
+    try {
+      const response = await axios.patch(
+        'https://virtual-learn-app-java.herokuapp.com/Save',
+        formBody,
+        options,
+      );
+      console.log("=====",response.data);
+      if (response.data) {
+        return response.data
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+

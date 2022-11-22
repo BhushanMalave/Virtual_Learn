@@ -57,14 +57,15 @@ export const OnBoardingScreen1 = ({navigation}) => {
                 // dispatch(hsTopHeaders(token))
                 // dispatch(hsCategories(token))
                  //dispatch(hsTopCourses(token))
-                // navigation.navigate('Welcome');
+                //navigation.navigate('Welcome');
+                  navigation.navigate('Drawer');
             
-                   const data = await popular(token);
-                   console.log(data);
-                   if(data)
-                   {
-                    dispatch(setAllData(data))
-                   }
+                  //  const data = await popular(token);
+                  //  console.log(data);
+                  //  if(data)
+                  //  {
+                  //   dispatch(setAllData(data))
+                  //  }
 
                 
                 // console.log(token);

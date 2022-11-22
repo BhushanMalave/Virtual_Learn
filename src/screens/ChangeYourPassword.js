@@ -16,9 +16,13 @@ import {
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import { useSelector,useDispatch } from 'react-redux';
+import { mpChangePassword } from '../authorization/Auth';
 
-export const ChangeYourPassword = () => {
+export const ChangeYourPassword = ({navigation}) => {
   const [info, setInfo] = useState(false);
+  const token = useSelector(state => state.userDetails.token);
+  
 
   const registerValidationScheme = yup.object().shape({
     currentpassword: yup
@@ -45,7 +49,7 @@ export const ChangeYourPassword = () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.body}>
         <ScrollView>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
          <Image source={require('../assets/images/icn_back_header.png')} style={styles.image}/>
          </TouchableOpacity>
           <View style={styles.textView}>
@@ -63,17 +67,18 @@ export const ChangeYourPassword = () => {
                 newpassword: '',
                 confirmnewpassword: '',
               }}
-              onSubmit={values => {
-                console.log(values);
-                // try{
-                //     const obj ={
-                //         newpassword:values.newpassword,
-                //         confirmnewpassword:values.confirmnewpassword,
-                //     }
-
-                // } catch(err){
-
-                // }
+              onSubmit={ async values => {
+                const objBody ={
+                    "currentPassword":values.currentpassword,
+                    "newPassword":values.newpassword,
+                };
+                 
+                const res = await mpChangePassword(token,objBody);
+                console.log(res);
+                if(res.message === "Password Changed Successfully")
+                {
+                  navigation.navigate("Profile");
+                }
               }}>
               {({
                 handleChange,
@@ -92,7 +97,7 @@ export const ChangeYourPassword = () => {
                             {values.currentpassword ? (
                               <View>
                                 <Text style={styles.text}>
-                                  Confirm New Password
+                                  Current Password
                                 </Text>
                               </View>
                             ) : (
@@ -108,6 +113,7 @@ export const ChangeYourPassword = () => {
                             onBlur={handleBlur('currentpassword')}
                             value={values.currentpassword}
                             style={styles.textinput}
+                            secureTextEntry
                           />
                           {values.currentpassword ? (
                     <View style={styles.bottom}></View>
@@ -145,6 +151,7 @@ export const ChangeYourPassword = () => {
                       onBlur={handleBlur('newpassword')}
                       value={values.newpassword}
                       style={styles.textinput}
+                      secureTextEntry
                     />
                     {values.newpassword ? (
                     <View style={styles.bottom}></View>

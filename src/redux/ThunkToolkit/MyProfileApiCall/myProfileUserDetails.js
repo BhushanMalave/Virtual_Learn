@@ -2,8 +2,8 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-export const hsCategories = createAsyncThunk(
-  'categories/hsCategories',
+export const mpUserDetails = createAsyncThunk(
+  'userData/mpUserDetails',
   async token => {
     const options = {
       headers:{
@@ -13,7 +13,7 @@ export const hsCategories = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/Categories',
+        'https://virtual-learn-app-java.herokuapp.com/MyProfile',
         options,
       );
       return response.data;
@@ -23,25 +23,30 @@ export const hsCategories = createAsyncThunk(
   },
 );
 
-const HSCategoriesSlice = createSlice({
-  name: 'categories',
+const MPUserDetailsSlice = createSlice({
+  name: 'userData',
   initialState: {
     data:null,
     status: null,
   },
+  reducer: {
+    setUserData: (state,action) => {
+      state.data = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
-    .addCase(hsCategories.pending ,(state, action) => {
+    .addCase(mpUserDetails.pending ,(state, action) => {
       state.status = 'loading';
     })
-    .addCase(hsCategories.fulfilled ,(state, action) => {
+    .addCase(mpUserDetails.fulfilled ,(state, action) => {
       state.status = 'success';
       state.data = action.payload;
     })
-    .addCase(hsCategories.rejected, (state, action) => {
+    .addCase(mpUserDetails.rejected, (state, action) => {
       state.status = 'failed';
     })
   },
 });
-
-export default HSCategoriesSlice.reducer;
+export const {setUserData} = MPUserDetailsSlice.actions;
+export default MPUserDetailsSlice.reducer;

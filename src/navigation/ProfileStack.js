@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { MyProfile } from '../screens/MyProfile';
 import { EditProfile } from '../screens/EditProfile';
-import { CreateNewPassword } from '../screens/CreateNewPassword';
+import { ChangeYourPassword } from '../screens/ChangeYourPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,8 +20,8 @@ export const ProfileStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="CreateNewPassword"
-        component={CreateNewPassword}
+        name="ChangeYourPassword"
+        component={ChangeYourPassword}
         options={{headerShown: false}}
       />
     

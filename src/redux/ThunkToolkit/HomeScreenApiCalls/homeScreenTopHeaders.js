@@ -6,7 +6,6 @@ export const hsTopHeaders = createAsyncThunk(
   'topHeader/hsTopHeaders',
   async token => {
     // const token =useSelector(state=> state.userDetails.token);
-    console.log('--',token);
     const options = {
       headers:{
         Authorization: `Bearer ${token}`,
@@ -18,10 +17,9 @@ export const hsTopHeaders = createAsyncThunk(
         'https://virtual-learn-app-java.herokuapp.com/user/home/course',
         options,
       );
-      console.log("--()--",response.data);
       return response.data;
     } catch (error) {
-      console.log("-()-",error);
+      console.log(error);
     }
   },
 );
