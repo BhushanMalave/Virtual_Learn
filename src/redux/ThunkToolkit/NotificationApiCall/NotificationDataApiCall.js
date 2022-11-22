@@ -2,8 +2,8 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-export const hsCategories = createAsyncThunk(
-  'categories/hsCategories',
+export const notificationApiCall = createAsyncThunk(
+  'notificationData/notificationApiCall ',
   async token => {
     const options = {
       headers:{
@@ -13,7 +13,7 @@ export const hsCategories = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/Categories',
+        'https://virtual-learn-app-java.herokuapp.com/Notification',
         options,
       );
       return response.data;
@@ -23,25 +23,25 @@ export const hsCategories = createAsyncThunk(
   },
 );
 
-const HSCategoriesSlice = createSlice({
-  name: 'categories',
+const notificationApiCallSlice = createSlice({
+  name: 'notificationData',
   initialState: {
     data:null,
     status: null,
   },
   extraReducers: (builder) => {
     builder
-    .addCase(hsCategories.pending ,(state, action) => {
+    .addCase(notificationApiCall .pending ,(state, action) => {
       state.status = 'loading';
     })
-    .addCase(hsCategories.fulfilled ,(state, action) => {
+    .addCase(notificationApiCall .fulfilled ,(state, action) => {
       state.status = 'success';
       state.data = action.payload;
     })
-    .addCase(hsCategories.rejected, (state, action) => {
+    .addCase(notificationApiCall .rejected, (state, action) => {
       state.status = 'failed';
     })
   },
 });
 
-export default HSCategoriesSlice.reducer;
+export default notificationApiCallSlice.reducer;

@@ -8,9 +8,10 @@ import userDetailsReducer from '../ReduxPersist/UserDetails'
 import hsCategoriesReducer from '../ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
 import choiceYourCourseReducer from '../ReduxPersist/ChoiceYourCourseSlice'
 import topCoursesReducer from '../ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses'
-
 import ChapterListReducer  from '../ThunkToolkit/ChaptersApi/ChapterListRedux';
-
+import mpUserDetailsReducer  from '../ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import notificationApiCallReducer from '../ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
+import OverViewReducer from '../ThunkToolkit/CourseJoinApi/OverView'
 
 const persistConfig = {
     key: 'root',
@@ -25,8 +26,12 @@ const persistConfig = {
     categories:hsCategoriesReducer,
     choiceYourCourse:choiceYourCourseReducer,
     topCourses:topCoursesReducer,
-
     chapterList: ChapterListReducer,
+    userData:mpUserDetailsReducer,
+    notificationData:notificationApiCallReducer,
+    categories:OverViewReducer
+
+
 
   });
 

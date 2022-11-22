@@ -17,9 +17,12 @@ import * as yup from 'yup';
 
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
+import { setUserData } from '../redux/ReduxPersist/UserDetails';
+import { useDispatch } from 'react-redux';
 
 export const PersonalDetails = ({navigation}) => {
   const [info, setInfo] = useState(false);
+  const dispatch = useDispatch();
 
   const registerValidationScheme = yup.object().shape({
     fullname: yup
@@ -72,12 +75,25 @@ export const PersonalDetails = ({navigation}) => {
                 console.log(values);
 
                 const obj = {
-                  mobileNumber: '+917795287943',
+                  mobileNumber: '+919591726087',
                   fullName: values.fullname,
                   userName: values.username,
                   email: values.email,
                   password: values.password,
                 };
+                const userData = {
+                  profilePhoto:null,
+                  fullName: values.fullname,
+                  userName:values.username,
+                  email:values.email,
+                  mobileNumber:'9591726087',
+                  occupation:null,
+                  gender:null,
+                  dateOfBirth:null,
+                  twitterLink:null,
+                  faceBookLink:null,
+               }
+               dispatch(setUserData(userData));
 
                 try {
                   const response = await axios.post(

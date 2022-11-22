@@ -16,10 +16,6 @@ import * as yup from 'yup';
 let valueGender = '';
 let valueOccupation ='';
 import icn_dropdown from '../assets/images/icn_dropdown.png';
-import img_edit_profile_bg from '../assets/images/img_edit_profile_bg.png';
-
-import img_profile_change from '../assets/images/img_profile_change.png';
-
 import icn_back_header from '../assets/images/icn_back_header.png';
 
 import {ButtonComponent} from '../components/Buttons';
@@ -35,6 +31,9 @@ const data = {
   occupation:'Design',
   gender: 'Female',
 };
+import {useSelector, useDispatch} from 'react-redux';
+import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {mpChangeUserData} from '../authorization/Auth';
 
 export const EditProfile = ({navigation}) => {
   const genderData = [
@@ -54,15 +53,60 @@ export const EditProfile = ({navigation}) => {
   const [occupationState, setOccupationState] = useState(false);
 
   const [text, setText] = useState('');
-  const [image, setImage] = useState({img_edit_profile_bg});
+  const [image, setImage] = useState(userData?.profilePhoto);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.userDetails.token);
+  const userData = useSelector(state => state.userData.data);
 
-  const changeProfileImageFromLibrary = () => {};
+  const changeProfileImageFromLibrary = () => {
+    ImagePicker.openPicker({
+      width: 110,
+      height: 110,
+      cropping: true,
+    }).then(img => {
+      // console.log(img);
+      setImage(img.path);
+      const {filename, mime, path} = img;
+      setProfilePhoto({filename, mime, path});
+      // console.log('--9090---', profilePhoto);
+    });
+  };
+  const changeProfileImageFromCamera = () => {
+    ImagePicker.openCamera({
+      width: 110,
+      height: 110,
+      cropping: true,
+    }).then(img => {
+     
+      setImage(img.path);
+    });
+  };
+
+  const createFromData = obj => {
+    let formData = new FormData();
+    for (let key in obj) {
+      if (key === 'profilePhoto') {
+        const imageData = obj[key];
+        formData.append('profilePhoto', {
+          uri: imageData.path,
+          type: imageData.mime,
+          name: `${imageData.filename}.${imageData.mime.substr(
+            imageData.mime.indexOf('/') + 1,
+          )}`,
+        });
+      } else {
+        formData.append(`${key}`, `${obj[key]}`);
+      }
+    }
+    return formData;
+  };
 
   return (
     <View style={{flex: 1}}>
       <ScrollView>
         <ImageBackground
-          source={img_profile_change}
+          source={{uri:userData.profilePhoto}}
           resizeMode="cover"
           style={styles.image}>
           <View style={styles.imageBlur}>
@@ -78,7 +122,7 @@ export const EditProfile = ({navigation}) => {
 
               <View style={{alignItems: 'center', marginTop: 30}}>
                 <Image
-                  source={img_profile_change}
+                  source={{uri: userData.profilePhoto}}
                   style={{height: 110, width: 110, marginRight: 40}}
                 />
                 <TouchableOpacity
@@ -109,41 +153,63 @@ export const EditProfile = ({navigation}) => {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                fullname: data.fullname,
-                username: data.username,
-                email: data.email,
-                mobilenumber: data.mobilenumber,
-                occupation: data.occupation,
-                gender: data.gender,
-                dateofbirth: '',
-                twitterlink: '',
-                facebooklink: '',
+                fullname: userData?.fullName,
+                username: userData?.userName,
+                email: userData?.email,
+                mobilenumber: userData?.mobileNumber,
+                occupation: userData?.occupation,
+                gender: userData?.gender,
+                dateofbirth: userData?.dateOfBirth,
+                twitterlink: userData?.twitterLink,
+                facebooklink: userData?.faceBookLink,
               }}
-              onSubmit={values => {
+
+              onSubmit={async values => {
                 {if(selected){
                   valueGender = selected;
                 }else {
-                valueGender = data.gender
+                valueGender = userData?.gender
                 }
               }
 
                 {if(selectedOccu){
                   valueOccupation = selectedOccu;
                 }else {
-                valueOccupation = data.gender
+                valueOccupation = userData?.occupation
                 }
 
                 }
-                const obj = {
-                  occupation: valueOccupation,
-                  gender: valueGender,
-                  dateofbirth: values.dateofbirth,
-                  twtterlink: values.twitterlink,
-                  facebooklink: values.facebooklink,
-                };
-                console.log(obj.gender);
-                console.log(obj.occupation);
-                console.log(obj);
+                const formBody = createFromData({
+                  profilePhoto: profilePhoto,
+                  userName: userData?.userName,
+                  occupation: 1,
+                  gender: values?.gender,
+                  dateofBirth: values?.dateofbirth,
+                  twtterLink: values?.twitterlink,
+                  faceBookLink: values?.facebooklink,
+                });
+                const res = await mpChangeUserData(token, formBody);
+
+                if (res == 200) {
+                
+                  const data = {
+                    profilePhoto: image,
+                    fullName: userData?.fullName,
+                    userName: userData?.userName,
+                    email: userData?.userName,
+                    mobileNumber: userData?.mobileNumber,
+                    occupation: valueOccupation,
+                    gender: valueGender,
+                    dateofBirth: values.dateofbirth,
+                    twtterLink: values.twitterlink,
+                    faceBookLink: values.facebooklink,
+                  };
+                  dispatch(setUserData(data));
+                  navigation.navigate('Profile');
+                }
+
+                console.log(values.gender);
+                console.log(values);
               }}>
               {({handleChange, handleBlur, handleSubmit, values, errors}) => (
                 <View>
@@ -491,7 +557,7 @@ const styles = StyleSheet.create({
   },
   imageBlur: {
     backgroundColor: '#042C5C',
-    opacity: 0.9,
+    opacity: 0.7,
     paddingBottom: 10,
   },
   imageContainer: {

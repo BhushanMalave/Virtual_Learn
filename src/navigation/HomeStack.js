@@ -7,6 +7,7 @@ import { HomeSearch } from '../screens/HomeSearch';
 import { ChoiceYourCourse } from '../screens/ChoiceYourCourse';
 import { CategoryDisplayScreen } from '../screens/CategoryDisplayScreen';
 import { CourseScreen } from '../screens/CourseScreen';
+
 const Stack = createNativeStackNavigator();
 
 export const HomeStack = () => {

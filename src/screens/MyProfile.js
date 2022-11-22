@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ImageBackground,
   Text,
@@ -10,13 +10,22 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
+import { useSelector,useDispatch } from 'react-redux';
+import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 
 export const MyProfile = ({navigation}) => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.userDetails.token);
+  const userData = useSelector(state => state.userData.data);
+
+  useEffect(() => {
+    dispatch(mpUserDetails(token));
+  },[]);
   return (
     <ScrollView>
       <View>
         <ImageBackground
-          source={require('../assets/images/img_profilepic.png')}
+          source={{uri:userData?.profilePhoto}}
           style={styles.backgroundimg}>
           <View style={styles.imageBlur}>
             <TouchableOpacity
@@ -34,21 +43,18 @@ export const MyProfile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate('EditProfile');
                 }}>
-                {/* <Image
-            source={require('../assets/images/icn_edit profile.png')}
-            style={styles.imgedit}
-          /> */}
                 <Icon name="edit-2" size={20} color="white" />
               </TouchableOpacity>
             </View>
             <View style={styles.topinfo}>
               <Image
-                source={require('../assets/images/img_profilepic.png')}
+                  //  source={require('../assets/images/icn_hamburgermenu_white.png')}
+                   source={{uri : userData?.profilePhoto}}
                 style={styles.imgprofile}
               />
               <View style={styles.topinfotext}>
-                <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
-                <Text style={styles.textdesc}>Designer</Text>
+                <Text style={styles.textname}>{userData?.fullName}</Text>
+                <Text style={styles.textdesc}>{userData?.occupations}</Text>
               </View>
             </View>
           </View>
@@ -56,46 +62,46 @@ export const MyProfile = ({navigation}) => {
         <Text style={styles.textcom}> Has Completed</Text>
         <View style={styles.viewcourseinfo}>
           <View style={styles.viewcourseinfoin}>
-            <Text style={styles.textno}>06</Text>
+            <Text style={styles.textno}>{userData?.courseCompleted}</Text>
             <Text style={styles.textcourse}>Courses</Text>
           </View>
           <View style={styles.viewcourseinfoin}>
-            <Text style={styles.textno}>06</Text>
+            <Text style={styles.textno}>{userData?.chaptersCompleted}</Text>
             <Text style={styles.textcourse}>Chapters</Text>
           </View>
           <View style={styles.viewcourseinfoin}>
-            <Text style={styles.textno}>06</Text>
+            <Text style={styles.textno}>{userData?.testsCompleted}</Text>
             <Text style={styles.textcourse}>Test</Text>
           </View>
         </View>
         <Text style={styles.textdetails}>Personal Details</Text>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Name</Text>
-          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+          <Text style={styles.texttitle}>{userData?.fullName}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Username</Text>
-          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+          <Text style={styles.texttitle}>{userData?.userName}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Email</Text>
-          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+          <Text style={styles.texttitle}>{userData?.email}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Mobile Number</Text>
-          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+          <Text style={styles.texttitle}>{userData?.mobileNumber}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Occupation</Text>
-          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+          <Text style={styles.texttitle}>{userData?.occupation}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Date of Birth</Text>
-          <Text style={styles.texttitle}>Mahendra Singh Dhoni</Text>
+          <Text style={styles.texttitle}>{userData?.dateOfBirth}</Text>
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('CreateNewPassword');
+            navigation.navigate('ChangeYourPassword');
           }}>
           <View style={styles.viewpass}>
             <Image
