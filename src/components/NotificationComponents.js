@@ -15,6 +15,7 @@ import {
 
 export const NotificationsComponentUnseen = (props) => {
   return (
+    <TouchableOpacity onPress = { props.onPress}>
     <View style={styles.view}>
       <View style={styles.viewin}>
         <Image source={{uri: props?.img}} style={styles.imageinc} />
@@ -25,6 +26,7 @@ export const NotificationsComponentUnseen = (props) => {
         <View style={styles.borderpoint1} />
       </View>
     </View>
+    </TouchableOpacity>
   );
 };
 

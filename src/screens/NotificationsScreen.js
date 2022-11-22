@@ -17,8 +17,10 @@ import {NotificationsComponentSeen} from '../components/NotificationComponents';
 import {useDispatch, useSelector} from 'react-redux';
 import {notificationApiCall} from '../redux/ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
 import {iteratorSymbol} from 'immer/dist/internal';
+import axios from 'axios';
 export const NotificationsScreen = ({navigation}) => {
   const dispatch = useDispatch();
+  
 
   const notificationData = useSelector(state => state.notificationData.data);
   const token = useSelector(state => state.userDetails.token);
@@ -40,42 +42,49 @@ export const NotificationsScreen = ({navigation}) => {
       <Text style={styles.text}>Notifications</Text>
 
       {notificationData.map(items => {
-        return(
-          <NotificationsComponentSeen 
-          desc={items.description}
-          img={items.notificationUrl}
-          time={items.timeStamp}
+        return items.readStatus === true ? (
+          <NotificationsComponentSeen
+            desc={items.description}
+            img={items.notificationUrl}
+            time={items.timeStamp}
           />
-        )
-      })}
-
-      {/* {notificationData.map(items => {
-        {
+        ) : (
           <NotificationsComponentUnseen
-          desc={items.description}
-          img={items.notificationUrl}
-          time={items.timeStamp}
-        />
-         
+            desc={items.description}
+            img={items.notificationUrl}
+            time={items.timeStamp}
+            onPress={ async () => {
+              const body = {
+                notificationId : items.notificationId
+              }
+              
+              const options = {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                 
+                },
+              };
+            
+              try {
+                const response = await axios.put(
+                  'https://virtual-learn-app-java.herokuapp.com/ReadNotification',
+                  body,
+                  options,
+                );
+            
+                if (response.data) {
+                  return response.data;
+                }
+              } catch (error) {
+                console.log(error);
+              }
 
-          // items.readStatus === true ? (
-
-          //   <NotificationsComponentUnseen
-          //     desc={items.description}
-          //     img={items.notificationUrl}
-          //     time={items.timeStamp}
-          //   />
-          // ) : (
-          //   <NotificationsComponentSeen
-          //     desc={items.description}
-          //     img={items.notificationUrl}
-          //     time={items.timeStamp}
-          //   />
-          // );
-        }
-      })
-
-      } */}
+            }
+            
+            }
+          />
+        );
+      })}
     </SafeAreaView>
   );
 };

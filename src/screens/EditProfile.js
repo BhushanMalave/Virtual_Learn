@@ -10,25 +10,20 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-
 } from 'react-native';
 
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
 import icn_dropdown from '../assets/images/icn_dropdown.png';
-import img_edit_profile_bg from '../assets/images/img_edit_profile_bg.png';
-
-import img_profile_change from '../assets/images/img_profile_change.png';
-
 import icn_back_header from '../assets/images/icn_back_header.png';
 
 import {ButtonComponent} from '../components/Buttons';
 
 import ImagePicker from 'react-native-image-crop-picker';
-import { useSelector,useDispatch } from 'react-redux';
-import { setUserData } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-import { mpChangeUserData } from '../authorization/Auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {mpChangeUserData} from '../authorization/Auth';
 
 export const EditProfile = ({navigation}) => {
   const genderData = [
@@ -37,64 +32,60 @@ export const EditProfile = ({navigation}) => {
   ];
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState('');
-  const [image,setImage] =useState(userData?.profilePhoto);
-  const[profilePhoto,setProfilePhoto] = useState(null);
+  const [image, setImage] = useState(userData?.profilePhoto);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
 
-
-  const changeProfileImageFromLibrary  = () => {
+  const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
       width: 110,
       height: 110,
-      cropping: true
+      cropping: true,
     }).then(img => {
-      console.log(img);
+      // console.log(img);
       setImage(img.path);
-      const {filename,mime,path} = img;
-      setProfilePhoto({filename , mime, path});
-      console.log("--9090---",profilePhoto)
-    }); 
-    
-  }
+      const {filename, mime, path} = img;
+      setProfilePhoto({filename, mime, path});
+      // console.log('--9090---', profilePhoto);
+    });
+  };
   const changeProfileImageFromCamera = () => {
     ImagePicker.openCamera({
       width: 110,
       height: 110,
       cropping: true,
     }).then(img => {
-      console.log(img);
-      setImage(img.path)
+     
+      setImage(img.path);
     });
-  }
+  };
 
-  // const createFromData = obj => {
-         
-    // let formData = new FormData();
-    //  for(let key in obj)
-    //  {
-    //   if(key === 'profilePhoto')
-    //   {
-    //     const imageData = obj[key];
-    //     formData.append('profilePhoto',{
-    //       uri:imageData.path,
-    //       type:imageData.mime,
-    //       name: `${imageData.filename}.${imageData.mime.substr(imageData.mime.indexOf('/')+1,
-    //       )}`,
-    //     });
-    //   }else{
-    //     formData.append(`${key}`,`${obj[key]}`);
-    //   }
-    //   }
-    //   return formData;
-    //  }
+  const createFromData = obj => {
+    let formData = new FormData();
+    for (let key in obj) {
+      if (key === 'profilePhoto') {
+        const imageData = obj[key];
+        formData.append('profilePhoto', {
+          uri: imageData.path,
+          type: imageData.mime,
+          name: `${imageData.filename}.${imageData.mime.substr(
+            imageData.mime.indexOf('/') + 1,
+          )}`,
+        });
+      } else {
+        formData.append(`${key}`, `${obj[key]}`);
+      }
+    }
+    return formData;
+  };
 
   return (
     <View style={{flex: 1}}>
       <ScrollView>
         <ImageBackground
-          source={{uri:image}}
+          source={{uri:userData.profilePhoto}}
           resizeMode="cover"
           style={styles.image}>
           <View style={styles.imageBlur}>
@@ -108,20 +99,32 @@ export const EditProfile = ({navigation}) => {
 
               <Text style={styles.editText}>Edit Profile</Text>
 
-            <View style={{alignItems: 'center', marginTop: 30 ,}}>
-              <Image source={{uri:image}} style={{height:110,width:110,marginRight:40,}} />
-              <TouchableOpacity  onPress={() => changeProfileImageFromCamera()}>
-              <Image source={require('../assets/images/icn_changeprofilepic.png')} style={{height:30,width:30,marginTop:-25,marginLeft:45}}/>
-              </TouchableOpacity>
-            </View>
-           
+              <View style={{alignItems: 'center', marginTop: 30}}>
+                <Image
+                  source={{uri: userData.profilePhoto}}
+                  style={{height: 110, width: 110, marginRight: 40}}
+                />
+                <TouchableOpacity
+                  onPress={() => changeProfileImageFromCamera()}>
+                  <Image
+                    source={require('../assets/images/icn_changeprofilepic.png')}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      marginTop: -25,
+                      marginLeft: 45,
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
 
-            <View style={{alignItems: 'flex-end', marginRight: 16}}>
-            <TouchableOpacity onPress={() => changeProfileImageFromLibrary()}>
-              <Text style={styles.changeText}>Change image</Text>
-              </TouchableOpacity>
+              <View style={{alignItems: 'flex-end', marginRight: 16}}>
+                <TouchableOpacity
+                  onPress={() => changeProfileImageFromLibrary()}>
+                  <Text style={styles.changeText}>Change image</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
           </View>
         </ImageBackground>
 
@@ -136,45 +139,38 @@ export const EditProfile = ({navigation}) => {
                 occupation: userData?.occupation,
                 gender: userData?.gender,
                 dateofbirth: userData?.dateOfBirth,
-                twitterlink:userData?.twitterLink,
+                twitterlink: userData?.twitterLink,
                 facebooklink: userData?.faceBookLink,
               }}
-              onSubmit={ async values => {
+              onSubmit={async values => {
+                const formBody = createFromData({
+                  profilePhoto: profilePhoto,
+                  userName: userData?.userName,
+                  occupation: 1,
+                  gender: values?.gender,
+                  dateofBirth: values?.dateofbirth,
+                  twtterLink: values?.twitterlink,
+                  faceBookLink: values?.facebooklink,
+                });
+                const res = await mpChangeUserData(token, formBody);
 
-
-             
-
-                  const formBody =  createFromData({
-                    profilePhoto:profilePhoto,
-                    userName:userData?.userName,
-                    occupation: 1,
-                    gender: values?.gender,
-                    dateofBirth: values?.dateofbirth,
-                    twtterLink: values?.twitterlink,
-                    faceBookLink: values?.facebooklink,
-                  })
-                   const res = await mpChangeUserData(token,formBody);
-                   console.log(res);
-        
-      
-
-                const data = {
-                  profilePhoto:image,
-                  fullName:userData?.fullName,
-                  userName:userData?.userName,
-                  email:userData?.userName,
-                  mobileNumber:userData?.mobileNumber,
-                  occupation: values.occupation,
-                  gender: values.gender,
-                  dateofBirth: values.dateofbirth,
-                  twtterLink: values.twitterlink,
-                  faceBookLink: values.facebooklink,
-                };
-                dispatch(setUserData(data));
-
-               
+                if (res == 200) {
                 
-
+                  const data = {
+                    profilePhoto: image,
+                    fullName: userData?.fullName,
+                    userName: userData?.userName,
+                    email: userData?.userName,
+                    mobileNumber: userData?.mobileNumber,
+                    occupation: values.occupation,
+                    gender: values.gender,
+                    dateofBirth: values.dateofbirth,
+                    twtterLink: values.twitterlink,
+                    faceBookLink: values.facebooklink,
+                  };
+                  dispatch(setUserData(data));
+                  navigation.navigate('Profile');
+                }
 
                 console.log(values.gender);
                 console.log(values);
@@ -456,7 +452,7 @@ export const EditProfile = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   image: {
-    width:'100%'
+    width: '100%',
   },
   imageBlur: {
     backgroundColor: '#042C5C',
