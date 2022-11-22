@@ -172,7 +172,7 @@ export const HomeSearch = ({navigation}) => {
         </View>
         
       )}
-      <BottomPopup show={filterState} />
+      <BottomPopup />
     </View>
   );
 };
