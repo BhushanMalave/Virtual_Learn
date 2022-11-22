@@ -58,6 +58,7 @@ export const OnBoardingScreen1 = ({navigation}) => {
                 // dispatch(hsCategories(token))
                  //dispatch(hsTopCourses(token))
                 // navigation.navigate('Welcome');
+                navigation.navigate('Drawer');
             
                    const data = await popular(token);
                    console.log(data);

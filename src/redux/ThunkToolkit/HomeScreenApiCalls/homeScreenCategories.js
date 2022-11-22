@@ -5,7 +5,7 @@ import axios from 'axios';
 export const hsCategories = createAsyncThunk(
   'categories/hsCategories',
   async token => {
-    console.log('--',token);
+ 
     const options = {
       headers:{
         Authorization: `Bearer ${token}`,
@@ -17,7 +17,7 @@ export const hsCategories = createAsyncThunk(
         'https://virtual-learn-app-java.herokuapp.com/user/Categories',
         options,
       );
-      console.log("----(cat)",response.data);
+
       return response.data;
     } catch (error) {
       console.log("-()-",error);

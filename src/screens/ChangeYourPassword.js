@@ -92,7 +92,7 @@ export const ChangeYourPassword = () => {
                             {values.currentpassword ? (
                               <View>
                                 <Text style={styles.text}>
-                                  Confirm New Password
+                                  Current Password
                                 </Text>
                               </View>
                             ) : (
@@ -108,6 +108,7 @@ export const ChangeYourPassword = () => {
                             onBlur={handleBlur('currentpassword')}
                             value={values.currentpassword}
                             style={styles.textinput}
+                            secureTextEntry
                           />
                           {values.currentpassword ? (
                     <View style={styles.bottom}></View>
@@ -145,6 +146,7 @@ export const ChangeYourPassword = () => {
                       onBlur={handleBlur('newpassword')}
                       value={values.newpassword}
                       style={styles.textinput}
+                      secureTextEntry
                     />
                     {values.newpassword ? (
                     <View style={styles.bottom}></View>

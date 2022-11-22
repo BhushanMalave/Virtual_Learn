@@ -18,76 +18,44 @@ import {CourseComponent} from '../components/CourseComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
+import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
+import {newest, popular, all} from '../authorization/Auth';
+import {hsTopCourses} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
+import {
+  setAllData,
+  setNewestData,
+  setPopularData,
+} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 
-
-const data = [
-  {
-    id: 1,
-    courseName: 'Product UX Design Course Sale hcujwedhuh',
-  },
-  {
-    id: 2,
-    courseName: 'Product UX Design Course Sale',
-  },
-  {
-    id: 3,
-    courseName: 'Product UX Design Course Sale',
-  },
-];
-
-const categories = [
-  {
-    id: 1,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Design',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Finance',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Development',
-  },
-  {
-    id: 4,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Health & Fitness',
-  },
-  {
-    id: 5,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Business',
-  },
-  {
-    id: 6,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'IT & Software',
-  },
-  {
-    id: 7,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Music',
-  },
-];
 export const HomeScreen = ({navigation}) => {
+
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
   const [clicked3, setClicked3] = useState(false);
   const dispatch = useDispatch();
-  const topHeaderData = useSelector(state => state.topHeader.value);
-  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
-  const categoriesData =useSelector(state => state.categories.data);
-  const topCoursesData =useSelector(state => state.topCourses.data);
+
   const token = useSelector(state => state.userDetails.token);
 
-
-
+  const allCourse = async () => {
+    const data1 = await all(token);
+    if (data1) {
+      dispatch(setAllData(data1));
+    }
+  };
   useEffect(() => {
-    // dispatch(hsTopHeaders());
-  });
+    dispatch(hsTopHeaders(token));
+    dispatch(hsCategories(token));
+    dispatch(hsTopCourses(token));
+    setClicked1(true);
+    setClicked2(false);
+    setClicked3(false);
+    allCourse();
+  }, []);
+
+  const topHeaderData = useSelector(state => state.topHeader.value);
+  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
+  const categoriesData = useSelector(state => state.categories.data);
+  const topCoursesData = useSelector(state => state.topCourses.data);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -107,21 +75,29 @@ export const HomeScreen = ({navigation}) => {
         <Text style={styles.name}>Mahendra Singh Dhoni</Text>
         <View>
           <FlatList
-            data={data}
+            data={topHeaderData}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <View style={styles.itemContainer}>
-                <View
+                <ImageBackground
+                  source={{uri: item?.coursePhoto}}
                   style={{
-                    borderwidth: 1,
-                    backgroundColor: 'pink',
-                    height: 45,
-                    width: 240,
-                    marginTop: 80,
+                    height: 140,
+                    width: 260,
+                    borderRadius: 5,
+                    overflow: 'hidden',
                   }}>
-                  <Text style={styles.courseText}>{item.courseName}</Text>
-                </View>
+                  <View
+                    style={{
+                      height: 45,
+                      marginTop: 90,
+                      justifyContent: 'center',
+                      margin: 13,
+                    }}>
+                    <Text style={styles.courseText}>{item?.courseName}</Text>
+                  </View>
+                </ImageBackground>
               </View>
             )}></FlatList>
         </View>
@@ -143,14 +119,17 @@ export const HomeScreen = ({navigation}) => {
                 marginLeft: 20,
                 marginTop: 10,
               }}>
-              {categories.map(item => (
-                <CategoriesComponent
-                  img={item.source}
-                  category={item.category}
-                  onPress ={() => {
-                    navigation.navigate('CategoryDisplayScreen');
-                  }}
-                />
+              {categoriesData?.map(item => (
+                <View key={item?.categoryId}>
+                  <CategoriesComponent
+                    id={item?.categoryId}
+                    img={item?.categoryPhoto}
+                    category={item?.categoryName}
+                    onPress={() => {
+                      navigation.navigate('CategoryDisplayScreen');
+                    }}
+                  />
+                </View>
               ))}
             </View>
           </ScrollView>
@@ -158,15 +137,18 @@ export const HomeScreen = ({navigation}) => {
             <View style={styles.categoryview}>
               <Text style={styles.category}>Choice your course</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('ChoiceCourse')}
-                >
+                onPress={() => navigation.navigate('ChoiceCourse')}>
                 <Text style={styles.all}>See All</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.buttontabs}>
               <TouchableOpacity
-                onPress={() => {
+                onPress={async () => {
                   setClicked1(true), setClicked2(false), setClicked3(false);
+                  const data1 = await all(token);
+                  if (data1) {
+                    dispatch(setAllData(data1));
+                  }
                 }}>
                 {clicked1 ? (
                   <View style={styles.buttonActiveview}>
@@ -178,9 +160,15 @@ export const HomeScreen = ({navigation}) => {
                   </View>
                 )}
               </TouchableOpacity>
+
               <TouchableOpacity
-                onPress={() => {
+                onPress={async () => {
                   setClicked2(true), setClicked1(false), setClicked3(false);
+                  const data2 = await popular(token);
+                  // console.log('popular===', data2);
+                  if (data2) {
+                    dispatch(setPopularData(data2));
+                  }
                 }}>
                 {clicked2 ? (
                   <View style={styles.buttonActiveview}>
@@ -192,9 +180,14 @@ export const HomeScreen = ({navigation}) => {
                   </View>
                 )}
               </TouchableOpacity>
+
               <TouchableOpacity
-                onPress={() => {
+                onPress={async () => {
                   setClicked3(true), setClicked2(false), setClicked1(false);
+                  const data3 = await newest(token);
+                  if (data3) {
+                    dispatch(setNewestData(data3));
+                  }
                 }}>
                 {clicked3 ? (
                   <View style={styles.buttonActiveview}>
@@ -207,107 +200,50 @@ export const HomeScreen = ({navigation}) => {
                 )}
               </TouchableOpacity>
             </View>
-            {/* <View style={styles.btmcourseview}> */}
 
             <FlatList
-              data={data}
+              data={choiceYourCourse}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => navigation.navigate('CourseScreen')}>
                 <View style={styles.btmcourseview}>
-                  <View style={styles.imgview}></View>
-                  <View style={styles.btmitemContainer}>
-                    <View>
-                      <Text
-                        style={styles.btmcourseText}
-                        numberOfLines={2}
-                        ellipsizeMode="tail">
-                        {item.courseName}
-                      </Text>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('CourseScreen')}>
+                    <Image
+                      source={{uri: item?.coursePhoto}}
+                      style={styles.imgview}
+                    />
+
+                    <View style={styles.btmitemContainer}>
+                      <View>
+                        <Text
+                          style={styles.btmcourseText}
+                          // numberOfLines={2}
+                          ellipsizeMode="tail">
+                          {item?.courseName}
+                        </Text>
+                        <Text style={styles.ChoiseCourseChapterNum}>
+                          Chapter {item?.chapterCount}
+                        </Text>
+                      </View>
                     </View>
-                  </View>
-                </View>
                 </TouchableOpacity>
-                /* <Text style={{backgroundColor:"white",paddingTop:30,margin:10,marginTop:0,}}>k</Text>  */
+                  </View>
               )}></FlatList>
 
             {/* </View> */}
           </View>
         </View>
 
-        {/* 
-        <View style={styles.businessview}>
-            <View style={styles.categoryview}>
-              <Text style={styles.category}>Top courses in Business</Text>
-              <TouchableOpacity>
-
-              <Text style={styles.all}>See All</Text>
-              </TouchableOpacity>
-            </View>
-            <View>
-          <FlatList
-            data={data}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <View>
-
-                <View style={styles.businessContainer}>
-                  <Text></Text>
-                </View>
-               
-  
-                  <Text style={styles.busnesstext}>The Complete Communication Skill</Text>
-                  <View style={{flexDirection:"row",marginLeft:25}}>
-
-                  <Text style={styles.busnesschapter}>5 Chapter</Text>
-                  <Text style={[styles.busnesschapter]}>          1:30:20</Text>
-                  </View>
-              </View>
-             
-            )}></FlatList>
-        </View>   
-        </View> */}
-        <CourseComponent header="Top Courses in Design" chapter="5"
-           onPress={() => {navigation.navigate('ChoiceCourse')}
-        }/>
-
-        {/* <View style={styles.businessview}>
-            <View style={styles.categoryview}>
-              <Text style={styles.category}>Top courses in Design</Text>
-             
-                <TouchableOpacity>
-                  
-              <Text style={styles.all}>See All</Text>
-                </TouchableOpacity>
-              
-            </View>
-            <View>
-          <FlatList
-            data={data}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <View>
-
-                <View style={styles.businessContainer}>
-                  <Text></Text>
-                </View>
-               
-  
-                  <Text style={styles.busnesstext}>The Complete Communication Skill</Text>
-                  <View style={{flexDirection:"row",marginLeft:25}}>
-
-                  <Text style={styles.busnesschapter}>5 Chapter</Text>
-                  <Text style={[styles.busnesschapter]}>          1:30:20</Text>
-                  </View>
-              </View>
-             
-            )}></FlatList>
-        </View>   
-        </View> */}
-        <CourseComponent header="Top Courses in Development" chapter="5"   onPress={() => {navigation.navigate('ChoiceCourse')}}/>
+        {topCoursesData?.map(item => (
+          <CourseComponent
+            header={item?.categoryName}
+            data={item?.popularCourseInEachCategoryList}
+            onPress={() => {
+              navigation.navigate('ChoiceCourse');
+            }}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
@@ -359,19 +295,15 @@ const styles = StyleSheet.create({
     width: 260,
     justifyContent: 'space-between',
     marginLeft: 25,
-    padding: 10,
-    // elevation: 5,
-    // marginLeft: 10,
-    borderWidth: 1,
     marginTop: 20,
   },
+
   courseText: {
-    height: 34,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
-    letterSpacing: 0,
-    lineHeight: 35,
-    // marginTop: '35%',
+    textAlign: 'center',
+    // lineHeight: 35,
+    // borderWidth:1,
   },
   categoryview: {
     // height: 104,
@@ -490,9 +422,8 @@ const styles = StyleSheet.create({
     height: 138,
     width: 142,
     borderRadius: 5,
-    borderwidth: 1,
     flexDirection: 'row',
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
 
     flexDirection: 'column',
     marginTop: 25,
@@ -501,8 +432,6 @@ const styles = StyleSheet.create({
   imgview: {
     width: 142,
     height: 82,
-    // marginLeft:-152,
-    // borderWidth:1
   },
   btmitemContainer: {
     backgroundColor: '#FFFFFF',
@@ -525,17 +454,22 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   btmcourseText: {
-    height: 25,
+    // height: 25,
+    width:120,
     fontFamily: 'Proxima Nova',
     fontSize: 10,
     color: '#2B2B2B',
+    // borderWidth: 1,
   },
-  // bussinesscontainer:{
-  //   height: 140,
-  //   width:600,
-  //   backgroundColor:"black"
-
-  // }
+  ChoiseCourseChapterNum: {
+    height: 9,
+    width: 35,
+    color: '#7A7A7A',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 8,
+    fontWeight: '500',
+    lineHeight: 9,
+  },
   businessContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
