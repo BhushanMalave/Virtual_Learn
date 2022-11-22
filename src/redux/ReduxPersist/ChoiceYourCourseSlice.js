@@ -8,15 +8,15 @@ export const ChoiceYourDetailsSlice = createSlice({
     },
     reducers: {
       setAllData: (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.data = action.payload;
       },
       setPopularData: (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.data = action.payload;
       },
       setNewestData: (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.data = action.payload;
       },
     },
