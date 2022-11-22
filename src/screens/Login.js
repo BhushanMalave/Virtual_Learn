@@ -82,9 +82,12 @@ export const Login = ({navigation}) => {
                   console.log('token:', token);
                   if (response.data.jwtToken) {
                     navigation.navigate('Drawer');
+                  }else{
+                    setWarning(true);
                   }
                 } catch (error) {
                   console.log(error);
+                  setWarning(true);
                 }
               }}>
               {({

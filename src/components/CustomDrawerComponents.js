@@ -31,16 +31,18 @@ export const CustomDrawerComponent = props => {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <ImageBackground
-          source={require('../assets/images/img_profiledetails_bg.png')}
+          source={require('../assets/images/img_profilepic.png')}
           style={styles.backgroundimg}>
-          <View style={styles.topinfo}>
-            <Image
-              source={require('../assets/images/img_profilepic.png')}
-              style={styles.imgprofile}
-            />
-            <View style={styles.topinfotext}>
-              <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
-              <Text style={styles.textdesc}>Designer</Text>
+          <View style={styles.backgroundImgBlur}>
+            <View style={styles.topinfo}>
+              <Image
+                source={require('../assets/images/img_profilepic.png')}
+                style={styles.imgprofile}
+              />
+              <View style={styles.topinfotext}>
+                <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
+                <Text style={styles.textdesc}>Designer</Text>
+              </View>
             </View>
           </View>
         </ImageBackground>
@@ -61,6 +63,11 @@ export const CustomDrawerComponent = props => {
 
 const styles = StyleSheet.create({
   backgroundimg: {
+    height: 178,
+  },
+  backgroundImgBlur: {
+    backgroundColor: '#042C5C',
+    opacity: 0.9,
     height: 178,
   },
   topinfo: {
@@ -91,8 +98,7 @@ const styles = StyleSheet.create({
     // marginBottom: 330,
     marginLeft: 20,
     flexDirection: 'row',
-    marginTop:15,
-    
+    marginTop: 15,
   },
   textname: {
     color: '#FFFFFF',
@@ -112,9 +118,9 @@ const styles = StyleSheet.create({
   textlog: {
     color: '#373737',
     fontFamily: 'Proxima Nova',
-    fontWeight:Platform.OS === 'ios' ? 'bold' : 'normal',
+    fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
     fontSize: 16,
     marginLeft: 21,
-    marginTop:Platform.OS === 'ios' ? 1 : -3,
+    marginTop: Platform.OS === 'ios' ? 1 : -3,
   },
 });

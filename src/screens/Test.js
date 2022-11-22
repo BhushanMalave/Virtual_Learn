@@ -7,11 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import {TimerComponent} from '../components/TimerComponent';
 
 const data = [
   {
     questionId: 1,
-    question: "What's the biggest planet in our solar system?",status:false,
+    question: "What's the biggest planet in our solar system?",
+    status: false,
     options: [
       {
         option1: 'Jupiter',
@@ -25,20 +27,22 @@ const data = [
   },
   {
     questionId: 2,
-    question: 'What attraction in India is one of the famus in the world?',status:false,
+    question: 'What attraction in India is one of the famus in the world?',
+    status: false,
     options: [
       {
-        option1: 'Jupiter',
-        option2: 'Saturn',
-        option3: 'Neptune',
-        option4: 'Mercury',
+        option1: 'taj mahal',
+        option2: 'paris',
+        option3: 'london',
+        option4: 'US',
       },
     ],
     correctAnswer: 'Taj mahal',
   },
   {
     questionId: 3,
-    question: 'What land animal can open its mouth the widest?',status:false,
+    question: 'What land animal can open its mouth the widest?',
+    status: false,
     options: [
       {
         option1: 'Jupiter',
@@ -51,7 +55,8 @@ const data = [
   },
   {
     questionId: 4,
-    question: 'What is the largest animal on Earth?',status:false,
+    question: 'What is the largest animal on Earth?',
+    status: false,
     options: [
       {
         option1: 'Jupiter',
@@ -65,7 +70,7 @@ const data = [
   {
     questionId: 5,
     question: 'What is the only flying mammal?',
-    status:false,
+    status: false,
     options: [
       {
         option1: 'Jupiter',
@@ -87,10 +92,9 @@ export const Test = () => {
   const [clicked3, setClicked3] = useState(false);
   const [clicked4, setClicked4] = useState(false);
 
-  const [nextClick,setNextClick]=useState();
+  const [nextClick, setNextClick] = useState();
+  const [previousQuestion, setPreviousQuestion] = useState();
 
-
- 
   const handleNextButtonCLick = () => {
     const nextQuestion = currentQuestion + 1;
     setCurrentQuestion(nextQuestion);
@@ -101,12 +105,12 @@ export const Test = () => {
   };
 
   const handlePreviousClick = () => {
-      const PreviousQuestion = currentQuestion - 1;
-      setCurrentQuestion(PreviousQuestion);
-    
-  }
+    const PreviousQuestion = currentQuestion - 1;
+    setCurrentQuestion(PreviousQuestion);
+  };
 
-   const nextQuestion = currentQuestion + 1;
+  const nextQuestion = currentQuestion + 1;
+  const PreviousQuestion = currentQuestion - 1;
 
   // const validateAnswer=(selectedOption)=>{
   //   let correctAnswer = data[currentQuestion]['correctAnswer'];
@@ -124,6 +128,14 @@ export const Test = () => {
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.testname}>Model Test</Text>
+          <View style={{flexDirection: 'row', marginLeft: 160, marginTop: 20}}>
+            <Image
+              source={require('../assets/images/icn_testduration.png')}
+              style={{marginTop: 9}}
+            />
+            <TimerComponent />
+            <Text style={styles.countdown}>secs remaining</Text>
+          </View>
 
           <View style={styles.middlecontainer}>
             <Text style={styles.questionnumber}>
@@ -134,15 +146,9 @@ export const Test = () => {
               <Text style={styles.question}>
                 {data[currentQuestion].question}
               </Text>
+
               <View style={{marginTop: 40}}>
-
-                
-
-      
                 {data[currentQuestion].options.map(item => (
-              
-          
-
                   <View>
                     {/* <TouchableOpacity
                      key={option.questionId}
@@ -164,15 +170,15 @@ export const Test = () => {
                        </View>
                      </TouchableOpacity> */}
 
-
-                   
-
                     <TouchableOpacity
                       onPress={() => {
-                        setClicked1(true),setClicked2(false),setClicked3(false),setClicked4(false)
-                        console.log(item.option1)
+                        setClicked1(true),
+                          setClicked2(false),
+                          setClicked3(false),
+                          setClicked4(false);
+                        console.log(item.option1);
                         // {data[currentQuestion].status===option1}
-                        console.log(data[currentQuestion].status)
+                        console.log(data[currentQuestion].status);
                       }}>
                       {!clicked1 ? (
                         <View style={styles.optionUncheckView}>
@@ -195,11 +201,13 @@ export const Test = () => {
                       )}
                     </TouchableOpacity>
 
-
                     <TouchableOpacity
                       onPress={() => {
-                        setClicked1(false),setClicked2(true),setClicked3(false),setClicked4(false)
-                        console.log(item.option2)
+                        setClicked1(false),
+                          setClicked2(true),
+                          setClicked3(false),
+                          setClicked4(false);
+                        console.log(item.option2);
                       }}>
                       {!clicked2 ? (
                         <View style={styles.optionUncheckView}>
@@ -224,8 +232,11 @@ export const Test = () => {
 
                     <TouchableOpacity
                       onPress={() => {
-                        setClicked1(false),setClicked2(false),setClicked3(true),setClicked4(false)
-                        console.log(item.option3)
+                        setClicked1(false),
+                          setClicked2(false),
+                          setClicked3(true),
+                          setClicked4(false);
+                        console.log(item.option3);
                       }}>
                       {!clicked3 ? (
                         <View style={styles.optionUncheckView}>
@@ -250,8 +261,11 @@ export const Test = () => {
 
                     <TouchableOpacity
                       onPress={() => {
-                        setClicked1(false),setClicked2(false),setClicked3(false),setClicked4(true)
-                        console.log(item.option4)
+                        setClicked1(false),
+                          setClicked2(false),
+                          setClicked3(false),
+                          setClicked4(true);
+                        console.log(item.option4);
                       }}>
                       {!clicked4 ? (
                         <View style={styles.optionUncheckView}>
@@ -281,7 +295,6 @@ export const Test = () => {
                       </View>
                      </TouchableOpacity> */}
                   </View>
-               
                 ))}
               </View>
             </View>
@@ -293,11 +306,20 @@ export const Test = () => {
             <Text style={styles.chapter}>Chapter 3</Text>
             <Text style={styles.topic}>Setting up a new project</Text>
           </View>
+
           <TouchableOpacity onPress={handlePreviousClick}>
-            <Image
-              source={require('../assets/images/Left.png')}
-              style={styles.left}
-            />
+            {PreviousQuestion === -1 ? (
+              <>
+              <View style={{marginLeft:33}}></View>
+              </>
+            ) : (
+              <>
+                <Image
+                  source={require('../assets/images/Left.png')}
+                  style={styles.left}
+                />
+              </>
+            )}
           </TouchableOpacity>
 
           {nextQuestion < data.length ? (
@@ -330,7 +352,7 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 25,
-   
+
     height: 700,
   },
   testname: {
@@ -350,7 +372,7 @@ const styles = StyleSheet.create({
   bottomview: {
     height: 95,
     flexDirection: 'row',
-   
+
     backgroundColor: '#2BB5F4',
   },
   innerbtm: {
@@ -397,6 +419,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     lineHeight: 20,
     alignSelf: 'center',
+    marginTop:8
   },
   questionnumber: {
     height: 17,
@@ -421,7 +444,7 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: 'white',
-    
+
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
@@ -435,7 +458,6 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: 'pink',
-   
 
     marginRight: 10,
   },
@@ -473,9 +495,24 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: '#EE5C4D',
-   
+
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
+  },
+  countdown: {
+    height: 20,
+    color: '#2BB5F4',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
+    fontWeight: '600',
+    letterSpacing: 0,
+    lineHeight: 20,
+    marginTop: 8,
+  },
+  leftlast: {
+    marginTop: 35,
+    marginLeft: 10,
+    opacity: 0.5,
   },
 });

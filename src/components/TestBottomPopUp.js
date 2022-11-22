@@ -1,241 +1,149 @@
 import {iteratorSymbol} from 'immer/dist/internal';
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
-import {Test} from '../screens/Test';
+import {View, StyleSheet, Text, Image, TouchableOpacity, Platform} from 'react-native';
+import { Modal } from 'react-native';
+import { setMockstate } from '../redux/ReduxPersist/FilterSlice';
+import { useDispatch,useSelector } from 'react-redux';
 
-const data = [
+const results = [
   {
     questionId: 1,
-    question: "What's the biggest planet in our solar system?",
-    status: false,
-    options: [
-      {
-        option1: 'Jupiter',
-        option2: 'Saturn',
-        option3: 'Neptune',
-        option4: 'Mercury',
-      },
-    ],
-
-    correctAnswer: 'Jupiter',
+    questionName: 'What is your name?',
+    options: ['aaa', 'bbb', 'ccc', 'ddd'],
+    correctAnswer: 'ccc',
+    userAnswer: 'ccc',
+    userAnswerStatus: '1',
   },
   {
     questionId: 2,
-    question: 'What attraction in India is one of the famus in the world?',
-    status: false,
-    options: [
-      {
-        option1: 'Jupiter',
-        option2: 'Saturn',
-        option3: 'Neptune',
-        option4: 'Mercury',
-      },
-    ],
-    correctAnswer: 'Taj mahal',
+    questionName: 'What is your name?',
+    options: ['aaa', 'bbb', 'ccc', 'ddd'],
+    correctAnswer: 'ddd',
+    userAnswer: 'ccc',
+    userAnswerStatus: '1',
   },
   {
     questionId: 3,
-    question: 'What land animal can open its mouth the widest?',
-    status: false,
-    options: [
-      {
-        option1: 'Jupiter',
-        option2: 'Saturn',
-        option3: 'Neptune',
-        option4: 'Mercury',
-      },
-    ],
-    correctAnswer: 'hippo',
+    questionName: 'What is your name',
+    options: ['aaa', 'bbb', 'ccc', 'ddd'],
+    correctAnswer: 'hhh',
+    userAnswer: 'hhh',
+    userAnswerStatus: '1',
   },
   {
     questionId: 4,
-    question: 'What is the largest animal on Earth?',
-    status: false,
-    options: [
-      {
-        option1: 'Jupiter',
-        option2: 'Saturn',
-        option3: 'Neptune',
-        option4: 'Mercury',
-      },
-    ],
-    correctAnswer: 'elephant',
+    questionName: 'What is your name',
+    options: ['aaa', 'bbb', 'ccc', 'ddd'],
+    correctAnswer: 'lll',
+    userAnswer: 'LLL',
+    userAnswerStatus: '1',
   },
   {
     questionId: 5,
-    question: 'What is the only flying mammal?',
-    status: false,
-    options: [
-      {
-        option1: 'Jupiter',
-        option2: 'Saturn',
-        option3: 'Neptune',
-        option4: 'Mercury',
-      },
-    ],
-    correctAnswer: 'frog',
+    questionName: 'What is your name',
+    options: ['aaa', 'bbb', 'ccc', 'ddd'],
+    correctAnswer: 'ppp',
+    userAnswer: 'PPP',
+    userAnswerStatus: '1',
   },
 ];
+
 export const TestBottomPopUp = () => {
-  const [clicked1, SetClicked1] = useState(1);
-  const [correctAnswer1, setCorrectanswer1] = useState(1);
-  const [userClicked1, SetUserClicked1] = useState(1);
+  let correctAnswer = results[0]['correctAnswer'];
+  let wrongAnswer = results[0]['userAnswer'];
+  console.log(correctAnswer);
+  console.log(wrongAnswer);
 
-  const [clicked2, SetClicked2] = useState(1);
-  const [correctAnswer2, setCorrectanswer2] = useState(0);
-  const [userClicked2, SetUserClicked2] = useState(0);
-
-  const [clicked3, SetClicked3] = useState(1);
-  const [correctAnswer3, setCorrectanswer3] = useState(0);
-  const [userClicked3, SetUserClicked3] = useState(0);
-
-  const [clicked4, SetClicked4] = useState(1);
-  const [correctAnswer4, setCorrectanswer4] = useState(0);
-  const [userClicked4, SetUserClicked4] = useState(0);
+  const dispatch=useDispatch()
+  const mockState = useSelector(state => state.filterState.mockState);
 
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Question{data[0].questionId}</Text>
-        <Text>{data[0].question}</Text>
-        {clicked1 == 1 ? (
-          <View>
-            {correctAnswer1 == 0 && userClicked1 == 0 ? (
-              <View style={styles.optionUncheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionunchecked.png')}
-                  style={styles.IconUnchecked}
-                />
-                <Text style={styles.optionUncheck}>option1</Text>
-              </View>
-            ) : correctAnswer1 == 1 && userClicked1 == 0 ? (
-              <View style={styles.optionCheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionwrong.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            ) : (
-              <View style={styles.optioncheckCorrectView}>
-                <Image
-                  source={require('../assets/images/icn_optionchecked.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option 1</Text>
-              </View>
-            )}
-          </View>
-        ) : (
-          <></>
-        )}
+    
+    <Modal
+    animationType="fade"
+    transparent={true}
+    visible={mockState}
+    onRequestClose={() => {
+      Alert.alert('Modal has been closed.');
+      {dispatch(setMockstate())}
+    }}>
+      <View style={styles.container} >
 
-        {clicked2 == 1 ? (
-          <View>
-            {correctAnswer2 == 0 && userClicked2 == 0 ? (
-              <View style={styles.optionUncheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionunchecked.png')}
-                  style={styles.IconUnchecked}
-                />
-                <Text style={styles.optionUncheck}>option1</Text>
-              </View>
-            ) : correctAnswer2 == 1 && userClicked2 == 0 ? (
-              <View style={styles.optionCheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionwrong.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            ) : (
-              <View style={styles.optioncheckCorrectView}>
-                <Image
-                  source={require('../assets/images/icn_optionchecked.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            )}
-          </View>
-        ) : (
-          <></>
-        )}
-
-        {clicked3 == 1 ? (
-          <View>
-            {correctAnswer3 == 0 && userClicked3 == 0 ? (
-              <View style={styles.optionUncheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionunchecked.png')}
-                  style={styles.IconUnchecked}
-                />
-                <Text style={styles.optionUncheck}>option1</Text>
-              </View>
-            ) : correctAnswer3 == 1 && userClicked3 == 0 ? (
-              <View style={styles.optionCheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionwrong.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            ) : (
-              <View style={styles.optioncheckCorrectView}>
-                <Image
-                  source={require('../assets/images/icn_optionchecked.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            )}
-          </View>
-        ) : (
-          <></>
-        )}
-
-        {clicked4 == 1 ? (
-          <View>
-            {correctAnswer4 == 0 && userClicked4 == 0 ? (
-              <View style={styles.optionUncheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionunchecked.png')}
-                  style={styles.IconUnchecked}
-                />
-                <Text style={styles.optionUncheck}>option1</Text>
-              </View>
-            ) : correctAnswer4 == 1 && userClicked4 == 0 ? (
-              <View style={styles.optionCheckView}>
-                <Image
-                  source={require('../assets/images/icn_optionwrong.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            ) : (
-              <View style={styles.optioncheckCorrectView}>
-                <Image
-                  source={require('../assets/images/icn_optionchecked.png')}
-                  style={styles.IconChecked}
-                />
-                <Text style={styles.optionCheck}>option1</Text>
-              </View>
-            )}
-          </View>
-        ) : (
-          <></>
-        )}
+     
+    <View style={styles.modalContainer}>
+      <View style={{flexDirection:"row", marginLeft:60}}>
+      <Text style={styles.questionid}>Question{results[0].questionId}</Text>
+      <TouchableOpacity onPress={() => {dispatch(setMockstate())}}>
+      <Image source={require('../assets/images/icn_close_filter.png')} style={styles.image}/>
+      </TouchableOpacity>
       </View>
-    </>
+      <Text style={styles.questionname}>{results[0].questionName}</Text>
+
+      {results[0]?.options.map(option => (
+        <View>
+          {correctAnswer == option ? (
+          
+            <View style={styles.optioncheckCorrectView}>
+              <Image
+                source={require('../assets/images/icn_optionchecked.png')}
+                style={styles.IconChecked}
+              />
+              <Text style={styles.optionCheck}>{option}</Text>
+            </View>
+          ) : (
+            <>
+              {wrongAnswer === option ? (
+                <View style={styles.optionCheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionwrong.png')}
+                    style={styles.IconChecked}
+                  />
+                  <Text style={styles.optionCheck}>{option}</Text>
+                </View>
+              ) : (
+                <View style={styles.optionUncheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionunchecked.png')}
+                    style={styles.IconUnchecked}
+                  />
+                  <Text style={styles.optionUncheck}>{option}</Text>
+                </View>
+              )}
+            </>
+          )}
+        </View>
+      ))}
+      {results[0].userAnswerStatus=== '1' ? (
+        <View>
+          <Text style={styles.status}>Correct Answer</Text>
+          </View>
+      ):(
+        <View>
+        
+        <Text style={styles.status}>Wrong Answer</Text>
+        </View>
+
+      )}
+   
+    </View>
+    </View>
+    </Modal>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  
+    backgroundColor: '#000000AA',
+    
+  },
+  modalContainer:{
     height: 612,
     borderRadius: 20,
-    borderWidth: 1,
-    margin: 30,
+    backgroundColor:"#FFFFFF",
+    marginTop:Platform.OS==='ios'?350:280,
+  
   },
   optionUncheck: {
     height: 20,
@@ -275,6 +183,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
+    marginHorizontal:20
   },
   optionUncheckView: {
     height: 46,
@@ -289,6 +198,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 5,
+    marginHorizontal:20
   },
   optionClicked: {
     height: 46,
@@ -300,10 +210,53 @@ const styles = StyleSheet.create({
   optioncheckCorrectView: {
     height: 46,
     borderRadius: 6,
-    backgroundColor: 'green',
+    backgroundColor: '#1EAB0D',
 
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
+    marginHorizontal:20,
+  
   },
+  questionid:{
+
+    height: 22,
+    color: '#2B2B2B',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 18,
+    fontWeight: '600',
+    letterSpacing: 0,
+    lineHeight: 22,
+    marginTop: 50,
+    marginLeft:70
+   
+  },
+  questionname:{
+    height: 44,
+    color: '#2B2B2B',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 18,
+    fontWeight: 'bold',
+    letterSpacing: 0,
+    lineHeight: 22,
+    marginTop: 35,
+    marginLeft:25,
+    marginBottom:20
+ 
+   
+  },
+  image:{
+    marginTop:50,
+    marginLeft:140
+  },
+  status:{
+    height:17,
+    color: '#1EAB0D',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
+    fontWeight: 'bold',
+    letterSpacing: 0,
+    lineHeight:17,
+    marginLeft:20
+  }
 });

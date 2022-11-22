@@ -21,14 +21,14 @@ import axios from 'axios';
 export const ForgotPassword = ({navigation}) => {
     
     const [text,setText] =useState ('');
-    const [showError,setShowError] =useState(true);
+    const [showError,setShowError] =useState(false);
     const handleText =string => {
         setText(string)
         setShowError(false);
     };
     const handleProcess =async () => {
         const obj ={
-            "mobileNumber" : "+919591726087"
+            "mobileNumber" : `+91${text}`
         }
        try {
             const response = await axios.put(
@@ -46,6 +46,7 @@ export const ForgotPassword = ({navigation}) => {
            
           } catch (error) {
             console.log(error);
+            setShowError(true);
           }
         
         navigation.navigate('Verification');

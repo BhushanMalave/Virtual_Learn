@@ -68,7 +68,7 @@ const categories = [
   },
 ];
 
-export const BottomPopup = ({show}) => {
+export const BottomPopup = () => {
 
   const filterState = useSelector(state => state.filterState.state);
 

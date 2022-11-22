@@ -9,10 +9,13 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-
-const enrolled = true ;
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/ChapterListRedux';
 
 export const LessonList = item => {
+  const data = useSelector(state => state.chapterList.data);
+  const dispatch = useDispatch();
   return (
     <>
       <View
@@ -21,7 +24,7 @@ export const LessonList = item => {
           alignItems: 'center',
           marginBottom: 10,
         }}>
-        {enrolled ? (
+        {data.enrolled ? (
           <View style={{marginRight: 10}}>
             {item.completed ? (
               <Image
@@ -54,20 +57,41 @@ export const LessonList = item => {
               <Text style={styles.chapterTime}>{item.duration} mins</Text>
             </View>
           </View>
-{item.status?(<TouchableOpacity onPress={() => console.log(" don't set/dispatch status as false in lessons:status  and pressed play")}>
-            <Image
-              source={require('../../assets/images/icn_lessonplay_active.png')}
-              style={styles.activePlay}
-            />
-          </TouchableOpacity>):(
-            <TouchableOpacity onPress={() => console.log(' set/dispatch status as true in lessons:status  and pressed play')}>
-            <Image
-              source={require('../../assets/images/icn_lessonplay_inactive.png')}
-              style={styles.activePlay}
-            />
-          </TouchableOpacity>
+
+
+          {item.status ? (
+            <TouchableOpacity
+            disabled={!data.enrolled}
+              onPress={() => {
+                console.log(
+                  " don't set/dispatch status as false in lessons:status  and pressed play",
+                );
+                dispatch(addPlayStatus({id: item.id}))
+              }
+              }>
+                <View style={{marginLeft:-5}}>
+              <Image
+                source={require('../../assets/images/icn_lessonplay_active.png')}
+                style={styles.activePlay}
+              />
+</View>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+            disabled={!data.enrolled}
+              onPress={
+                () =>{
+                  console.log(' set/dispatch status as true in lessons:status  and pressed play');
+                dispatch(addPlayStatus({id: item.id}))}
+              }>
+                <View style={{marginLeft:-5}} >
+              <Image
+                source={require('../../assets/images/icn_lessonplay_inactive.png')}
+                style={styles.activePlay}
+              />
+                </View>
+            </TouchableOpacity>
           )}
-          
         </View>
       </View>
     </>
@@ -75,14 +99,13 @@ export const LessonList = item => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Platform.OS === 'ios' ? '#F9F9F9': '#F9F9F9',
+    backgroundColor: Platform.OS === 'ios' ? '#F9F9F9' : '#F9F9F9',
     paddingLeft: 16,
     paddingBottom: 16,
     paddingTop: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // borderWidth:1,
     borderRadius: 6,
     width: '91%',
   },
@@ -113,7 +136,7 @@ const styles = StyleSheet.create({
     color: '#042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
-    fontWeight:Platform.OS === 'ios' ? '600': '700',
+    fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 20,
     // width:'70%',
     // borderWidth:1,

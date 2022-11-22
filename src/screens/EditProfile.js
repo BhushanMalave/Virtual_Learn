@@ -9,6 +9,8 @@ import {
   ScrollView,
   Image,
   TextInput,
+  TouchableOpacity,
+
 } from 'react-native';
 
 import {Formik} from 'formik';
@@ -22,7 +24,8 @@ import img_profile_change from '../assets/images/img_profile_change.png';
 import icn_back_header from '../assets/images/icn_back_header.png';
 
 import {ButtonComponent} from '../components/Buttons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import ImagePicker from 'react-native-image-crop-picker';
 
 const data = {
   fullname: 'Mahendra Singh Dhoni',
@@ -38,30 +41,44 @@ export const EditProfile = ({navigation}) => {
   ];
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState('');
+  const [image,setImage] =useState({img_edit_profile_bg})
+
+  const changeProfileImageFromLibrary  = () => {
+
+  }
 
   return (
     <View style={{flex: 1}}>
       <ScrollView>
         <ImageBackground
-          source={img_edit_profile_bg}
+          source={img_profile_change}
           resizeMode="cover"
           style={styles.image}>
-          <View style={styles.imageContainer}>
-          <TouchableOpacity  onPress={ () => {navigation.goBack();}}>
-            <Image source={icn_back_header} style={styles.back} />
-            </TouchableOpacity>
+          <View style={styles.imageBlur}>
+            <View style={styles.imageContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}>
+                <Image source={icn_back_header} style={styles.back} />
+              </TouchableOpacity>
 
-            <Text style={styles.editText}>Edit Profile</Text>
+              <Text style={styles.editText}>Edit Profile</Text>
 
             <View style={{alignItems: 'center', marginTop: 30 ,}}>
               <Image source={img_profile_change} style={{height:110,width:110,marginRight:40,}} />
+              <TouchableOpacity  onPress={() => changeProfileImageFromCamera()}>
               <Image source={require('../assets/images/icn_changeprofilepic.png')} style={{height:30,width:30,marginTop:-25,marginLeft:45}}/>
+              </TouchableOpacity>
             </View>
            
 
             <View style={{alignItems: 'flex-end', marginRight: 16}}>
+            <TouchableOpacity onPress={() => changeProfileImageFromLibrary()}>
               <Text style={styles.changeText}>Change image</Text>
+              </TouchableOpacity>
             </View>
+          </View>
           </View>
         </ImageBackground>
 
@@ -367,6 +384,11 @@ export const EditProfile = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   image: {
+    width:'100%'
+  },
+  imageBlur: {
+    backgroundColor: '#042C5C',
+    opacity: 0.9,
     paddingBottom: 10,
   },
   imageContainer: {

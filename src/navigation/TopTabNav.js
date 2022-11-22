@@ -4,7 +4,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {NavigationContainer} from '@react-navigation/native';
 
 import {OverviewScreen} from '../screens/OverviewScreen';
-import {Chapters} from '../screens/Chapters';
+import { ChaptersScreen } from '../screens/ChaptersScreen';
 import {color} from 'react-native-reanimated';
 import {Platform} from 'react-native';
 
@@ -12,14 +12,12 @@ const Tab = createMaterialTopTabNavigator();
 
 const TopTabNav = () => {
   return (
-<<<<<<< HEAD
-    <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {height: 55},
           tabBarActiveTintColor: '#EE5C4D',
           tabBarInactiveTintColor: '#7A7A7A',
- 
+
           tabBarIndicatorContainerStyle: {marginLeft: 20},
           tabBarIndicatorStyle: {
             width: 164,
@@ -37,20 +35,8 @@ const TopTabNav = () => {
           },
         }}>
         <Tab.Screen name="Overview" component={OverviewScreen} />
-        <Tab.Screen name="Chapters" component={Chapters} />
+        <Tab.Screen name="Chapters" component={ChaptersScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
-=======
-  
-
-    <Tab.Navigator screenOptions={{
-   
-  }}>
-      <Tab.Screen name="OverviewScreen" component={OverviewScreen} />
-      <Tab.Screen name="Chapters" component={Chapters} />
-    </Tab.Navigator>
-   
->>>>>>> a01174a03262e6556c96ee1e0c5631187fa3333d
   );
 };
 export default TopTabNav;

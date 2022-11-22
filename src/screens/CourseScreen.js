@@ -8,31 +8,23 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
 
 export const CourseScreen = ({navigation}) => {
   return (
-    
-  
-
     <View style={styles.container}>
       <View style={styles.header}>
-      
-
         <ImageBackground
           source={require('../assets/images/img_designcoursedetail1_bg.png')}
           style={styles.header}>
-<<<<<<< HEAD
-            <TouchableOpacity>
-
-          <Image source={require('../assets/images/icn_close_white.png')} style={styles.image}/>
-            </TouchableOpacity>
-=======
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={require('../assets/images/icn_close_white.png')} style={styles.image} />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require('../assets/images/icn_close_white.png')}
+              style={styles.image}
+            />
           </TouchableOpacity>
->>>>>>> a01174a03262e6556c96ee1e0c5631187fa3333d
+
           <Text style={styles.maintext}>
             Learn Figma - UI/UX Design Essential Training
           </Text>
@@ -43,12 +35,9 @@ export const CourseScreen = ({navigation}) => {
             <Text style={styles.chapter}>7 Chapters | 46 Lessons</Text>
           </View>
         </ImageBackground>
-       
       </View>
-      <TopTabNav/>
-     
+      <TopTabNav />
     </View>
-          
   );
 };
 
@@ -62,7 +51,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   maintext: {
-    marginTop:18,
+    marginTop: 18,
     marginLeft: 20,
     color: '#FFFFFF',
     fontFamily: 'Biko',
@@ -75,35 +64,35 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flexDirection: 'row',
   },
-  designview:{
-    height:20,
-    width:60,
-    borderRadius:3,
-    backgroundColor:"#FCBE4B",
-    marginTop:10
-},
-design:{
+  designview: {
+    height: 20,
+    width: 60,
+    borderRadius: 3,
+    backgroundColor: '#FCBE4B',
+    marginTop: 10,
+  },
+  design: {
     height: 12,
-    
-    color: "#373737",
-    fontFamily:Platform.OS==='ios'?"Proxima Nova":"ProximaNova",
-    fontSize:10,
-    fontWeight: "500",
+
+    color: '#373737',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 10,
+    fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 9,
-    alignSelf:"center",
-    marginTop:5
-},
-chapter:{
-  color:"#FFFFFF",
-  fontSize:14,
-  letterSpacing:0,
-  lineHeight:17,
-  marginTop:10,
-  marginLeft:10
-},
-image:{
-  marginTop:70,
-  marginLeft:20
-}
+    alignSelf: 'center',
+    marginTop: 5,
+  },
+  chapter: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    letterSpacing: 0,
+    lineHeight: 17,
+    marginTop: 10,
+    marginLeft: 10,
+  },
+  image: {
+    marginTop: 70,
+    marginLeft: 20,
+  },
 });

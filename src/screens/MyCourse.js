@@ -36,7 +36,7 @@ const data = [
     chapters: '15/20',
   },
 ];
-export const MyCourse = () => {
+export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
 
@@ -46,7 +46,7 @@ export const MyCourse = () => {
     <SafeAreaView style={styles.container}>
       
         <View style={styles.view}>
-          <Pressable>
+          <Pressable onPress={() => navigation.goBack()}>
             <Image source={require('../assets/images/icn_hamburgermenu.png')} />
           </Pressable>
           <Image

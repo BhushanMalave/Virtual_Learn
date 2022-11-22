@@ -9,6 +9,8 @@ import hsCategoriesReducer from '../ThunkToolkit/HomeScreenApiCalls/homeScreenCa
 import choiceYourCourseReducer from '../ReduxPersist/ChoiceYourCourseSlice'
 import topCoursesReducer from '../ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses'
 
+import ChapterListReducer  from '../ThunkToolkit/ChaptersApi/ChapterListRedux';
+import OverViewReducer from '../ThunkToolkit/CourseJoinApi/OverView'
 
 const persistConfig = {
     key: 'root',
@@ -23,6 +25,12 @@ const persistConfig = {
     categories:hsCategoriesReducer,
     choiceYourCourse:choiceYourCourseReducer,
     topCourses:topCoursesReducer,
+
+    chapterList: ChapterListReducer,
+
+    categories:OverViewReducer
+
+
 
   });
 
