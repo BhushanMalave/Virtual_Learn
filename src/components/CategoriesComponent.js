@@ -8,7 +8,7 @@ export const CategoriesComponent =({
     return(
       <Pressable onPress={onPress}>
         <View style={styles.categorycontainer}>
-        <Image source={img} style={styles.img}/>
+        <Image source={{uri:img}} style={styles.img}/>
         <Text style={styles.categorytext}>{category}</Text>
        </View>
        </Pressable>

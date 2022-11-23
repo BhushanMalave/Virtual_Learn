@@ -11,7 +11,7 @@ import topCoursesReducer from '../ThunkToolkit/HomeScreenApiCalls/homeScreenTopC
 import ChapterListReducer  from '../ThunkToolkit/ChaptersApi/ChapterListRedux';
 import mpUserDetailsReducer  from '../ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import notificationApiCallReducer from '../ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
-import OverViewReducer from '../ThunkToolkit/CourseJoinApi/OverView'
+import overViewReducer from '../ThunkToolkit/CourseJoinApi/OverView'
 
 const persistConfig = {
     key: 'root',
@@ -29,7 +29,7 @@ const persistConfig = {
     chapterList: ChapterListReducer,
     userData:mpUserDetailsReducer,
     notificationData:notificationApiCallReducer,
-    categories:OverViewReducer
+    category:overViewReducer,
 
 
 
