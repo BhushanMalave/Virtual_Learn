@@ -9,21 +9,22 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
-const enrolled = false;
-export const ModularTest = (item) => {
-  const data = useSelector(state => state.courseData.data)
+let enrolledghhj = false;
+const completed = false;
+export const ModularTest = item => {
+  const data = useSelector(state => state.courseData.data);
   return (
     <>
-      <View >
+      <View>
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             marginBottom: 30,
           }}>
-          {enrolled ? (
+          {data?.enrolled ? (
             <View style={{marginRight: 10}}>
               {item.completed ? (
                 <Image
@@ -38,11 +39,8 @@ export const ModularTest = (item) => {
           ) : (
             <></>
           )}
-        
 
           <View style={styles.container}>
-
-
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={{width: 40, marginLeft: 5}}>
                 <Image
@@ -50,36 +48,46 @@ export const ModularTest = (item) => {
                   style={styles.image}
                 />
               </View>
-              
 
               <View style={{width: '70%'}}>
                 {/* <View > */}
-                <TouchableOpacity disabled={!item.disable} onPress={()=> console.log(item.disable)}>
-                <Text style={styles.chapterText}>{item.test}</Text>
-                <Text style={styles.chapterTime}>
-                  {item.duration} mins | {item.questions} Questions
-                </Text>
+                <TouchableOpacity
+                  disabled={!item.disable}
+                  onPress={() => {console.log(item.disable)
+                  {item.test == 'Final Test' ?(<>
+                  {
+                   console.log(enrolledghhj)
+                  }
+                   </>
+                  ):(
+                  // enrolledghhj = false,
+                  console.log(enrolledghhj)
+                  )}
+                  }}>
+                  <Text style={styles.chapterText}>{item.test}</Text>
+                  <Text style={styles.chapterTime}>
+                    {item.duration} mins | {item.questions} Questions
+                  </Text>
                 </TouchableOpacity>
               </View>
-
-
-
-
             </View>
 
-
-
-
-            {item.rate ? (
-              <View style={styles.rateView}>
-                <View style={styles.rateNumView}>
-                  <Text style={styles.rateNum}>{item.rate}</Text>
-                  <Text style={styles.ratePercent}>%</Text>
-                </View>
-                <Text style={styles.rateText}>Approval Rate</Text>
-              </View>
-            ) : (
+            {item.rate === -1 ? (
               <></>
+            ) : (
+              <>
+                {item.rate === 0 || item.rate ? <></> : <></>}
+                <>
+                  {' '}
+                  <View style={styles.rateView}>
+                    <View style={styles.rateNumView}>
+                      <Text style={styles.rateNum}>{item.rate}</Text>
+                      <Text style={styles.ratePercent}>%</Text>
+                    </View>
+                    <Text style={styles.rateText}>Approval Rate</Text>
+                  </View>
+                </>
+              </>
             )}
           </View>
         </View>
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
     color: '#042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
-    fontWeight:Platform.OS === 'ios' ? '600': '700',
+    fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 20,
     // width:'70%',
     // borderWidth:1,
@@ -138,7 +146,7 @@ const styles = StyleSheet.create({
   rateView: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft:-5
+    marginLeft: -5,
   },
   rateNumView: {
     flexDirection: 'row',
@@ -151,7 +159,7 @@ const styles = StyleSheet.create({
     // lineHeight: 47,
   },
   ratePercent: {
-    marginTop:Platform.OS === 'ios'? 5: 15,
+    marginTop: Platform.OS === 'ios' ? 5 : 15,
     fontSize: 8,
     color: '#1EAB0D',
     fontFamily: 'Biko',

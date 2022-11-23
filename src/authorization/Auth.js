@@ -148,28 +148,75 @@ const options =  {
 // };
 
 
-
-export const searchData = async (token,string) => {
+export const chapterListData = async (token,id) => {
  
   const options =  {
     headers: {
       Authorization:
         `Bearer ${token}`,
-        'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
     },
   };
   
     try {
       const response = await axios.get(
-        `https://virtual-learn-app-java.herokuapp.com/user/search/${string}`,
+        `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse/${id}`,
         options,
        
       );
-      // console.log(response.data);
       if (response.data) {
         return response.data;
       }
     } catch (error) {
-      //console.log(error.response.data);
+      console.log(error.response.data);
     }
   };
+
+
+  export const continueApi = async (token,id) => {
+ 
+  const options =  {
+    headers: {
+      Authorization:
+        `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  
+    try {
+      const response = await axios.get(
+        `https://virtual-learn-app-java.herokuapp.com/user/continue/${id}`,
+        options,
+       
+      );
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+  export const searchData = async (token,string) => {
+ 
+    const options =  {
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+          'Content-Type': 'application/json',
+      },
+    };
+    
+      try {
+        const response = await axios.get(
+          `https://virtual-learn-app-java.herokuapp.com/user/search/${string}`,
+          options,
+         
+        );
+        // console.log(response.data);
+        if (response.data) {
+          return response.data;
+        }
+      } catch (error) {
+        //console.log(error.response.data);
+      }
+    };

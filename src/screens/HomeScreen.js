@@ -29,6 +29,9 @@ import {
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
+import { chapterListData } from '../authorization/Auth';
+import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -218,13 +221,15 @@ export const HomeScreen = ({navigation}) => {
                 <View style={styles.btmcourseview}>
                   <TouchableOpacity
                     onPress={async () => {
-                      // const objBody = {
-                      //   courseId: 3,
-                      // };
-                      // console.log(objBody);
+                      
                       const res = await overViewData(token,item.courseId);
+                      const chapterRes = await chapterListData(token,item.courseId);
                        console.log("==()==",res);
-                     navigation.navigate('CourseScreen');
+                       console.log('+++',chapterRes);
+                      //  if(chapterRes){
+                        //   }
+                           dispatch(addChapterList(chapterRes));
+                        navigation.navigate('CourseScreen');
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}
