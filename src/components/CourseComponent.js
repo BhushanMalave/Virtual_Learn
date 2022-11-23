@@ -48,6 +48,7 @@ export const CourseComponent = props => {
                   style={{height: 134, width: 288,borderRadius:5,
                     overflow:'hidden'}}
                 />
+                <Image source={require('../assets/images/icn_play-play-button2.png')} style={{marginLeft:120,marginTop:-90,}}/>
                 </TouchableOpacity>
               </View>
 

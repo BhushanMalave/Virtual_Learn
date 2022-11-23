@@ -11,13 +11,20 @@ import {
   Platform,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import { OverView } from '../redux/ThunkToolkit/CourseJoinApi/OverView';
+import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
+import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
+import { hsTopCourses } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
+import { all } from '../authorization/Auth';
+import { newest } from '../authorization/Auth';
+import { popular } from '../authorization/Auth';
+import { setAllData } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 
 
 
 export const OnBoardingScreen1 = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
+  const userData = useSelector(state => state.userData.data);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,14 +55,9 @@ export const OnBoardingScreen1 = ({navigation}) => {
           <View>
             <TouchableOpacity
               onPress={async () => {
-                
-
-                const obj ={
-                  'courseId':3,
-                }
-                // navigation.navigate('Welcome');
-                // navigation.navigate('Drawer');
-                dispatch(OverView(token,obj))
+               
+                navigation.navigate('Welcome');
+                 // navigation.navigate('Drawer');
             
                  
               }}>

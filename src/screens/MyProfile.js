@@ -20,12 +20,12 @@ export const MyProfile = ({navigation}) => {
 
   useEffect(() => {
     dispatch(mpUserDetails(token));
-<<<<<<< HEAD
+
+    console.log(userData);
+
   }, []);
-=======
-   // console.log(userData);
-  },[]);
->>>>>>> 0226ac19de53e25b6ff8a3f62055aefb60584f57
+
+
   return (
     <ScrollView>
       <View>
@@ -53,14 +53,8 @@ export const MyProfile = ({navigation}) => {
             </View>
             <View style={styles.topinfo}>
               <Image
-<<<<<<< HEAD
                 source={{uri: userData?.profilePhoto}}
                 style={styles.imgProfile}
-=======
-                  //  source={require('../assets/images/icn_hamburgermenu_white.png')}
-                  source={{uri : userData?.profilePhoto}}
-                style={styles.imgprofile}
->>>>>>> 0226ac19de53e25b6ff8a3f62055aefb60584f57
               />
               <View style={styles.topinfotext}>
                 <Text style={styles.textname}>{userData?.fullName}</Text>

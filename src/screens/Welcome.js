@@ -11,18 +11,20 @@ import {
 } from 'react-native';
 import {ButtonComponent, ButtonComponent2} from '../components/Buttons';
 export const WelcomeScreen = ({navigation}) => {
+  
 
     const nav =() => {
         navigation.navigate('TermServicesScreen');
-        console.log('====')
+       
     };
     const register =() => {
-        console.log('===')
+     
         navigation.navigate('RegisterStack');
     };
     const login = () => {
+        
         navigation.navigate('LoginStack');
-        console.log("===")
+       
     }
   return (
     <SafeAreaView style={styles.container}>

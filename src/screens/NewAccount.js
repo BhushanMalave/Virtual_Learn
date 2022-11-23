@@ -27,7 +27,7 @@ export const NewAccount = ({navigation}) => {
     };
     try {
       const response = await axios.put(
-        'https://virtual-learn-app-java.herokuapp.com/User/Continue',
+        'https://virtual-learn-app-java.herokuapp.com/user/continue',
         obj,
       );
       console.log('=====', response.data.message);

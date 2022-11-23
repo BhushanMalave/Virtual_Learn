@@ -13,7 +13,7 @@ export const notificationApiCall = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/Notification',
+        'https://virtual-learn-app-java.herokuapp.com/notification',
         options,
       );
       return response.data;
