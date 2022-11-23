@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const all = async token => {
-  console.log('-----', token);
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -86,19 +85,20 @@ export const mpChangePassword = async (token, objBody) => {
 };
 
 export const mpChangeUserData = async (token, formBody) => {
-  try {
-    let res = await fetch('https://virtual-learn-app-java.herokuapp.com/Save', {
-      method: 'patch',
-      body: formBody,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    // console.log(res.status)
-    return res.status;
-  } catch (err) {
-    console.log(err);
-  }
+  try{
+  let res = await fetch('https://virtual-learn-app-java.herokuapp.com/Save', {
+    method: 'patch',
+    body: formBody,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+   console.log(res.status)
+  return res.status;
+}catch(err)
+{
+  console.log(err);
+}
 };
 
 export const overViewData = async (token, objBody) => {

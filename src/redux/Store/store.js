@@ -30,9 +30,6 @@ const persistConfig = {
     userData:mpUserDetailsReducer,
     notificationData:notificationApiCallReducer,
     category:overViewReducer,
-
-
-
   });
 
 
