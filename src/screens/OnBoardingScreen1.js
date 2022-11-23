@@ -18,12 +18,14 @@ import { all } from '../authorization/Auth';
 import { newest } from '../authorization/Auth';
 import { popular } from '../authorization/Auth';
 import { setAllData } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 
 
 
 export const OnBoardingScreen1 = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
+  const userData = useSelector(state => state.userData.data);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,7 +59,8 @@ export const OnBoardingScreen1 = ({navigation}) => {
                
                 navigation.navigate('Welcome');
                  // navigation.navigate('Drawer');
-            
+                 // dispatch(mpUserDetails(token));
+                 // console.log(userData);
                  
               }}>
               <Text style={styles.skiptext}>SKIP</Text>

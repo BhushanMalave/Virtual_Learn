@@ -41,7 +41,7 @@ export const NotificationsScreen = ({navigation}) => {
       </TouchableOpacity>
       <Text style={styles.text}>Notifications</Text>
 
-      {notificationData.map(items => {
+      {notificationData?.map(items => {
         return items.readStatus === true ? (
           <NotificationsComponentSeen
             desc={items.description}
@@ -67,7 +67,7 @@ export const NotificationsScreen = ({navigation}) => {
             
               try {
                 const response = await axios.put(
-                  'https://virtual-learn-app-java.herokuapp.com/ReadNotification',
+                  'https://virtual-learn-app-java.herokuapp.com/readNotification',
                   body,
                   options,
                 );

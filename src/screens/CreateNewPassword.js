@@ -64,7 +64,7 @@ export const CreateNewPassword = ({navigation}) => {
 
                 try {
                   const response = await axios.post(
-                    'https://virtual-learn-app-java.herokuapp.com/User/ResetPassword',
+                    'https://virtual-learn-app-java.herokuapp.com/user/resetPassword',
                      obj,
                   );
                   console.log("=====",response.data.message);

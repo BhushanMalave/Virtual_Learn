@@ -20,6 +20,7 @@ import icn_warning from '../assets/images/05.1_VirtualLearn_Login_error/warning/
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
+import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 
 export const Login = ({navigation}) => {
   const [warning, setWarning] = useState(false);
@@ -74,11 +75,12 @@ export const Login = ({navigation}) => {
 
                 try {
                   const response = await axios.put(
-                    'https://virtual-learn-app-java.herokuapp.com/Login',
+                    'https://virtual-learn-app-java.herokuapp.com/login',
                     obj,
                   );
                   console.log('=====', response.data);
                   dispatch(setToken(response.data.jwtToken));
+                  dispatch(mpUserDetails(token));
                   console.log('token:', token);
                   if (response.data.jwtToken) {
                     navigation.navigate('Drawer');

@@ -13,9 +13,10 @@ export const hsCategories = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/Categories',
+        'https://virtual-learn-app-java.herokuapp.com/user/categories',
         options,
       );
+      console.log("--------",response.data);
       return response.data;
     } catch (error) {
       console.log(error);
