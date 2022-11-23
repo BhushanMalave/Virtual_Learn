@@ -20,7 +20,6 @@ import {iteratorSymbol} from 'immer/dist/internal';
 import axios from 'axios';
 export const NotificationsScreen = ({navigation}) => {
   const dispatch = useDispatch();
-  
 
   const notificationData = useSelector(state => state.notificationData.data);
   const token = useSelector(state => state.userDetails.token);
@@ -53,35 +52,30 @@ export const NotificationsScreen = ({navigation}) => {
             desc={items.description}
             img={items.notificationUrl}
             time={items.timeStamp}
-            onPress={ async () => {
+            onPress={async () => {
               const body = {
-                notificationId : items.notificationId
-              }
-              
+                notificationId: items.notificationId,
+              };
               const options = {
                 headers: {
                   Authorization: `Bearer ${token}`,
-                 
                 },
               };
-            
+
               try {
                 const response = await axios.put(
                   'https://virtual-learn-app-java.herokuapp.com/readNotification',
                   body,
                   options,
                 );
-            
+
                 if (response.data) {
                   return response.data;
                 }
               } catch (error) {
                 console.log(error);
               }
-
-            }
-            
-            }
+            }}
           />
         );
       })}

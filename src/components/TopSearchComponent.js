@@ -33,8 +33,8 @@ const styles =StyleSheet.create({
       },
       comtext:{
         fontSize:13,
-       fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova-Semibold',
-       fontStyle: 'oblique',
+       fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+       fontWeight:'bold',
         color: '#373737',
         marginHorizontal:10,
         marginTop:5,

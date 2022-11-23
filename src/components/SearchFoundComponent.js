@@ -13,17 +13,17 @@ export const SearchFoundComponent = (props) => {
     <View style={styles.container} >
       <View style={styles.imageview}>
         <Image
-          source={props.source}
+          source={{uri:props.coursePhoto}}
           style={styles.image}
         />
       </View>
       <View style={{width: '85%'}}>
         <Text style={styles.name} >
-          {props.name}
+          {props.courseName}
         </Text>
-        <Text style={styles.chapters}>{props.chapter} Chapters</Text>
+        <Text style={styles.chapters}>{props.chapterCount} Chapters</Text>
         <View style={styles.designview}>
-          <Text style={styles.category}>{props.category}</Text>
+          <Text style={styles.category}>{props.categoryName}</Text>
         </View>
       </View>
     </View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     color: '#373737',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 16,
  
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 10,
-    fontWeight: '500',
+    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 12,
     marginTop: 3,
@@ -72,14 +72,17 @@ const styles = StyleSheet.create({
   },
   category: {
     height: 9,
-
     color: '#373737',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 8,
-    fontWeight: '500',
+    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 9,
     alignSelf: 'center',
     marginTop: 2,
   },
+  image:{
+    width:50,
+    height:50,
+  }
 });

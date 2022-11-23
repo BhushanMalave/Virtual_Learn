@@ -1,5 +1,5 @@
 import {TabRouter} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,69 +21,44 @@ import {TopSearchComponent} from '../components/TopSearchComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
 import {BottomPopup} from '../components/BottomPopup';
-import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
+import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
 import {useSelector, useDispatch} from 'react-redux';
-
-
-
-const categories = [
-  {
-    id: 1,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Design',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Finance',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Development',
-  },
-  {
-    id: 4,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Health & Fitness',
-  },
-  {
-    id: 5,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Business',
-  },
-  {
-    id: 6,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'IT & Software',
-  },
-  {
-    id: 7,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Music',
-  },
-];
+import {searchData} from '../authorization/Auth';
+import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 
 export const HomeSearch = ({navigation}) => {
-  const filterState = useSelector(state => state.filterState.state);
   const [text, setText] = useState('');
-  const dispatch =useDispatch();
-  const [componentrender, setComponentRender] = useState(3);
 
-
+  const dispatch = useDispatch();
+  const [componentrender, setComponentRender] = useState(1);
+  const token = useSelector(state => state.userDetails.token);
+  const categoriesData = useSelector(state => state.categories.data);
+  const data = useSelector(state => state.searchData.data);
 
   const handleText = async string => {
     setText(string);
-    console.log(text);
+    const res = await searchData(token, text);
+    if (res) {
+      setComponentRender(2);
+      dispatch(setSearchData(res));
+    } else {
+      setComponentRender(3);
+    }
+   
+    // console.log(data);
   };
+  useEffect(() => {
+   
+  }, []);
+
   return (
     <View style={styles.body}>
       <View style={styles.topView}>
-      <Pressable onPress={()=> navigation.goBack()}>
-        <Image
-          source={require('../assets/images/icn_back_header.png')}
-          style={styles.imgback}
-        />
+        <Pressable onPress={() => navigation.goBack()}>
+          <Image
+            source={require('../assets/images/icn_back_header.png')}
+            style={styles.imgback}
+          />
         </Pressable>
         <Text style={styles.texttop}>Search</Text>
       </View>
@@ -102,7 +77,12 @@ export const HomeSearch = ({navigation}) => {
             onChangeText={handleText}
           />
         </View>
-        <TouchableOpacity onPress={() =>{ {dispatch(setFilterState())}}}>
+        <TouchableOpacity
+          onPress={() => {
+            {
+              dispatch(setFilterState());
+            }
+          }}>
           <Image
             source={require('../assets/images/icn_filter_search.png')}
             style={styles.imgfilter}
@@ -114,24 +94,28 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.topsearchView}>
             <Text style={styles.texttopsearch}>Top Searches</Text>
             <View style={styles.viewtopsearch}>
+              <TopSearchComponent text="12sadfg34" />
+              <TopSearchComponent text="dfsdfghj" />
+              <TopSearchComponent text="dfgzxczxcvhj" />
+              <TopSearchComponent text="dfsdfgghj" />
+              <TopSearchComponent text="dfsdfghj" />
               <TopSearchComponent text="dfghj" />
+              <TopSearchComponent text="dfsdfghj" />
               <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfghj" />
+              <TopSearchComponent text="dfdfghj" />
             </View>
           </View>
           <View style={styles.searchCatView}>
             <Text style={styles.texttopsearch}>Search From Categories</Text>
             <View style={styles.viewcatin}>
-              {categories.map(item => (
+              {categoriesData.map(item => (
                 <CategoriesComponent
-                  img={item.source}
-                  category={item.category}
+                  id={item?.categoryId}
+                  img={item?.categoryPhoto}
+                  category={item?.categoryName}
+                  onPress={() => {
+                    // navigation.navigate('CategoryDisplayScreen');
+                  }}
                 />
               ))}
             </View>
@@ -140,10 +124,14 @@ export const HomeSearch = ({navigation}) => {
       )}
       {componentrender == 2 && (
         <View style={{marginTop: 30}}>
-          <SearchFoundComponent />
-          <SearchFoundComponent />
-          <SearchFoundComponent />
-          <SearchFoundComponent />
+          {data?.map(item => (
+            <SearchFoundComponent
+              coursePhoto={item?.coursePhoto}
+              courseName={item?.courseName}
+              chapterCount={item?.chapterCount}
+              categoryName={item?.categoryName}
+            />
+          ))}
         </View>
       )}
 
@@ -160,17 +148,19 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.searchCatView1}>
             <Text style={styles.texttopsearch}>Search From Categories</Text>
             <View style={styles.viewcatin}>
-              {categories.map(item => (
+              {categoriesData.map(item => (
                 <CategoriesComponent
-                  img={item.source}
-                  category={item.category}
+                  id={item?.categoryId}
+                  img={item?.categoryPhoto}
+                  category={item?.categoryName}
+                  onPress={() => {
+                    // navigation.navigate('CategoryDisplayScreen');
+                  }}
                 />
               ))}
             </View>
           </View>
-          
         </View>
-        
       )}
       <BottomPopup />
     </View>
