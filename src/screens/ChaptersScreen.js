@@ -20,7 +20,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 
 export const ChaptersScreen = () => {
-  const data = useSelector(state => state.chapterList.data);
+  const data = useSelector(state => state.courseData.data);
 
   return (
     <SafeAreaView style={styles.container}>
