@@ -216,14 +216,14 @@ export const HomeScreen = ({navigation}) => {
               renderItem={({item}) => (
                 <View style={styles.btmcourseview}>
                   <TouchableOpacity
-                    onPress={() => {
+                    onPress={async () => {
                       // const objBody = {
                       //   courseId: 3,
                       // };
                       // console.log(objBody);
-                      // const res = await overViewData(token, objBody);
-                      // console.log(res);
-                      navigation.navigate('CourseScreen');
+                      const res = await overViewData(token,item.courseId);
+                       console.log("==()==",res);
+                     navigation.navigate('CourseScreen');
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}

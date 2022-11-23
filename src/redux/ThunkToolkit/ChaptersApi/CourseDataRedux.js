@@ -234,10 +234,11 @@ const Chapter = {
     },
   ],
 };
-export const ChapterListSlice = createSlice({
-  name: 'chapterList',
+export const CourseDataSlice = createSlice({
+  name: 'courseData',
   initialState: {
     data: Chapter,
+    overview:[],
   },
   reducers: {
     changeChapterListStatus: (state, action) => {
@@ -258,10 +259,15 @@ export const ChapterListSlice = createSlice({
         });
       });
     },
+
+    addOverView:(state,action)=>{
+      state.overview.push(action.payload)
+    }
+
   },
 });
 
-export const {changeChapterListStatus, addPlayStatus} =
-  ChapterListSlice.actions;
+export const {changeChapterListStatus, addPlayStatus,addOverView} =
+CourseDataSlice.actions;
 
-export default ChapterListSlice.reducer;
+export default  CourseDataSlice.reducer;

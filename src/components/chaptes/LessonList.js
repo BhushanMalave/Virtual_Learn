@@ -11,10 +11,10 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/ChapterListRedux';
+import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 export const LessonList = item => {
-  const data = useSelector(state => state.chapterList.data);
+  const data = useSelector(state => state.courseData.data);
   const dispatch = useDispatch();
   return (
     <>
