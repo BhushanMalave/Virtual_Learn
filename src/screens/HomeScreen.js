@@ -53,6 +53,7 @@ export const HomeScreen = ({navigation}) => {
   }, []);
 
   const topHeaderData = useSelector(state => state.topHeader.value);
+  // console.log(topHeaderData)
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
@@ -73,6 +74,8 @@ export const HomeScreen = ({navigation}) => {
         </View>
         <Text style={styles.toptext}>Hello!</Text>
         <Text style={styles.name}>Mahendra Singh Dhoni</Text>
+
+
         <View>
           <FlatList
             data={topHeaderData}
@@ -101,6 +104,9 @@ export const HomeScreen = ({navigation}) => {
               </View>
             )}></FlatList>
         </View>
+
+
+
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
             <Text style={styles.category}>Categories</Text>

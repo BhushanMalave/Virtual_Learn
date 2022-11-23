@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   ImageBackground,
   Text,
@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
-import { useSelector,useDispatch } from 'react-redux';
-import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {useSelector, useDispatch} from 'react-redux';
+import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ export const MyProfile = ({navigation}) => {
 
   useEffect(() => {
     dispatch(mpUserDetails(token));
-  },[]);
+  }, []);
   return (
     <ScrollView>
       <View>
         <ImageBackground
-          source={{uri:userData?.profilePhoto}}
+          source={{uri: userData?.profilePhoto}}
           style={styles.backgroundimg}>
           <View style={styles.imageBlur}>
             <TouchableOpacity
@@ -48,9 +48,8 @@ export const MyProfile = ({navigation}) => {
             </View>
             <View style={styles.topinfo}>
               <Image
-                  //  source={require('../assets/images/icn_hamburgermenu_white.png')}
-                   source={{uri : userData?.profilePhoto}}
-                style={styles.imgprofile}
+                source={{uri: userData?.profilePhoto}}
+                style={styles.imgProfile}
               />
               <View style={styles.topinfotext}>
                 <Text style={styles.textname}>{userData?.fullName}</Text>
@@ -278,5 +277,9 @@ const styles = StyleSheet.create({
     width: 15,
     marginTop: 30,
     marginRight: 15,
+  },
+  imgProfile: {
+    height: 58,
+    width: 58,
   },
 });
