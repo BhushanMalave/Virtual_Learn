@@ -29,6 +29,7 @@ import {
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
+import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -38,6 +39,9 @@ export const HomeScreen = ({navigation}) => {
 
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+
+
+
 
   const allCourse = async () => {
     const data1 = await all(token);
@@ -217,14 +221,12 @@ export const HomeScreen = ({navigation}) => {
                 <View style={styles.btmcourseview}>
                   <TouchableOpacity
                     onPress={async () => {
-                      // const objBody = {
-                      //   courseId: 3,
-                      // };
-                      // console.log(objBody);
                       const res = await overViewData(token,item.courseId);
+                      dispatch(addOverView(res))
                        console.log("==()==",res);
                      navigation.navigate('CourseScreen');
                     }}>
+                
                     <Image
                       source={{uri: item?.coursePhoto}}
                       style={styles.imgview}

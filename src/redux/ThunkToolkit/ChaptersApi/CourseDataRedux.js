@@ -261,7 +261,8 @@ export const CourseDataSlice = createSlice({
     },
 
     addOverView:(state,action)=>{
-      state.overview.push(action.payload)
+      console.log("\\\\\\\\",action.payload)
+      state.overview = action.payload;
     }
 
   },
