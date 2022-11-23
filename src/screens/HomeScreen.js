@@ -18,6 +18,7 @@ import {CourseComponent} from '../components/CourseComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
+import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 
 
 const data = [
@@ -84,7 +85,12 @@ export const HomeScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
 
 
+const handleClick= async()=>{
 
+    const res = OverView()
+    
+    navigation.navigate('CourseScreen')
+}
   useEffect(() => {
     // dispatch(hsTopHeaders());
   });
@@ -214,7 +220,7 @@ export const HomeScreen = ({navigation}) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => navigation.navigate('CourseScreen')}>
+                <TouchableOpacity onPress={() =>handleClick()}>
                 <View style={styles.btmcourseview}>
                   <View style={styles.imgview}></View>
                   <View style={styles.btmitemContainer}>

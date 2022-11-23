@@ -55,8 +55,8 @@ export const OnBoardingScreen1 = ({navigation}) => {
             <TouchableOpacity
               onPress={async () => {
                
-                navigation.navigate('Welcome');
-                 // navigation.navigate('Drawer');
+                // navigation.navigate('Welcome');
+                 navigation.navigate('Drawer');
             
                  
               }}>
