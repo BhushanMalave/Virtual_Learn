@@ -8,7 +8,7 @@ const Chapter = {
   totalLength: 3.5,
   enrolled: false,
   courseCompletedStatus: false,
-  
+
   chapterList: [
     {
       id: 1,
@@ -16,7 +16,7 @@ const Chapter = {
       name: 'Introduction to the course',
       status: true,
       completed: true,
-      disabled:true,
+      disabled: true,
       lessons: [
         {
           id: 1,
@@ -42,7 +42,7 @@ const Chapter = {
       name: 'Learning the Figma Interface',
       status: false,
       completed: false,
-      disabled:true,
+      disabled: true,
       lessons: [
         {
           id: 1,
@@ -75,7 +75,7 @@ const Chapter = {
       name: 'Setting up a new project',
       completed: false,
       status: false,
-      disabled:true,
+      disabled: true,
       lessons: [
         {
           id: 1,
@@ -108,7 +108,7 @@ const Chapter = {
       name: 'Adding and Editing Content',
       status: false,
       completed: false,
-      disabled:true,
+      disabled: true,
       lessons: [
         {
           id: 1,
@@ -234,40 +234,33 @@ const Chapter = {
   ],
 };
 export const ChapterListSlice = createSlice({
-    name: 'chapterList',
-    initialState:{
-        data: Chapter,
-    },
-    reducers:{
-        changeChapterListStatus: (state, action) => {
-        state.data.chapterList.map(item =>{
-            if(item.id == action.payload.id)
-            {
-              console.log(action.payload.id)
-                item.status = !item.status
-            }
-        })
-        } ,
-
-        addPlayStatus: (state ,action) => {
-state.data.chapterList.map(
-  item =>{
-    item.lessons.map(
-      item => {
-        if(item.id == action.payload.id)
-        {
-          item.status = true
+  name: 'chapterList',
+  initialState: {
+    data: Chapter,
+  },
+  reducers: {
+    changeChapterListStatus: (state, action) => {
+      state.data.chapterList.map(item => {
+        if (item.id == action.payload.id) {
+          console.log(action.payload.id);
+          item.status = !item.status;
         }
-      }
-    )
-  }
-)
-        },
+      });
+    },
 
+    addPlayStatus: (state, action) => {
+      state.data.chapterList.map(item => {
+        item.lessons.map(item => {
+          if (item.id == action.payload.id) {
+            item.status = true;
+          }
+        });
+      });
+    },
+  },
+});
 
-    }
-})
-
-export const {changeChapterListStatus,addPlayStatus} = ChapterListSlice.actions;
+export const {changeChapterListStatus, addPlayStatus} =
+  ChapterListSlice.actions;
 
 export default ChapterListSlice.reducer;
