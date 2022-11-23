@@ -47,15 +47,13 @@ export const OnBoardingScreen1 = ({navigation}) => {
         <TouchableOpacity>
           <View>
             <TouchableOpacity
-              onPress={async () => {
+              onPress={() => {
                 
 
-                const obj ={
-                  'courseId':3,
-                }
-                // navigation.navigate('Welcome');
+                
+                navigation.navigate('Welcome');
                 // navigation.navigate('Drawer');
-                dispatch(OverView(token,obj))
+                // dispatch(OverView(token,obj))
             
                  
               }}>

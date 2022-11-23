@@ -237,10 +237,14 @@ const Chapter = {
 export const CourseDataSlice = createSlice({
   name: 'courseData',
   initialState: {
-    data: Chapter,
+    data: [],
     overview:[],
   },
   reducers: {
+
+    addChapterList:(state , action) => {
+      state.data = action.payload
+    },
     changeChapterListStatus: (state, action) => {
       state.data.chapterList.map(item => {
         if (item.id == action.payload.id) {
@@ -261,13 +265,13 @@ export const CourseDataSlice = createSlice({
     },
 
     addOverView:(state,action)=>{
-      state.overview.push(action.payload)
+      state.overview = action.payload
     }
 
   },
 });
 
-export const {changeChapterListStatus, addPlayStatus,addOverView} =
+export const {addChapterList,changeChapterListStatus, addPlayStatus,addOverView} =
 CourseDataSlice.actions;
 
 export default  CourseDataSlice.reducer;

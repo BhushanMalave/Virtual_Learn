@@ -145,3 +145,29 @@ const options =  {
 //     console.log(err);
 //   }
 // };
+
+
+export const chapterListData = async (token,id) => {
+ 
+  const options =  {
+    headers: {
+      Authorization:
+        `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  
+    try {
+      const response = await axios.get(
+        `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse/${id}`,
+        options,
+       
+      );
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+  
