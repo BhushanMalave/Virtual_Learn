@@ -21,20 +21,23 @@ import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenT
 import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
 import {newest, popular, all} from '../authorization/Auth';
 import {hsTopCourses} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
+import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {
   setAllData,
   setNewestData,
   setPopularData,
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
+import {overViewData} from '../authorization/Auth';
 
 export const HomeScreen = ({navigation}) => {
-
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
   const [clicked3, setClicked3] = useState(false);
   const dispatch = useDispatch();
 
   const token = useSelector(state => state.userDetails.token);
+  const userData = useSelector(state => state.userData.data);
 
   const allCourse = async () => {
     const data1 = await all(token);
@@ -46,6 +49,7 @@ export const HomeScreen = ({navigation}) => {
     dispatch(hsTopHeaders(token));
     dispatch(hsCategories(token));
     dispatch(hsTopCourses(token));
+    dispatch(mpUserDetails(token));
     setClicked1(true);
     setClicked2(false);
     setClicked3(false);
@@ -73,9 +77,7 @@ export const HomeScreen = ({navigation}) => {
           </Pressable>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
-        <Text style={styles.name}>Mahendra Singh Dhoni</Text>
-
-
+        <Text style={styles.name}>{userData?.fullName}</Text>
         <View>
           <FlatList
             data={topHeaderData}
@@ -213,8 +215,16 @@ export const HomeScreen = ({navigation}) => {
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
                 <View style={styles.btmcourseview}>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate('CourseScreen')}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      // const objBody = {
+                      //   courseId: 3,
+                      // };
+                      // console.log(objBody);
+                      // const res = await overViewData(token, objBody);
+                      // console.log(res);
+                      navigation.navigate('CourseScreen');
+                    }}>
                     <Image
                       source={{uri: item?.coursePhoto}}
                       style={styles.imgview}
@@ -233,8 +243,8 @@ export const HomeScreen = ({navigation}) => {
                         </Text>
                       </View>
                     </View>
-                </TouchableOpacity>
-                  </View>
+                  </TouchableOpacity>
+                </View>
               )}></FlatList>
 
             {/* </View> */}
@@ -461,7 +471,7 @@ const styles = StyleSheet.create({
   },
   btmcourseText: {
     // height: 25,
-    width:120,
+    width: 120,
     fontFamily: 'Proxima Nova',
     fontSize: 10,
     color: '#2B2B2B',
