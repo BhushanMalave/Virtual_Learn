@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const all = async token => {
-  console.log('-----', token);
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -94,7 +93,7 @@ export const mpChangeUserData = async (token, formBody) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  // console.log(res.status)
+   console.log(res.status)
   return res.status;
 }catch(err)
 {

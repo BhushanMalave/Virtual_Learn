@@ -21,6 +21,7 @@ import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenT
 import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
 import {newest, popular, all} from '../authorization/Auth';
 import {hsTopCourses} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
+import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {
   setAllData,
   setNewestData,
@@ -35,6 +36,7 @@ export const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const token = useSelector(state => state.userDetails.token);
+  const userData = useSelector(state => state.userData.data);
 
   const allCourse = async () => {
     const data1 = await all(token);
@@ -46,6 +48,7 @@ export const HomeScreen = ({navigation}) => {
     dispatch(hsTopHeaders(token));
     dispatch(hsCategories(token));
     dispatch(hsTopCourses(token));
+    dispatch(mpUserDetails(token));
     setClicked1(true);
     setClicked2(false);
     setClicked3(false);
@@ -72,7 +75,7 @@ export const HomeScreen = ({navigation}) => {
           </Pressable>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
-        <Text style={styles.name}>Mahendra Singh Dhoni</Text>
+        <Text style={styles.name}>{userData?.fullName}</Text>
         <View>
           <FlatList
             data={topHeaderData}
