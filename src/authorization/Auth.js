@@ -146,3 +146,30 @@ const options =  {
 //     console.log(err);
 //   }
 // };
+
+
+
+export const searchData = async (token,string) => {
+ 
+  const options =  {
+    headers: {
+      Authorization:
+        `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    },
+  };
+  
+    try {
+      const response = await axios.get(
+        `https://virtual-learn-app-java.herokuapp.com/user/search/${string}`,
+        options,
+       
+      );
+      // console.log(response.data);
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      //console.log(error.response.data);
+    }
+  };

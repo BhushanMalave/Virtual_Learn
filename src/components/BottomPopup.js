@@ -107,6 +107,7 @@ export const BottomPopup = () => {
           <View style={styles.durationView}>
             <Text style={styles.texttopsearch}>Duration</Text>
             <View style={styles.viewdurin}>
+              {}
               <View style={styles.durview}>
                 <Text style={styles.durtext}>5/10 Chapters</Text>
               </View >
