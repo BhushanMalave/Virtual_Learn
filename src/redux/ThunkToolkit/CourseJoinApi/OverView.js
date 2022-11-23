@@ -3,17 +3,20 @@ import axios from 'axios';
 
 export const OverView = createAsyncThunk(
     'category/OverView',
-    async token => {
-      console.log('--',token);
+    async (token,obj) => {
+      const body = obj;
+      console.log(obj);
       const options = {
         headers:{
           Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }
       };
     
       try {
         const response = await axios.get(
           'https://virtual-learn-app-java.herokuapp.com/user/CourseOverView',
+          body,
           options,
         );
         console.log("----",response.data);

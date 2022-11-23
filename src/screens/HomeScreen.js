@@ -27,9 +27,10 @@ import {
   setNewestData,
   setPopularData,
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
+import {overViewData} from '../authorization/Auth';
 
 export const HomeScreen = ({navigation}) => {
-
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
   const [clicked3, setClicked3] = useState(false);
@@ -56,6 +57,7 @@ export const HomeScreen = ({navigation}) => {
   }, []);
 
   const topHeaderData = useSelector(state => state.topHeader.value);
+  // console.log(topHeaderData)
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
@@ -105,6 +107,9 @@ export const HomeScreen = ({navigation}) => {
               </View>
             )}></FlatList>
         </View>
+
+
+
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
             <Text style={styles.category}>Categories</Text>
@@ -211,8 +216,16 @@ export const HomeScreen = ({navigation}) => {
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
                 <View style={styles.btmcourseview}>
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate('CourseScreen')}>
+                  <TouchableOpacity
+                    onPress={async () => {
+                      // const objBody = {
+                      //   courseId: 3,
+                      // };
+                      // console.log(objBody);
+                      const res = await overViewData(token,item.courseId);
+                       console.log("==()==",res);
+                     navigation.navigate('CourseScreen');
+                    }}>
                     <Image
                       source={{uri: item?.coursePhoto}}
                       style={styles.imgview}
@@ -231,8 +244,8 @@ export const HomeScreen = ({navigation}) => {
                         </Text>
                       </View>
                     </View>
-                </TouchableOpacity>
-                  </View>
+                  </TouchableOpacity>
+                </View>
               )}></FlatList>
 
             {/* </View> */}
@@ -459,7 +472,7 @@ const styles = StyleSheet.create({
   },
   btmcourseText: {
     // height: 25,
-    width:120,
+    width: 120,
     fontFamily: 'Proxima Nova',
     fontSize: 10,
     color: '#2B2B2B',

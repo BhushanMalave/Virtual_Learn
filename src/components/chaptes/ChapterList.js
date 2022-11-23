@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { useDispatch } from 'react-redux';
-import { changeChapterListStatus } from '../../redux/ThunkToolkit/ChaptersApi/ChapterListRedux';
+import { changeChapterListStatus } from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 export const ChapterList = item => {
   const dispatch = useDispatch();

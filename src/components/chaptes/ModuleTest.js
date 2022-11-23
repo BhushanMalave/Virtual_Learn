@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 const enrolled = false;
 export const ModularTest = (item) => {
-  const data = useSelector(state => state.chapterList.data)
+  const data = useSelector(state => state.courseData.data)
   return (
     <>
       <View >
