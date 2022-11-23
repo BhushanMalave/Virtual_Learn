@@ -20,6 +20,7 @@ export const MyProfile = ({navigation}) => {
 
   useEffect(() => {
     dispatch(mpUserDetails(token));
+   // console.log(userData);
   },[]);
   return (
     <ScrollView>

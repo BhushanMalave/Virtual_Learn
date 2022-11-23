@@ -29,10 +29,7 @@ const persistConfig = {
     chapterList: ChapterListReducer,
     userData:mpUserDetailsReducer,
     notificationData:notificationApiCallReducer,
-    categories:OverViewReducer
-
-
-
+    category:OverViewReducer,
   });
 
 
