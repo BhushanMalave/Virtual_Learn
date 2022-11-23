@@ -13,7 +13,7 @@ export const mpUserDetails = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/MyProfile',
+        'https://virtual-learn-app-java.herokuapp.com/myProfile',
         options,
       );
       return response.data;

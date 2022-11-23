@@ -71,7 +71,7 @@ export const mpChangePassword = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/ChangePassword',
+      'https://virtual-learn-app-java.herokuapp.com/changePassword',
       body,
       options,
     );
@@ -86,14 +86,15 @@ export const mpChangePassword = async (token, objBody) => {
 
 export const mpChangeUserData = async (token, formBody) => {
   try{
-  let res = await fetch('https://virtual-learn-app-java.herokuapp.com/Save', {
+  let res = await fetch('https://virtual-learn-app-java.herokuapp.com/save', {
     method: 'patch',
     body: formBody,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-   console.log(res.status)
+  const jsonResponse = await res.json();
+   console.log(jsonResponse);
   return res.status;
 }catch(err)
 {
@@ -170,4 +171,28 @@ export const chapterListData = async (token,id) => {
       console.log(error.response.data);
     }
   };
+
+
+  export const continueApi = async (token,id) => {
+ 
+  const options =  {
+    headers: {
+      Authorization:
+        `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
   
+    try {
+      const response = await axios.get(
+        `https://virtual-learn-app-java.herokuapp.com/user/continue/${id}`,
+        options,
+       
+      );
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };

@@ -64,7 +64,7 @@ export const LessonList = item => {
             disabled={!data.enrolled}
               onPress={() => {
                 console.log(
-                  " don't set/dispatch status as false in lessons:status  and pressed play",
+                  " don't set/dispatch status as false in lessons:status  and pressed play",item.videoLink
                 );
                 dispatch(addPlayStatus({id: item.id}))
               }
@@ -81,7 +81,7 @@ export const LessonList = item => {
             disabled={!data.enrolled}
               onPress={
                 () =>{
-                  console.log(' set/dispatch status as true in lessons:status  and pressed play');
+                  console.log(' set/dispatch status as true in lessons:status  and pressed play',item.videoLink);
                 dispatch(addPlayStatus({id: item.id}))}
               }>
                 <View style={{marginLeft:-5}} >

@@ -49,8 +49,7 @@ export const MyProfile = ({navigation}) => {
             </View>
             <View style={styles.topinfo}>
               <Image
-                  //  source={require('../assets/images/icn_hamburgermenu_white.png')}
-                  source={{uri : userData?.profilePhoto}}
+                source={{uri: userData?.profilePhoto}}
                 style={styles.imgProfile}
               />
               <View style={styles.topinfotext}>
