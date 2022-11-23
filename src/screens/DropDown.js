@@ -13,9 +13,12 @@ import {
 
 import {Formik} from 'formik';
 import * as yup from 'yup';
-let valueGender = '';
-let valueOccupation ='';
+
 import icn_dropdown from '../assets/images/icn_dropdown.png';
+import img_edit_profile_bg from '../assets/images/img_edit_profile_bg.png';
+
+import img_profile_change from '../assets/images/img_profile_change.png';
+
 import icn_back_header from '../assets/images/icn_back_header.png';
 
 import {ButtonComponent} from '../components/Buttons';
@@ -28,85 +31,32 @@ const data = {
   username: 'Msdian',
   email: 'msd07@gamil.com',
   mobilenumber: '9876543211',
-  occupation:'Design',
-  gender: 'Female',
 };
-import {useSelector, useDispatch} from 'react-redux';
-import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-import {mpChangeUserData} from '../authorization/Auth';
 
-export const EditProfile = ({navigation}) => {
+export const DropDown = ({navigation}) => {
   const genderData = [
-    {key: 'Female', value: 'Female'},
-    {key: 'Male', value: 'Male'},
+    {key: 1, value: 'Female'},
+    {key: 2, value: 'Male'},
   ];
   const occupationData = [
-    {key: 1, value: 'design'},
-    {key: 2, value: 'development'},
-    {key: 3, value: 'music'},
-  ];
+     { categoryId:1 , categoryName:'design' },
+    {  categoryId:2 , categoryName:'development' },
+     { categoryId:3 , categoryName:'music' },
+  ]
 
-  const [selected, setSelected] = useState();
-  const [selectedOccu, setSelectedOccu] = useState();
+  const [selected, setSelected] = useState('');
 
-  const [genderState, serGenderState] = useState(false);
-  const [occupationState, setOccupationState] = useState(false);
-
+  const [selectedOccu, setSelectedOccu] = useState('')
   const [text, setText] = useState('');
-  const [image, setImage] = useState(userData?.profilePhoto);
-  const [profilePhoto, setProfilePhoto] = useState(null);
-  const dispatch = useDispatch();
-  const token = useSelector(state => state.userDetails.token);
-  const userData = useSelector(state => state.userData.data);
+  const [image, setImage] = useState({img_edit_profile_bg});
 
-  const changeProfileImageFromLibrary = () => {
-    ImagePicker.openPicker({
-      width: 110,
-      height: 110,
-      cropping: true,
-    }).then(img => {
-      // console.log(img);
-      setImage(img.path);
-      const {filename, mime, path} = img;
-      setProfilePhoto({filename, mime, path});
-      // console.log('--9090---', profilePhoto);
-    });
-  };
-  const changeProfileImageFromCamera = () => {
-    ImagePicker.openCamera({
-      width: 110,
-      height: 110,
-      cropping: true,
-    }).then(img => {
-     
-      setImage(img.path);
-    });
-  };
-
-  const createFromData = obj => {
-    let formData = new FormData();
-    for (let key in obj) {
-      if (key === 'profilePhoto') {
-        const imageData = obj[key];
-        formData.append('profilePhoto', {
-          uri: imageData.path,
-          type: imageData.mime,
-          name: `${imageData.filename}.${imageData.mime.substr(
-            imageData.mime.indexOf('/') + 1,
-          )}`,
-        });
-      } else {
-        formData.append(`${key}`, `${obj[key]}`);
-      }
-    }
-    return formData;
-  };
+  const changeProfileImageFromLibrary = () => {};
 
   return (
     <View style={{flex: 1}}>
       <ScrollView>
         <ImageBackground
-          source={{uri:userData.profilePhoto}}
+          source={img_profile_change}
           resizeMode="cover"
           style={styles.image}>
           <View style={styles.imageBlur}>
@@ -122,7 +72,7 @@ export const EditProfile = ({navigation}) => {
 
               <View style={{alignItems: 'center', marginTop: 30}}>
                 <Image
-                  source={{uri: userData.profilePhoto}}
+                  source={img_profile_change}
                   style={{height: 110, width: 110, marginRight: 40}}
                 />
                 <TouchableOpacity
@@ -153,63 +103,27 @@ export const EditProfile = ({navigation}) => {
           <View style={styles.container}>
             <Formik
               initialValues={{
-                fullname: userData?.fullName,
-                username: userData?.userName,
-                email: userData?.email,
-                mobilenumber: userData?.mobileNumber,
-                occupation: userData?.occupation,
-                gender: userData?.gender,
-                dateofbirth: userData?.dateOfBirth,
-                twitterlink: userData?.twitterLink,
-                facebooklink: userData?.faceBookLink,
+                fullname: data.fullname,
+                username: data.username,
+                email: data.email,
+                mobilenumber: data.mobilenumber,
+                occupation: '',
+                gender: '',
+                dateofbirth: '',
+                twitterlink: '',
+                facebooklink: '',
               }}
-
-              onSubmit={async values => {
-                {if(selected){
-                  valueGender = selected;
-                }else {
-                valueGender = userData?.gender
-                }
-              }
-
-                {if(selectedOccu){
-                  valueOccupation = selectedOccu;
-                }else {
-                valueOccupation = userData?.occupation
-                }
-
-                }
-                const formBody = createFromData({
-                  profilePhoto: profilePhoto,
-                  userName: userData?.userName,
-                  occupation: 1,
-                  gender: values?.gender,
-                  dateofBirth: values?.dateofbirth,
-                  twtterLink: values?.twitterlink,
-                  faceBookLink: values?.facebooklink,
-                });
-                const res = await mpChangeUserData(token, formBody);
-
-                if (res == 200) {
-                
-                  const data = {
-                    profilePhoto: image,
-                    fullName: userData?.fullName,
-                    userName: userData?.userName,
-                    email: userData?.userName,
-                    mobileNumber: userData?.mobileNumber,
-                    occupation: valueOccupation,
-                    gender: valueGender,
-                    dateofBirth: values.dateofbirth,
-                    twtterLink: values.twitterlink,
-                    faceBookLink: values.facebooklink,
-                  };
-                  dispatch(setUserData(data));
-                  navigation.navigate('Profile');
-                }
-
-                console.log(values.gender);
-                console.log(values);
+              onSubmit={values => {
+                const obj = {
+                  occupation: selectedOccu,
+                  gender: selected,
+                  dateofbirth: values.dateofbirth,
+                  twtterlink: values.twitterlink,
+                  facebooklink: values.facebooklink,
+                };
+                console.log(obj.selected);
+                console.log(obj.occupation);
+                console.log(obj);
               }}>
               {({handleChange, handleBlur, handleSubmit, values, errors}) => (
                 <View>
@@ -313,13 +227,42 @@ export const EditProfile = ({navigation}) => {
                     <View style={styles.bottom2}></View>
                   )}
 
-{occupationState ? ( <>
-                    {selectedOccu ? (
-                      <View style={styles.dropDownForm1}></View>
+                  {/* 
+                  {values.occupation ? (
+                    <View style={styles.form1}></View>
+                  ) : (
+                    <View style={styles.form}></View>
+                  )}
+                  <>
+                    {values.occupation ? (
+                      <View>
+                        <Text style={styles.text}>Occupation</Text>
+                      </View>
                     ) : (
-                      <View style={styles.dropDownForm}></View>
+                      <></>
                     )}
-                    {selectedOccu ? (
+                  </>
+                  <TextInput
+                    name="occupation"
+                    placeholder="Occupation"
+                    placeholderTextColor={'#7A7A7A'}
+                    onChangeText={handleChange('occupation')}
+                    // onBlur={handleBlur('username')}
+                    value={values.occupation}
+                    style={styles.textinput}></TextInput>
+                  {values.occupation ? (
+                    <View style={styles.bottom}></View>
+                  ) : (
+                    <View style={styles.bottom2}></View>
+                  )} */}
+
+                  <>
+                    {selected ? (
+                      <View style={styles.form1}></View>
+                    ) : (
+                      <View style={styles.form}></View>
+                    )}
+                    {selected ? (
                       <View>
                         <Text style={styles.dropDownTopText}>Occupation</Text>
                       </View>
@@ -327,7 +270,7 @@ export const EditProfile = ({navigation}) => {
                       <></>
                     )}
                     <DropDownField
-                      text={data.gender}
+                      text="Occupation"
                       name="Occupation"
                       onChangeText={handleChange('gender')}
                       onBlur={handleBlur('gender')}
@@ -337,122 +280,44 @@ export const EditProfile = ({navigation}) => {
                       placeholder="Gender"
                     />
 
-                    {selectedOccu ? (
+                    {selected ? (
                       <View style={styles.dropDownBottom}></View>
                     ) : (
                       <View style={styles.dropDownBottom2}></View>
                     )}
-                  </>): (
-                    <>
-                    <View style={styles.form1}></View>
 
-                    {values.gender ? (
+                  </>
+
+                  <>
+                    {selected ? (
+                      <View style={styles.form1}></View>
+                    ) : (
+                      <View style={styles.form}></View>
+                    )}
+                    {selected ? (
                       <View>
-                        <Text style={styles.text}>Occupation</Text>
+                        <Text style={styles.dropDownTopText}>Gender</Text>
                       </View>
                     ) : (
                       <></>
                     )}
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}>
-                      <TextInput
-                        name="occupation"
-                        editable={false}
-                        value={values.occupation}
-                        style={styles.textinput}
-                      />
-                      <TouchableOpacity onPress={() => setOccupationState(true)}>
-                        <Image source={icn_dropdown} />
-                      </TouchableOpacity>
-                    </View>
-                    {values.gender ? (
-                      <View style={styles.bottom}></View>
-                    ) : (
-                      <View style={styles.bottom2}></View>
-                    )}
                   </>
-                  )}
+                  <DropDownField
+                    text="Gender"
+                    name="Gender"
+                    onChangeText={handleChange('gender')}
+                    onBlur={handleBlur('gender')}
+                    data={genderData}
+                    setSelected={setSelected}
+                    value={selected}
+                    placeholder="Gender"
+                  />
 
-
-                 
-
-
-
-
-                  {genderState ? (
-                    <>
-                      {selected ? (
-                        <View style={styles.dropDownForm1}></View>
-                      ) : (
-                        <View style={styles.dropDownForm}></View>
-                      )}
-                      {selected ? (
-                        <View>
-                          <Text style={styles.dropDownTopText}>Gender</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-
-                      <DropDownField
-                        text="Gender"
-                        name="Gender"
-                        onChangeText={handleChange('gender')}
-                        onBlur={handleBlur('gender')}
-                        data={genderData}
-                        setSelected={setSelected}
-                        value={selected}
-                        placeholder="Gender"
-                      />
-
-                      {selected ? (
-                        <View style={styles.dropDownBottom}></View>
-                      ) : (
-                        <View style={styles.dropDownBottom2}></View>
-                      )}
-                    </>
+                  {selected ? (
+                    <View style={styles.dropDownBottom}></View>
                   ) : (
-                    <>
-                      <View style={styles.form1}></View>
-
-                      {values.gender ? (
-                        <View>
-                          <Text style={styles.text}>Gender</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                        }}>
-                        <TextInput
-                          name="gender"
-                          editable={false}
-                          value={values.gender}
-                          style={styles.textinput}
-                        />
-                        <TouchableOpacity onPress={() => serGenderState(true)}>
-                          <Image source={icn_dropdown} />
-                        </TouchableOpacity>
-                      </View>
-                      {values.gender ? (
-                        <View style={styles.bottom}></View>
-                      ) : (
-                        <View style={styles.bottom2}></View>
-                      )}
-                    </>
+                    <View style={styles.dropDownBottom2}></View>
                   )}
-
-
-
-
 
 
 
@@ -557,7 +422,7 @@ const styles = StyleSheet.create({
   },
   imageBlur: {
     backgroundColor: '#042C5C',
-    opacity: 0.7,
+    opacity: 0.9,
     paddingBottom: 10,
   },
   imageContainer: {
@@ -656,12 +521,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#7A7A7A',
     opacity: 0.6,
-  },
-  dropDownForm1: {
-    marginTop: Platform.OS == 'ios' ? 14 : 15,
-  },
-
-  dropDownForm: {
-    marginTop: Platform.OS == 'ios' ? 30 : 20,
   },
 });

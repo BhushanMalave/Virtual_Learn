@@ -17,7 +17,6 @@ export const hsTopCourses = createAsyncThunk(
         'https://virtual-learn-app-java.herokuapp.com/user/home/course/category',
         options,
       );
-
       return response.data;
     } catch (error) {
       console.log(error);
