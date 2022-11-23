@@ -66,6 +66,7 @@ export const HomeScreen = ({navigation}) => {
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
 
+  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
