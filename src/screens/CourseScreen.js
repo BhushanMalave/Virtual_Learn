@@ -17,7 +17,7 @@ export const CourseScreen = ({navigation}) => {
 
   const coursedata = useSelector(state => state.courseData.overview);
 
-  console.log("heyyyy",coursedata)
+  // console.log("heyyyy",coursedata)
   return (
     <View style={styles.container}>
       <View style={styles.header}>

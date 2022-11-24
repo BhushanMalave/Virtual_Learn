@@ -17,13 +17,16 @@ import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
 import {BottomPopup} from './src/components/BottomPopup'
 
+import {ContinuePopUp} from './src/components/chaptes/ContinuePopUp'
+import {ChaptersScreen} from './src/screens/ChaptersScreen'
+
 let persistor = persistStore(store);
 
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router />
+        <Router/>
       </PersistGate>
     </Provider>
   );

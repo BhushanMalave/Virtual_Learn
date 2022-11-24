@@ -8,10 +8,12 @@ export const CourseDataSlice = createSlice({
     data: [],
     overview:[],
     continueData:[],
+    popUpState:false,
   },
   reducers: {
 
     addChapterList:(state , action) => {
+      state.data = null;
       state.data = action.payload
     },
     changeChapterListStatus: (state, action) => {
@@ -23,17 +25,14 @@ export const CourseDataSlice = createSlice({
       });
     },
 
-    addPlayStatus: (state, action) => {
-      state.data.chapterResponses.map(item => {
-        item.lessonResponses.map(item => {
-          if (item.lessonId == action.payload.id) {
-            item.status = true;
-          }
-        });
-      });
-    },
     addContinueData:(state,action) => {
+      state.continueData= null;
       state.continueData = action.payload
+    },
+
+    setPopUpState:(state , action) => {
+      state.popUpState = !state.popUpState;
+      console.log(state.popUpState)
     },
 
     addOverView:(state,action)=>{
@@ -43,7 +42,7 @@ export const CourseDataSlice = createSlice({
   },
 });
 
-export const {addChapterList,changeChapterListStatus, addPlayStatus,addContinueData,addOverView} =
+export const {addChapterList,changeChapterListStatus,addContinueData,setPopUpState,addOverView} =
 CourseDataSlice.actions;
 
 export default  CourseDataSlice.reducer;
