@@ -282,5 +282,6 @@ const styles = StyleSheet.create({
   imgProfile: {
     height: 58,
     width: 58,
+    borderRadius:6,
   },
 });

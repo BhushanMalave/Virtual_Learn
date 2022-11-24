@@ -42,6 +42,10 @@ export const HomeScreen = ({navigation}) => {
 
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const topHeaderData = useSelector(state => state.topHeader.value);
+  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
+  const categoriesData = useSelector(state => state.categories.data);
+  const topCoursesData = useSelector(state => state.topCourses.data);
 
 
 
@@ -62,14 +66,6 @@ export const HomeScreen = ({navigation}) => {
     setClicked3(false);
     allCourse();
   }, []);
-
-  const topHeaderData = useSelector(state => state.topHeader.value);
-  // console.log(topHeaderData)
-  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
-  const categoriesData = useSelector(state => state.categories.data);
-  const topCoursesData = useSelector(state => state.topCourses.data);
-
-  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
