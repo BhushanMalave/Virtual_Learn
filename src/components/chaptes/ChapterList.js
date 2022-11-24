@@ -28,7 +28,7 @@ export const ChapterList = item => {
       )}
 
       <View style={{marginLeft: 4}}>
-        {item.status ? (
+        {item.chapterStatus ? (
           <TouchableOpacity
             onPress={() => {
               console.log('set/disaptch status as false in chapterlist:status and close');

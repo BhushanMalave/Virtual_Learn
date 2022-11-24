@@ -1,5 +1,4 @@
-import {createEntityAdapter} from '@reduxjs/toolkit';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   View,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ButtonComponent} from '../components/Buttons';
 import {ChapterList} from '../components/chaptes/ChapterList';
@@ -19,8 +19,34 @@ import {ModularTest} from '../components/chaptes/ModuleTest';
 import Icon from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 
+import {chapterListData} from '../authorization/Auth';
+import {
+  addChapterList,
+  addContinueData,
+} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+
+import {continueApi} from '../authorization/Auth';
+
 export const ChaptersScreen = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.userDetails.token);
   const data = useSelector(state => state.courseData.data);
+  const continueData = useSelector(state => state.courseData.continueData);
+
+  const continueCall = async () => {
+    const cont = await continueApi(token, data?.courseId);
+    dispatch(addContinueData(cont));
+  };
+
+  const apiCall = async () => {
+    const chapterRes = await chapterListData(token, data?.courseId);
+    dispatch(addChapterList(chapterRes));
+  };
+
+  useEffect(() => {
+    apiCall();
+    continueCall();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,39 +54,51 @@ export const ChaptersScreen = () => {
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.mainView}>
+
+
+          {continueData ? (
+            <>
+              <View style={{marginTop: 29, marginBottom: 30}}>
+                <ButtonComponent text={'Continue Chapter 3 Lesson 21'} />
+              </View>
+            </>
+          ) : (
+            <></>
+          )}
+
           <Text style={styles.contentText}>Course Content</Text>
 
           <View style={styles.contentDetailsView}>
             <Text style={styles.contentDetailsText}>
-              {data.chapterNum} chapters | {data.lessonNum} lessons |{' '}
-              {data.assignmentNum} Assignment Test | {data.totalLength}h total
+              {data?.chapterCount} chapters | {data?.lessonCount} lessons |{' '}
+              {data?.testCount} Assignment Test | {data?.courseDuration}h total
               length
             </Text>
           </View>
 
           <View style={styles.chapterListContainer}>
-            {data.chapterList.map(item => (
-              <View key={item.id}>
+            {data?.chapterResponses.map(item => (
+              <View key={item?.chapterId}>
                 <ChapterList
-                  number={item.number}
-                  name={item.name}
-                  status={item.status}
-                  completed={item.completed}
-                  id={item.id}
+                  number={item?.chapterNumber}
+                  name={item?.chapterName}
+                  chapterStatus={item?.chapterStatus}
+                  completed={item?.chapterCompletedStatus}
+                  id={item?.chapterId}
                 />
 
-                {item.status ? (
+                {item?.chapterStatus ? (
                   <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                    {item.lessons.map(item => (
-                      <View key={item.id}>
+                    {item?.lessonResponses.map(item => (
+                      <View key={item?.lessonId}>
                         <LessonList
-                          number={item.number}
-                          name={item.name}
-                          duration={item.duration}
-                          completed={item.completed}
-                          status={item.status}
-                          id={item.id}
-                          url={item.url}
+                          number={item?.number}
+                          name={item?.lessonName}
+                          duration={item?.lessonDuration}
+                          completed={item?.lessonCompletedStatus}
+                          status={item?.lessonStatus}
+                          id={item?.lessonId}
+                          videoLink={item?.videoLink}
                         />
                       </View>
                     ))}
@@ -69,24 +107,25 @@ export const ChaptersScreen = () => {
                   <></>
                 )}
 
-                {item.lessons.map(temp => {
+                {item?.lessonResponses.map(temp => {
                   if (temp.completed == true) {
-                    item.disabled = true;
+                    item.disableStatus = true;
                   } else {
-                    item.disabled = false;
+                    item.disableStatus = false;
                   }
                 })}
 
-                {item.status ? (
+                {item?.chapterStatus ? (
                   <>
-                    {item.modularTest ? (
+                    {item.testId ? (
                       <ModularTest
-                        test={item.modularTest.name}
-                        duration={item.modularTest.duration}
-                        questions={item.modularTest.questions}
-                        rate={item.modularTest.rate}
-                        id={item.modularTest.id}
-                        disable={item.disabled}
+                        test={item?.testName}
+                        duration={item?.testDuration}
+                        questions={item?.questionCount}
+                        rate={item?.chapterTestPercentage}
+                        id={item?.testId}
+                        disable={item.disableStatus}
+                        completed={item?.chapterCompletedStatus}
                       />
                     ) : (
                       <></>
@@ -105,7 +144,7 @@ export const ChaptersScreen = () => {
               <View style={{margin: 24, marginTop: 30}}>
                 <Text style={styles.courseText}>Course Result</Text>
 
-                <Text style={styles.percentText}>90%</Text>
+                <Text style={styles.percentText}>{data.coursePercentage}</Text>
 
                 <Text style={styles.aprrovalText}>approval rate</Text>
 
