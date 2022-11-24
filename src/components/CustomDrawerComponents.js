@@ -44,7 +44,7 @@ export const CustomDrawerComponent = props => {
               />
               <View style={styles.topinfotext}>
                 <Text style={styles.textname}>{userData?.fullName}</Text>
-                <Text style={styles.textdesc}>{user?.occupation}</Text>
+                <Text style={styles.textdesc}>{userData?.occupation}</Text>
               </View>
             </View>
           </View>
