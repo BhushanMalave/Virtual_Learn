@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
   },
   toptext: {
     height: 20,
-    color: '#7A7A7As',
+    color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 18,
     letterSpacing: 0,

@@ -43,8 +43,8 @@ export const CustomDrawerComponent = props => {
                 style={styles.imgprofile}
               />
               <View style={styles.topinfotext}>
-                <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
-                <Text style={styles.textdesc}>Designer</Text>
+                <Text style={styles.textname}>{userData?.fullName}</Text>
+                <Text style={styles.textdesc}>{user?.occupation}</Text>
               </View>
             </View>
           </View>
