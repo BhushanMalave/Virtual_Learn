@@ -194,7 +194,7 @@ export const searchData = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/search/${string}`,
+      `https://virtual-learn-app-java.herokuapp.com/user/search?searchKey=${string}`,
       options,
     );
     // console.log(response.data);
