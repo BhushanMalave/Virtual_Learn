@@ -34,7 +34,7 @@ const data = {
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {mpChangeUserData} from '../authorization/Auth';
-import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 export const EditProfile = ({navigation}) => {
   const genderData = [
     {key: 'Female', value: 'Female'},
@@ -48,16 +48,14 @@ export const EditProfile = ({navigation}) => {
 
   const [selected, setSelected] = useState();
   const [selectedOccu, setSelectedOccu] = useState();
-
   const [genderState, serGenderState] = useState(false);
   const [occupationState, setOccupationState] = useState(false);
-
   const [text, setText] = useState('');
-  const [image, setImage] = useState(userData?.profilePhoto);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const [image, setImage] = useState(userData?.profilePhoto);
 
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
@@ -105,8 +103,8 @@ export const EditProfile = ({navigation}) => {
 
   useEffect(() => {
     dispatch(mpUserDetails(token));
-   // console.log(userData);
-  },[]);
+    // console.log(userData);
+  }, []);
   return (
     <View style={{flex: 1}}>
       <ScrollView>
@@ -128,7 +126,7 @@ export const EditProfile = ({navigation}) => {
               <View style={{alignItems: 'center', marginTop: 30}}>
                 <Image
                   source={{uri: image}}
-                  style={{height: 110, width: 110, marginRight: 40}}
+                  style={{height: 110, width: 110, marginRight: 40, borderRadius:6,}}
                 />
                 <TouchableOpacity
                   onPress={() => changeProfileImageFromCamera()}>
@@ -208,11 +206,9 @@ export const EditProfile = ({navigation}) => {
                 const res = await mpChangeUserData(token, formBody);
                 console.log(res);
                 if (res == 200) {
-                 
                   // dispatch(setUserData(data));
-               
+
                   navigation.navigate('Profile');
-                
                 }
               }}>
               {({handleChange, handleBlur, handleSubmit, values, errors}) => (
@@ -535,7 +531,10 @@ export const EditProfile = ({navigation}) => {
                     <View style={styles.bottom2}></View>
                   )}
                   <View style={styles.buttonContainer}>
-                    <ButtonComponent text={'Submit'} onPress={() => handleSubmit()} />
+                    <ButtonComponent
+                      text={'Submit'}
+                      onPress={() => handleSubmit()}
+                    />
                   </View>
                 </View>
               )}

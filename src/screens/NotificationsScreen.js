@@ -39,7 +39,7 @@ export const NotificationsScreen = ({navigation}) => {
         />
       </TouchableOpacity>
       <Text style={styles.text}>Notifications</Text>
-
+      <ScrollView>
       {notificationData?.map(items => {
         return items.readStatus === true ? (
           <NotificationsComponentSeen
@@ -68,7 +68,7 @@ export const NotificationsScreen = ({navigation}) => {
                   body,
                   options,
                 );
-
+                 console.log(response.data)
                 if (response.data) {
                   return response.data;
                 }
@@ -79,6 +79,7 @@ export const NotificationsScreen = ({navigation}) => {
           />
         );
       })}
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -25,33 +25,40 @@ import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
 import {useSelector, useDispatch} from 'react-redux';
 import {searchData} from '../authorization/Auth';
 import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
+import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
 
 export const HomeSearch = ({navigation}) => {
   const [text, setText] = useState('');
-  const dispatch =useDispatch();
-  const [componentrender, setComponentRender] = useState(1);
-
-
-  // const dispatch = useDispatch();
-  // const [componentrender, setComponentRender] = useState(1);
+  const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const categoriesData = useSelector(state => state.categories.data);
   const data = useSelector(state => state.searchData.data);
+  const componentrender = useSelector(
+    state => state.searchData.componentRender,
+  );
 
   const handleText = async string => {
     setText(string);
     const res = await searchData(token, text);
     if (res) {
-      setComponentRender(2);
+      dispatch(setComponentRender(2));
       dispatch(setSearchData(res));
     } else {
-      setComponentRender(3);
+      dispatch(setComponentRender(3));
     }
-   
+
     // console.log(data);
   };
+
+  const call = () => {
+    if (text === '') {
+      dispatch(setComponentRender(1));
+    }
+  };
+
   useEffect(() => {
-   
+    dispatch(setComponentRender(1));
+    call();
   }, []);
 
   return (
@@ -92,7 +99,7 @@ export const HomeSearch = ({navigation}) => {
           />
         </TouchableOpacity>
       </View>
-      {componentrender == 1 && (
+      {componentrender === 1 && (
         <View style={styles.defaultBody}>
           <View style={styles.topsearchView}>
             <Text style={styles.texttopsearch}>Top Searches</Text>
@@ -126,16 +133,18 @@ export const HomeSearch = ({navigation}) => {
         </View>
       )}
       {componentrender == 2 && (
-        <View style={{marginTop: 30}}>
-          {data?.map(item => (
-            <SearchFoundComponent
-              coursePhoto={item?.coursePhoto}
-              courseName={item?.courseName}
-              chapterCount={item?.chapterCount}
-              categoryName={item?.categoryName}
-            />
-          ))}
-        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{marginTop: 30}}>
+            {data?.map(item => (
+              <SearchFoundComponent
+                coursePhoto={item?.coursePhoto}
+                courseName={item?.courseName}
+                chapterCount={item?.chapterCount}
+                categoryName={item?.categoryName}
+              />
+            ))}
+          </View>
+        </ScrollView>
       )}
 
       {componentrender == 3 && (
