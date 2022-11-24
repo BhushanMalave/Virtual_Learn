@@ -7,114 +7,29 @@ import {
   Text,
   ScrollView,
   Pressable,
+  FlatList,
   SafeAreaView,
 } from 'react-native';
 import {CategoryDisplayCourseComponent} from '../components/CategoryDisplayCourseComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
 import {CategoriesComponents} from '../components/CategoryDisplayCourseComponent';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 
-const categories = [
-  {
-    id: 1,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Design',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Finance',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Development',
-  },
-  {
-    id: 4,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Health & Fitness',
-  },
-  {
-    id: 5,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Business',
-  },
-  {
-    id: 6,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'IT & Software',
-  },
-  {
-    id: 7,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Music',
-  },
-];
 
-const course = [
-  {
-    id: 1,
-    courseName: 'fhAdobe Illustrator CC - Essential Training Course',
-    chapters: 30,
-    category: 'Design',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 2,
-    courseName: 'Leadership: Practical Leadership Skills',
-    chapters: 10,
-    category: 'Business',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 3,
-    courseName: '2021 Complete Python Bootcamp From Zero to Hero',
-    chapters: 5,
-    category: 'Development',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 4,
-    courseName: 'The Ultimate Drawing Course - Beginner to Advanced',
-    chapters: 20,
-    category: 'Design',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 5,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 6,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 7,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-  {
-    id: 8,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png'),
-  },
-];
 
-export const CategoryDisplayScreen = ({navigation}) => {
+export const CategoryDisplayScreen = ({navigation,route}) => {
+
+  const basicCourse = useSelector(state => state.basicCourse.data)
+  const featuredCourse = useSelector(state => state.advanceCourse.data)
+  const subCategories = useSelector(state => state.subCategories.data)
+  const allcourse = useSelector(state => state.allCourseOfCategory.data)
+
+
+
   return (
     <View style={styles.body}>
-      <ScrollView    showsHorizontalScrollIndicator={false}>
+      <ScrollView showsHorizontalScrollIndicator={false}>
         <View style={styles.topbar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
@@ -129,43 +44,71 @@ export const CategoryDisplayScreen = ({navigation}) => {
           />
           </TouchableOpacity>
         </View>
-        <Text style={styles.text1}>Design</Text>
-        <View style={styles.view1}>
+        <Text style={styles.text1}>{route.params.item.categoryName}</Text>
           <Text style={styles.text2}> Courses to get you started</Text>
-          <View>
-            <CategoryDisplayCourseComponent />
-          </View>
+        <View style={styles.view1}>
+        <FlatList
+          data={basicCourse}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => (
+            <View>
+               <CategoryDisplayCourseComponent 
+              courseName={item?.courseName}
+              chapterCount={item?.chapterCount}
+              courseDuration={item?.courseDuration}
+              courseId = {item?.courseId}
+              coursePhoto = {item?.coursePhoto}
+              previewVideo = {item?.previewVideo}
+              />
+            </View>
+          )}></FlatList>
         </View>
         <View style={styles.view1}>
           <Text style={styles.text2}>Featured courses</Text>
           <View>
-            <CategoryDisplayCourseComponent />
+          <FlatList
+          data={featuredCourse}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) => (
+            <View>
+               <CategoryDisplayCourseComponent 
+              courseName={item?.courseName}
+              chapterCount={item?.chapterCount}
+              courseDuration={item?.courseDuration}
+              courseId = {item?.courseId}
+              coursePhoto = {item?.coursePhoto}
+              previewVideo = {item?.previewVideo}
+              />
+            </View>
+          )}></FlatList>
           </View>
         </View>
-        <View style={styles.view2}>
+        <View >
           <Text style={styles.text2}>Subcategories</Text>
          
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
                  <View style={styles.viewcatin}>
-              {categories.map(item => (
-                <CategoriesComponents category={item.category} />
+              {subCategories?.map(item => (
+                <CategoriesComponents category={item?.subCategoryName} />
               ))}
               </View>
             </ScrollView>
         
         </View>
-        <View style={{marginRight: 34}}>
           <Text style={styles.text2}>All courses</Text>
-          {course.map(item => (
-            <View key={item.id}>
+        <View style={{marginHorizontal:24}}>
+          {allcourse?.map(item => (
+            <View key={item?.courseId}>
               <SearchFoundComponent
-                name={item.courseName}
-                chapter={item.chapters}
-                category={item.category}
-                source={item.source}
-                key={item.id}
+                courseName={item?.courseName}
+                chapterCount={item?.chapterCount}
+                categoryName={item?.categoryName}
+                coursePhoto={item?.coursePhoto}
+                courseId={item?.courseId}
               />
             </View>
           ))}
@@ -177,12 +120,13 @@ export const CategoryDisplayScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    marginLeft: 24,
+    // marginLeft: 24,
   },
   topbar: {
     marginTop: Platform.OS === 'ios' ? 80 : 40,
     justifyContent: 'space-between',
     flexDirection: 'row',
+    marginHorizontal:24
   },
   view1: {
     marginTop: 0,
@@ -194,6 +138,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'wrap',
     display: 'flex',
+    marginLeft: 20,
+
   },
 
   text1: {
@@ -203,6 +149,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#2B2B2B',
     marginTop: 30,
+    marginHorizontal:24,
   },
   text2: {
     fontSize: 18,
@@ -211,5 +158,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#2B2B2B',
     marginTop: 30,
+    marginHorizontal:24,
   },
 });

@@ -55,7 +55,6 @@ export const ChaptersScreen = () => {
   useEffect(() => {
     if (focus == true) {
       apiCall();
-      //  Continue = continueCall();
       continueCall();
     }
   }, [focus]);
@@ -130,7 +129,7 @@ export const ChaptersScreen = () => {
                 )}
 
                 {item?.lessonResponses.map(temp => {
-                  if (temp.completed == true) {
+                  if (temp?.completed == true) {
                     item.disableStatus = true;
                   } else {
                     item.disableStatus = false;
@@ -146,7 +145,7 @@ export const ChaptersScreen = () => {
                         questions={item?.questionCount}
                         rate={item?.chapterTestPercentage}
                         id={item?.testId}
-                        disable={item.disableStatus}
+                        disable={item?.disableStatus}
                         completed={item?.chapterCompletedStatus}
                       />
                     ) : (
@@ -160,13 +159,13 @@ export const ChaptersScreen = () => {
             ))}
           </View>
         </View>
-        {data.courseCompletedStatus ? (
+        {data?.courseCompletedStatus ? (
           <>
             <View style={{backgroundColor: '#042C5C'}}>
               <View style={{margin: 24, marginTop: 30}}>
                 <Text style={styles.courseText}>Course Result</Text>
 
-                <Text style={styles.percentText}>{data.coursePercentage}</Text>
+                <Text style={styles.percentText}>{data?.coursePercentage}</Text>
 
                 <Text style={styles.aprrovalText}>approval rate</Text>
 

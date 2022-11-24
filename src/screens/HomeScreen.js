@@ -29,9 +29,15 @@ import {
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
-import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import {chapterListData} from '../authorization/Auth';
-import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import { chapterListData } from '../authorization/Auth';
+import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+
+import { cdsbasicCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import { cdsAdvanceCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import { cdsAllCourseOfCategory } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import { cdsSubCategories } from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+
 import {VideoPlayer} from '../components/VideoPlayer';
 
 export const HomeScreen = ({navigation}) => {
@@ -139,7 +145,11 @@ export const HomeScreen = ({navigation}) => {
                     img={item?.categoryPhoto}
                     category={item?.categoryName}
                     onPress={() => {
-                      navigation.navigate('CategoryDisplayScreen');
+                      dispatch(cdsbasicCourse({token,id:item?.categoryId}))
+                      dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
+                      dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
+                      dispatch(cdsSubCategories({token,id:item?.categoryId}))
+                      navigation.navigate('CategoryDisplayScreen',{item});
                     }}
                   />
                 </View>

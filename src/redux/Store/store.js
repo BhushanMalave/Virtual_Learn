@@ -13,7 +13,10 @@ import mpUserDetailsReducer  from '../ThunkToolkit/MyProfileApiCall/myProfileUse
 import notificationApiCallReducer from '../ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
 import overViewReducer from '../ThunkToolkit/CourseJoinApi/OverView';
 import searchDataReducer from '../ReduxPersist/searchDataSlice'
-
+import BasicCoursesReducer from '../ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import AdvanceCourseReducer from '../ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import SubCategoriesReducer from '../ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+import AllCourseOfCategoryReducer from '../ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 const persistConfig = {
     key: 'root',
     version: 1,
@@ -32,6 +35,11 @@ const persistConfig = {
     notificationData:notificationApiCallReducer,
     category:overViewReducer,
     searchData:searchDataReducer,
+
+    basicCourse:BasicCoursesReducer,
+    advanceCourse:AdvanceCourseReducer,
+    subCategories:SubCategoriesReducer,
+    allCourseOfCategory:AllCourseOfCategoryReducer,
   });
 
 
