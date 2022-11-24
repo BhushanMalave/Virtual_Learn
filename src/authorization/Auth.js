@@ -111,7 +111,7 @@ export const overViewData = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/courseOverView/${id}`,
+      `https://virtual-learn-app-java.herokuapp.com/user/courseOverView?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -153,7 +153,7 @@ export const chapterListData = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse/${id}`,
+      `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -174,7 +174,7 @@ export const continueApi = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/continue/${id}`,
+      `https://virtual-learn-app-java.herokuapp.com/user/continue?courseId=${id}`,
       options,
     );
     if (response.data) {
