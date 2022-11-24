@@ -32,13 +32,13 @@ export const CourseScreen = ({navigation}) => {
           </TouchableOpacity>
 
           <Text style={styles.maintext}>
-            Learn Figma - UI/UX Design Essential Training
+            {coursedata.courseName}
           </Text>
           <View style={styles.text}>
             <View style={styles.designview}>
-              <Text style={styles.design}>Design</Text>
+              <Text style={styles.design}>{coursedata.categoryName}</Text>
             </View>
-            <Text style={styles.chapter}>7 Chapters | 46 Lessons</Text>
+            <Text style={styles.chapter}>{coursedata.chapterCount} Chapters | {coursedata.lessonCount} Lessons</Text>
           </View>
         </ImageBackground>
       </View>
