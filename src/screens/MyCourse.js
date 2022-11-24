@@ -15,6 +15,7 @@ import { CompletedComponent } from '../components/CompletedComponent';
 import {OnGoingComponent} from '../components/OnGoingComponent';
 import { SearchComponent } from '../components/SearchFoundComponent';
 import MyCourseEmptyScreen from './MyCourseEmptyScreen';
+import { useSelector } from 'react-redux';
 
 const data = [
   {
@@ -41,7 +42,7 @@ export const MyCourse = ({navigation}) => {
   const [clicked2, setClicked2] = useState(false);
 
   const[initial,setInitial]=useState(1)
-
+  const coursedata = useSelector(state => state.courseData.overview);
   return (
     <SafeAreaView style={styles.container}>
       
@@ -49,18 +50,18 @@ export const MyCourse = ({navigation}) => {
           <Pressable onPress={() => navigation.goBack()}>
             <Image source={require('../assets/images/icn_hamburgermenu.png')} />
           </Pressable>
+          <TouchableOpacity onPress={()=>navigation.navigate('HomeSearch')}>
+
           <Image
             source={require('../assets/images/icn_search-Search.png')}
             style={styles.search}
           />
+
+          </TouchableOpacity>
         </View>
         <Text style={styles.header}>My Course</Text>
 
-        {initial === 1?(
-          <>
-          <MyCourseEmptyScreen/>
-          </>
-        ):(
+        {coursedata.enrolled?(
           <>
              <View style={styles.buttontabs}>
           <TouchableOpacity
@@ -119,6 +120,11 @@ export const MyCourse = ({navigation}) => {
               ):(<></>)
             }
 
+          </>
+        ):(
+
+            <>
+          <MyCourseEmptyScreen/>
           </>
         )}
        

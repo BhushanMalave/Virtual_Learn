@@ -26,37 +26,35 @@ import {useSelector, useDispatch} from 'react-redux';
 import {searchData} from '../authorization/Auth';
 import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
- 
+
 export const HomeSearch = ({navigation}) => {
   const [text, setText] = useState('');
-
   const dispatch = useDispatch();
- 
   const token = useSelector(state => state.userDetails.token);
   const categoriesData = useSelector(state => state.categories.data);
   const data = useSelector(state => state.searchData.data);
-  const componentrender =useSelector(state => state.searchData.componentRender);
+  const componentrender = useSelector(
+    state => state.searchData.componentRender,
+  );
 
   const handleText = async string => {
     setText(string);
     const res = await searchData(token, text);
     if (res) {
-       dispatch(setComponentRender(2))  ;
+      dispatch(setComponentRender(2));
       dispatch(setSearchData(res));
     } else {
       dispatch(setComponentRender(3));
     }
-   
-   
+
     // console.log(data);
   };
 
-const call = ( ) => {
-  if(text=== '')
-  {
-    dispatch(setComponentRender(1));
-  }
-}
+  const call = () => {
+    if (text === '') {
+      dispatch(setComponentRender(1));
+    }
+  };
 
   useEffect(() => {
     dispatch(setComponentRender(1));
@@ -136,16 +134,16 @@ const call = ( ) => {
       )}
       {componentrender == 2 && (
         <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 30}}>
-          {data?.map(item => (
-            <SearchFoundComponent
-              coursePhoto={item?.coursePhoto}
-              courseName={item?.courseName}
-              chapterCount={item?.chapterCount}
-              categoryName={item?.categoryName}
-            />
-          ))}
-        </View>
+          <View style={{marginTop: 30}}>
+            {data?.map(item => (
+              <SearchFoundComponent
+                coursePhoto={item?.coursePhoto}
+                courseName={item?.courseName}
+                chapterCount={item?.chapterCount}
+                categoryName={item?.categoryName}
+              />
+            ))}
+          </View>
         </ScrollView>
       )}
 

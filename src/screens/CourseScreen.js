@@ -10,8 +10,14 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
+import { useSelector } from 'react-redux';
 
 export const CourseScreen = ({navigation}) => {
+
+
+  const coursedata = useSelector(state => state.courseData.overview);
+
+  console.log("heyyyy",coursedata)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -26,13 +32,13 @@ export const CourseScreen = ({navigation}) => {
           </TouchableOpacity>
 
           <Text style={styles.maintext}>
-            Learn Figma - UI/UX Design Essential Training
+            {coursedata.courseName}
           </Text>
           <View style={styles.text}>
             <View style={styles.designview}>
-              <Text style={styles.design}>Design</Text>
+              <Text style={styles.design}>{coursedata.categoryName}</Text>
             </View>
-            <Text style={styles.chapter}>7 Chapters | 46 Lessons</Text>
+            <Text style={styles.chapter}>{coursedata.chapterCount} Chapters | {coursedata.lessonCount} Lessons</Text>
           </View>
         </ImageBackground>
       </View>

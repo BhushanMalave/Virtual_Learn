@@ -54,12 +54,9 @@ export const OnBoardingScreen1 = ({navigation}) => {
         <TouchableOpacity>
           <View>
             <TouchableOpacity
-              onPress={async () => {
-               
-                navigation.navigate('Welcome');
-                 // navigation.navigate('Drawer');
-            
-                 
+              onPress={() => {
+                   navigation.navigate('Welcome');
+                // navigation.navigate('Drawer'); 
               }}>
               <Text style={styles.skiptext}>SKIP</Text>
             </TouchableOpacity>
