@@ -350,9 +350,13 @@ export const EditProfile = ({navigation}) => {
                     </>
                   ) : (
                     <>
-                      <View style={styles.form1}></View>
+                     {values.occupation ? (
+                    <View style={styles.form1}></View>
+                  ) : (
+                    <View style={styles.form}></View>
+                  )}
 
-                      {values.gender ? (
+                      {values.occupation ? (
                         <View>
                           <Text style={styles.text}>Occupation</Text>
                         </View>
@@ -368,6 +372,8 @@ export const EditProfile = ({navigation}) => {
                         <TextInput
                           name="occupation"
                           editable={false}
+                          placeholder='Occupation'
+                          placeholderTextColor={'#7A7A7A'}
                           value={values.occupation}
                           style={styles.textinput}
                         />
@@ -376,7 +382,7 @@ export const EditProfile = ({navigation}) => {
                           <Image source={icn_dropdown} />
                         </TouchableOpacity>
                       </View>
-                      {values.gender ? (
+                      {values.occupation ? (
                         <View style={styles.bottom}></View>
                       ) : (
                         <View style={styles.bottom2}></View>
@@ -418,7 +424,11 @@ export const EditProfile = ({navigation}) => {
                     </>
                   ) : (
                     <>
-                      <View style={styles.form1}></View>
+                       {values.gender ? (
+                    <View style={styles.form1}></View>
+                  ) : (
+                    <View style={styles.form}></View>
+                  )}
 
                       {values.gender ? (
                         <View>
@@ -435,6 +445,8 @@ export const EditProfile = ({navigation}) => {
                         }}>
                         <TextInput
                           name="gender"
+                          placeholder='Gender'
+                          placeholderTextColor={'#7A7A7A'}
                           editable={false}
                           value={values.gender}
                           style={styles.textinput}

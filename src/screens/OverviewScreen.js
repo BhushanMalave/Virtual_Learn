@@ -67,6 +67,7 @@ const requirements = [
   },
 ];
 export const OverviewScreen = ({navigation}) => {
+  
   const coursedata = useSelector(state => state.courseData.overview);
   renderTruncatedFooter = handlePress => {
     return (

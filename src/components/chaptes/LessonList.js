@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+// import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 export const LessonList = item => {
   const data = useSelector(state => state.courseData.data);
+  const continueData = useSelector(state => state.courseData.continueData);
   const dispatch = useDispatch();
   return (
     <>
@@ -58,38 +60,45 @@ export const LessonList = item => {
             </View>
           </View>
 
-
           {item.status ? (
             <TouchableOpacity
-            disabled={!data.enrolled}
+              disabled={!item.status}
               onPress={() => {
-                console.log(
-                  " don't set/dispatch status as false in lessons:status  and pressed play",item.videoLink
-                );
-                dispatch(addPlayStatus({id: item.id}))
-              }
-              }>
-                <View style={{marginLeft:-5}}>
-              <Image
-                source={require('../../assets/images/icn_lessonplay_active.png')}
-                style={styles.activePlay}
-              />
-</View>
+                {
+                  continueData
+                    ? (console.log(
+                        'navigate to model page by sendind vedio link, Pause time and lesson id',
+                      ),
+                      dispatch(setPopUpState()))
+                    : console.log(
+                        "Play Vedio and don't set/dispatch status as false in lessons:status",
+                        item.videoLink,
+                        item.id,
+                      );
+                }
+              }}>
+              <View style={{marginLeft: -5}}>
+                <Image
+                  source={require('../../assets/images/icn_lessonplay_active.png')}
+                  style={styles.activePlay}
+                />
+              </View>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-            disabled={!data.enrolled}
-              onPress={
-                () =>{
-                  console.log(' set/dispatch status as true in lessons:status  and pressed play',item.videoLink);
-                dispatch(addPlayStatus({id: item.id}))}
-              }>
-                <View style={{marginLeft:-5}} >
-              <Image
-                source={require('../../assets/images/icn_lessonplay_inactive.png')}
-                style={styles.activePlay}
-              />
-                </View>
+              disabled={!item.status}
+              onPress={() => {
+                console.log(
+                  ' set/dispatch status as true in lessons:status  and pressed play',
+                  item.videoLink,
+                );
+              }}>
+              <View style={{marginLeft: -5}}>
+                <Image
+                  source={require('../../assets/images/icn_lessonplay_inactive.png')}
+                  style={styles.activePlay}
+                />
+              </View>
             </TouchableOpacity>
           )}
         </View>
