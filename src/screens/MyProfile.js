@@ -54,7 +54,7 @@ export const MyProfile = ({navigation}) => {
               />
               <View style={styles.topinfotext}>
                 <Text style={styles.textname}>{userData?.fullName}</Text>
-                <Text style={styles.textdesc}>{userData?.occupations}</Text>
+                <Text style={styles.textdesc}>{userData?.occupation}</Text>
               </View>
             </View>
           </View>
@@ -254,13 +254,13 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   textpvy: {
-    color: ' #042C5C',
+    color: '#042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight: 'bold',
     fontSize: 16,
   },
   textpvy1: {
-    color: ' #7A7A7A',
+    color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     letterSpacing: 0.3,
     fontSize: 13,

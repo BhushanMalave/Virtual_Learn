@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -9,65 +9,26 @@ import {
   Pressable,
   SafeAreaView,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import { setCatData } from '../redux/ReduxPersist/searchDataSlice';
+import { searchCategoriesdata } from '../authorization/Auth';
 
-const categories = [
-  {
-    id: 1,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Design',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Development',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Business',
-  },
-  {
-    id: 4,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Marketing',
-  },
-  {
-    id: 5,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Photography',
-  },
-  {
-    id: 6,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Finance',
-  },
-  {
-    id: 7,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'IT & Software',
-  },
-  {
-    id: 8,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'LifeStyle',
-  },
-  {
-    id: 9,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Music',
-  },
-  {
-    id: 10,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Training',
-  },
-  {
-    id: 11,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Health & Fitness',
-  },
-];
+
+
 export const CategoriesScreen = ({navigation}) => {
+ 
+  const token = useSelector(state => state.userDetails.token);
+  const catData = useSelector(state => state.searchData.catData);
+
+  const call = async () => {
+    const categories = await searchCategoriesdata(token);
+    dispatch(setCatData(categories));
+  };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+     call();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mainheader}>
@@ -85,10 +46,10 @@ export const CategoriesScreen = ({navigation}) => {
       </Text>
 
       <View style={styles.middlecontainer}>
-        {categories.map(item => (
-          <View style={styles.categorycontainer} key={item.id}>
-            <Image source={item.source} style={styles.icon} />
-            <Text style={styles.categorytext}>{item.category}</Text>
+        {catData.map(item => (
+          <View style={styles.categorycontainer} key={item.categoryId}>
+            <Image source={{uri:item?.categoryPhoto}} style={styles.icon} />
+            <Text style={styles.categorytext}>{item.categoryName}</Text>
           </View>
         ))}
       </View>
@@ -160,7 +121,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     // height:20,
-
-    marginBottom: 15,
+    height:38,width:38,
+    marginBottom: 10,
   },
 });
