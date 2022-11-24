@@ -21,7 +21,7 @@ import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenT
 import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
 import {newest, popular, all} from '../authorization/Auth';
 import {hsTopCourses} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
-import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {
   setAllData,
   setNewestData,
@@ -29,10 +29,10 @@ import {
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
-import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { chapterListData } from '../authorization/Auth';
-import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {chapterListData} from '../authorization/Auth';
+import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {VideoPlayer} from '../components/VideoPlayer';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -47,8 +47,11 @@ export const HomeScreen = ({navigation}) => {
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
 
+  const video = (url) => {
+     
+    console.log(url);
 
-
+  };
 
   const allCourse = async () => {
     const data1 = await all(token);
@@ -110,8 +113,6 @@ export const HomeScreen = ({navigation}) => {
               </View>
             )}></FlatList>
         </View>
-
-
 
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
@@ -221,19 +222,21 @@ export const HomeScreen = ({navigation}) => {
                 <View style={styles.btmcourseview}>
                   <TouchableOpacity
                     onPress={async () => {
-                      const res = await overViewData(token,item.courseId);
-                      dispatch(addOverView(res))
-                      
+                      const res = await overViewData(token, item.courseId);
+                      dispatch(addOverView(res));
+
                       // const res = await overViewData(token,item.courseId);
-                      const chapterRes = await chapterListData(token,item.courseId);
-                       console.log("==()==",res);
-                       console.log('+++',chapterRes);
+                      const chapterRes = await chapterListData(
+                        token,
+                        item.courseId,
+                      );
+                      console.log('==()==', res);
+                      console.log('+++', chapterRes);
                       //  if(chapterRes){
-                        //   }
-                           dispatch(addChapterList(chapterRes));
-                        navigation.navigate('CourseScreen');
+                      //   }
+                      dispatch(addChapterList(chapterRes));
+                      navigation.navigate('CourseScreen');
                     }}>
-                
                     <Image
                       source={{uri: item?.coursePhoto}}
                       style={styles.imgview}
@@ -262,10 +265,11 @@ export const HomeScreen = ({navigation}) => {
 
         {topCoursesData?.map(item => (
           <CourseComponent
+            nav={navigation}
             header={item?.categoryName}
             data={item?.popularCourseInEachCategoryList}
             onPress={() => {
-              navigation.navigate('ChoiceCourse');
+           
             }}
           />
         ))}

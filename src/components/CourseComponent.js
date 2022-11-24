@@ -8,22 +8,15 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { VideoPlayer } from './VideoPlayer';
+export const CourseComponent = (props)=> {
 
-const data = [
-  {
-    id: 1,
-    courseName: 'Product UX Design Course Sale hcujwedhuh',
-  },
-  {
-    id: 2,
-    courseName: 'Product UX Design Course Sale',
-  },
-  {
-    id: 3,
-    courseName: 'Product UX Design Course Sale',
-  },
-];
-export const CourseComponent = props => {
+
+  const video = (item) => {
+     
+  props.nav.navigate('VideoPlayer',{item});
+
+  };
   return (
     <View style={styles.businessview}>
       <View style={styles.categoryview}>
@@ -41,14 +34,23 @@ export const CourseComponent = props => {
           renderItem={({item}) => (
             <View>
               <View style={styles.imageContainer}>
-                <TouchableOpacity onPress={()=>console.log('play vedio : -- ',item.previewVideo)} >
-
-                <Image
-                  source={{uri: item?.coursePhoto}}
-                  style={{height: 134, width: 288,borderRadius:5,
-                    overflow:'hidden'}}
-                />
-                <Image source={require('../assets/images/icn_play-play-button2.png')} style={{marginLeft:120,marginTop:-90,}}/>
+                <TouchableOpacity
+                  onPress={() => {
+                    video(item);
+                  }}>
+                  <Image
+                    source={{uri: item?.coursePhoto}}
+                    style={{
+                      height: 134,
+                      width: 288,
+                      borderRadius: 5,
+                      overflow: 'hidden',
+                    }}
+                  />
+                  <Image
+                    source={require('../assets/images/icn_play-play-button2.png')}
+                    style={{marginLeft: 120, marginTop: -90}}
+                  />
                 </TouchableOpacity>
               </View>
 
@@ -57,9 +59,7 @@ export const CourseComponent = props => {
                 <Text style={styles.chapterCount}>
                   {item.chapterCount} Chapter
                 </Text>
-                <Text style={styles.courseDuration}>
-                  {item.courseDuration}
-                </Text>
+                <Text style={styles.courseDuration}>{item.courseDuration}</Text>
               </View>
             </View>
           )}></FlatList>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     marginRight: 25,
   },
 
- imageContainer: {
+  imageContainer: {
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     height: 134,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 25,
     marginTop: 20,
-  // borderWidth:1,
+    // borderWidth:1,
   },
   businessview: {
     height: 223,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     width: 288,
   },
-chapterCount: {
+  chapterCount: {
     fontSize: 12,
     color: '#7A7A7A',
     fontWeight: '300',
