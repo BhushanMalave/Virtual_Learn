@@ -28,9 +28,12 @@ import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 
 export const HomeSearch = ({navigation}) => {
   const [text, setText] = useState('');
-
-  const dispatch = useDispatch();
+  const dispatch =useDispatch();
   const [componentrender, setComponentRender] = useState(1);
+
+
+  // const dispatch = useDispatch();
+  // const [componentrender, setComponentRender] = useState(1);
   const token = useSelector(state => state.userDetails.token);
   const categoriesData = useSelector(state => state.categories.data);
   const data = useSelector(state => state.searchData.data);

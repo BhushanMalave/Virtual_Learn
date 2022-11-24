@@ -7,38 +7,25 @@ import {
   Platform,
   Image,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import ReadMore from 'react-native-read-more-text';
+import {useSelector} from 'react-redux';
 
 const details = [
   {
     id: 1,
-    source: require('../assets/images/icn_includes_duration.png'),
-    description: '3.5 total hours video',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/icn_includes_supportfiles.png'),
-    description: 'Support Files',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/icn_includes_test.png'),
-    description: '6 Modules Test',
-  },
-  {
-    id: 4,
     source: require('../assets/images/icn_includes_lifetime.png'),
     description: 'Full liftetime access',
   },
   {
-    id: 5,
+    id: 2,
     source: require('../assets/images/icn_includes_lifetime.png'),
     description: 'Access on Mobile,desktop, and tv',
   },
   {
-    id: 6,
+    id: 3,
     source: require('../assets/images/icn_includes_certificate.png'),
     description: 'Certificate of Completion',
   },
@@ -80,6 +67,7 @@ const requirements = [
   },
 ];
 export const OverviewScreen = ({navigation}) => {
+  const coursedata = useSelector(state => state.courseData.overview);
   renderTruncatedFooter = handlePress => {
     return (
       <Text
@@ -114,102 +102,125 @@ export const OverviewScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginHorizontal:24}}>
-
-       
-        <Text style={styles.text}>
-          Learn how to design a beautiful and engaging mobile app with Figma.
-          Learn-by-doing approach.
-        </Text>
-        <View style={styles.preview}>
-          <Text style={styles.previewtext}>Preview this course</Text>
-          <View style={styles.videoview}>
-            <Image />
+        <View style={{marginHorizontal: 24}}>
+          <Text style={styles.text}>{coursedata.courseTagLine}</Text>
+          <View style={styles.preview}>
+            <Text style={styles.previewtext}>Preview this course</Text>
+            <View style={styles.videoview}>
+              <Image
+                source={{uri: coursedata?.coursePhoto}}
+                style={{
+                  width: 340,
+                  height: 80,
+                  resizeMode: 'cover',
+                  borderRadius: 5,
+                }}
+              />
+            </View>
           </View>
-        </View>
-        <View style={{marginTop: 20}}>
-          <ReadMore
-            numberOfLines={7}
-            renderTruncatedFooter={renderTruncatedFooter}
-            renderRevealedFooter={renderRevealedFooter}>
-            <Text style={styles.description}>
-              Figma is a very powerful application that runs online. There are
-              virtually no platform boundaries when it comes to using figma
-              because you can design within a web browser or using their desktop
-              application made for windows and macs. Figma is similar to Sketch
-              and Adobe XD but is the more powerful of the three when it comes
-              to Figma is a very powerful application that runs online. There
-              are virtually no platform boundaries when it comes to using figma
-              because you can design within a web browser or using their desktop
-              application made for windows and macs.There are virtually no
-              platform boundaries when it comes to using figma because you can
-              design within a web browser or using their desktop application
-              made for windows and macs.
-            </Text>
-          </ReadMore>
-        </View>
-        <View style={styles.coursecontainer}>
-          <Text style={styles.header}>Course Includes</Text>
-          {details.map(item => (
-            <View style={styles.coursecontent} key={item.id}>
-              <Image source={item.source} />
-              <Text style={styles.coursedescription}>{item.description}</Text>
-            </View>
-          ))}
-        </View>
+          <View style={{marginTop: 20}}>
+            <ReadMore
+              numberOfLines={7}
+              renderTruncatedFooter={renderTruncatedFooter}
+              renderRevealedFooter={renderRevealedFooter}>
+              <Text style={styles.description}>{coursedata?.description}</Text>
+            </ReadMore>
+          </View>
+          <View style={styles.coursecontainer}>
+            <Text style={styles.header}>Course Includes</Text>
 
-        <View style={styles.coursecontainer}>
-          <Text style={styles.header}>What you'll learn</Text>
-          {outcomes.map(item => (
-            <View style={styles.coursecontent} key={item.id}>
-              <Image source={item.source} />
-              <Text style={styles.outcomedescription}>{item.description}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.coursecontainer}>
-          <Text style={styles.header}>Requirements</Text>
-          {requirements.map(item => (
-            <View style={styles.requirecontent} key={item.id}>
-              <Image source={item.source} />
-              <Text style={styles.requiredescription}>{item.description}</Text>
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.instructorview}>
-          <Text style={styles.instructor}>Instructor</Text>
-          <View style={styles.instructorinner}>
-            <Image source={require('../assets/images/img_instructor1.png')} />
-            <View style={styles.textview}>
-              <Text style={styles.name}>Dean Mathew</Text>
-              <Text style={styles.desp}>
-                User Interface teacher www.appledesigntips.com
+            <View style={styles.coursecontent}>
+              <Image
+                source={require('../assets/images/icn_includes_duration.png')}
+              />
+              <Text style={styles.coursedescription}>
+                {coursedata.courseDuration}
               </Text>
             </View>
-          </View>
-          <View style={{marginTop:10}}>
+            <View style={styles.coursecontent}>
+              <Image
+                source={require('../assets/images/icn_includes_supportfiles.png')}
+              />
+              <Text style={styles.coursedescription}>Support Files</Text>
+            </View>
+            <View style={styles.coursecontent}>
+              <Image
+                source={require('../assets/images/icn_includes_supportfiles.png')}
+              />
+              <Text style={styles.coursedescription}>
+                {coursedata.testCount} Modules Test
+              </Text>
+            </View>
 
-          <ReadMore
-            numberOfLines={3}
-            renderTruncatedFooter={renderTruncatedFooter}
-            renderRevealedFooter={renderRevealedFooter}>
-            <Text style={styles.instructordescription}>
-              Back in 2020, I started brainspin with a desire to design
-              compelling and engaging apps. For over 7 years, I have designed
-              many high. Back in 2020, I started brainspin with a desire to design
-              compelling and engaging apps. For over 7 years, I have designed
-              many high.
-            </Text>
-          </ReadMore>
-          </View>
+            {details.map(item => (
+              <View style={styles.coursecontent} key={item.id}>
+                <Image source={item.source} />
+                <Text style={styles.coursedescription}>{item.description}</Text>
+              </View>
+            ))}
           </View>
 
+          <View style={styles.coursecontainer}>
+            <Text style={styles.header}>What you'll learn</Text>
+            {outcomes.map(item => (
+              <View style={styles.coursecontent} key={item.id}>
+                <Image source={item.source} />
+                <Text style={styles.outcomedescription}>
+                  {item.description}
+                </Text>
+              </View>
+            ))}
           </View>
-          <TouchableOpacity
-          style={styles.button}><Text style={styles.buttontext} onPress={() => navigation.navigate('Chapters')}>Join Course</Text>
-          </TouchableOpacity>
+
+          <View style={styles.coursecontainer}>
+            <Text style={styles.header}>Requirements</Text>
+            {requirements.map(item => (
+              <View style={styles.requirecontent} key={item.id}>
+                <Image source={item.source} />
+                <Text style={styles.requiredescription}>
+                  {item.description}
+                </Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={styles.instructorview}>
+            <Text style={styles.instructor}>Instructor</Text>
+            <View style={styles.instructorinner}>
+              <Image
+                source={{uri: coursedata?.profilePhoto}}
+                style={{height: 40, width: 40}}
+              />
+              <View style={styles.textview}>
+                <Text style={styles.name}>{coursedata.instructorName}</Text>
+                <Text style={styles.desp}>{coursedata.url}</Text>
+              </View>
+            </View>
+            <View style={{marginTop: 10}}>
+              <ReadMore
+                numberOfLines={3}
+                renderTruncatedFooter={renderTruncatedFooter}
+                renderRevealedFooter={renderRevealedFooter}>
+                <Text style={styles.instructordescription}>
+                  {coursedata.instructorDescription}
+                </Text>
+              </ReadMore>
+            </View>
+          </View>
+        </View>
+        {coursedata?.enrolled ? (
+          <></>
+        ) : (
+          <>
+            <TouchableOpacity style={styles.button}>
+              <Text
+                style={styles.buttontext}
+                onPress={() => navigation.navigate('Chapters')}>
+                Join Course
+              </Text>
+            </TouchableOpacity>
+          </>
+        )}
       </ScrollView>
     </View>
   );
@@ -219,7 +230,7 @@ const styles = StyleSheet.create({
   container: {
     // margin: 25,
     flex: 1,
-    marginTop:20
+    marginTop: 20,
   },
   text: {
     height: 40,
@@ -244,7 +255,7 @@ const styles = StyleSheet.create({
   },
   videoview: {
     height: 80,
-    borderWidth: 1,
+
     marginTop: 12,
     borderRadius: 5,
   },
@@ -315,7 +326,6 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   instructorview: {
-   
     marginTop: 25,
   },
   instructorinner: {
@@ -352,27 +362,27 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
   },
-  instructordescription:{
+  instructordescription: {
     color: '#2B2B2B',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     fontWeight: '400',
-    letterSpacing:0,
+    letterSpacing: 0,
     lineHeight: 20,
   },
-  button:{
-    height:56,
-    backgroundColor:"#EE5C4D",
-    width:"100%"
+  button: {
+    height: 56,
+    backgroundColor: '#EE5C4D',
+    width: '100%',
   },
-  buttontext:{
+  buttontext: {
     height: 20,
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 20,
-    textAlign:"center",
-    marginTop:15
-  }
+    textAlign: 'center',
+    marginTop: 15,
+  },
 });
