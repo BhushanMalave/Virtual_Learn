@@ -252,3 +252,29 @@ export const joinCourse = async (token, objBody) => {
     console.log(error.response.data);
   }
 };
+
+
+export const SubmitTest = async (token, Body) => {
+  const body = JSON.stringify(Body);
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2NjkzODU5MTAsImV4cCI6MTY2OTM5NDkxMH0.AKu0drpb6JAC5pEHrY_Lj7dhkcFZm4f76W-55pcBk8CBVkkrCzoCrC0NcOH0Hqmac-IviAuAgMivdPr2G4vkWQ',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      'https://virtual-learn-app-java.herokuapp.com/submit',
+      body,
+      options,
+    );
+
+    if (response.data) {
+      console.log('tatatatatta', response.data);
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -17,7 +17,7 @@ return (
         timeLabels={{m:null,s:null}}
         showSeparator
         separatorStyle={{color:"#2BB5F4"}}
-       
+        
         
       />
 

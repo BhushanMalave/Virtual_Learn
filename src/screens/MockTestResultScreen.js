@@ -14,7 +14,7 @@ import { QuestionListComponent } from '../components/QuestionListComponent';
 import { TestBottomPopUp } from '../components/TestBottomPopUp';
 import { setMockstate } from '../redux/ReduxPersist/FilterSlice';
 import { useDispatch,useSelector } from 'react-redux';
-
+import { setCorrectAnswers } from '../redux/ReduxPersist/TestSlice';
 export const MockTestResultScreen = () => {
 
   const dispatch = useDispatch();
@@ -80,7 +80,14 @@ export const MockTestResultScreen = () => {
         }}>
         <Text style={styles.textlist}>List of Questions</Text>
         <View style={{marginTop: 30}}>
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
+
+          
+         <QuestionListComponent state={true} onPress={()=>{
+          // dispatch(setCorrectAnswers(item))
+          dispatch(setMockstate())}}/>
+
+
+
          <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
          <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
          <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
