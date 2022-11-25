@@ -66,7 +66,7 @@ export const Login = ({navigation}) => {
                 password: '',
               }}
               onSubmit={async values => {
-                console.log(values);
+               // console.log(values);
 
                 const obj = {
                   userName: values.username,
@@ -78,7 +78,7 @@ export const Login = ({navigation}) => {
                     'https://virtual-learn-app-java.herokuapp.com/login',
                     obj,
                   );
-                  console.log('=====', response.data);
+                  //console.log('=====', response.data);
                   dispatch(setToken(response.data.jwtToken));
                   dispatch(mpUserDetails(token));
                   console.log('token:', token);

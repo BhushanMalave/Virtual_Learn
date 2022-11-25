@@ -31,7 +31,7 @@ export const CustomDrawerComponent = props => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,marginTop:Platform.OS === 'ios'? -52:-4,}}>
       <DrawerContentScrollView {...props}>
         <ImageBackground
           source={{uri: userData?.profilePhoto}}
@@ -54,7 +54,7 @@ export const CustomDrawerComponent = props => {
           <View style={styles.ViewText}>
             <Image
               source={require('../assets/images/icn_logout_menu.png')}
-              style={{height: 16, width: 15, marginBottom: 0}}
+              style={{height: 16, width: 15, marginBottom: 0,tintColor:'black'}}
             />
             <Text style={styles.textlog}>Logout</Text>
           </View>

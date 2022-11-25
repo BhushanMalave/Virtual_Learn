@@ -22,6 +22,7 @@ import {ButtonComponent} from '../components/Buttons';
 
 import ImagePicker from 'react-native-image-crop-picker';
 import DropDownField from './../components/DropDownField';
+import { changeUserData } from '../authorization/Auth';
 
 const data = {
   fullname: 'Mahendra Singh Dhoni',
@@ -41,9 +42,9 @@ export const EditProfile = ({navigation}) => {
     {key: 'Male', value: 'Male'},
   ];
   const occupationData = [
-    {key: 1, value: 'design'},
-    {key: 2, value: 'development'},
-    {key: 3, value: 'music'},
+    {key: '1', value: 'design'},
+    {key:  '2', value: 'development'},
+    {key: '3', value: 'music'},
   ];
 
   const [selected, setSelected] = useState();
@@ -51,11 +52,11 @@ export const EditProfile = ({navigation}) => {
   const [genderState, serGenderState] = useState(false);
   const [occupationState, setOccupationState] = useState(false);
   const [text, setText] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  const [image, setImage] = useState(userData?.profilePhoto);
+  const [image, setImage] = useState(userData.profilePhoto);
 
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
@@ -187,10 +188,13 @@ export const EditProfile = ({navigation}) => {
                   userName: userData?.userName,
                   occupation: valueOccupation,
                   gender: valueGender,
-                  dateofBirth: values?.dateofbirth,
+                  dateOfBirth: values?.dateofbirth,
                   twtterLink: values?.twitterlink,
                   faceBookLink: values?.facebooklink,
                 });
+                console.log(formBody)
+                // const body = JSON.stringify(formBody);
+                // console.log(body);
                 // const data = {
                 //   profilePhoto: image,
                 //   fullName: userData?.fullName,
@@ -203,11 +207,10 @@ export const EditProfile = ({navigation}) => {
                 //   twtterLink: values.twitterlink,
                 //   faceBookLink: values.facebooklink,
                 // };
-                const res = await mpChangeUserData(token, formBody);
+                const res = await mpChangeUserData(token,formBody);
                 console.log(res);
                 if (res == 200) {
                   // dispatch(setUserData(data));
-
                   navigation.navigate('Profile');
                 }
               }}>
@@ -330,12 +333,12 @@ export const EditProfile = ({navigation}) => {
                       <DropDownField
                         text={data.occupation}
                         name="Occupation"
-                        onChangeText={handleChange('gender')}
-                        onBlur={handleBlur('gender')}
+                        onChangeText={handleChange('occupation')}
+                        onBlur={handleBlur('occupation')}
                         data={occupationData}
                         setSelected={setSelectedOccu}
                         value={selectedOccu}
-                        placeholder="Gender"
+                        placeholder="Occupation"
                       />
 
                       {selectedOccu ? (

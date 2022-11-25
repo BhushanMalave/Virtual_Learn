@@ -124,6 +124,7 @@ export const HomeSearch = ({navigation}) => {
             <View style={styles.viewcatin}>
               {categoriesData.map(item => (
                 <CategoriesComponent
+                 key={item?.categoryId}
                   id={item?.categoryId}
                   img={item?.categoryPhoto}
                   category={item?.categoryName}
@@ -149,6 +150,8 @@ export const HomeSearch = ({navigation}) => {
                 courseName={item?.courseName}
                 chapterCount={item?.chapterCount}
                 categoryName={item?.categoryName}
+                key={item?.courseId}
+                id={item?.courseId}
               />
             ))}
           </View>
@@ -170,6 +173,7 @@ export const HomeSearch = ({navigation}) => {
             <View style={styles.viewcatin}>
               {categoriesData.map(item => (
                 <CategoriesComponent
+                  key={item?.categoryId}
                   id={item?.categoryId}
                   img={item?.categoryPhoto}
                   category={item?.categoryName}
@@ -222,13 +226,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 120,
     marginTop: Platform.OS === 'ios' ? -5 : -5,
+    color:'black'
   },
   textInput: {
     height: 35,
     width: '75%',
     marginLeft: 10,
     marginTop: 2,
-    color: '#',
+   color: '#2B2B2B',
   },
   texttopsearch: {
     fontSize: 18,

@@ -1,5 +1,25 @@
 import axios from 'axios';
 
+export const refreshToken = async (token) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      'https://virtual-learn-app-java.herokuapp.com/refreshToken',
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
 export const all = async token => {
   const options = {
     headers: {
@@ -85,21 +105,45 @@ export const mpChangePassword = async (token, objBody) => {
 };
 
 export const mpChangeUserData = async (token, formBody) => {
+
   try {
     let res = await fetch('https://virtual-learn-app-java.herokuapp.com/save', {
-      method: 'patch',
+      method: 'put',
       body: formBody,
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
       },
     });
-    const jsonResponse = await res.json();
-    console.log(jsonResponse);
+    const jsonResponse =  res;
+    console.log(jsonResponse.message);
     return res.status;
-  } catch (err) {
-    console.log(err);
+    } catch (err) {
+    console.log("-----",err);
   }
 };
+
+export const changeUserData = async (token,formBody) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    },
+  };
+
+  try {
+    const response = await axios.put(
+      'https://virtual-learn-app-java.herokuapp.com/save',
+      formBody,
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+}
 
 export const overViewData = async (token, id) => {
   const options = {
