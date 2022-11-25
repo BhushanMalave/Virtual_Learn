@@ -28,28 +28,6 @@ import { chapterListData } from '../authorization/Auth';
 import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 
-
-
-const data = [
-  {
-    id: 1,
-    source: require('../assets/images/img_mycourse_ongoing1.png'),
-    name: 'Art & Illustration',
-    chapters: '15/20',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/img_mycourse_ongoing1.png'),
-    name: 'User Interface',
-    chapters: '15/20',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/img_mycourse_ongoing1.png'),
-    name: 'Learn Figma - UI/UX Design Essential',
-    chapters: '15/20',
-  },
-];
 export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);

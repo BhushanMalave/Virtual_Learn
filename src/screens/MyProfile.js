@@ -20,7 +20,7 @@ export const MyProfile = ({navigation}) => {
 
   useEffect(() => {
     dispatch(mpUserDetails(token));
-   // console.log(userData);
+    //console.log(userData);
   },[]);
   return (
     <ScrollView>
@@ -72,7 +72,7 @@ export const MyProfile = ({navigation}) => {
           <View style={styles.viewcourseinfoin}>
             <Text style={styles.textno}>{userData?.testsCompleted}</Text>
             <Text style={styles.textcourse}>Test</Text>
-          </View>
+          </View> 
         </View>
         <Text style={styles.textdetails}>Personal Details</Text>
         <View style={styles.viewinfo}>
@@ -97,11 +97,12 @@ export const MyProfile = ({navigation}) => {
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Date of Birth</Text>
-          <Text style={styles.texttitle}>{userData?.dateOfBirth}</Text>
+          <Text style={styles.texttitle}>{userData?.dateOfBirth}</Text> 
         </View>
         <TouchableOpacity
+
           onPress={() => {
-            navigation.navigate('ChangeYourPassword');
+            navigation.navigate('ChangeYourPassword');  
           }}>
           <View style={styles.viewpass}>
             <Image

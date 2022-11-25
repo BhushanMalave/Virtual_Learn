@@ -99,18 +99,16 @@ const styles = StyleSheet.create({
   image: {
     height: 281.19,
     width: '94%',
-    marginTop: 75,
     alignSelf: 'center',
+    marginTop:Platform.OS=='ios'?85:125,
   },
   imageView: {
     // marginHorizontal:10
   },
   textView: {
-    height: Platform.OS === 'ios' ? 70 : 40,
+    height: Platform.OS === 'ios' ? 70 : 110,
     width: '100%',
-    flex: 1,
-
-    marginTop: 85,
+    marginTop:Platform.OS === 'ios' ?  85 : 120,
   },
   text: {
     color: '#2B2B2B',
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
   descriptionview: {
     // borderWidth:1,
     width: '100%',
-    marginTop: 25,
+    marginTop:Platform.OS == 'ios' ? 25 :-20,
   },
   description: {
     height: 85,
