@@ -13,6 +13,11 @@ import mpUserDetailsReducer  from '../ThunkToolkit/MyProfileApiCall/myProfileUse
 import notificationApiCallReducer from '../ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
 import overViewReducer from '../ThunkToolkit/CourseJoinApi/OverView';
 import searchDataReducer from '../ReduxPersist/searchDataSlice'
+// import MyCourseReducer from '../ReduxPersist/MyCourseRedux';
+import myCoursesReducer from '../ThunkToolkit/MyCourses/MyCourseApi';
+import OnGoingReducer  from '../ThunkToolkit/MyCourses/OnGoingApi'
+import CompletedReducer from '../ThunkToolkit/MyCourses/CompletedApi'
+
 
 const persistConfig = {
     key: 'root',
@@ -30,8 +35,15 @@ const persistConfig = {
     courseData: CourseDataReducer,
     userData:mpUserDetailsReducer,
     notificationData:notificationApiCallReducer,
-    category:overViewReducer,
+    // category:overViewReducer,
     searchData:searchDataReducer,
+
+    courses:myCoursesReducer,
+    // MyCourse:MyCourseReducer,
+
+    ongoingcourse:OnGoingReducer,
+    completedcourse:CompletedReducer
+   
   });
 
 

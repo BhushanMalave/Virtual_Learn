@@ -98,6 +98,7 @@ export const BottomPopup = () => {
             <View style={styles.viewcatin}>
               {categories.map(item => (
                 <CategoriesComponent
+                  key={item.id}
                   img={item.source}
                   category={item.category}
                 />

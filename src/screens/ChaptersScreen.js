@@ -31,6 +31,7 @@ export const ChaptersScreen = () => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const data = useSelector(state => state.courseData.data);
+
   const continueData = useSelector(state => state.courseData.continueData);
 
   const continueCall = async () => {
@@ -138,7 +139,7 @@ export const ChaptersScreen = () => {
             ))}
           </View>
         </View>
-        {data.courseCompletedStatus ? (
+        {data?.courseCompletedStatus ? (
           <>
             <View style={{backgroundColor: '#042C5C'}}>
               <View style={{margin: 24, marginTop: 30}}>
@@ -159,6 +160,7 @@ export const ChaptersScreen = () => {
                 <View style={styles.certificateView}>
                   <Image
                     source={require('../assets/images/img_designcoursedetail1_bg.png')}
+                    // source={{uri: courseCompletedStatus?.certificateUrl}}
                     style={styles.certificate}
                   />
                 </View>
@@ -170,7 +172,7 @@ export const ChaptersScreen = () => {
         )}
       </ScrollView>
 
-      {data.enrolled ? (
+      {data?.enrolled ? (
         <></>
       ) : (
         <View style={{bottom: 0}}>

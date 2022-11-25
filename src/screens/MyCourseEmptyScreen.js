@@ -1,66 +1,70 @@
 import React from 'react'
 import { View ,Image,StyleSheet,Text, Platform} from 'react-native'
 import { CategoriesComponent } from '../components/CategoriesComponent';
+import { useSelector } from 'react-redux';
 
 
-const categories = [
-  {
-    id: 1,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Design',
-  },
-  {
-    id: 2,
-  source: require('../assets/images/icn_back_header.png'),
-    category: 'Development',
-  },
-  {
-    id: 3,
-  source: require('../assets/images/icn_back_header.png'),
-    category: 'Business',
-  },
-  {
-    id: 4,
-     source: require('../assets/images/icn_back_header.png'),
-    category: 'Marketing',
-  },
-  {
-    id: 5,
-      source: require('../assets/images/icn_back_header.png'),
-    category: 'Photography',
-  },
-  {
-    id: 6,
-      source: require('../assets/images/icn_back_header.png'),
-    category: 'Finance',
-  },
-  {
-    id: 7,
-     source: require('../assets/images/icn_back_header.png'),
-    category: 'IT & Software',
-  },
-  {
-    id: 8,
-     source: require('../assets/images/icn_back_header.png'),
-    category: 'LifeStyle',
-  },
-  {
-    id: 9,
-     source: require('../assets/images/icn_back_header.png'),
-    category: 'Music',
-  },
-  {
-    id: 10,
-      source: require('../assets/images/icn_back_header.png'),
-    category: 'Training',
-  },
-  {
-    id: 11,
-      source: require('../assets/images/icn_back_header.png'),
-    category: 'Health & Fitness',
-  },
-];
-export default function MyCourseEmptyScreen() {
+
+// const categories = [
+//   {
+//     id: 1,
+//     source: require('../assets/images/icn_back_header.png'),
+//     category: 'Design',
+//   },
+//   {
+//     id: 2,
+//   source: require('../assets/images/icn_back_header.png'),
+//     category: 'Development',
+//   },
+//   {
+//     id: 3,
+//   source: require('../assets/images/icn_back_header.png'),
+//     category: 'Business',
+//   },
+//   {
+//     id: 4,
+//      source: require('../assets/images/icn_back_header.png'),
+//     category: 'Marketing',
+//   },
+//   {
+//     id: 5,
+//       source: require('../assets/images/icn_back_header.png'),
+//     category: 'Photography',
+//   },
+//   {
+//     id: 6,
+//       source: require('../assets/images/icn_back_header.png'),
+//     category: 'Finance',
+//   },
+//   {
+//     id: 7,
+//      source: require('../assets/images/icn_back_header.png'),
+//     category: 'IT & Software',
+//   },
+//   {
+//     id: 8,
+//      source: require('../assets/images/icn_back_header.png'),
+//     category: 'LifeStyle',
+//   },
+//   {
+//     id: 9,
+//      source: require('../assets/images/icn_back_header.png'),
+//     category: 'Music',
+//   },
+//   {
+//     id: 10,
+//       source: require('../assets/images/icn_back_header.png'),
+//     category: 'Training',
+//   },
+//   {
+//     id: 11,
+//       source: require('../assets/images/icn_back_header.png'),
+//     category: 'Health & Fitness',
+//   },
+
+export default function MyCourseEmptyScreen({navigation}) {
+
+  const categoriesData = useSelector(state => state.categories.data);
   return (
     <View>
 
@@ -80,9 +84,15 @@ export default function MyCourseEmptyScreen() {
                 marginLeft: 10,
                 marginTop: 10,
               }}>
-              {categories.map(item => (
-                <CategoriesComponent  img={item.source}
-                  category={item.category}
+              {categoriesData.map(item => (
+                <CategoriesComponent  
+                id={item?.categoryId}
+                img={item?.categoryPhoto}
+                  category={item?.categoryName}
+                  onPress={() => {
+                    navigation.navigate('CategoryDisplayScreen');
+                    
+                  }}
                 />
               ))}
             </View>

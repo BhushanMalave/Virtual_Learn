@@ -90,9 +90,11 @@ export const HomeScreen = ({navigation}) => {
           <FlatList
             data={topHeaderData}
             horizontal={true}
+
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
-              <View style={styles.itemContainer}>
+              <View style={styles.itemContainer}
+              key={item.id}>
                 <ImageBackground
                   source={{uri: item?.coursePhoto}}
                   style={{
@@ -227,8 +229,6 @@ export const HomeScreen = ({navigation}) => {
                     onPress={async () => {
                       const res = await overViewData(token,item.courseId);
                       dispatch(addOverView(res))
-                      
-                      // const res = await overViewData(token,item.courseId);
                       const chapterRes = await chapterListData(token,item.courseId);
                        console.log("==()==",res);
                        console.log('+++',chapterRes);
