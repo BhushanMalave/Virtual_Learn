@@ -10,13 +10,17 @@ import {
 export const OnGoingComponent = props => {
   return (
     <View style={styles.mainContainer}>
-      <ImageBackground source={props.source} style={styles.image}>
+     
+      <ImageBackground source={props.source} style={styles.image} imageStyle={{borderRadius:6}}>
+    <Text style={styles.ongoing}>Ongoing</Text>
         <Text style={styles.name}>{props.name}</Text>
-        <Text style={styles.chapter}>{props.chapters} Chapters</Text>
-        <TouchableOpacity style={styles.contbutton}>
+     
+        <Text style={styles.chapter}>{props.chapter}/{props.ctdchapter} Chapters</Text>
+        <TouchableOpacity style={styles.contbutton} onPress={props.onPress}>
           <Text style={styles.conttext}>Continue</Text>
         </TouchableOpacity>
       </ImageBackground>
+     
     </View>
   );
 };
@@ -25,16 +29,22 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: 140,
     // width:327,
-    borderWidth: 1,
+
     borderRadius: 6,
     // marginTop:20,
     marginBottom: 12,
   },
   image: {
+    height: 140,
     // marginTop:-15
-    flex: 1,
-    width: 380,
-    marginLeft: -20,
+    // flex: 1,
+    // // width: 350,
+    // marginLeft: -20,
+   
+    marginBottom: 12,
+    // resizeMode: 'cover',
+  
+               
   },
   contbutton: {
     height: 26,
@@ -42,7 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 3.4,
     backgroundColor: '#EE5C4D',
     marginTop: 8,
-    marginLeft: 40,
+    marginLeft:15,
   },
   conttext: {
     height: 12,
@@ -65,8 +75,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 20,
-    marginTop: 60,
-    marginLeft: 40,
+    marginTop: 40,
+    marginLeft: 15,
   },
   chapter: {
     height: 15,
@@ -76,6 +86,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
-    marginLeft: 40,
+    marginLeft: 15,
   },
+  ongoing:{
+    height: 15,
+    
+    color: '#FFFFFF',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 12,
+    letterSpacing: 0,
+    lineHeight: 15,
+    marginLeft: 15,
+    fontWeight:"bold",
+    marginTop:5
+  }
 });

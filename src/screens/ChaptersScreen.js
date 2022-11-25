@@ -180,6 +180,7 @@ export const ChaptersScreen = () => {
                 <View style={styles.certificateView}>
                   <Image
                     source={require('../assets/images/img_designcoursedetail1_bg.png')}
+                    // source={{uri: courseCompletedStatus?.certificateUrl}}
                     style={styles.certificate}
                   />
                 </View>
@@ -191,7 +192,7 @@ export const ChaptersScreen = () => {
         )}
       </ScrollView>
 
-      {data.enrolled ? (
+      {data?.enrolled ? (
         <></>
       ) : (
         <View style={{bottom: 0}}>

@@ -122,27 +122,6 @@ export const overViewData = async (token, id) => {
   }
 };
 
-// export const overViewData = async (token, objBody) => {
-//   const body = JSON.stringify(objBody);
-//   try {
-//     let res = await fetch(
-//       'https://virtual-learn-app-java.herokuapp.com/user/CourseOverView',
-//       {
-//         method: 'GET',
-//         body: body,
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       },
-//     );
-//     const jsonResponse = await res.json();
-//     console.log(jsonResponse);
-//     return res.status;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
 export const chapterListData = async (token, id) => {
   const options = {
     headers: {
@@ -242,11 +221,34 @@ export const applySearchFilter = async (token, objBody) => {
       options,
     );
     if (response.data) {
-        return response.data;
+      return response.data;
     }
-  } catch (error) {
-   // console.log(error.response);
+  } catch (err) {
+    console.log(err);
   }
 };
 
+export const joinCourse = async (token, objBody) => {
+  body = objBody;
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
 
+  try {
+    const response = await axios.post(
+      'https://virtual-learn-app-java.herokuapp.com/user/enroll',
+      body,
+      options,
+    );
+
+    if (response.data) {
+      console.log('tatatatatta', response.data);
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
