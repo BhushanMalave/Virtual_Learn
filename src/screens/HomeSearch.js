@@ -26,6 +26,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {searchData} from '../authorization/Auth';
 import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
+import { cdsbasicCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import { cdsAdvanceCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import { cdsAllCourseOfCategory } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import { cdsSubCategories } from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 
 export const HomeSearch = ({navigation}) => {
   const [text, setText] = useState('');
@@ -124,7 +128,11 @@ export const HomeSearch = ({navigation}) => {
                   img={item?.categoryPhoto}
                   category={item?.categoryName}
                   onPress={() => {
-                    // navigation.navigate('CategoryDisplayScreen');
+                    dispatch(cdsbasicCourse({token,id:item?.categoryId}))
+                    dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
+                    dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
+                    dispatch(cdsSubCategories({token,id:item?.categoryId}))
+                    navigation.navigate('CategoryDisplayScreen',{item});
                   }}
                 />
               ))}
