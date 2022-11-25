@@ -21,6 +21,10 @@ import BasicCoursesReducer from '../ThunkToolkit/categoryDisplayScreenApi/BasicC
 import AdvanceCourseReducer from '../ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import SubCategoriesReducer from '../ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 import AllCourseOfCategoryReducer from '../ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+
+import ChapterScreenReducer from '../ThunkToolkit/ChaptersApi/ChapterScreenApi';
+
+
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -49,6 +53,10 @@ const reducer = combineReducers({
   advanceCourse: AdvanceCourseReducer,
   subCategories: SubCategoriesReducer,
   allCourseOfCategory: AllCourseOfCategoryReducer,
+
+
+  chapterResponse: ChapterScreenReducer,
+
 });
 
 const persistRed = persistReducer(persistConfig, reducer);
