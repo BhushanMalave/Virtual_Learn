@@ -7,9 +7,12 @@ import {
   ImageBackground,
   Text,
 } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const SearchFoundComponent = (props) => {
   return (
+    <View style={{marginTop:15}}>
+      <TouchableOpacity onPress={()=>{}} >
     <View style={styles.container} >
       <View style={styles.imageview}>
         <Image
@@ -27,15 +30,14 @@ export const SearchFoundComponent = (props) => {
         </View>
       </View>
     </View>
+      </TouchableOpacity>
+      </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 15,
-
     flexDirection: 'row',
-
     width: '100%',
   },
   imageview: {

@@ -77,15 +77,17 @@ const styles = StyleSheet.create({
     width: 34,
   },
   text2: {
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     fontWeight: 'bold',
     marginLeft: 10,
     marginRight: 30,
+    color: 'black',
   },
   text3: {
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
+   
     color: '#7A7A7A',
     marginLeft: 10,
     marginTop: 8,

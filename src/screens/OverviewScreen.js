@@ -12,7 +12,7 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import ReadMore from 'react-native-read-more-text';
 import {useSelector} from 'react-redux';
-import { joinCourse } from '../authorization/Auth';
+import {joinCourse} from '../authorization/Auth';
 
 const details = [
   {
@@ -70,6 +70,7 @@ const requirements = [
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
   const token = useSelector(state => state.userDetails.token);
+
   renderTruncatedFooter = handlePress => {
     return (
       <Text
@@ -102,16 +103,15 @@ export const OverviewScreen = ({navigation}) => {
     );
   };
 
-  const duration = coursedata?.courseDuration
-  const time = duration.split(":")
+  const duration = coursedata?.courseDuration;
+  const time = duration.split(':');
 
-const hours = Number(time[0])
-const m = time[1]
+  const hours = Number(time[0]);
+  const m = time[1];
 
+  const mins = m / 60;
 
-const mins = m/60
-
-const total_hours = hours+mins
+  const total_hours = hours + mins;
 
   return (
     <View style={styles.container}>
@@ -121,24 +121,29 @@ const total_hours = hours+mins
           <View style={styles.preview}>
             <Text style={styles.previewtext}>Preview this course</Text>
             <View style={styles.videoview}>
-              <TouchableOpacity onPress={()=>{ 
-                
-              {{ coursedata?.previewVideo}}
-                console.log("vcjhdvsjchbdh")
+              <TouchableOpacity
+                onPress={() => {
+                  {
+                    {
+                      coursedata?.previewVideo;
+                    }
+                  }
+                  console.log('vcjhdvsjchbdh');
                 }}>
-
-              <ImageBackground
-                source={{uri: coursedata?.coursePhoto}}
-                style={{
-                  width: 340,
-                  height: 80,
-                  resizeMode: 'cover',
-                  borderRadius: 5,
-                }}
-                imageStyle={{borderRadius: 5}}
-              >
-                <Image source={require('../assets/images/icn_play_orange.png')} style={styles.videobutton}/>
-              </ImageBackground>
+                <ImageBackground
+                  source={{uri: coursedata?.coursePhoto}}
+                  style={{
+                    width: 340,
+                    height: 80,
+                    resizeMode: 'cover',
+                    borderRadius: 5,
+                  }}
+                  imageStyle={{borderRadius: 5}}>
+                  <Image
+                    source={require('../assets/images/icn_play_orange.png')}
+                    style={styles.videobutton}
+                  />
+                </ImageBackground>
               </TouchableOpacity>
             </View>
           </View>
@@ -186,29 +191,24 @@ const total_hours = hours+mins
 
           <View style={styles.coursecontainer}>
             <Text style={styles.header}>What you'll learn</Text>
-            <View style={styles.coursecontent} >
-            <Image source={require('../assets/images/Circle.png')} />
-            {coursedata?.learningOutCome.map(item => (
-              <View key={item.id}>
-                <Text style={styles.outcomedescription}>
-                  {item}
-                </Text>
+            <View style={styles.coursecontent}>
+              <Image source={require('../assets/images/Circle.png')} />
+              {coursedata?.learningOutCome.map(item => (
+                <View key={item.id}>
+                  <Text style={styles.outcomedescription}>{item}</Text>
                 </View>
-            ))}
+              ))}
             </View>
           </View>
 
           <View style={styles.coursecontainer}>
             <Text style={styles.header}>Requirements</Text>
-              <View style={styles.requirecontent}>
-               
-            {coursedata.requirements.map(item => (
-              <View  key={item.id}>
-                <Text style={styles.requiredescription}>
-                • {item}
-                </Text>
+            <View style={styles.requirecontent}>
+              {coursedata.requirements.map(item => (
+                <View key={item.id}>
+                  <Text style={styles.requiredescription}>• {item}</Text>
                 </View>
-            ))}
+              ))}
             </View>
           </View>
 
@@ -240,22 +240,19 @@ const total_hours = hours+mins
           <></>
         ) : (
           <>
-            <TouchableOpacity style={styles.button}
-            
-            onPress={async() => {
-              const objBody ={
-                "courseId":coursedata.courseId,
-                "joinDate":"2022-11-10"
-              }
-              console.log("hvhc",coursedata.courseId)
-              const res = await joinCourse(token,objBody);
-              console.log(res);
-              navigation.navigate('Chapters')}}>
-              <Text
-                style={styles.buttontext}
-                >
-                Join Course
-              </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={async () => {
+                const objBody = {
+                  courseId: coursedata.courseId,
+                  joinDate: '2022-11-10',
+                };
+                console.log('hvhc', coursedata.courseId);
+                const res = await joinCourse(token, objBody);
+                console.log(res);
+                navigation.navigate('Chapters');
+              }}>
+              <Text style={styles.buttontext}>Join Course</Text>
             </TouchableOpacity>
           </>
         )}
@@ -423,7 +420,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 15,
   },
-  videobutton:{
-    margin:15
-  }
+  videobutton: {
+    margin: 15,
+  },
 });

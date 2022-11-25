@@ -15,8 +15,11 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {useRoute} from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 export const CustomDrawerComponent = props => {
+
+  const userData = useSelector(state => state.userData.data);
   const log = () => {
     Alert.alert('', 'Are you sure want to Logout?', [
       {
@@ -31,17 +34,17 @@ export const CustomDrawerComponent = props => {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <ImageBackground
-          source={require('../assets/images/img_profilepic.png')}
+          source={{uri: userData?.profilePhoto}}
           style={styles.backgroundimg}>
           <View style={styles.backgroundImgBlur}>
             <View style={styles.topinfo}>
               <Image
-                source={require('../assets/images/img_profilepic.png')}
+              source={{uri: userData?.profilePhoto}}
                 style={styles.imgprofile}
               />
               <View style={styles.topinfotext}>
-                <Text style={styles.textname}>Mahendra Singh Dhoni</Text>
-                <Text style={styles.textdesc}>Designer</Text>
+                <Text style={styles.textname}>{userData?.fullName}</Text>
+                <Text style={styles.textdesc}>{userData?.occupation}</Text>
               </View>
             </View>
           </View>
@@ -123,4 +126,10 @@ const styles = StyleSheet.create({
     marginLeft: 21,
     marginTop: Platform.OS === 'ios' ? 1 : -3,
   },
+  imgprofile:{
+    height:58,
+    width:58,
+    marginTop:5,
+    borderRadius:6,
+  }
 });

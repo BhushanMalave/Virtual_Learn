@@ -85,38 +85,34 @@ export const mpChangePassword = async (token, objBody) => {
 };
 
 export const mpChangeUserData = async (token, formBody) => {
-  try{
-  let res = await fetch('https://virtual-learn-app-java.herokuapp.com/save', {
-    method: 'patch',
-    body: formBody,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const jsonResponse = await res.json();
-   console.log(jsonResponse);
-  return res.status;
-}catch(err)
-{
-  console.log(err);
-}
+  try {
+    let res = await fetch('https://virtual-learn-app-java.herokuapp.com/save', {
+      method: 'patch',
+      body: formBody,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const jsonResponse = await res.json();
+    console.log(jsonResponse);
+    return res.status;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const overViewData = async (token,id) => {
- 
-const options =  {
-  headers: {
-    Authorization:
-      `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  },
-};
+export const overViewData = async (token, id) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
 
   try {
     const response = await axios.get(
       `https://virtual-learn-app-java.herokuapp.com/user/courseOverView?courseId=${id}`,
       options,
-     
     );
     if (response.data) {
       return response.data;
@@ -126,170 +122,133 @@ const options =  {
   }
 };
 
-// export const overViewData = async (token, objBody) => {
-//   const body = JSON.stringify(objBody);
-//   try {
-//     let res = await fetch(
-//       'https://virtual-learn-app-java.herokuapp.com/user/CourseOverView',
-//       {
-//         method: 'GET',
-//         body: body,
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       },
-//     );
-//     const jsonResponse = await res.json();
-//     console.log(jsonResponse);
-//     return res.status;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-
-export const chapterListData = async (token,id) => {
- 
-  const options =  {
+export const chapterListData = async (token, id) => {
+  const options = {
     headers: {
-      Authorization:
-        `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   };
-  
-    try {
-      const response = await axios.get(
-        `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse?courseId=${id}`,
-        options,
-       
-      );
-      if (response.data) {
-        console.log(response.data)
-        return response.data;
-      }
-    } catch (error) {
-      console.log(error.response.data);
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse?courseId=${id}`,
+      options,
+    );
+    if (response.data) {
+      return response.data;
     }
-  };
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
 
-
-  export const continueApi = async (token,id) => {
- 
-  const options =  {
+export const continueApi = async (token, id) => {
+  const options = {
     headers: {
-      Authorization:
-        `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   };
-  
-    try {
-      const response = await axios.get(
-        `https://virtual-learn-app-java.herokuapp.com/user/continue?courseId=${id}`,
-        options,
-       
-      );
-      if (response.data) {
-        return response.data;
-      }
-    } catch (error) {
-      console.log(error.response.data);
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/continue?courseId=${id}`,
+      options,
+    );
+    if (response.data) {
+      return response.data;
     }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+export const searchData = async (token, string) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
   };
-  export const searchData = async (token,string) => {
- 
-    const options =  {
-      headers: {
-        Authorization:
-          `Bearer ${token}`,
-          'Content-Type': 'application/json',
-      },
-    };
-    
-      try {
-        const response = await axios.get(
-          `https://virtual-learn-app-java.herokuapp.com/user/search/${string}`,
-          options,
-         
-        );
-        // console.log(response.data);
-        if (response.data) {
-          return response.data;
-        }
-      } catch (error) {
-        //console.log(error.response.data);
-      }
-    };
 
-    // export const MyCourseData = async (token) => {
- 
-    //   const options =  {
-    //     headers: {
-    //       Authorization:`Bearer ${token}`, 
-    //       'Content-Type': 'application/json',
-    //     },
-    //   };
-      
-    //     try {
-    //       const response = await axios.get(
-    //         `https://virtual-learn-app-java.herokuapp.com/user/checkMyCourses`,
-    //         options,
-           
-    //       );
-    //       if (response.data) {
-    //         return response.data;
-    //       }
-    //     } catch (error) {
-    //       console.log(error.response.data);
-    //     }
-    //   };
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/search?searchKey=${string}`,
+      options,
+    );
+    // console.log(response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    //console.log(error.response.data);
+  }
+};
 
+export const searchCategoriesdata = async token => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-    // export const OnGoing = async (token) => {
- 
-    //   const options =  {
-    //     headers: {
-    //       Authorization:`Bearer ${token}`, 
-    //       'Content-Type': 'application/json',
-    //     },
-    //   };
-      
-    //     try {
-    //       const response = await axios.get(
-    //         `https://virtual-learn-app-java.herokuapp.com/user/OngoingCourses`,
-    //         options,
-           
-    //       );
-    //       if (response.data) {
-    //         return response.data;
-    //       }
-    //     } catch (error) {
-    //       console.log(error.response.data);
-    //     }
-    //   };
+  try {
+    const response = await axios.get(
+      'https://virtual-learn-app-java.herokuapp.com/user/categoriesWP',
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    export const joinCourse = async (token, objBody) => {
-      body = objBody;
-      const options = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      };
-    
-      try {
-        const response = await axios.post(
-          'https://virtual-learn-app-java.herokuapp.com/user/enroll',
-          body,
-          options,
-        );
-    
-        if (response.data) {
-          console.log("tatatatatta",response.data)
-          return response.data;
-        }
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
+export const applySearchFilter = async (token, objBody) => {
+  body = JSON.stringify(objBody);
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      'https://virtual-learn-app-java.herokuapp.com/user/applyFilter',
+      body,
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const joinCourse = async (token, objBody) => {
+  body = objBody;
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      'https://virtual-learn-app-java.herokuapp.com/user/enroll',
+      body,
+      options,
+    );
+
+    if (response.data) {
+      console.log('tatatatatta', response.data);
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};

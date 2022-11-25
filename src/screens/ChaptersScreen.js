@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useIsFocused} from '@react-navigation/native';
 
 import {
   View,
@@ -19,35 +20,51 @@ import {ModularTest} from '../components/chaptes/ModuleTest';
 import Icon from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 
+
 import {chapterListData} from '../authorization/Auth';
 import {
   addChapterList,
   addContinueData,
+  setPopUpState,
 } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 import {continueApi} from '../authorization/Auth';
+import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 
 export const ChaptersScreen = () => {
+
+
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const data = useSelector(state => state.courseData.data);
 
-  const continueData = useSelector(state => state.courseData.continueData);
-
-  const continueCall = async () => {
-    const cont = await continueApi(token, data?.courseId);
-    dispatch(addContinueData(cont));
-  };
-
   const apiCall = async () => {
     const chapterRes = await chapterListData(token, data?.courseId);
     dispatch(addChapterList(chapterRes));
+    console.log('.....')
   };
 
+  const continueCall = async () => {
+    cont = await continueApi(token, data?.courseId);
+    dispatch(addContinueData(cont));
+  };
+
+  const continueData = useSelector(state => state.courseData.continueData);
+
+  const focus = useIsFocused();
   useEffect(() => {
-    apiCall();
-    continueCall();
-  }, []);
+    if (focus == true) {
+      apiCall();
+      continueCall();
+    }
+  }, [focus]);
+
+  const duration = data?.courseDuration;
+  const b = duration.split(':');
+  const h = Number(b[0]);
+  const m = b[1];
+  const mins = m / 60;
+  const totalHours = h + mins;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,12 +72,16 @@ export const ChaptersScreen = () => {
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.mainView}>
-
-
-          {continueData ? (
+          {!continueData ? (
             <>
               <View style={{marginTop: 29, marginBottom: 30}}>
-                <ButtonComponent text={'Continue Chapter 3 Lesson 21'} />
+                <ButtonComponent
+                  text={'Continue Chapter 3 Lesson 21'}
+                  onPress={() => {
+                    dispatch(setPopUpState())
+                    console.log('navigate to Contiue PopUp')
+                  }}
+                />
               </View>
             </>
           ) : (
@@ -72,8 +93,7 @@ export const ChaptersScreen = () => {
           <View style={styles.contentDetailsView}>
             <Text style={styles.contentDetailsText}>
               {data?.chapterCount} chapters | {data?.lessonCount} lessons |{' '}
-              {data?.testCount} Assignment Test | {data?.courseDuration}h total
-              length
+              {data?.testCount} Assignment Test | {totalHours} h total length
             </Text>
           </View>
 
@@ -93,7 +113,7 @@ export const ChaptersScreen = () => {
                     {item?.lessonResponses.map(item => (
                       <View key={item?.lessonId}>
                         <LessonList
-                          number={item?.number}
+                          number={item?.lessonNumber}
                           name={item?.lessonName}
                           duration={item?.lessonDuration}
                           completed={item?.lessonCompletedStatus}
@@ -109,7 +129,7 @@ export const ChaptersScreen = () => {
                 )}
 
                 {item?.lessonResponses.map(temp => {
-                  if (temp.completed == true) {
+                  if (temp?.completed == true) {
                     item.disableStatus = true;
                   } else {
                     item.disableStatus = false;
@@ -125,7 +145,7 @@ export const ChaptersScreen = () => {
                         questions={item?.questionCount}
                         rate={item?.chapterTestPercentage}
                         id={item?.testId}
-                        disable={item.disableStatus}
+                        disable={item?.disableStatus}
                         completed={item?.chapterCompletedStatus}
                       />
                     ) : (
@@ -145,7 +165,7 @@ export const ChaptersScreen = () => {
               <View style={{margin: 24, marginTop: 30}}>
                 <Text style={styles.courseText}>Course Result</Text>
 
-                <Text style={styles.percentText}>{data.coursePercentage}</Text>
+                <Text style={styles.percentText}>{data?.coursePercentage}</Text>
 
                 <Text style={styles.aprrovalText}>approval rate</Text>
 
@@ -182,6 +202,7 @@ export const ChaptersScreen = () => {
           />
         </View>
       )}
+      <ContinuePopUp />
     </SafeAreaView>
   );
 };

@@ -7,7 +7,6 @@ import { HomeSearch } from '../screens/HomeSearch';
 import { ChoiceYourCourse } from '../screens/ChoiceYourCourse';
 import { CategoryDisplayScreen } from '../screens/CategoryDisplayScreen';
 import { CourseScreen } from '../screens/CourseScreen';
-import MyCourseEmptyScreen from '../screens/MyCourseEmptyScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,12 +42,6 @@ export const HomeStack = () => {
         <Stack.Screen
         name="CourseScreen"
         component={CourseScreen}
-        options={{headerShown: false}}
-      />
-
-      <Stack.Screen
-        name="MyCourseEmptyScreen"
-        component={MyCourseEmptyScreen}
         options={{headerShown: false}}
       />
       

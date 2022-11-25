@@ -13,7 +13,7 @@ import {
 
 export const ButtonComponent = ({text,onPress}) => {
   return (
-    <Pressable onPress ={onPress}style={styles.body}>
+    <Pressable onPress ={onPress} style={styles.body}>
       <View>
         <Text style={styles.text}>{text}</Text>
       </View>
@@ -40,6 +40,15 @@ export const ButtonComponent3 = ({text,onPress}) => {
   );
 };
 
+export const ButtonComponent4 = ({text,onPress}) =>{
+  return (
+    <Pressable onPress ={onPress}style={styles.body3}>
+      <View>
+        <Text style={styles.text}>{text}</Text>
+      </View>
+    </Pressable>
+  );
+}
 const styles = StyleSheet.create({
   body: {
     backgroundColor: '#EE5C4D',
@@ -68,6 +77,11 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth:1,
     borderColor:'#373737',
+  },
+  body3:{
+    backgroundColor: '#042C5C',
+    height: 46,
+    borderRadius: 6,
   },
   text1: {
     textAlign: 'center',

@@ -2,46 +2,48 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-export const notificationApiCall = createAsyncThunk(
-  'notificationData/notificationApiCall ',
-  async token => {
+export const cdsbasicCourse = createAsyncThunk(
+  'basicCourse/cdsbasicCourse',
+  async ({token,id}) => {
     const options = {
       headers:{
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       }
     };
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/notifications',
+        `https://virtual-learn-app-java.herokuapp.com/user/basicCourses?categoryId=${id}`,
         options,
       );
+console.log('+++',response.data)
       return response.data;
     } catch (error) {
-      console.log("===",error);
+      console.log(error);
     }
   },
 );
 
-const notificationApiCallSlice = createSlice({
-  name: 'notificationData',
+const BasicCourseSlice = createSlice({
+  name: 'basicCourse',
   initialState: {
     data:null,
     status: null,
   },
   extraReducers: (builder) => {
     builder
-    .addCase(notificationApiCall .pending ,(state, action) => {
+    .addCase(cdsbasicCourse.pending ,(state, action) => {
       state.status = 'loading';
     })
-    .addCase(notificationApiCall .fulfilled ,(state, action) => {
+    .addCase(cdsbasicCourse.fulfilled ,(state, action) => {
       state.status = 'success';
       state.data = action.payload;
     })
-    .addCase(notificationApiCall .rejected, (state, action) => {
+    .addCase(cdsbasicCourse.rejected, (state, action) => {
       state.status = 'failed';
     })
   },
 });
 
-export default notificationApiCallSlice.reducer;
+export default BasicCourseSlice.reducer;

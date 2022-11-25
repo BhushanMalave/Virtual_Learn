@@ -21,7 +21,7 @@ import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenT
 import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
 import {newest, popular, all} from '../authorization/Auth';
 import {hsTopCourses} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
-import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {
   setAllData,
   setNewestData,
@@ -29,10 +29,16 @@ import {
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
-import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { chapterListData } from '../authorization/Auth';
-import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {chapterListData} from '../authorization/Auth';
+import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
+import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+
+import {VideoPlayer} from '../components/VideoPlayer';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -42,9 +48,14 @@ export const HomeScreen = ({navigation}) => {
 
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const topHeaderData = useSelector(state => state.topHeader.value);
+  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
+  const categoriesData = useSelector(state => state.categories.data);
+  const topCoursesData = useSelector(state => state.topCourses.data);
 
-
-
+  const video = url => {
+    console.log(url);
+  };
 
   const allCourse = async () => {
     const data1 = await all(token);
@@ -62,14 +73,6 @@ export const HomeScreen = ({navigation}) => {
     setClicked3(false);
     allCourse();
   }, []);
-
-  const topHeaderData = useSelector(state => state.topHeader.value);
-  // console.log(topHeaderData)
-  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
-  const categoriesData = useSelector(state => state.categories.data);
-  const topCoursesData = useSelector(state => state.topCourses.data);
-
-  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -90,11 +93,9 @@ export const HomeScreen = ({navigation}) => {
           <FlatList
             data={topHeaderData}
             horizontal={true}
-
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
-              <View style={styles.itemContainer}
-              key={item.id}>
+              <View style={styles.itemContainer} key={item.id}>
                 <ImageBackground
                   source={{uri: item?.coursePhoto}}
                   style={{
@@ -116,8 +117,6 @@ export const HomeScreen = ({navigation}) => {
               </View>
             )}></FlatList>
         </View>
-
-
 
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
@@ -144,7 +143,13 @@ export const HomeScreen = ({navigation}) => {
                     img={item?.categoryPhoto}
                     category={item?.categoryName}
                     onPress={() => {
-                      navigation.navigate('CategoryDisplayScreen');
+                      dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                      dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+                      dispatch(
+                        cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                      );
+                      dispatch(cdsSubCategories({token, id: item?.categoryId}));
+                      navigation.navigate('CategoryDisplayScreen', {item});
                     }}
                   />
                 </View>
@@ -227,17 +232,20 @@ export const HomeScreen = ({navigation}) => {
                 <View style={styles.btmcourseview}>
                   <TouchableOpacity
                     onPress={async () => {
-                      const res = await overViewData(token,item.courseId);
-                      dispatch(addOverView(res))
-                      const chapterRes = await chapterListData(token,item.courseId);
-                       console.log("==()==",res);
-                       console.log('+++',chapterRes);
+                      const res = await overViewData(token, item.courseId);
+                      dispatch(addOverView(res));
+
+                      const chapterRes = await chapterListData(
+                        token,
+                        item.courseId,
+                      );
+                      console.log('==()==', res);
+                      console.log('+++', chapterRes);
                       //  if(chapterRes){
-                        //   }
-                           dispatch(addChapterList(chapterRes));
-                        navigation.navigate('CourseScreen');
+                      //   }
+                      dispatch(addChapterList(chapterRes));
+                      navigation.navigate('CourseScreen');
                     }}>
-                
                     <Image
                       source={{uri: item?.coursePhoto}}
                       style={styles.imgview}
@@ -266,11 +274,10 @@ export const HomeScreen = ({navigation}) => {
 
         {topCoursesData?.map(item => (
           <CourseComponent
+            nav={navigation}
             header={item?.categoryName}
             data={item?.popularCourseInEachCategoryList}
-            onPress={() => {
-              navigation.navigate('ChoiceCourse');
-            }}
+            onPress={() => {}}
           />
         ))}
       </ScrollView>
@@ -298,7 +305,7 @@ const styles = StyleSheet.create({
   },
   toptext: {
     height: 20,
-    color: '#7A7A7As',
+    color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 18,
     letterSpacing: 0,
