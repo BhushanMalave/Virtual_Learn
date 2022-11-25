@@ -12,6 +12,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Pressable,
+  Platform,
 } from 'react-native';
 import {number} from 'yup';
 import {CourseComponent} from '../components/CourseComponent';
@@ -41,6 +42,8 @@ import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/S
 import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 import {VideoPlayer} from '../components/VideoPlayer';
+import { OnGoing } from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
+import { OnGoingComponent } from '../components/OnGoingComponent';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -54,6 +57,7 @@ export const HomeScreen = ({navigation}) => {
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
+  const ongoingdata = useSelector(state=>state.ongoingcourse.data);
 
   const video = url => {
     console.log(url);
@@ -70,6 +74,7 @@ export const HomeScreen = ({navigation}) => {
     dispatch(hsCategories(token));
     dispatch(hsTopCourses(token));
     dispatch(mpUserDetails(token));
+    dispatch(OnGoing(token));
     setClicked1(true);
     setClicked2(false);
     setClicked3(false);
@@ -116,6 +121,27 @@ export const HomeScreen = ({navigation}) => {
                     <Text style={styles.courseText}>{item?.courseName}</Text>
                   </View>
                 </ImageBackground>
+              </View>
+            )}></FlatList>
+        </View>
+        <View>
+          <FlatList
+            data={ongoingdata}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+              <View style={styles.itemContainer} key={item.id}>
+                 <OnGoingComponent source={{uri:item?.coursePhoto}} name={item?.courseName} chapter={item?.completedChapter} ctdchapter={item?.totalChapter} 
+             onPress={async () => {
+              const res = await overViewData(token,item.courseId);
+              dispatch(addOverView(res))
+              const chapterRes = await chapterListData(token,item.courseId);
+              //  console.log("ohoooo",res);
+              //  console.log('eyeye',chapterRes);
+                   dispatch(addChapterList(chapterRes));
+                navigation.navigate('CourseScreen');
+             
+             }}/>
               </View>
             )}></FlatList>
         </View>
@@ -229,10 +255,9 @@ export const HomeScreen = ({navigation}) => {
             <FlatList
               data={choiceYourCourse}
               horizontal={true}
-              key={choiceYourCourse}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
-                <View style={styles.btmcourseview}>
+                <View style={styles.btmcourseview}  key={item?.courseId}>
                   <TouchableOpacity
                     onPress={async () => {
                       const res = await overViewData(token, item.courseId);
@@ -288,7 +313,7 @@ export const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 35,
+    marginTop:Platform.OS === 'ios' ?35: 10,
 
     // borderWidth:1
   },

@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 
 export const OnBoardingScreen2 = ({navigation}) => {
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
   },
   bottomView:{
     flexDirection:"row",
-    marginTop:30,
+    marginTop:Platform.OS === 'ios' ? 40: 100,
     justifyContent:"space-between"
   },
   bottomLineView:{
