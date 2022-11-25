@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { HomeScreen } from '../screens/HomeScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { CategoriesScreen } from '../screens/CategoriesScreen';
-import { HomeSearch } from '../screens/HomeSearch';
-import { ChoiceYourCourse } from '../screens/ChoiceYourCourse';
-import { CategoryDisplayScreen } from '../screens/CategoryDisplayScreen';
-import { CourseScreen } from '../screens/CourseScreen';
+import {HomeScreen} from '../screens/HomeScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {CategoriesScreen} from '../screens/CategoriesScreen';
+import {HomeSearch} from '../screens/HomeSearch';
+import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
+import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
+import {CourseScreen} from '../screens/CourseScreen';
+import {CongratulationScreen} from '../screens/CongratulationScreen';
+import { TestStack } from './TestStack';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { CourseComponent } from '../components/CourseComponent';
 
@@ -16,7 +18,6 @@ const Stack = createNativeStackNavigator();
 
 export const HomeStack = () => {
   return (
- 
     <Stack.Navigator>
       <Stack.Screen
         name="HomeScreen"
@@ -43,7 +44,7 @@ export const HomeStack = () => {
         component={CategoryDisplayScreen}
         options={{headerShown: false}}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="CourseScreen"
         component={CourseScreen}
         options={{headerShown: false}}
@@ -64,9 +65,12 @@ export const HomeStack = () => {
         options={{headerShown: false}}
       />
 
+<Stack.Screen
+name="TestStack"
+          component={TestStack}
+          options={{headerShown: false}}
+        />
       
     </Stack.Navigator>
-   
- 
   );
 };

@@ -48,21 +48,34 @@ const results = [
   },
 ];
 
+const data={
+  questionId: 1,
+  questionName: "What is your name",
+  option_1: "aaa",
+  option_2: "bbb",
+  option_3: "ccc",
+  option_4: "ddd",
+  options: ['aaa', 'bbb', 'ccc', 'ddd'],
+  correctAnswer: "ccc",
+  userAnswer: "ccc",
+  userAnswerStatus: "1"
+  }
 export const TestBottomPopUp = () => {
-  let correctAnswer = results[0]['correctAnswer'];
-  let wrongAnswer = results[0]['userAnswer'];
+  let correctAnswer = data.correctAnswer;
+  let wrongAnswer = data.userAnswer;
   console.log(correctAnswer);
   console.log(wrongAnswer);
 
   const dispatch=useDispatch()
   const mockState = useSelector(state => state.filterState.mockState);
+  const data2=useSelector(state=>state.testdata.correctAnswers);
 
   return (
     
     <Modal
     animationType="fade"
     transparent={true}
-    visible={mockState}
+    visible={true}
     onRequestClose={() => {
       Alert.alert('Modal has been closed.');
       {dispatch(setMockstate())}
@@ -72,33 +85,34 @@ export const TestBottomPopUp = () => {
      
     <View style={styles.modalContainer}>
       <View style={{flexDirection:"row", marginLeft:60}}>
-      <Text style={styles.questionid}>Question{results[0].questionId}</Text>
+      <Text style={styles.questionid}>Question{data?.questionId}</Text>
       <TouchableOpacity onPress={() => {dispatch(setMockstate())}}>
       <Image source={require('../assets/images/icn_close_filter.png')} style={styles.image}/>
       </TouchableOpacity>
       </View>
-      <Text style={styles.questionname}>{results[0].questionName}</Text>
+      <Text style={styles.questionname}>{data?.questionName}</Text>
 
-      {results[0]?.options.map(option => (
+
+      
         <View>
-          {correctAnswer == option ? (
+          {correctAnswer == data?.option_1 ? (
           
             <View style={styles.optioncheckCorrectView}>
               <Image
                 source={require('../assets/images/icn_optionchecked.png')}
                 style={styles.IconChecked}
               />
-              <Text style={styles.optionCheck}>{option}</Text>
+              <Text style={styles.optionCheck}>{data?.option_1}</Text>
             </View>
           ) : (
             <>
-              {wrongAnswer === option ? (
+              {wrongAnswer === data?.option_1 ? (
                 <View style={styles.optionCheckView}>
                   <Image
                     source={require('../assets/images/icn_optionwrong.png')}
                     style={styles.IconChecked}
                   />
-                  <Text style={styles.optionCheck}>{option}</Text>
+                  <Text style={styles.optionCheck}>{data?.option_1}</Text>
                 </View>
               ) : (
                 <View style={styles.optionUncheckView}>
@@ -106,14 +120,121 @@ export const TestBottomPopUp = () => {
                     source={require('../assets/images/icn_optionunchecked.png')}
                     style={styles.IconUnchecked}
                   />
-                  <Text style={styles.optionUncheck}>{option}</Text>
+                  <Text style={styles.optionUncheck}>{data?.option_1}</Text>
                 </View>
               )}
             </>
           )}
         </View>
-      ))}
-      {results[0].userAnswerStatus=== '1' ? (
+  
+
+
+        <View>
+          {correctAnswer == data?.option_2 ? (
+          
+            <View style={styles.optioncheckCorrectView}>
+              <Image
+                source={require('../assets/images/icn_optionchecked.png')}
+                style={styles.IconChecked}
+              />
+              <Text style={styles.optionCheck}>{data?.option_2}</Text>
+            </View>
+          ) : (
+            <>
+              {wrongAnswer === data?.option_2 ? (
+                <View style={styles.optionCheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionwrong.png')}
+                    style={styles.IconChecked}
+                  />
+                  <Text style={styles.optionCheck}>{data?.option_2}</Text>
+                </View>
+              ) : (
+                <View style={styles.optionUncheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionunchecked.png')}
+                    style={styles.IconUnchecked}
+                  />
+                  <Text style={styles.optionUncheck}>{data?.option_2}</Text>
+                </View>
+              )}
+            </>
+          )}
+        </View>
+
+
+
+        <View>
+          {correctAnswer == data?.option_3 ? (
+          
+            <View style={styles.optioncheckCorrectView}>
+              <Image
+                source={require('../assets/images/icn_optionchecked.png')}
+                style={styles.IconChecked}
+              />
+              <Text style={styles.optionCheck}>{data?.option_3}</Text>
+            </View>
+          ) : (
+            <>
+              {wrongAnswer === data?.option_3 ? (
+                <View style={styles.optionCheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionwrong.png')}
+                    style={styles.IconChecked}
+                  />
+                  <Text style={styles.optionCheck}>{data?.option_3}</Text>
+                </View>
+              ) : (
+                <View style={styles.optionUncheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionunchecked.png')}
+                    style={styles.IconUnchecked}
+                  />
+                  <Text style={styles.optionUncheck}>{data?.option_3}</Text>
+                </View>
+              )}
+            </>
+          )}
+        </View>
+
+
+
+        <View>
+          {correctAnswer ==data?.option_4 ? (
+          
+            <View style={styles.optioncheckCorrectView}>
+              <Image
+                source={require('../assets/images/icn_optionchecked.png')}
+                style={styles.IconChecked}
+              />
+              <Text style={styles.optionCheck}>{data?.option_4}</Text>
+            </View>
+          ) : (
+            <>
+              {wrongAnswer === data?.option_4 ? (
+                <View style={styles.optionCheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionwrong.png')}
+                    style={styles.IconChecked}
+                  />
+                  <Text style={styles.optionCheck}>{data?.option_4}</Text>
+                </View>
+              ) : (
+                <View style={styles.optionUncheckView}>
+                  <Image
+                    source={require('../assets/images/icn_optionunchecked.png')}
+                    style={styles.IconUnchecked} 
+                  />
+                  <Text style={styles.optionUncheck}>{data?.option_4}</Text>
+                </View>
+              )}
+            </>
+          )}
+        </View>
+
+
+
+      {data.userAnswerStatus=== '1' ? (
         <View>
           <Text style={styles.status}>Correct Answer</Text>
           </View>

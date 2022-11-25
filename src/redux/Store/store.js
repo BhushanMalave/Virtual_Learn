@@ -21,9 +21,9 @@ import BasicCoursesReducer from '../ThunkToolkit/categoryDisplayScreenApi/BasicC
 import AdvanceCourseReducer from '../ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import SubCategoriesReducer from '../ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 import AllCourseOfCategoryReducer from '../ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
-
+import testdataReducer from '../ReduxPersist/TestSlice';
+import  joinCourseReducer  from '../ReduxPersist/JoinCourseRedux';
 import ChapterScreenReducer from '../ThunkToolkit/ChaptersApi/ChapterScreenApi';
-
 
 const persistConfig = {
   key: 'root',
@@ -53,8 +53,8 @@ const reducer = combineReducers({
   advanceCourse: AdvanceCourseReducer,
   subCategories: SubCategoriesReducer,
   allCourseOfCategory: AllCourseOfCategoryReducer,
-
-
+  joinCourse:joinCourseReducer,
+  testdata:testdataReducer,
   chapterResponse: ChapterScreenReducer,
 
 });

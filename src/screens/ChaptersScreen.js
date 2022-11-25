@@ -192,8 +192,17 @@ const data = useSelector(state => state.chapterResponse.data);
         <View style={{bottom: 0}}>
           <ButtonComponent
             text={'Join Course'}
-            onPress={() => console.log('Join Course Pressed')}
-          />
+            onPress={async () => {
+              const objBody = {
+                courseId: 3,
+                joinDate: '2022-11-10',
+              };
+              console.log('hvhc', coursedata.courseId);
+              const res = await joinCourse(token, objBody);
+              console.log(res);
+              navigation.navigate('Chapters');
+            }}/>
+          
         </View>
       )}
       <ContinuePopUp />
