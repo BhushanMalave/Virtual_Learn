@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import {useSelector} from 'react-redux';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,16 +16,17 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
-
-
+import {PauseTime} from '../authorization/Auth';
+import {useDispatch} from 'react-redux';
 export const LessonVideoPlayer = ({navigation, route}) => {
+  const token = useSelector(state => state.userDetails.token);
+  const data = useSelector(state => state.chapterResponse.data);
+  const dispatch = useDispatch();
   //   console.log('==-=-=-=-', route.params);
-  const url = route.params.item.previewVideo;
-  const title = route.params.item.courseName;
+  const url = route.params.item.videoLink;
+  const title = route.params.item.name;
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
-
-
 
   const timeformat = timesec => {
     const digit = n => (n < 10 ? `0${n}` : `${n}`);
@@ -34,6 +36,14 @@ export const LessonVideoPlayer = ({navigation, route}) => {
     const hr = digit(Math.floor((timesec / 3000) % 60));
     return `${min}:${sec}`;
   };
+  const timeformat1 = timesec => {
+    const digit = n => (n < 10 ? `0${n}` : `${n}`);
+
+    const sec = digit(Math.floor(timesec % 60));
+    const min = digit(Math.floor((timesec / 60) % 60));
+    const hr = digit(Math.floor((timesec / 3000) % 60));
+    return `${hr}:${min}:${sec}`;
+  };
   const videoRef = useRef();
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
@@ -41,10 +51,19 @@ export const LessonVideoPlayer = ({navigation, route}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <Pressable
-        onPress={() => {
-            console.log("====",time.currentTime);
-          navigation.goBack();
-        
+        onPress={ async () => {
+          const body = {
+            pauseTime: timeformat1(time.currentTime),
+            lessonId: route.params.item.lessonId,
+            chapterId: route.params.item.chapterId,
+            courseId: data?.courseId,
+          };
+
+          const res = await PauseTime(token, body);
+          console.log(res)
+          if (res.message == 'Updated SuccessFully') {
+            navigation.goBack();
+          }
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -67,8 +86,7 @@ export const LessonVideoPlayer = ({navigation, route}) => {
         onLoad={data => {
           setTime({...time, endingTime: data.duration});
         }}
-        style={styles.backgroundVideo}>
-        </Video>
+        style={styles.backgroundVideo}></Video>
       <View style={styles.control}>
         <View style={styles.view1}>
           <View style={{flexDirection: 'row'}}>
@@ -89,7 +107,7 @@ export const LessonVideoPlayer = ({navigation, route}) => {
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_pausevideo.png')}
-                style={{height: 16, width: 14, transform:[{rotate:'90 deg'}]}}
+                style={{height: 16, width: 14, transform: [{rotate: '90 deg'}]}}
               />
             </Pressable>
           )}

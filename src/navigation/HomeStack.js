@@ -10,6 +10,8 @@ import { CourseScreen } from '../screens/CourseScreen';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { CourseComponent } from '../components/CourseComponent';
 
+import { LessonVideoPlayer } from '../components/LessonVideoPlayer';
+
 const Stack = createNativeStackNavigator();
 
 export const HomeStack = () => {
@@ -56,6 +58,12 @@ export const HomeStack = () => {
         component={CourseComponent}
         options={{headerShown: false}}
       />
+<Stack.Screen
+        name="LessonVideoPlayer"
+        component={LessonVideoPlayer}
+        options={{headerShown: false}}
+      />
+
       
     </Stack.Navigator>
    

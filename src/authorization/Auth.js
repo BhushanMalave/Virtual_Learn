@@ -122,26 +122,6 @@ export const overViewData = async (token, id) => {
   }
 };
 
-export const chapterListData = async (token, id) => {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  };
-
-  try {
-    const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/courseChapterResponse?courseId=${id}`,
-      options,
-    );
-    if (response.data) {
-      return response.data;
-    }
-  } catch (error) {
-    console.log(error.response.data);
-  }
-};
 
 export const continueApi = async (token, id) => {
   const options = {
@@ -250,5 +230,30 @@ export const joinCourse = async (token, objBody) => {
     }
   } catch (error) {
     console.log(error.response.data);
+  }
+};
+
+
+export const PauseTime = async (token, objBody) => {
+  body = JSON.stringify(objBody);
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.put(
+      'https://virtual-learn-app-java.herokuapp.com/user/pauseTime',
+      body,
+      options,
+    );
+    console.log(response.data)
+    if (response.data) {
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
   }
 };

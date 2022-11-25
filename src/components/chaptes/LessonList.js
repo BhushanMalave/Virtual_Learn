@@ -11,12 +11,17 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import { setPopUpState } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import { ContinuePopUp } from './ContinuePopUp';
 // import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 export const LessonList = item => {
-  const data = useSelector(state => state.courseData.data);
-  const continueData = useSelector(state => state.courseData.continueData);
+  const video = item => {
+    item.nav.navigate('LessonVideoPlayer', {item});
+  };
+  // const data = useSelector(state => state.courseData.data);
+  const data = useSelector(state => state.chapterResponse.data);
+  const continueData = useSelector(state => state.chapterResponse.continueData);
   const dispatch = useDispatch();
   return (
     <>
@@ -65,16 +70,12 @@ export const LessonList = item => {
               disabled={!item.status}
               onPress={() => {
                 {
-                  continueData
+                  !continueData
                     ? (console.log(
                         'navigate to model page by sendind vedio link, Pause time and lesson id',
                       ),
                       dispatch(setPopUpState()))
-                    : console.log(
-                        "Play Vedio and don't set/dispatch status as false in lessons:status",
-                        item.videoLink,
-                        item.id,
-                      );
+                    : (video(item));
                 }
               }}>
               <View style={{marginLeft: -5}}>
@@ -103,6 +104,7 @@ export const LessonList = item => {
           )}
         </View>
       </View>
+          <ContinuePopUp/>
     </>
   );
 };
