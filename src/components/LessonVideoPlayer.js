@@ -15,9 +15,9 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
-import { RotateInDownRight } from 'react-native-reanimated';
 
-export const VideoPlayer = ({navigation, route}) => {
+
+export const LessonVideoPlayer = ({navigation, route}) => {
   //   console.log('==-=-=-=-', route.params);
   const url = route.params.item.previewVideo;
   const title = route.params.item.courseName;
@@ -42,8 +42,9 @@ export const VideoPlayer = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <Pressable
         onPress={() => {
-          console.log("====",time.currentTime);
+            console.log("====",time.currentTime);
           navigation.goBack();
+        
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
