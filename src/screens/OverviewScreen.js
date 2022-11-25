@@ -12,6 +12,7 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import ReadMore from 'react-native-read-more-text';
 import {useSelector} from 'react-redux';
+import {joinCourse} from '../authorization/Auth';
 
 const details = [
   {
@@ -67,8 +68,9 @@ const requirements = [
   },
 ];
 export const OverviewScreen = ({navigation}) => {
-  
   const coursedata = useSelector(state => state.courseData.overview);
+  const token = useSelector(state => state.userDetails.token);
+
   renderTruncatedFooter = handlePress => {
     return (
       <Text
@@ -100,6 +102,17 @@ export const OverviewScreen = ({navigation}) => {
       </Text>
     );
   };
+
+  const duration = coursedata?.courseDuration;
+  const time = duration.split(':');
+
+  const hours = Number(time[0]);
+  const m = time[1];
+
+  const mins = m / 60;
+
+  const total_hours = hours + mins;
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -108,15 +121,30 @@ export const OverviewScreen = ({navigation}) => {
           <View style={styles.preview}>
             <Text style={styles.previewtext}>Preview this course</Text>
             <View style={styles.videoview}>
-              <Image
-                source={{uri: coursedata?.coursePhoto}}
-                style={{
-                  width: 340,
-                  height: 80,
-                  resizeMode: 'cover',
-                  borderRadius: 5,
-                }}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  {
+                    {
+                      coursedata?.previewVideo;
+                    }
+                  }
+                  console.log('vcjhdvsjchbdh');
+                }}>
+                <ImageBackground
+                  source={{uri: coursedata?.coursePhoto}}
+                  style={{
+                    width: 340,
+                    height: 80,
+                    resizeMode: 'cover',
+                    borderRadius: 5,
+                  }}
+                  imageStyle={{borderRadius: 5}}>
+                  <Image
+                    source={require('../assets/images/icn_play_orange.png')}
+                    style={styles.videobutton}
+                  />
+                </ImageBackground>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={{marginTop: 20}}>
@@ -135,7 +163,7 @@ export const OverviewScreen = ({navigation}) => {
                 source={require('../assets/images/icn_includes_duration.png')}
               />
               <Text style={styles.coursedescription}>
-                {coursedata.courseDuration}
+                {total_hours} total hours video
               </Text>
             </View>
             <View style={styles.coursecontent}>
@@ -163,26 +191,25 @@ export const OverviewScreen = ({navigation}) => {
 
           <View style={styles.coursecontainer}>
             <Text style={styles.header}>What you'll learn</Text>
-            {outcomes.map(item => (
-              <View style={styles.coursecontent} key={item.id}>
-                <Image source={item.source} />
-                <Text style={styles.outcomedescription}>
-                  {item.description}
-                </Text>
-              </View>
-            ))}
+            <View style={styles.coursecontent}>
+              <Image source={require('../assets/images/Circle.png')} />
+              {coursedata?.learningOutCome.map(item => (
+                <View key={item.id}>
+                  <Text style={styles.outcomedescription}>{item}</Text>
+                </View>
+              ))}
+            </View>
           </View>
 
           <View style={styles.coursecontainer}>
             <Text style={styles.header}>Requirements</Text>
-            {requirements.map(item => (
-              <View style={styles.requirecontent} key={item.id}>
-                <Image source={item.source} />
-                <Text style={styles.requiredescription}>
-                  {item.description}
-                </Text>
-              </View>
-            ))}
+            <View style={styles.requirecontent}>
+              {coursedata.requirements.map(item => (
+                <View key={item.id}>
+                  <Text style={styles.requiredescription}>• {item}</Text>
+                </View>
+              ))}
+            </View>
           </View>
 
           <View style={styles.instructorview}>
@@ -193,8 +220,8 @@ export const OverviewScreen = ({navigation}) => {
                 style={{height: 40, width: 40}}
               />
               <View style={styles.textview}>
-                <Text style={styles.name}>{coursedata.instructorName}</Text>
-                <Text style={styles.desp}>{coursedata.url}</Text>
+                <Text style={styles.name}>{coursedata?.instructorName}</Text>
+                <Text style={styles.desp}>{coursedata?.url}</Text>
               </View>
             </View>
             <View style={{marginTop: 10}}>
@@ -213,12 +240,19 @@ export const OverviewScreen = ({navigation}) => {
           <></>
         ) : (
           <>
-            <TouchableOpacity style={styles.button}>
-              <Text
-                style={styles.buttontext}
-                onPress={() => navigation.navigate('Chapters')}>
-                Join Course
-              </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={async () => {
+                const objBody = {
+                  courseId: coursedata.courseId,
+                  joinDate: '2022-11-10',
+                };
+                console.log('hvhc', coursedata.courseId);
+                const res = await joinCourse(token, objBody);
+                console.log(res);
+                navigation.navigate('Chapters');
+              }}>
+              <Text style={styles.buttontext}>Join Course</Text>
             </TouchableOpacity>
           </>
         )}
@@ -385,5 +419,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     textAlign: 'center',
     marginTop: 15,
+  },
+  videobutton: {
+    margin: 15,
   },
 });

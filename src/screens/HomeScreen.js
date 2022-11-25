@@ -29,14 +29,14 @@ import {
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
-import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { chapterListData } from '../authorization/Auth';
-import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {chapterListData} from '../authorization/Auth';
+import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
-import { cdsbasicCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
-import { cdsAdvanceCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
-import { cdsAllCourseOfCategory } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
-import { cdsSubCategories } from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 
 import {VideoPlayer} from '../components/VideoPlayer';
 
@@ -53,10 +53,8 @@ export const HomeScreen = ({navigation}) => {
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
 
-  const video = (url) => {
-     
+  const video = url => {
     console.log(url);
-
   };
 
   const allCourse = async () => {
@@ -97,7 +95,7 @@ export const HomeScreen = ({navigation}) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
-              <View style={styles.itemContainer}>
+              <View style={styles.itemContainer} key={item.id}>
                 <ImageBackground
                   source={{uri: item?.coursePhoto}}
                   style={{
@@ -145,11 +143,13 @@ export const HomeScreen = ({navigation}) => {
                     img={item?.categoryPhoto}
                     category={item?.categoryName}
                     onPress={() => {
-                      dispatch(cdsbasicCourse({token,id:item?.categoryId}))
-                      dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
-                      dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
-                      dispatch(cdsSubCategories({token,id:item?.categoryId}))
-                      navigation.navigate('CategoryDisplayScreen',{item});
+                      dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                      dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+                      dispatch(
+                        cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                      );
+                      dispatch(cdsSubCategories({token, id: item?.categoryId}));
+                      navigation.navigate('CategoryDisplayScreen', {item});
                     }}
                   />
                 </View>
@@ -236,7 +236,6 @@ export const HomeScreen = ({navigation}) => {
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
 
-                      // const res = await overViewData(token,item.courseId);
                       const chapterRes = await chapterListData(
                         token,
                         item.courseId,

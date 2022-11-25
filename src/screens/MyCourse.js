@@ -16,6 +16,19 @@ import {OnGoingComponent} from '../components/OnGoingComponent';
 import { SearchComponent } from '../components/SearchFoundComponent';
 import MyCourseEmptyScreen from './MyCourseEmptyScreen';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { MyCourseData, overViewData } from '../authorization/Auth';
+import { myCourses } from '../redux/ThunkToolkit/MyCourses/MyCourseApi';
+import { OnGoing } from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
+import { Completed } from '../redux/ThunkToolkit/MyCourses/CompletedApi';
+
+import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import { chapterListData } from '../authorization/Auth';
+import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+
+
+
 
 const data = [
   {
@@ -41,8 +54,26 @@ export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
 
-  const[initial,setInitial]=useState(1)
+  const[initial,setInitial]=useState(false)
+  const token = useSelector(state => state.userDetails.token);
+ 
+  const mycoursestatus= useSelector(state => state.courses.status);
+  const ongoingdata = useSelector(state=>state.ongoingcourse.data);
+  const completeddata= useSelector(state=>state.completedcourse.data)
+
+
+
+
   const coursedata = useSelector(state => state.courseData.overview);
+
+  const dispatch=useDispatch()
+
+  useEffect(() => {
+    dispatch(myCourses(token));
+    dispatch(OnGoing(token));
+    
+  }, []);
+  
   return (
     <SafeAreaView style={styles.container}>
       
@@ -61,7 +92,7 @@ export const MyCourse = ({navigation}) => {
         </View>
         <Text style={styles.header}>My Course</Text>
 
-        {coursedata.enrolled?(
+        {mycoursestatus?(
           <>
              <View style={styles.buttontabs}>
           <TouchableOpacity
@@ -82,6 +113,7 @@ export const MyCourse = ({navigation}) => {
           <TouchableOpacity
             onPress={() => {
               setClicked2(true), setClicked1(false);
+              dispatch(Completed(token))
             }}>
             {clicked2 ? (
               
@@ -99,21 +131,44 @@ export const MyCourse = ({navigation}) => {
             {clicked1?(
               <>
               <FlatList
-            data={data}
+            data={ongoingdata}
             renderItem={({item})=>(
 
-             <OnGoingComponent source={item.source} name={item.name} chapters={item.chapters}/>
-            )}></FlatList>
+             <OnGoingComponent source={{uri:item?.coursePhoto}} name={item?.courseName} chapter={item?.completedChapter} ctdchapter={item?.totalChapter} 
+             onPress={async () => {
+              const res = await overViewData(token,item.courseId);
+              dispatch(addOverView(res))
+              const chapterRes = await chapterListData(token,item.courseId);
+               console.log("ohoooo",res);
+               console.log('eyeye',chapterRes);
+              
+                   dispatch(addChapterList(chapterRes));
+                navigation.navigate('CourseScreen');
+             
+             }}/>
+            )}>
+
+            </FlatList>
               </>
             ):(<></>)}
             {
               clicked2?(
                 <>
                 <FlatList
-              data={data}
+              data={completeddata}
               renderItem={({item})=>(
   
-               <CompletedComponent source={item.source} name={item.name} chapters={item.chapters}/>
+               <CompletedComponent source={{uri:item?.coursePhoto}} name={item?.courseName} percentage={item?.coursePercentage}
+               onPress={async () => {
+              const res = await overViewData(token,item.courseId);
+              dispatch(addOverView(res))
+              const chapterRes = await chapterListData(token,item.courseId);
+              
+                   dispatch(addChapterList(chapterRes));
+                navigation.navigate('CourseScreen');
+             
+             }}
+               />
               )}></FlatList>
                 </>
 
