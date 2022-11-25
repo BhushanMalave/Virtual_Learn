@@ -12,6 +12,10 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import { setCatData } from '../redux/ReduxPersist/searchDataSlice';
 import { searchCategoriesdata } from '../authorization/Auth';
+import { cdsbasicCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import { cdsAdvanceCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import { cdsAllCourseOfCategory } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import { cdsSubCategories } from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 
 
 
@@ -47,10 +51,19 @@ export const CategoriesScreen = ({navigation}) => {
 
       <View style={styles.middlecontainer}>
         {catData.map(item => (
+          <Pressable    onPress={() => {
+            dispatch(cdsbasicCourse({token,id:item?.categoryId}))
+            dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
+            dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
+            dispatch(cdsSubCategories({token,id:item?.categoryId}))
+            navigation.navigate('CategoryDisplayScreen',{item});
+          }}>
           <View style={styles.categorycontainer} key={item.categoryId}>
             <Image source={{uri:item?.categoryPhoto}} style={styles.icon} />
             <Text style={styles.categorytext}>{item.categoryName}</Text>
           </View>
+          </Pressable>
+
         ))}
       </View>
     </SafeAreaView>

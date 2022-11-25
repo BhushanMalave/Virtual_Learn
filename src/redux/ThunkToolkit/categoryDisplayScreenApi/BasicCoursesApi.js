@@ -17,7 +17,7 @@ export const cdsbasicCourse = createAsyncThunk(
         `https://virtual-learn-app-java.herokuapp.com/user/basicCourses?categoryId=${id}`,
         options,
       );
-console.log('+++',response.data)
+
       return response.data;
     } catch (error) {
       console.log(error);

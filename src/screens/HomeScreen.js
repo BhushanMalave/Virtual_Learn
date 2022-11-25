@@ -227,6 +227,7 @@ export const HomeScreen = ({navigation}) => {
             <FlatList
               data={choiceYourCourse}
               horizontal={true}
+              key={choiceYourCourse}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
                 <View style={styles.btmcourseview}>
@@ -278,10 +279,14 @@ export const HomeScreen = ({navigation}) => {
             nav={navigation}
             header={item?.categoryName}
             data={item?.popularCourseInEachCategoryList}
-            onPress={() => {
-           
-            }}
-          />
+          //   onPress={() => {
+          //     dispatch(cdsbasicCourse({token,id:item?.categoryId}))
+          //     dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
+          //     dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
+          //     dispatch(cdsSubCategories({token,id:item?.categoryId}))
+          //     navigation.navigate('CategoryDisplayScreen',{item});
+          //   }}
+           />
         ))}
       </ScrollView>
     </SafeAreaView>

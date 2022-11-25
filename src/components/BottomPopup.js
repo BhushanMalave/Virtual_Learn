@@ -58,6 +58,7 @@ export const BottomPopup = () => {
    dispatch(setSearchData(res));
    dispatch(setFilterState());
    dispatch(setComponentRender(2));
+   clearAll();
    }
   };
   const clearAll = () => {
