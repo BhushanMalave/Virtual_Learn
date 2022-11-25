@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     lineHeight: 20,
     width: 288,
+    color:'black'
   },
   chapterCount: {
     fontSize: 12,

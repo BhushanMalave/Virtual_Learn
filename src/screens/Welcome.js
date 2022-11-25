@@ -11,21 +11,15 @@ import {
 } from 'react-native';
 import {ButtonComponent, ButtonComponent2} from '../components/Buttons';
 export const WelcomeScreen = ({navigation}) => {
-  
-
-    const nav =() => {
-        navigation.navigate('TermServicesScreen');
-       
-    };
-    const register =() => {
-     
-        navigation.navigate('RegisterStack');
-    };
-    const login = () => {
-        
-        navigation.navigate('LoginStack');
-       
-    }
+  const nav = () => {
+    navigation.navigate('TermServicesScreen');
+  };
+  const register = () => {
+    navigation.navigate('RegisterStack');
+  };
+  const login = () => {
+    navigation.navigate('LoginStack');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -39,19 +33,19 @@ export const WelcomeScreen = ({navigation}) => {
           style={styles.image}
           resizeMode="contain"></Image>
       </View>
-      <View>
+      <View style={{   marginTop: Platform.OS == 'ios' ? 0 : 45,}}>
         <Text style={styles.text1}>Welcome,</Text>
         <Text style={styles.text2}>
           Are you ready to study easily in a virtual way?
         </Text>
       </View>
-  
-      <ButtonComponent text="Login"   onPress={ () => login()  } />
+
+      <ButtonComponent text="Login" onPress={() => login()} />
 
       <Text style={styles.bottomtext}>Or</Text>
-  
-      <ButtonComponent2 text="Register"  onPress={ () =>  register() } />
-   
+
+      <ButtonComponent2 text="Register" onPress={() => register()} />
+
       <View>
         <Text style={styles.bottomview}>
           By creating new account, you agree to our
@@ -61,9 +55,19 @@ export const WelcomeScreen = ({navigation}) => {
             <Text style={styles.bottomlinetext}>Terms of Services</Text>
           </TouchableOpacity>
 
-          <Text> & </Text>
+          <Text
+            style={{
+              color: 'black',
+              fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+              fontSize: 14,
+            }}>
+            {' '}
+            &{' '}
+          </Text>
           <TouchableOpacity
-            onPress={() => {navigation.navigate('PrivacyPolicyScreen')}}>
+            onPress={() => {
+              navigation.navigate('PrivacyPolicyScreen');
+            }}>
             <Text style={styles.bottomlinetext}>Privacy Policy</Text>
           </TouchableOpacity>
         </View>
@@ -95,6 +99,7 @@ const styles = StyleSheet.create({
   },
   imageView: {
     // marginHorizontal:10
+    marginTop: Platform.OS == 'ios' ? 0 : 45,
   },
   text1: {
     height: 35,

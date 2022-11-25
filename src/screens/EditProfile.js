@@ -22,6 +22,9 @@ import {ButtonComponent} from '../components/Buttons';
 
 import ImagePicker from 'react-native-image-crop-picker';
 import DropDownField from './../components/DropDownField';
+import { changeUserData } from '../authorization/Auth';
+
+import {TextInputComp} from '../components/TextInputComp';
 
 const data = {
   fullname: 'Mahendra Singh Dhoni',
@@ -41,9 +44,9 @@ export const EditProfile = ({navigation}) => {
     {key: 'Male', value: 'Male'},
   ];
   const occupationData = [
-    {key: 1, value: 'design'},
-    {key: 2, value: 'development'},
-    {key: 3, value: 'music'},
+    {key: '1', value: 'design'},
+    {key:  '2', value: 'development'},
+    {key: '3', value: 'music'},
   ];
 
   const [selected, setSelected] = useState();
@@ -51,11 +54,11 @@ export const EditProfile = ({navigation}) => {
   const [genderState, serGenderState] = useState(false);
   const [occupationState, setOccupationState] = useState(false);
   const [text, setText] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  const [image, setImage] = useState(userData?.profilePhoto);
+  const [image, setImage] = useState(userData.profilePhoto);
 
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
@@ -126,7 +129,12 @@ export const EditProfile = ({navigation}) => {
               <View style={{alignItems: 'center', marginTop: 30}}>
                 <Image
                   source={{uri: image}}
-                  style={{height: 110, width: 110, marginRight: 40, borderRadius:6,}}
+                  style={{
+                    height: 110,
+                    width: 110,
+                    marginRight: 40,
+                    borderRadius: 6,
+                  }}
                 />
                 <TouchableOpacity
                   onPress={() => changeProfileImageFromCamera()}>
@@ -187,10 +195,13 @@ export const EditProfile = ({navigation}) => {
                   userName: userData?.userName,
                   occupation: valueOccupation,
                   gender: valueGender,
-                  dateofBirth: values?.dateofbirth,
+                  dateOfBirth: values?.dateofbirth,
                   twtterLink: values?.twitterlink,
                   faceBookLink: values?.facebooklink,
                 });
+                console.log(formBody)
+                // const body = JSON.stringify(formBody);
+                // console.log(body);
                 // const data = {
                 //   profilePhoto: image,
                 //   fullName: userData?.fullName,
@@ -203,115 +214,42 @@ export const EditProfile = ({navigation}) => {
                 //   twtterLink: values.twitterlink,
                 //   faceBookLink: values.facebooklink,
                 // };
-                const res = await mpChangeUserData(token, formBody);
+                const res = await mpChangeUserData(token,formBody);
                 console.log(res);
                 if (res == 200) {
                   // dispatch(setUserData(data));
-
                   navigation.navigate('Profile');
                 }
               }}>
               {({handleChange, handleBlur, handleSubmit, values, errors}) => (
                 <View>
-                  {values.fullname ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.fullname ? (
-                      <View>
-                        <Text style={styles.text}>FullName</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="fullname"
+                  <TextInputComp
+                    name={'fullname'}
                     editable={false}
                     value={values.fullname}
-                    style={styles.textinput}></TextInput>
-                  {values.fullname ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                    text="Full Name"
+                  />
 
-                  {values.username ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.username ? (
-                      <View>
-                        <Text style={styles.text}>Username</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="username"
+                  <TextInputComp
+                    name={'username'}
                     editable={false}
                     value={values.username}
-                    style={styles.textinput}></TextInput>
-                  {values.username ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                    text="User Name"
+                  />
 
-                  {values.email ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.email ? (
-                      <View>
-                        <Text style={styles.text}>Email</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="email"
+                  <TextInputComp
+                    name={'email'}
                     editable={false}
                     value={values.email}
-                    style={styles.textinput}></TextInput>
-                  {values.email ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                    text="Email"
+                  />
 
-                  {values.mobilenumber ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.mobilenumber ? (
-                      <View>
-                        <Text style={styles.text}>Moblie Number</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="mobilenumber"
+                  <TextInputComp
+                    name={'mobilenumber'}
                     editable={false}
                     value={values.mobilenumber}
-                    style={styles.textinput}></TextInput>
-                  {values.mobilenumber ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                    text="Moblie Number"
+                  />
 
                   {occupationState ? (
                     <>
@@ -330,12 +268,12 @@ export const EditProfile = ({navigation}) => {
                       <DropDownField
                         text={data.occupation}
                         name="Occupation"
-                        onChangeText={handleChange('gender')}
-                        onBlur={handleBlur('gender')}
+                        onChangeText={handleChange('occupation')}
+                        onBlur={handleBlur('occupation')}
                         data={occupationData}
                         setSelected={setSelectedOccu}
                         value={selectedOccu}
-                        placeholder="Gender"
+                        placeholder="Occupation"
                       />
 
                       {selectedOccu ? (
@@ -346,11 +284,11 @@ export const EditProfile = ({navigation}) => {
                     </>
                   ) : (
                     <>
-                     {values.occupation ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
+                      {values.occupation ? (
+                        <View style={styles.form1}></View>
+                      ) : (
+                        <View style={styles.form}></View>
+                      )}
 
                       {values.occupation ? (
                         <View>
@@ -368,7 +306,7 @@ export const EditProfile = ({navigation}) => {
                         <TextInput
                           name="occupation"
                           editable={false}
-                          placeholder='Occupation'
+                          placeholder="Occupation"
                           placeholderTextColor={'#7A7A7A'}
                           value={values.occupation}
                           style={styles.textinput}
@@ -420,11 +358,11 @@ export const EditProfile = ({navigation}) => {
                     </>
                   ) : (
                     <>
-                       {values.gender ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
+                      {values.gender ? (
+                        <View style={styles.form1}></View>
+                      ) : (
+                        <View style={styles.form}></View>
+                      )}
 
                       {values.gender ? (
                         <View>
@@ -441,7 +379,7 @@ export const EditProfile = ({navigation}) => {
                         }}>
                         <TextInput
                           name="gender"
-                          placeholder='Gender'
+                          placeholder="Gender"
                           placeholderTextColor={'#7A7A7A'}
                           editable={false}
                           value={values.gender}
@@ -458,90 +396,33 @@ export const EditProfile = ({navigation}) => {
                       )}
                     </>
                   )}
-
-                  {values.dateofbirth ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.dateofbirth ? (
-                      <View>
-                        <Text style={styles.text}>Date Of Birth</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="dateofbirth"
+                  <TextInputComp
+                    name={'dateofbirth'}
+                    value={values.dateofbirth}
+                    text="Date Of Birth"
                     placeholder="Date Of Birth"
                     placeholderTextColor={'#7A7A7A'}
                     onChangeText={handleChange('dateofbirth')}
-                    // onBlur={handleBlur('username')}
-                    value={values.dateofbirth}
-                    style={styles.textinput}></TextInput>
-                  {values.dateofbirth ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                  />
 
-                  {values.twitterlink ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.twitterlink ? (
-                      <View>
-                        <Text style={styles.text}>Twitter Link</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="twitterlink"
+                  <TextInputComp
+                    name={'twitterlink'}
+                    value={values.twitterlink}
+                    text="Twitter Link"
                     placeholder="Twitter Link"
                     placeholderTextColor={'#7A7A7A'}
                     onChangeText={handleChange('twitterlink')}
-                    // onBlur={handleBlur('username')}
-                    value={values.twitterlink}
-                    style={styles.textinput}></TextInput>
-                  {values.twitterlink ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                  />
 
-                  {values.facebooklink ? (
-                    <View style={styles.form1}></View>
-                  ) : (
-                    <View style={styles.form}></View>
-                  )}
-                  <>
-                    {values.facebooklink ? (
-                      <View>
-                        <Text style={styles.text}>Facebook Link</Text>
-                      </View>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                  <TextInput
-                    name="facebooklink"
-                    placeholder="FacebookLink"
+                  <TextInputComp
+                    name={'facebooklink'}
+                    value={values.facebooklink}
+                    text="Facebook Link"
+                    placeholder="Facebook Link"
                     placeholderTextColor={'#7A7A7A'}
                     onChangeText={handleChange('facebooklink')}
-                    // onBlur={handleBlur('username')}
-                    value={values.facebooklink}
-                    style={styles.textinput}></TextInput>
-                  {values.facebooklink ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                  />
+
                   <View style={styles.buttonContainer}>
                     <ButtonComponent
                       text={'Submit'}

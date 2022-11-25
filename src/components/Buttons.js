@@ -9,44 +9,46 @@ import {
   Text,
   useColorScheme,
   View,
+  TouchableOpacity
 } from 'react-native';
+
 
 export const ButtonComponent = ({text,onPress}) => {
   return (
-    <Pressable onPress ={onPress} style={styles.body}>
+    <TouchableOpacity onPress ={onPress} style={styles.body}>
       <View>
         <Text style={styles.text}>{text}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 export const ButtonComponent2 = ({text,onPress}) => {
   return (
-    <Pressable onPress ={onPress}style={styles.body1}>
+    <TouchableOpacity onPress ={onPress}style={styles.body1}>
       <View>
         <Text style={styles.text1}>{text}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
 export const ButtonComponent3 = ({text,onPress}) => {
   return (
-    <Pressable onPress ={onPress}style={styles.body2}>
+    <TouchableOpacity onPress ={onPress}style={styles.body2}>
       <View>
         <Text style={styles.text2}>{text}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
 export const ButtonComponent4 = ({text,onPress}) =>{
   return (
-    <Pressable onPress ={onPress}style={styles.body3}>
+    <TouchableOpacity onPress ={onPress}style={styles.body3}>
       <View>
         <Text style={styles.text}>{text}</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({

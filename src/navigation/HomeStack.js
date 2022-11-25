@@ -9,6 +9,10 @@ import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {CongratulationScreen} from '../screens/CongratulationScreen';
 import { TestStack } from './TestStack';
+import { VideoPlayer } from '../components/VideoPlayer';
+import { CourseComponent } from '../components/CourseComponent';
+
+import { LessonVideoPlayer } from '../components/LessonVideoPlayer';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,10 +50,27 @@ export const HomeStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-          name="TestStack"
+        name="VideoPlayer"
+        component={VideoPlayer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CourseComponent"
+        component={CourseComponent}
+        options={{headerShown: false}}
+      />
+<Stack.Screen
+        name="LessonVideoPlayer"
+        component={LessonVideoPlayer}
+        options={{headerShown: false}}
+      />
+
+<Stack.Screen
+name="TestStack"
           component={TestStack}
           options={{headerShown: false}}
         />
+      
     </Stack.Navigator>
   );
 };

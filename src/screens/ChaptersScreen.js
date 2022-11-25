@@ -21,45 +21,36 @@ import Icon from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 
 
-import {chapterListData} from '../authorization/Auth';
-import {
-  addChapterList,
-  addContinueData,
-  setPopUpState,
-} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-
 import {continueApi} from '../authorization/Auth';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
+import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
-export const ChaptersScreen = () => {
+import { setPopUpState,addContinueData } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+
+export const ChaptersScreen = ({navigation}) => {
 
 
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
-  const data = useSelector(state => state.courseData.data);
-
-  const apiCall = async () => {
-    const chapterRes = await chapterListData(token, data?.courseId);
-    dispatch(addChapterList(chapterRes));
-    console.log('.....')
-  };
+const data = useSelector(state => state.chapterResponse.data);
 
   const continueCall = async () => {
     cont = await continueApi(token, data?.courseId);
     dispatch(addContinueData(cont));
   };
 
-  const continueData = useSelector(state => state.courseData.continueData);
+  const continueData = useSelector(state => state.chapterResponse.continueData);
 
   const focus = useIsFocused();
   useEffect(() => {
     if (focus == true) {
-      apiCall();
+      dispatch(csChapterResponse({token, id: data?.courseId}));
       continueCall();
     }
   }, [focus]);
 
-  const duration = data?.courseDuration;
+
+ const duration = data?.courseDuration;
   const b = duration.split(':');
   const h = Number(b[0]);
   const m = b[1];
@@ -72,7 +63,7 @@ export const ChaptersScreen = () => {
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.mainView}>
-          {!continueData ? (
+          {continueData ? (
             <>
               <View style={{marginTop: 29, marginBottom: 30}}>
                 <ButtonComponent
@@ -98,19 +89,20 @@ export const ChaptersScreen = () => {
           </View>
 
           <View style={styles.chapterListContainer}>
-            {data?.chapterResponses.map(item => (
-              <View key={item?.chapterId}>
+            {data?.chapterResponses.map(item1 => (
+              <View key={item1?.chapterId}>
                 <ChapterList
-                  number={item?.chapterNumber}
-                  name={item?.chapterName}
-                  chapterStatus={item?.chapterStatus}
-                  completed={item?.chapterCompletedStatus}
-                  id={item?.chapterId}
+                chapterId={item1?.chapterId}
+                  number={item1?.chapterNumber}
+                  name={item1?.chapterName}
+                  chapterStatus={item1?.chapterStatus}
+                  completed={item1?.chapterCompletedStatus}
+                  id={item1?.chapterId}
                 />
 
-                {item?.chapterStatus ? (
+                {item1?.chapterStatus ? (
                   <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                    {item?.lessonResponses.map(item => (
+                    {item1?.lessonResponses.map(item => (
                       <View key={item?.lessonId}>
                         <LessonList
                           number={item?.lessonNumber}
@@ -118,8 +110,10 @@ export const ChaptersScreen = () => {
                           duration={item?.lessonDuration}
                           completed={item?.lessonCompletedStatus}
                           status={item?.lessonStatus}
-                          id={item?.lessonId}
+                          lessonId={item?.lessonId}
                           videoLink={item?.videoLink}
+                          nav={navigation}
+                          chapterId={item1?.chapterId}
                         />
                       </View>
                     ))}
@@ -128,25 +122,25 @@ export const ChaptersScreen = () => {
                   <></>
                 )}
 
-                {item?.lessonResponses.map(temp => {
+                {item1?.lessonResponses.map(temp => {
                   if (temp?.completed == true) {
-                    item.disableStatus = true;
+                    item1.disableStatus = true;
                   } else {
-                    item.disableStatus = false;
+                    item1.disableStatus = false;
                   }
                 })}
 
-                {item?.chapterStatus ? (
+                {item1?.chapterStatus ? (
                   <>
-                    {item.testId ? (
+                    {item1.testId ? (
                       <ModularTest
-                        test={item?.testName}
-                        duration={item?.testDuration}
-                        questions={item?.questionCount}
-                        rate={item?.chapterTestPercentage}
-                        id={item?.testId}
-                        disable={item?.disableStatus}
-                        completed={item?.chapterCompletedStatus}
+                        test={item1?.testName}
+                        duration={item1?.testDuration}
+                        questions={item1?.questionCount}
+                        rate={item1?.chapterTestPercentage}
+                        id={item1?.testId}
+                        disable={item1?.disableStatus}
+                        completed={item1?.chapterCompletedStatus}
                       />
                     ) : (
                       <></>
