@@ -24,11 +24,11 @@ export const hsTopHeaders = createAsyncThunk(
       return response.data;
     } catch (error) {
      // console.log(error);
-      if(error.response.status){
-          const res = await refreshToken(token);
-          console.log("=========",res.jwt);
-          setToken(res.jwt);
-      }
+      // if(error.response.status){
+      //     const res = await refreshToken(token);
+      //     console.log("=========",res.jwt);
+      //     setToken(res.jwt);
+      // }
     }
   },
 );
