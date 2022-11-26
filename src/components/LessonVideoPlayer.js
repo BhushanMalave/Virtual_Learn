@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
+import Orientation from 'react-native-orientation-locker';
 
 
 export const LessonVideoPlayer = ({navigation, route}) => {
@@ -23,7 +24,7 @@ export const LessonVideoPlayer = ({navigation, route}) => {
   const title = route.params.item.courseName;
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
-
+  const [fullScreen, setFullScreen] = useState(false);
 
 
   const timeformat = timesec => {
@@ -33,6 +34,14 @@ export const LessonVideoPlayer = ({navigation, route}) => {
     const min = digit(Math.floor((timesec / 60) % 60));
     const hr = digit(Math.floor((timesec / 3000) % 60));
     return `${min}:${sec}`;
+  };
+  const FullScreen = () => {
+    if (fullScreen) {
+      Orientation.lockToPortrait();
+    } else {
+      Orientation.lockToLandscape();
+    }
+    setFullScreen(!fullScreen);
   };
   const videoRef = useRef();
   const handleslide = value => {
@@ -52,12 +61,14 @@ export const LessonVideoPlayer = ({navigation, route}) => {
         />
       </Pressable>
       <Video
-        ref={videoRef}
+         controls={false}
+         ref={videoRef}
+         resizeMode='contain'
         source={{
           uri: url,
         }}
         paused={isPlaying}
-        fullscreen={true}
+        fullscreen={fullScreen}
         onEnd={() => {
           navigation.goBack();
         }}
@@ -67,8 +78,8 @@ export const LessonVideoPlayer = ({navigation, route}) => {
         onLoad={data => {
           setTime({...time, endingTime: data.duration});
         }}
-        style={styles.backgroundVideo}>
-        </Video>
+        style={fullScreen ? styles.fullscreenVideo : styles.backgroundVideo}
+      />
       <View style={styles.control}>
         <View style={styles.view1}>
           <View style={{flexDirection: 'row'}}>
@@ -113,6 +124,9 @@ const styles = StyleSheet.create({
   backgroundVideo: {
     flex: 1,
   },
+  fullscreenVideo: {
+    flex: 1,
+  },
   imgback: {
     height: 14,
     width: 22,
@@ -122,7 +136,7 @@ const styles = StyleSheet.create({
   },
   control: {
     backgroundColor: '#2B2B2B',
-    height: Platform.OS === 'ios' ? 120 : 90,
+    height: Platform.OS === 'ios' ? 100 : 90,
   },
   view1: {
     flexDirection: 'row',

@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   bottomView:{
     flexDirection:"row",
-    marginTop:Platform.OS === 'ios' ? 40: 100,
+    marginTop:Platform.OS === 'ios' ? 40: 10,
     justifyContent:"space-between"
   },
   bottomLineView:{
