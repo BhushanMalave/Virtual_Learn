@@ -43,6 +43,7 @@ export const VideoPlayer = ({navigation, route}) => {
     return `${min}:${sec}`;
   };
   const videoRef = useRef();
+
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
   };
@@ -50,8 +51,10 @@ export const VideoPlayer = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <Pressable
         onPress={() => {
-          console.log('====', time.currentTime);
+          //console.log('====', time.currentTime);
+          Orientation.lockToPortrait();
           navigation.goBack();
+        
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -60,13 +63,14 @@ export const VideoPlayer = ({navigation, route}) => {
       </Pressable>
 
       <Video
-        controls={false}
+        muted={false}
         ref={videoRef}
         resizeMode={fullScreen ? 'cover' : 'contain'}
         source={{
           uri: url,
         }}
         paused={isPlaying}
+        controls={false}
         fullscreen={fullScreen}
         onEnd={() => {
           navigation.goBack();
@@ -113,7 +117,8 @@ export const VideoPlayer = ({navigation, route}) => {
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={v => handleslide(v)}
+           // onValueChange={(value) => { handleslide(value)}}
+           //onValueChange={value => { videoRef.current.seek(value * time.endingTime); }}
           />
         </View>
       </View>
