@@ -56,7 +56,9 @@ export const LessonVideoPlayer = ({navigation, route}) => {
           const res = await PauseTime(token, body);
           console.log(res)
           if (res.message == 'Updated SuccessFully') {
+            Orientation.lockToPortrait();
             navigation.goBack();
+            
           }
         }}>
         <Image
@@ -90,8 +92,11 @@ export const LessonVideoPlayer = ({navigation, route}) => {
             <Text style={styles.text1}>{timeformat(time.currentTime)}</Text>
             <Text style={styles.text2}>{title}</Text>
           </View>
+          <Pressable onPress={() => FullScreen()}>
           <Image source={require('../assets/images/icn_maximise.png')} />
+          </Pressable>
         </View>
+      
         <View style={styles.view2}>
           {isPlaying ? (
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
@@ -116,7 +121,7 @@ export const LessonVideoPlayer = ({navigation, route}) => {
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={v => handleslide(v)}
+           // onValueChange={v => handleslide(v)}
           />
         </View>
       </View>

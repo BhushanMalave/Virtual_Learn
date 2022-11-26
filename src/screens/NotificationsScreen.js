@@ -23,6 +23,11 @@ export const NotificationsScreen = ({navigation}) => {
 
   const notificationData = useSelector(state => state.notificationData.data);
   const token = useSelector(state => state.userDetails.token);
+
+ 
+
+
+
   useEffect(() => {
     dispatch(notificationApiCall(token));
     // console.log(notificationData)
@@ -52,7 +57,7 @@ export const NotificationsScreen = ({navigation}) => {
             desc={items.description}
             img={items.notificationUrl}
             time={items.timeStamp}
-            onPress={async () => {
+            notify={ async () => {
               const body = {
                 notificationId: items.notificationId,
               };
@@ -68,7 +73,7 @@ export const NotificationsScreen = ({navigation}) => {
                   body,
                   options,
                 );
-                 console.log(response.data)
+                // console.log(response.data)
                 if (response.data) {
                   return response.data;
                 }

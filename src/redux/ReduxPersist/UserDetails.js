@@ -17,6 +17,7 @@ export const UserDetailsSlice = createSlice({
     name: 'userDetails',
     initialState: {
      token:null,
+     newUser:true,
      userData:null,
     },
     reducers: {
@@ -26,6 +27,9 @@ export const UserDetailsSlice = createSlice({
       },
       setUserData: (state,action) => {
         state.userData = action.payload;
+      },
+      setNewUser: (state,action) => {
+        state.newUser = action.payload;
       }
     },
   });
@@ -34,6 +38,7 @@ export const UserDetailsSlice = createSlice({
 export const {
     setToken,
     setUserData,
+    setNewUser,
   } = UserDetailsSlice.actions;
   
   export default UserDetailsSlice.reducer;
