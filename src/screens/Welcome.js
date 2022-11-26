@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   imageView: {
     // marginHorizontal:10
-    marginTop: Platform.OS == 'ios' ? 0 : 45,
+    marginTop: Platform.OS == 'ios' ? 0 : 0,
   },
   text1: {
     height: 35,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 35,
-    marginTop: Platform.OS == 'ios' ? 30 : 15,
+    marginTop: Platform.OS == 'ios' ? 30 : 10,
   },
   text2: {
     height: 20,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 20,
-    marginBottom: Platform.OS == 'ios' ? 55 : 45,
+    marginBottom: Platform.OS == 'ios' ? 55 : 10,
   },
   bottomview: {
     marginTop: 10,

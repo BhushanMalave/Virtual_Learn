@@ -13,7 +13,7 @@ export const refreshToken = async (token) => {
       options,
     );
     if (response.data) {
-      return response.data;
+      return response;
     }
   } catch (error) {
     console.log(error.response.data);

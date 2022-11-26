@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   image: {
     height: 281.19,
     width: '100%',
-    marginTop: Platform.OS == 'ios' ? 75 : 120,
+    marginTop: Platform.OS == 'ios' ? 75 : 10,
     alignSelf: 'center',
   },
   imageView: {
