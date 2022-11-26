@@ -1,7 +1,8 @@
 import React from "react";
 import { View,StyleSheet,Text,Image, TouchableOpacity} from "react-native";
 
-export const CongratulationScreen=()=>{
+export const CongratulationScreen=({navigation,route})=>{
+    console.log(route.params)
     return(
         <View style={styles.container}>
             <TouchableOpacity>
@@ -10,8 +11,8 @@ export const CongratulationScreen=()=>{
             </TouchableOpacity>
             <Image source={require('../assets/images/img_moduletest_success_illustration.png')} style={styles.image}/>
             <Text style={styles.congratulation}>Congratulations!</Text>
-            <Text style={styles.coursename}>You have completed Chapter 3 - Setting up a new project from Course: Learn Figma - UI/UX Design Essential Training</Text>
-            <TouchableOpacity><Text style={styles.result}>Result</Text></TouchableOpacity>
+            <Text style={styles.coursename}>You have completed Chapter {route.params.chapterNumber} - {route.params.chapterName} from Course: {route.params.courseName}</Text>
+            <TouchableOpacity onPress={()=>{}}><Text style={styles.result}>Result</Text></TouchableOpacity>
         </View>
     )
 }

@@ -50,4 +50,76 @@ const categories = [
       category: 'Music',
     },
   ];
+  const data = [
+    {
+      questionId: 1,
+      question: "What's the biggest planet in our solar system?",
+      status: false,
+      options: [
+        {
+          option1: 'Jupiter',
+          option2: 'Saturn',
+          option3: 'Neptune',
+          option4: 'Mercury',
+        },
+      ],
   
+      correctAnswer: 'Jupiter',
+    },
+    {
+      questionId: 2,
+      question: 'What attraction in India is one of the famus in the world?',
+      status: false,
+      options: [
+        {
+          option1: 'taj mahal',
+          option2: 'paris',
+          option3: 'london',
+          option4: 'US',
+        },
+      ],
+      correctAnswer: 'Taj mahal',
+    },
+    {
+      questionId: 3,
+      question: 'What land animal can open its mouth the widest?',
+      status: false,
+      options: [
+        {
+          option1: 'Jupiter',
+          option2: 'Saturn',
+          option3: 'Neptune',
+          option4: 'Mercury',
+        },
+      ],
+      correctAnswer: 'hippo',
+    },
+    {
+      questionId: 4,
+      question: 'What is the largest animal on Earth?',
+      status: false,
+      options: [
+        {
+          option1: 'Jupiter',
+          option2: 'Saturn',
+          option3: 'Neptune',
+          option4: 'Mercury',
+        },
+      ],
+      correctAnswer: 'elephant',
+    },
+    {
+      questionId: 5,
+      question: 'What is the only flying mammal?',
+      status: false,
+      options: [
+        {
+          option1: 'Jupiter',
+          option2: 'Saturn',
+          option3: 'Neptune',
+          option4: 'Mercury',
+        },
+      ],
+      correctAnswer: 'frog',
+    },
+  ];

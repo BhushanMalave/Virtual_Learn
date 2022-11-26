@@ -5,16 +5,16 @@ import {View, Text, Modal, StyleSheet} from 'react-native';
 import {ButtonComponent} from '../Buttons';
 import {ButtonComponent4} from '../Buttons';
 import {useSelector, useDispatch} from 'react-redux';
-import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import { setPopUpState } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 export const ContinuePopUp = () => {
-    const continueData = useSelector(state => state.courseData.continueData);
-  const filterState = useSelector(state => state.courseData.popUpState);
+    const continueData = useSelector(state => state.chapterResponse.continueData);
+  const filterState = useSelector(state => state.chapterResponse.popUpState);
   console.log(filterState)
 
   const dispatch = useDispatch();
   return (
-    <Modal animationType="slide" transparent={true} visible={filterState}>
+    <Modal animationType="slide" transparent={true} visible={filterState} >
       <View style={styles.container}> 
         <View style={styles.containerView}>
           <View style={styles.messageContainer}>
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'#000000AA'
   },
   containerView: {
     backgroundColor: 'rgba(255,255,255,0.82)',

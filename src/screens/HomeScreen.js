@@ -38,6 +38,10 @@ import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/Bas
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+
+import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+
+import {VideoPlayer} from '../components/VideoPlayer';
 import { OnGoing } from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import { OnGoingComponent } from '../components/OnGoingComponent';
 
@@ -258,16 +262,8 @@ export const HomeScreen = ({navigation}) => {
                     onPress={async () => {
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
-
-                      const chapterRes = await chapterListData(
-                        token,
-                        item.courseId,
-                      );
                       console.log('==()==', res);
-                      console.log('+++', chapterRes);
-                      //  if(chapterRes){
-                      //   }
-                      dispatch(addChapterList(chapterRes));
+                      dispatch(csChapterResponse({token, id: item?.courseId}));
                       navigation.navigate('CourseScreen');
                     }}>
                     <Image
@@ -301,13 +297,13 @@ export const HomeScreen = ({navigation}) => {
             nav={navigation}
             header={item?.categoryName}
             data={item?.popularCourseInEachCategoryList}
-          //   onPress={() => {
-          //     dispatch(cdsbasicCourse({token,id:item?.categoryId}))
-          //     dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
-          //     dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
-          //     dispatch(cdsSubCategories({token,id:item?.categoryId}))
-          //     navigation.navigate('CategoryDisplayScreen',{item});
-          //   }}
+            onPress={() => {
+              dispatch(cdsbasicCourse({token,id:item?.categoryId}))
+              dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
+              dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
+              dispatch(cdsSubCategories({token,id:item?.categoryId}))
+              navigation.navigate('CategoryDisplayScreen',{item});
+            }}
            />
         ))}
       </ScrollView>

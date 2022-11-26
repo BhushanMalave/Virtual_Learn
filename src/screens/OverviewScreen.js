@@ -70,7 +70,7 @@ const requirements = [
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
   const token = useSelector(state => state.userDetails.token);
-
+console.log(coursedata)
   renderTruncatedFooter = handlePress => {
     return (
       <Text
@@ -244,8 +244,7 @@ export const OverviewScreen = ({navigation}) => {
               style={styles.button}
               onPress={async () => {
                 const objBody = {
-                  courseId: coursedata.courseId,
-                  joinDate: '2022-11-10',
+                  courseId:coursedata.courseId,
                 };
                 console.log('hvhc', coursedata.courseId);
                 const res = await joinCourse(token, objBody);
