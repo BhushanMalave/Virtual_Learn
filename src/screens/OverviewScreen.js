@@ -38,7 +38,6 @@ const details = [
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
   const token = useSelector(state => state.userDetails.token);
-console.log(coursedata)
   renderTruncatedFooter = handlePress => {
     return (
       <Text

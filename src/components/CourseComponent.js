@@ -8,14 +8,12 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { VideoPlayer } from './VideoPlayer';
+
 export const CourseComponent = (props)=> {
 
 
   const video = (item) => {
-     
   props.nav.navigate('VideoPlayer',{item});
-
   };
   return (
     <View style={styles.businessview}>

@@ -62,7 +62,7 @@ export const CertificateScreen = ({route, navigation}) => {
             <>
               <View style={styles.certificateView}>
                 <Image
-                  source={{uri: route.params.data.certificateUrl}}
+                  source={{uri: route.params.data?.certificateUrl}}
                   style={styles.certificate}
                 />
               </View>

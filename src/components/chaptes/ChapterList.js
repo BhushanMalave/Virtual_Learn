@@ -13,38 +13,37 @@ import {
 import { useDispatch } from 'react-redux';
 import { changeChapterListStatus } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
-export const ChapterList = item => {
+export const ChapterList = (item) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.chapterList}>
-      {item.completed ? (
+      {item?.completed ? (
         <Text style={styles.chapterNameCompleted}>
-          Chapter {item.number} - {item.name}
+          Chapter {item?.number} - {item?.name}
         </Text>
       ) : (
         <Text style={styles.chapterName}>
-          Chapter {item.number} - {item.name}
+          Chapter {item?.number} - {item?.name}
         </Text>
       )}
 
       <View style={{marginLeft: 4}}>
-        {item.chapterStatus ? (
+        {item?.chapterStatus ? (
           <TouchableOpacity
             onPress={() => {
               console.log('set/disaptch status as false in chapterlist:status and close');
-              dispatch(changeChapterListStatus({id: item.id}))
+              dispatch(changeChapterListStatus({id: item?.id}))
             }}
             style={{padding: 3}}>
             <Image
               source={require('../../assets/images/icn_chapter_minimise.png')}
-              
             />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             onPress={() => {
               console.log('set/disaptch status as true in chapterlist:status and expanded');
-              dispatch(changeChapterListStatus({id : item.id}))
+              dispatch(changeChapterListStatus({id : item?.id}))
             }}
             style={{padding: 2}}>
             <Image
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: Platform.OS == 'ios' ? 18 : 14,
-    // marginTop:10,
   },
   chapterName: {
     color: '#373737',

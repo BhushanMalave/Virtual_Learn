@@ -127,7 +127,7 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.topsearchView}>
             <Text style={styles.texttopsearch}>Top Searches</Text>
             <View style={styles.viewtopsearch}>
-              {topData.map(item => (
+              {topData?.map(item => (
                 <TopSearchComponent
                   string={item?.keyWord}
                   onPress={async () => {
@@ -145,7 +145,7 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.searchCatView}>
             <Text style={styles.texttopsearch}>Search From Categories</Text>
             <View style={styles.viewcatin}>
-              {categoriesData.map(item => (
+              {categoriesData?.map(item => (
                 <CategoriesComponent
                   key={item?.categoryId}
                   id={item?.categoryId}

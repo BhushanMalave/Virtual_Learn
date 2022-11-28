@@ -8,8 +8,8 @@ export const TermServicesScreen = ({navigation}) => {
 
   const call = async () => {
         const res = await termsAndConditions();
-        // console.log(res)
-        // setData(res);
+        console.log(res)
+        setData(res);
   }
   useEffect(() => {
   call();
@@ -24,7 +24,7 @@ export const TermServicesScreen = ({navigation}) => {
       </TouchableOpacity>
       <Text style={styles.text}>Terms of Services</Text>
       <View style={styles.description}>
-      <Text style={styles.text}>{data}</Text>
+      <Text style={styles.text1}>{data}</Text>
         {/* <Text style={styles.text1}>These Terms of Services ("Terms") were last updated on September 16,
         2020.</Text>
       <Text style={styles.text1}>

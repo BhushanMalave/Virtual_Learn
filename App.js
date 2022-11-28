@@ -16,7 +16,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router />
+        <Router/>
       </PersistGate>
     </Provider>
   );

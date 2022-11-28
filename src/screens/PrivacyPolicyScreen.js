@@ -7,8 +7,8 @@ export const PrivacyPolicyScreen = ({navigation}) => {
 
     const call = async () => {
           const res = await privacyPolicy();
-          // console.log(res)
-          // setData(res);
+     
+          setData(res);
     }
     useEffect(() => {
     call();

@@ -17,41 +17,25 @@ let valueGender = '';
 let valueOccupation = '';
 import icn_dropdown from '../assets/images/icn_dropdown.png';
 import icn_back_header from '../assets/images/icn_back_header.png';
-
 import {ButtonComponent} from '../components/Buttons';
-
 import ImagePicker from 'react-native-image-crop-picker';
-import DropDownField from './../components/DropDownField';
-import { changeUserData } from '../authorization/Auth';
-
 import {TextInputComp} from '../components/TextInputComp';
-
-const data = {
-  fullname: 'Mahendra Singh Dhoni',
-  username: 'Msdian',
-  email: 'msd07@gamil.com',
-  mobilenumber: '9876543211',
-  occupation: 'Design',
-  gender: 'Female',
-};
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {mpChangeUserData} from '../authorization/Auth';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import { getOccupationData } from '../authorization/Auth';
+
+
 export const EditProfile = ({navigation}) => {
   const genderData = [
-    {key: 'Female', value: 'Female'},
-    {key: 'Male', value: 'Male'},
+    {genderId: 1, genderName: 'Female'},
+    {genderId: 2, genderName: 'Male'},
   ];
-  const occupationData = [
-    {key: '1', value: 'design'},
-    {key:  '2', value: 'development'},
-    {key: '3', value: 'music'},
-  ];
-
+  const [occupationData,setOccupationData] = useState(null); 
   const [selected, setSelected] = useState();
   const [selectedOccu, setSelectedOccu] = useState();
-  const [genderState, serGenderState] = useState(false);
+  const [genderState, setGenderState] = useState(false);
   const [occupationState, setOccupationState] = useState(false);
   const [text, setText] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
@@ -59,7 +43,6 @@ export const EditProfile = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
   const [image, setImage] = useState(userData?.profilePhoto);
-
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
       width: 110,
@@ -104,8 +87,14 @@ export const EditProfile = ({navigation}) => {
     return formData;
   };
 
+  const occupation = async () => {
+   const res = await  getOccupationData(token);
+   setOccupationData(res);
+  }
+
   useEffect(() => {
     dispatch(mpUserDetails(token));
+    occupation();
     // console.log(userData);
   }, []);
   return (
@@ -199,7 +188,7 @@ export const EditProfile = ({navigation}) => {
                   twtterLink: values?.twitterlink,
                   faceBookLink: values?.facebooklink,
                 });
-                console.log(formBody)
+                console.log(formBody);
                 // const body = JSON.stringify(formBody);
                 // console.log(body);
                 // const data = {
@@ -214,10 +203,9 @@ export const EditProfile = ({navigation}) => {
                 //   twtterLink: values.twitterlink,
                 //   faceBookLink: values.facebooklink,
                 // };
-                const res = await mpChangeUserData(token,formBody);
+                const res = await mpChangeUserData(token, formBody);
                 console.log(res);
                 if (res == 200) {
-                  // dispatch(setUserData(data));
                   navigation.navigate('Profile');
                 }
               }}>
@@ -251,151 +239,165 @@ export const EditProfile = ({navigation}) => {
                     text="Moblie Number"
                   />
 
+                  {values.occupation || selectedOccu ? (
+                    <View style={styles.form1}></View>
+                  ) : (
+                    <View style={styles.form}></View>
+                  )}
+
+                  {values.occupation || selectedOccu ? (
+                    <View>
+                      <Text style={styles.text}>Occupation</Text>
+                    </View>
+                  ) : (
+                    <></>
+                  )}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}>
+                    <TextInput
+                      name="occupation"
+                      editable={false}
+                      placeholder="Occupation"
+                      placeholderTextColor={'#7A7A7A'}
+                      value={selectedOccu ? selectedOccu : values.occupation}
+                      style={styles.textinput}
+                    />
+                    {occupationState ? (
+                      <>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setOccupationState(false);
+                          }}>
+                          <Image
+                            source={require('../assets/images/icn_close_filter.png')}
+                            style={{tintColor: 'black'}}
+                          />
+                        </TouchableOpacity>
+                      </>
+                    ) : (
+                      <TouchableOpacity
+                        onPress={() => {
+                          setOccupationState(true);
+                        }}>
+                        <Image source={icn_dropdown} />
+                      </TouchableOpacity>
+                    )}
+                  </View>
+                  {values.occupation || selectedOccu ? (
+                    <View style={styles.bottom}></View>
+                  ) : (
+                    <View style={styles.bottom2}></View>
+                  )}
                   {occupationState ? (
                     <>
-                      {selectedOccu ? (
-                        <View style={styles.dropDownForm1}></View>
-                      ) : (
-                        <View style={styles.dropDownForm}></View>
-                      )}
-                      {selectedOccu ? (
-                        <View>
-                          <Text style={styles.dropDownTopText}>Occupation</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-                      <DropDownField
-                        text={data.occupation}
-                        name="Occupation"
-                        onChangeText={handleChange('occupation')}
-                        onBlur={handleBlur('occupation')}
-                        data={occupationData}
-                        setSelected={setSelectedOccu}
-                        value={selectedOccu}
-                        placeholder="Occupation"
-                      />
-
-                      {selectedOccu ? (
-                        <View style={styles.dropDownBottom}></View>
-                      ) : (
-                        <View style={styles.dropDownBottom2}></View>
-                      )}
+                      <View style={styles.dropDownBox}>
+                        {occupationData.map(item => (
+                          <View key={item.subCategoryId}>
+                            <View style={styles.dropDownTextView}>
+                              <TouchableOpacity
+                                onPress={() => {
+                                  setSelectedOccu(item.subCategoryName);
+                                }}>
+                                <Text style={styles.dropDownText}>
+                                  {item.subCategoryName}
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </View>
+                        ))}
+                      </View>
                     </>
                   ) : (
-                    <>
-                      {values.occupation ? (
-                        <View style={styles.form1}></View>
-                      ) : (
-                        <View style={styles.form}></View>
-                      )}
-
-                      {values.occupation ? (
-                        <View>
-                          <Text style={styles.text}>Occupation</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                        }}>
-                        <TextInput
-                          name="occupation"
-                          editable={false}
-                          placeholder="Occupation"
-                          placeholderTextColor={'#7A7A7A'}
-                          value={values.occupation}
-                          style={styles.textinput}
-                        />
-                        <TouchableOpacity
-                          onPress={() => setOccupationState(true)}>
-                          <Image source={icn_dropdown} />
-                        </TouchableOpacity>
-                      </View>
-                      {values.occupation ? (
-                        <View style={styles.bottom}></View>
-                      ) : (
-                        <View style={styles.bottom2}></View>
-                      )}
-                    </>
+                    <></>
                   )}
 
+                  {values.gender || selected ? (
+                    <View style={styles.form1}></View>
+                  ) : (
+                    <View style={styles.form}></View>
+                  )}
+
+                  {values.gender || selected ? (
+                    <View>
+                      <Text style={styles.text}>Occupation</Text>
+                    </View>
+                  ) : (
+                    <></>
+                  )}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}>
+                    <TextInput
+                      name="gender"
+                      editable={false}
+                      placeholder="Gender"
+                      placeholderTextColor={'#7A7A7A'}
+                      value={selected ? selected : values.gender}
+                      style={styles.textinput}
+                    />
+                    {genderState ? (
+                      <>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setGenderState(false);
+                          }}>
+                          <Image
+                            source={require('../assets/images/icn_close_filter.png')}
+                            style={{tintColor: 'black'}}
+                          />
+                        </TouchableOpacity>
+                      </>
+                    ) : (
+                      <TouchableOpacity
+                        onPress={() => {
+                          setGenderState(true);
+                        }}>
+                        <Image source={icn_dropdown} />
+                      </TouchableOpacity>
+                    )}
+                  </View>
+
+                  {values.gender || selected ? (
+                    <View style={styles.bottom}></View>
+                  ) : (
+                    <View style={styles.bottom2}></View>
+                  )}
                   {genderState ? (
                     <>
-                      {selected ? (
-                        <View style={styles.dropDownForm1}></View>
-                      ) : (
-                        <View style={styles.dropDownForm}></View>
-                      )}
-                      {selected ? (
-                        <View>
-                          <Text style={styles.dropDownTopText}>Gender</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-
-                      <DropDownField
-                        text="Gender"
-                        name="Gender"
-                        onChangeText={handleChange('gender')}
-                        onBlur={handleBlur('gender')}
-                        data={genderData}
-                        setSelected={setSelected}
-                        value={selected}
-                        placeholder="Gender"
-                      />
-
-                      {selected ? (
-                        <View style={styles.dropDownBottom}></View>
-                      ) : (
-                        <View style={styles.dropDownBottom2}></View>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {values.gender ? (
-                        <View style={styles.form1}></View>
-                      ) : (
-                        <View style={styles.form}></View>
-                      )}
-
-                      {values.gender ? (
-                        <View>
-                          <Text style={styles.text}>Gender</Text>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
                       <View
                         style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
+                          marginTop: 10,
+                          borderWidth: 1,
+                          borderColor: '#7A7A7A',
+                          borderRadius: 10,
                         }}>
-                        <TextInput
-                          name="gender"
-                          placeholder="Gender"
-                          placeholderTextColor={'#7A7A7A'}
-                          editable={false}
-                          value={values.gender}
-                          style={styles.textinput}
-                        />
-                        <TouchableOpacity onPress={() => serGenderState(true)}>
-                          <Image source={icn_dropdown} />
-                        </TouchableOpacity>
+                        {genderData.map(item => (
+                          <View key={item.genderId}>
+                            <View style={styles.dropDownTextView}>
+                              <TouchableOpacity
+                                onPress={() => {
+                                  setSelected(item.genderName);
+                                }}>
+                                <Text style={styles.dropDownText}>
+                                  {item.genderName}
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </View>
+                        ))}
                       </View>
-                      {values.gender ? (
-                        <View style={styles.bottom}></View>
-                      ) : (
-                        <View style={styles.bottom2}></View>
-                      )}
                     </>
+                  ) : (
+                    <></>
                   )}
+
                   <TextInputComp
                     name={'dateofbirth'}
                     value={values.dateofbirth}
@@ -524,31 +526,47 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
   },
-  dropDownTopText: {
-    height: 17,
-    marginBottom: Platform.OS == 'ios' ? 0 : 0,
-    color: Platform.OS == 'ios' ? '#7A7A7A' : '#7A7A7A',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontSize: 14,
-    letterSpacing: 0.29,
-    lineHeight: 17,
-  },
-  dropDownBottom: {
-    marginTop: Platform.OS == 'ios' ? 0 : 0,
-    borderBottomWidth: 1,
-    borderBottomColor: '#042C5C',
-  },
-  dropDownBottom2: {
-    marginTop: Platform.OS == 'ios' ? 0 : 0,
-    borderBottomWidth: 1,
-    borderBottomColor: '#7A7A7A',
-    opacity: 0.6,
-  },
-  dropDownForm1: {
-    marginTop: Platform.OS == 'ios' ? 14 : 15,
-  },
+  // dropDownTopText: {
+  //   height: 17,
+  //   marginBottom: Platform.OS == 'ios' ? 0 : 0,
+  //   color: Platform.OS == 'ios' ? '#7A7A7A' : '#7A7A7A',
+  //   fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+  //   fontSize: 14,
+  //   letterSpacing: 0.29,
+  //   lineHeight: 17,
+  // },
+  // dropDownBottom: {
+  //   marginTop: Platform.OS == 'ios' ? 0 : 0,
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: '#042C5C',
+  // },
+  // dropDownBottom2: {
+  //   marginTop: Platform.OS == 'ios' ? 0 : 0,
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: '#7A7A7A',
+  //   opacity: 0.6,
+  // },
+  // dropDownForm1: {
+  //   marginTop: Platform.OS == 'ios' ? 14 : 15,
+  // },
 
-  dropDownForm: {
-    marginTop: Platform.OS == 'ios' ? 30 : 20,
+  // dropDownForm: {
+  //   marginTop: Platform.OS == 'ios' ? 30 : 20,
+  // },
+  dropDownBox: {
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#7A7A7A',
+    borderRadius: 10,
+  },
+  dropDownTextView: {
+    marginTop: 5,
+    marginHorizontal: 20,
+    padding: 5,
+  },
+  dropDownText: {
+    fontSize: 12,
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    color: '#7A7A7A',
   },
 });

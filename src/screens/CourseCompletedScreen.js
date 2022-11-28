@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export const CourseCompletedScreen = () => {
+export const CourseCompletedScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
@@ -47,7 +47,7 @@ export const CourseCompletedScreen = () => {
           <Text style={styles.percentText}>90%</Text>
           <Text style={styles.approvalText}>approval rate</Text>
 
-          <TouchableOpacity onPress={()=> console.log('navigate to certificate page')}>
+          <TouchableOpacity onPress={()=> {navigation.navigate('CertificateScreen')}}>
             <Text style={styles.viewCetificateButton}>View Certificate</Text>
           </TouchableOpacity>
         </View>

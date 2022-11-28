@@ -2,10 +2,14 @@ import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, FlatList,Image, ImageBackground, Platform} from 'react-native';
 
 export const CategoryDisplayCourseComponent = props => {
+
+  const video = (item) => {
+    props.nav.navigate('VideoPlayer',{item});
+    };
   return (
     <View>
     <View style={styles.imageContainer}>
-      <TouchableOpacity onPress={()=>console.log('play vedio : -- ',props.previewVideo)} >
+      <TouchableOpacity onPress={()=> video(props)} >
 
       <Image
         source={{uri: props?.coursePhoto}}
