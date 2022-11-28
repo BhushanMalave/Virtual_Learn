@@ -21,7 +21,7 @@ import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-
+import { setNewUser } from '../redux/ReduxPersist/UserDetails';
 export const Login = ({navigation}) => {
   const [warning, setWarning] = useState(false);
   const dispatch = useDispatch();
@@ -79,11 +79,12 @@ export const Login = ({navigation}) => {
                     obj,
                   );
                   //console.log('=====', response.data);
-                  dispatch(setToken(response.data.jwtToken));
+                 
                   dispatch(mpUserDetails(token));
                   console.log('token:', token);
                   if (response.data.jwtToken) {
-                    navigation.navigate('Drawer');
+                    dispatch(setToken(response.data.jwtToken));
+                    dispatch(setNewUser(false));
                   }else{
                     setWarning(true);
                   }

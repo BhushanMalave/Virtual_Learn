@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,7 +13,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+
 export const NotificationsComponentUnseen = (props) => {
+  
+   const notify = props.notify;
+   
+  useEffect(() => {
+      notify();
+  },[])
   return (
     <TouchableOpacity onPress = { props.onPress}>
     <View style={styles.view}>
@@ -71,6 +78,7 @@ const styles = StyleSheet.create({
     marginRight: 65,
     marginVertical: 22,
     flexDirection: 'row',
+    
   },
   imageinc: {
     height: 24,

@@ -15,18 +15,24 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {useRoute} from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch} from 'react-redux';
+import { setNewUser } from '../redux/ReduxPersist/UserDetails';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
 
 export const CustomDrawerComponent = props => {
 
   const userData = useSelector(state => state.userData.data);
+  const dispatch = useDispatch();
   const log = () => {
     Alert.alert('', 'Are you sure want to Logout?', [
       {
         text: 'Cancel',
         onPress: () => {},
       },
-      {text: 'Logout', onPress: () => {}},
+      {text: 'Logout', onPress: () => {
+               // dispatch(setNewUser(true));
+                dispatch(setToken(null));
+      }},
     ]);
   };
 

@@ -32,6 +32,8 @@ export const LessonVideoPlayer = ({route, navigation}) => {
   // console.log(route.params.item.pauseTime)
 
 
+
+
   const timeformat = timesec => {
     const digit = n => (n < 10 ? `0${n}` : `${n}`);
 
@@ -111,7 +113,9 @@ if(turn){
         />
       </TouchableOpacity>
       <Video
-        ref={videoRef}
+         controls={false}
+         ref={videoRef}
+         resizeMode='contain'
         source={{
           uri: url,
         }}
@@ -149,8 +153,11 @@ if(turn){
             <Text style={styles.text1}>{timeformat(time.currentTime)}</Text>
             <Text style={styles.text2}>{title}</Text>
           </View>
+          <Pressable onPress={() => FullScreen()}>
           <Image source={require('../assets/images/icn_maximise.png')} />
+          </Pressable>
         </View>
+      
         <View style={styles.view2}>
           {isPlaying ? (
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
@@ -175,7 +182,7 @@ if(turn){
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={v => handleslide(v)}
+           // onValueChange={v => handleslide(v)}
           />
         </View>
       </View>
@@ -202,7 +209,7 @@ const styles = StyleSheet.create({
   },
   control: {
     backgroundColor: '#2B2B2B',
-    height: Platform.OS === 'ios' ? 120 : 90,
+    height: Platform.OS === 'ios' ? 100 : 90,
   },
   view1: {
     flexDirection: 'row',

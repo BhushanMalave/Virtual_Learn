@@ -7,8 +7,10 @@ import {HomeSearch} from '../screens/HomeSearch';
 import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
 import {CourseScreen} from '../screens/CourseScreen';
-import {VideoPlayer} from '../components/VideoPlayer';
-import {CourseComponent} from '../components/CourseComponent';
+import {CongratulationScreen} from '../screens/CongratulationScreen';
+import { TestStack } from './TestStack';
+import { VideoPlayer } from '../components/VideoPlayer';
+import { CourseComponent } from '../components/CourseComponent';
 
 import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
@@ -69,6 +71,12 @@ export const HomeStack = () => {
         component={ContinuePopUp}
         options={{headerShown: false}}
       />
+<Stack.Screen
+name="TestStack"
+          component={TestStack}
+          options={{headerShown: false}}
+        />
+      
     </Stack.Navigator>
   );
 };
