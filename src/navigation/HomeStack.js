@@ -8,10 +8,10 @@ import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {CongratulationScreen} from '../screens/CongratulationScreen';
-import { TestStack } from './TestStack';
-import { VideoPlayer } from '../components/VideoPlayer';
-import { CourseComponent } from '../components/CourseComponent';
-
+import {TestStack} from './TestStack';
+import {VideoPlayer} from '../components/VideoPlayer';
+import {CourseComponent} from '../components/CourseComponent';
+import { OnGoingComponent } from '../components/OnGoingComponent';
 import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 
@@ -60,6 +60,11 @@ export const HomeStack = () => {
         component={CourseComponent}
         options={{headerShown: false}}
       />
+        <Stack.Screen
+        name="OnGoingComponent"
+        component={OnGoingComponent}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="LessonVideoPlayer"
         component={LessonVideoPlayer}
@@ -71,12 +76,11 @@ export const HomeStack = () => {
         component={ContinuePopUp}
         options={{headerShown: false}}
       />
-<Stack.Screen
-name="TestStack"
-          component={TestStack}
-          options={{headerShown: false}}
-        />
-      
+      <Stack.Screen
+        name="TestStack"
+        component={TestStack}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

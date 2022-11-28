@@ -229,6 +229,70 @@ export const searchCategoriesdata = async token => {
   }
 };
 
+export const topSearchData = async token => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      'https://virtual-learn-app-java.herokuapp.com/user/topSearches',
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchDataKeyword = async (token, body) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.put(
+      `https://virtual-learn-app-java.herokuapp.com/user/keywords?courseId=${body}`,
+      options,
+    );
+    // console.log(response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    //console.log(error.response.data);
+  }
+};
+
+export const searchByKeyword = async (token, string) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/searchByKeyword?keyword=${string}`,
+      options,
+    );
+    // console.log(response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    //console.log(error.response.data);
+  }
+};
+
 export const applySearchFilter = async (token, objBody) => {
   body = JSON.stringify(objBody);
   const options = {
