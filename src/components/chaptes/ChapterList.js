@@ -18,32 +18,71 @@ export const ChapterList = item => {
   return (
     <View style={styles.chapterList}>
       {item?.completed ? (
+        <View style={{width:'95%'}}>
         <Text style={styles.chapterNameCompleted}>
           Chapter {item?.number} - {item?.name}
         </Text>
+        </View>
       ) : (
+        <View style={{ width:'95%'}}>
         <Text style={styles.chapterName}>
           Chapter {item?.number} - {item?.name}
         </Text>
+        </View>
       )}
-
-      <View style={{marginLeft: 4}}>
+{item?.completed ? (<>
+  <View style={{marginLeft: 4}}>
         {item?.chapterStatus ? (
+          <>
           <TouchableOpacity
             onPress={() => {
-              console.log('set/disaptch status as false in chapterlist:status and close');
-              dispatch(changeChapterListStatus({id: item?.id}))
+            
+              dispatch(changeChapterListStatus({id: item?.chapterId}))
             }}
             style={{padding: 3}}>
             <Image
               source={require('../../assets/images/icn_chapter_minimise.png')}
             />
           </TouchableOpacity>
+          </>
         ) : (
+          <>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(changeChapterListStatus({id : item?.chapterId}))
+            }}
+>
+            <Image
+              source={require('../../assets/images/icn_chapter_maximise.png')}
+              style={{
+                tintColor: '#EE5C4D',
+              }}
+            />
+          </TouchableOpacity>
+          </>
+        )}
+      </View>
+</>):<>
+<View style={{marginLeft: 4}}>
+        {item.chapterStatus ? (
+          <>
+          <TouchableOpacity
+            onPress={() => {
+              console.log('set/disaptch status as false in chapterlist:status and close');
+              dispatch(changeChapterListStatus({id: item.chapterId}))
+            }}
+            style={{padding: 3}}>
+            <Image
+              source={require('../../assets/images/icn_chapter_minimise.png')}
+            />
+          </TouchableOpacity>
+          </>
+        ) : (
+          <>
           <TouchableOpacity
             onPress={() => {
               console.log('set/disaptch status as true in chapterlist:status and expanded');
-              dispatch(changeChapterListStatus({id : item?.id}))
+              dispatch(changeChapterListStatus({id : item.chapterId}))
             }}
             style={{padding: 2}}>
             <Image
@@ -53,8 +92,12 @@ export const ChapterList = item => {
               }}
             />
           </TouchableOpacity>
+          </>
         )}
       </View>
+</>}
+
+     
     </View>
   );
 };
@@ -70,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight:Platform.OS == 'ios' ? '500':'600',
     lineHeight: 15,
-    width: '95%',
+    // width: '95%',
   },
   chapterNameCompleted: {
     color: '#1EAB0D',
@@ -79,7 +122,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 15,
     // borderWidth: 1,
-    width: '95%',
+    // width: '95%',
   },
   chapterNumber: {
     marginRight: 12,

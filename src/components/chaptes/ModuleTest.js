@@ -9,14 +9,18 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-let enrolledghhj = false;
+import {FinalTest, ModuleTest} from '../../authorization/Auth';
+import { addQuestionData } from '../../redux/ReduxPersist/TestSlice';
+import {addFinalQuestionData} from '../../redux/ReduxPersist/FinalTestSlice'
+import { TestStack } from '../../navigation/TestStack';
 const completed = false;
-export const ModularTest = item => {
+export const ModularTest = (item) => {
   // const data = useSelector(state => state.courseData.data);
 const data = useSelector(state => state.chapterResponse.data);
-
+const token = useSelector(state => state.userDetails.token);
+const dispatch = useDispatch()
   return (
     <>
       <View>
@@ -28,7 +32,7 @@ const data = useSelector(state => state.chapterResponse.data);
           }}>
           {data?.enrolled ? (
             <View style={{marginRight: 10}}>
-              {item.completed ? (
+              {item?.completed ? (
                 <Image
                   source={require('../../assets/images/icn_timeline_completed.png')}
                 />
@@ -54,40 +58,50 @@ const data = useSelector(state => state.chapterResponse.data);
               <View style={{width: '70%'}}>
                 {/* <View > */}
                 <TouchableOpacity
-                  disabled={!item.disable}
-                  onPress={() => {console.log(item.disable)
-                  {item.test == 'Final Test' ?(<>
+                  disabled={!!item?.disable}
+                  onPress={async () => {
+                    {if(item?.test ==='Final Test')
                   {
-                   console.log(enrolledghhj)
+                    const res = await FinalTest(token,item?.id);
+                    dispatch(addFinalQuestionData(res));
+                    item.navigation.navigate('FinalTestStack')
+                  }else {
+                    const res = await ModuleTest(token,item?.id);
+                    dispatch(addQuestionData(res));
+                    item.navigation.navigate('TestStack');
                   }
-                   </>
-                  ):(
-                  // enrolledghhj = false,
-                  console.log(enrolledghhj)
-                  )}
+                
+                
+                } 
+                    
                   }}>
-                  <Text style={styles.chapterText}>{item.test}</Text>
+                  <Text style={styles.chapterText}>{item?.test}</Text>
                   <Text style={styles.chapterTime}>
-                    {item.duration} mins | {item.questions} Questions
+                    {item?.duration} mins | {item?.questions} Questions
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
 
-            {item.rate === -1 ? (
+            {item?.rate === -1 ? (
               <></>
             ) : (
               <>
-                {item.rate === 0 || item.rate ? <></> : <></>}
+                {item?.rate === 0 || item?.rate ? (
+                   <View style={styles.rateView}>
+                   <View style={styles.rateNumView}>
+                     <Text style={styles.rateNum}>{item?.rate}</Text>
+                     <Text style={styles.ratePercent}>%</Text>
+                   </View>
+                   <Text style={styles.rateText}>Approval Rate</Text>
+                 </View>
+                )
+
+                 :
+                 (<></>)}
                 <>
-                  {' '}
-                  <View style={styles.rateView}>
-                    <View style={styles.rateNumView}>
-                      <Text style={styles.rateNum}>{item.rate}</Text>
-                      <Text style={styles.ratePercent}>%</Text>
-                    </View>
-                    <Text style={styles.rateText}>Approval Rate</Text>
-                  </View>
+
+                 
                 </>
               </>
             )}

@@ -3,8 +3,7 @@ import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {ResultHeader} from '../authorization/Auth';
 import {ResultAnswer} from '../authorization/Auth'
 import {useSelector,useDispatch} from 'react-redux';
-import {setResultHeader} from '../redux/ReduxPersist/TestSlice'
-import {setResultAnswers} from '../redux/ReduxPersist/TestSlice'
+
 import { FinalTestResult } from '../authorization/Auth';
 import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
 import { setFinalResult } from '../redux/ReduxPersist/FinalTestSlice';
@@ -14,8 +13,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
   const dispatch=useDispatch()
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.finaltestdata.questionData);
-  const testpercentage = useSelector(state => state.testdata.testPercentage);
- 
+  const testpercentage = useSelector(state => state.finaltestdata.testPercentage);
   
 
   testName = 'Module Test';

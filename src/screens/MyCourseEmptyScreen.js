@@ -1,11 +1,20 @@
 import React from 'react'
 import { View ,Image,StyleSheet,Text, Platform} from 'react-native'
 import { CategoriesComponent } from '../components/CategoriesComponent';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 
 
-export default function MyCourseEmptyScreen({navigation}) {
 
+export const MyCourseEmptyScreen=({navigation})=> {
+
+  const dispatch=useDispatch()
+
+  const token = useSelector(state => state.userDetails.token);
+  console.log(token)
   const categoriesData = useSelector(state => state.categories.data);
   return (
     <View>
@@ -26,16 +35,24 @@ export default function MyCourseEmptyScreen({navigation}) {
                 marginLeft: 10,
                 marginTop: 10,
               }}>
-              {categoriesData.map(item => (
-                <CategoriesComponent  
-                id={item?.categoryId}
-                img={item?.categoryPhoto}
-                  category={item?.categoryName}
-                  onPress={() => {
-                    navigation.navigate('CategoryDisplayScreen');
-                    
-                  }}
-                />
+                {categoriesData?.map(item => (
+                <View key={item?.categoryId}>
+                  <CategoriesComponent
+                    id={item?.categoryId}
+                    img={item?.categoryPhoto}
+                    category={item?.categoryName}
+                    onPress={() => {
+                      dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                      dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+                      dispatch(
+                        cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                      );
+                      dispatch(cdsSubCategories({token, id: item?.categoryId}));
+                      navigation.navigate('CategoryDisplayScreen', {item});
+                     
+                    }}
+                  />
+                </View>
               ))}
             </View>
 

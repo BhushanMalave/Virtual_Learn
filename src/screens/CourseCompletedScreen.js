@@ -9,8 +9,10 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-
+import { useSelector } from 'react-redux';
 export const CourseCompletedScreen = ({navigation}) => {
+  const testpercentage = useSelector(state => state.finaltestdata.testPercentage);
+  const data = testpercentage;
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
@@ -47,7 +49,7 @@ export const CourseCompletedScreen = ({navigation}) => {
           <Text style={styles.percentText}>90%</Text>
           <Text style={styles.approvalText}>approval rate</Text>
 
-          <TouchableOpacity onPress={()=> {navigation.navigate('CertificateScreen')}}>
+          <TouchableOpacity onPress={()=> {navigation.navigate('CertificateScreen',{data})}}>
             <Text style={styles.viewCetificateButton}>View Certificate</Text>
           </TouchableOpacity>
         </View>

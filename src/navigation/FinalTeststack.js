@@ -11,12 +11,13 @@ import {FinalTest} from '../screens/FinalTest'
 import { NavigationContainer } from '@react-navigation/native';
 import {FinalCongratulationScreen} from '../screens/FinalCongratulationScreen'
 import { CertificateScreen } from '../screens/CertificateScreen';
+import { HomeScreen } from '../screens/HomeScreen';
+import { ModularTest } from '../components/chaptes/ModuleTest';
 
 const Stack = createNativeStackNavigator();
 export const FinalTestStack = () => {
   return (
 
-    <NavigationContainer>
 
       <Stack.Navigator>
         <Stack.Screen
@@ -41,8 +42,24 @@ export const FinalTestStack = () => {
         component={CertificateScreen}
         options={{headerShown: false}}
       />
+
+<Stack.Screen
+          name="CourseScreen"
+          component={CourseScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="ModularTest"
+        component={ModularTest}
+        options={{headerShown: false}}
+      />
+
       </Stack.Navigator>
     
-    </NavigationContainer>
   );
 };

@@ -84,7 +84,7 @@ const data = {
 export const TestSlice = createSlice({
   name: 'testdata',
   initialState: {
-    question: data,
+    question: null,
     testId: null,
     userAnswers: [],
     correctAnswers:[],

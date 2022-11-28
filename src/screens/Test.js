@@ -63,7 +63,8 @@ export const Test = ({navigation}) => {
     Alert.alert('', 'Are you sure you want to quit the exam?', [
       {
         text: 'Cancel',
-        onPress: () => setBack(false),
+        onPress: () => {setBack(false),
+        navigation.navigate('ChapterScreen')},
       },
       {
         text: 'Quit',
@@ -71,6 +72,7 @@ export const Test = ({navigation}) => {
         onPress: () => {
           dispatch(removeAll());
           console.log('hweyyy', userAnswers);
+          navigation.navigate('CourseScreen')
         },
       },
     ]);

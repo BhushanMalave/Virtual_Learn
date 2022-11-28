@@ -21,7 +21,7 @@ import {
   addTestId,
   removeAll,
   setTestPercentage,
-} from '../redux/ReduxPersist/TestSlice';
+} from '../redux/ReduxPersist/FinalTestSlice';
 const data = {
   courseName: 'bcbd',
   chapterNumber: 2,
@@ -31,7 +31,6 @@ const data = {
 
 export const FinalTest = ({navigation}) => {
   const data1 = useSelector(state => state.finaltestdata.questionData);
-  console.log(data1)
 
 
   const token = useSelector(state => state.userDetails.token);
@@ -70,8 +69,9 @@ export const FinalTest = ({navigation}) => {
         text: 'Quit',
         style: {fontWeight: 'bold'},
         onPress: () => {
-          dispatch(removeAll());
+
           console.log('hweyyy', userAnswers);
+          dispatch(removeAll());
         },
       },
     ]);
@@ -97,7 +97,7 @@ export const FinalTest = ({navigation}) => {
             console.log("i am body",body)
             const res = await SubmitFinalTest(token,body)
             console.log("+++++",res)
-            // dispatch(setTestPercentage(res))
+            dispatch(setTestPercentage(res))
             if(res){
               navigation.navigate('FinalCongratulationScreen')
               dispatch(removeAll())
@@ -119,7 +119,7 @@ export const FinalTest = ({navigation}) => {
           style: {fontWeight: 'bold'},
           onPress: async () => {
             const body = {
-              testId:26,
+              testId:data1?.testId,
               userAnswers: userAnswers,
             };
             const res = await SubmitFinalTest(token, body);

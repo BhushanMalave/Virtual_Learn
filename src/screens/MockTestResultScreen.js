@@ -24,12 +24,13 @@ import {
 import {setResultHeader} from '../redux/ReduxPersist/TestSlice';
 import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
 
-export const MockTestResultScreen = () => {
+export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
+  console.log(resultheader)
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
   // const correctAnswers = useSelector(state => state.testdata.resultAnswers);
   const testpercentage = useSelector(state => state.testdata.testPercentage);
-  console.log('()()((((', testpercentage);
+  // console.log('()()((((', testpercentage);
 
   const dispatch = useDispatch();
   return (
@@ -38,6 +39,7 @@ export const MockTestResultScreen = () => {
         <TouchableOpacity
           onPress={() => {
             res = dispatch(removeAnswers());
+            navigation.navigate('CourseScreen');
           }}>
           <Image
             source={require('../assets/images/icn_close_white.png')}

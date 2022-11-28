@@ -14,7 +14,7 @@ import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {CompletedComponent} from '../components/CompletedComponent';
 import {OnGoingComponent} from '../components/OnGoingComponent';
 import {SearchComponent} from '../components/SearchFoundComponent';
-import MyCourseEmptyScreen from './MyCourseEmptyScreen';
+import {MyCourseEmptyScreen} from './MyCourseEmptyScreen';
 import {useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
@@ -31,7 +31,7 @@ export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
 
-  const [initial, setInitial] = useState(false);
+  const [initial, setInitial] = useState(1);
   const token = useSelector(state => state.userDetails.token);
 
   const mycoursestatus = useSelector(state => state.courses.status);
@@ -62,7 +62,7 @@ export const MyCourse = ({navigation}) => {
       </View>
       <Text style={styles.header}>My Course</Text>
 
-      {mycoursestatus ? (
+      {mycoursestatus? (
         <>
           <View style={styles.buttontabs}>
             <TouchableOpacity
@@ -151,7 +151,7 @@ export const MyCourse = ({navigation}) => {
         </>
       ) : (
         <>
-          <MyCourseEmptyScreen />
+          <MyCourseEmptyScreen navigation={navigation}/>
         </>
       )}
     </SafeAreaView>

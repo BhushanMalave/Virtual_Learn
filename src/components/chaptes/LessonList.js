@@ -30,15 +30,15 @@ export const LessonList = (item) => {
           alignItems: 'center',
           marginBottom: 10,
         }}>
-        {data.enrolled ? (
+        {data?.enrolled ? (
           <View style={{marginRight: 10}}>
-            {item.completed ? (
+            {item?.completed ? (
               <Image
                 source={require('../../assets/images/icn_timeline_completed.png')}
               />
             ) : (
               <>
-                {item.status ? (
+                {item?.status ? (
                   <Image
                     source={require('../../assets/images/icn_timeline_active.png')}
                   />
@@ -56,17 +56,17 @@ export const LessonList = (item) => {
 
         <View style={styles.container}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={styles.chapterNumber}>0{item.number}</Text>
+            <Text style={styles.chapterNumber}>0{item?.number}</Text>
             <View style={{width: '75%'}}>
               {/* <View > */}
-              <Text style={styles.chapterText}>{item.lessonName}</Text>
-              <Text style={styles.chapterTime}>{item.duration} mins</Text>
+              <Text style={styles.chapterText}>{item?.lessonName}</Text>
+              <Text style={styles.chapterTime}>{item?.duration} mins</Text>
             </View>
           </View>
 
-          {item.status ? (
+          {item?.status ? (
             <TouchableOpacity
-              disabled={!item.status}
+              disabled={!item?.status}
               onPress={() => {
                 {
                   continueData
@@ -86,11 +86,11 @@ export const LessonList = (item) => {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              disabled={!item.status}
+              disabled={!item?.status}
               onPress={() => {
                 console.log(
                   ' set/dispatch status as true in lessons:status  and pressed play',
-                  item.videoLink,
+                  item?.videoLink,
                 );
               }}>
               <View style={{marginLeft: -5}}>
