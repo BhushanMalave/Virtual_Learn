@@ -1,103 +1,58 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const data = {
-  testId: 1,
-  testName: 'Module final',
-  testDuration: '00:30:00',
-  questionsCount: 25,
+const dataNew = {
+  testId: 6,
+  chapterNumber: 6,
+  chapterName: "Conclusion",
+  testName: "Final Test",
+  testDuration: "00:04:00",
+  questionsCount:2,
   questions: [
     {
-      questionId: 1,
-      questionName: 'What is your name',
-      option_1: 'aaa',
-      option_2: 'bbb',
-      option_3: 'ccc',
-      option_4: 'ddd',
+      questionId: 7,
+      questionName: "What is your efgh?",
+      option_1: "e",
+      option_2: "f",
+      option_3: "g",
+      option_4: "h",
       state1: false,
       state2: false,
       state3: false,
-      state4: false,
+      state4: false
     },
     {
-      questionId: 2,
-      questionName: 'What is your age',
-      option_1: 'ddd',
-      option_2: 'eee',
-      option_3: 'fff',
-      option_4: 'ggg',
+      questionId: 15,
+      questionName: "How many letters are there in english alphabets ",
+      option_1: "26",
+      option_2: "25",
+      option_3: "10",
+      option_4: "28",
       state1: false,
       state2: false,
       state3: false,
-      state4: false,
-    },
-    {
-      questionId: 3,
-      questionName: 'What is your bday',
-      option_1: 'hhh',
-      option_2: 'iii',
-      option_3: 'jjj',
-      option_4: 'kkk',
-      state1: false,
-      state2: false,
-      state3: false,
-      state4: false,
-    },
-    {
-      questionId: 4,
-      questionName: 'What is your fullname',
-      option_1: 'lll',
-      option_2: 'mmm',
-      option_3: 'nnn',
-      option_4: 'ooo',
-      state1: false,
-      state2: false,
-      state3: false,
-      state4: false,
-    },
-    {
-      questionId: 5,
-      questionName: 'What is your mothername',
-      option_1: 'ppp',
-      option_2: 'qqq',
-      option_3: 'rrr',
-      option_4: 'sss',
-      state1: false,
-      state2: false,
-      state3: false,
-      state4: false,
-    },
-    {
-      questionId: 6,
-      questionName: 'What is your fathername',
-      option_1: 'www',
-      option_2: 'ttt',
-      option_3: 'uuu',
-      option_4: 'vvv',
-      state1: false,
-      state2: false,
-      state3: false,
-      state4: false,
-    },
+      state4: false
+  },
   ],
 };
 
-export const TestSlice = createSlice({
+export const FinalTestSlice = createSlice({
   name: 'finaltestdata',
   initialState: {
-    question: data,
-    finaltestId: null,
+    questionData: dataNew,
+    testId: null,
     userAnswers: [],
     correctAnswers:[],
-    resultHeader:null,
-    resultAnswers:[],
-    testPercentage:null
+    finalresult:null,
+    // resultAnswers:[],
+    // testPercentage:null
   },
   reducers: {
     addQuestionData: (state, action) => {
-      state.question = action.payload;
+      state.questionData = action.payload;
+      console.log("++++",state.questionData)
     },
     addTestId: (state, action) => {
-      state.finaltestId = action.payload;
+      state.testId = action.payload;
     },
     addAnswerData: (state, action) => {
       const val = state.userAnswers.map(userAnswers => userAnswers.questionId);
@@ -113,7 +68,7 @@ export const TestSlice = createSlice({
     },
 
     setStatus1: (state, action) => {
-      state.question?.questions.map(item => {
+      state.questionData?.questions.map(item => {
         if (item.questionId === action.payload) {
           item.state1 = true;
           item.state2 = false;
@@ -123,7 +78,7 @@ export const TestSlice = createSlice({
       });
     },
     setStatus2: (state, action) => {
-      state.question?.questions.map(item => {
+      state.questionData?.questions.map(item => {
         if (item.questionId === action.payload) {
           item.state1 = false;
           item.state2 = true;
@@ -133,7 +88,7 @@ export const TestSlice = createSlice({
       });
     },
     setStatus3: (state, action) => {
-      state.question?.questions.map(item => {
+      state.questionData?.questions.map(item => {
         if (item.questionId === action.payload) {
           item.state1 = false;
           item.state2 = false;
@@ -143,7 +98,7 @@ export const TestSlice = createSlice({
       });
     },
     setStatus4: (state, action) => {
-      state.question?.questions.map(item => {
+      state.questionData?.questions.map(item => {
         if (item.questionId === action.payload) {
           item.state1 = false;
           item.state2 = false;
@@ -160,13 +115,13 @@ export const TestSlice = createSlice({
       console.log("++++++",state.correctAnswers)
     },
 
-    setResultHeader:(state,action)=>{
-      state.resultHeader = action.payload
+    setFinalResult:(state,action)=>{
+      state.finalresult = action.payload
     },
-    setResultAnswers:(state,action)=>{
-      // console.log("++++++++",action.payload)
-      state.resultAnswers = action.payload
-    },
+    // setResultAnswers:(state,action)=>{
+    //   // console.log("++++++++",action.payload)
+    //   state.resultAnswers = action.payload
+    // },
     removeAnswers: (state, action) => {
       state.resultAnswers = [];
     },
@@ -187,9 +142,9 @@ export const {
   setStatus4,
   addTestId,
   setCorrectAnswers,
-  setResultHeader,
+  setFinalResult,
   setResultAnswers,
   removeAnswers,
   setTestPercentage
-} = TestSlice.actions;
-export default TestSlice.reducer;
+} = FinalTestSlice.actions;
+export default FinalTestSlice.reducer;

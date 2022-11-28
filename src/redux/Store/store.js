@@ -24,6 +24,7 @@ import AllCourseOfCategoryReducer from '../ThunkToolkit/categoryDisplayScreenApi
 import testdataReducer from '../ReduxPersist/TestSlice';
 import  joinCourseReducer  from '../ReduxPersist/JoinCourseRedux';
 import ChapterScreenReducer from '../ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import finaltestdataReducer from '../ReduxPersist/FinalTestSlice'
 
 const persistConfig = {
   key: 'root',
@@ -56,6 +57,7 @@ const reducer = combineReducers({
   joinCourse:joinCourseReducer,
   testdata:testdataReducer,
   chapterResponse: ChapterScreenReducer,
+  finaltestdata:finaltestdataReducer
 
 });
 
