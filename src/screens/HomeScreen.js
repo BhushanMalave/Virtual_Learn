@@ -27,7 +27,9 @@ import {
   setAllData,
   setNewestData,
   setPopularData,
+  addContinueData,
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import {continueApi} from '../authorization/Auth';
 import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
@@ -39,11 +41,11 @@ import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/A
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 
-import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 import {VideoPlayer} from '../components/VideoPlayer';
-import { OnGoing } from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
-import { OnGoingComponent } from '../components/OnGoingComponent';
+import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
+import {OnGoingComponent} from '../components/OnGoingComponent';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -57,7 +59,7 @@ export const HomeScreen = ({navigation}) => {
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
-  const ongoingdata = useSelector(state=>state.ongoingcourse.data);
+  const ongoingdata = useSelector(state => state.ongoingcourse.data);
 
   const video = url => {
     console.log(url);
@@ -131,17 +133,24 @@ export const HomeScreen = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <View style={styles.itemContainer} key={item.id}>
-                 <OnGoingComponent source={{uri:item?.coursePhoto}} name={item?.courseName} chapter={item?.completedChapter} ctdchapter={item?.totalChapter} 
-             onPress={async () => {
-              const res = await overViewData(token,item.courseId);
-              dispatch(addOverView(res))
-              const chapterRes = await chapterListData(token,item.courseId);
-              //  console.log("ohoooo",res);
-              //  console.log('eyeye',chapterRes);
-                   dispatch(addChapterList(chapterRes));
-                navigation.navigate('CourseScreen');
-             
-             }}/>
+                <OnGoingComponent
+                  source={{uri: item?.coursePhoto}}
+                  name={item?.courseName}
+                  chapter={item?.completedChapter}
+                  ctdchapter={item?.totalChapter}
+                  onPress={async () => {
+                    const res = await overViewData(token, item.courseId);
+                    dispatch(addOverView(res));
+                    const chapterRes = await chapterListData(
+                      token,
+                      item.courseId,
+                    );
+                    //  console.log("ohoooo",res);
+                    //  console.log('eyeye',chapterRes);
+                    dispatch(addChapterList(chapterRes));
+                    navigation.navigate('CourseScreen');
+                  }}
+                />
               </View>
             )}></FlatList>
         </View>
@@ -257,14 +266,15 @@ export const HomeScreen = ({navigation}) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
-                <View style={styles.btmcourseview}  key={item?.courseId}>
+                <View style={styles.btmcourseview} key={item?.courseId}>
                   <TouchableOpacity
                     onPress={async () => {
+                      dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
-                      console.log('==()==', res);
-                      dispatch(csChapterResponse({token, id: item?.courseId}));
-                      navigation.navigate('CourseScreen');
+                      if (res) {
+                        navigation.navigate('CourseScreen');
+                      }
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}
@@ -298,13 +308,13 @@ export const HomeScreen = ({navigation}) => {
             header={item?.categoryName}
             data={item?.popularCourseInEachCategoryList}
             onPress={() => {
-              dispatch(cdsbasicCourse({token,id:item?.categoryId}))
-              dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
-              dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
-              dispatch(cdsSubCategories({token,id:item?.categoryId}))
-              navigation.navigate('CategoryDisplayScreen',{item});
+              dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+              dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+              dispatch(cdsAllCourseOfCategory({token, id: item?.categoryId}));
+              dispatch(cdsSubCategories({token, id: item?.categoryId}));
+              navigation.navigate('CategoryDisplayScreen', {item});
             }}
-           />
+          />
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -313,7 +323,7 @@ export const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:Platform.OS === 'ios' ?35: 10,
+    marginTop: Platform.OS === 'ios' ? 35 : 10,
 
     // borderWidth:1
   },

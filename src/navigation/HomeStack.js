@@ -12,7 +12,8 @@ import { TestStack } from './TestStack';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { CourseComponent } from '../components/CourseComponent';
 
-import { LessonVideoPlayer } from '../components/LessonVideoPlayer';
+import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
+import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,12 +60,17 @@ export const HomeStack = () => {
         component={CourseComponent}
         options={{headerShown: false}}
       />
-<Stack.Screen
+      <Stack.Screen
         name="LessonVideoPlayer"
         component={LessonVideoPlayer}
         options={{headerShown: false}}
       />
 
+      <Stack.Screen
+        name="ContinuePopUp"
+        component={ContinuePopUp}
+        options={{headerShown: false}}
+      />
 <Stack.Screen
 name="TestStack"
           component={TestStack}

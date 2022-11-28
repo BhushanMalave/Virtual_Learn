@@ -1,27 +1,64 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {View, Text, Modal, StyleSheet} from 'react-native';
 
 import {ButtonComponent} from '../Buttons';
 import {ButtonComponent4} from '../Buttons';
 import {useSelector, useDispatch} from 'react-redux';
-import { setPopUpState } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {useIsFocused} from '@react-navigation/native';
 
-export const ContinuePopUp = () => {
-    const continueData = useSelector(state => state.chapterResponse.continueData);
+export const ContinuePopUp = ({navigation}) => {
+  const continueData = useSelector(state => state.chapterResponse.continueData);
   const filterState = useSelector(state => state.chapterResponse.popUpState);
-  console.log(filterState)
-
+  const [updatedTime, setUpdatedTime] = useState(0);
+  const video = (item) => {
+    navigation.navigate('LessonVideoPlayer', {item});
+  };
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (continueData?.pauseTime) {
+      const time = continueData?.pauseTime.split(':');
+      let time1 = [];
+
+      for (i = 0; i < time.length; i++) {
+        time1[i] = time[i] * 1;
+      }
+      let updateTime = '';
+      let i = 0;
+      let j = time.length;
+      let k = 0;
+      if (time1[0] == 0 && time1[1] == 0) {
+        updateTime = 0 + '.' + time1[2];
+        setUpdatedTime(updateTime);
+      } else if (time1[0] == 0) {
+        updateTime = 0 + '.' + time1[1] + '.' + time1[2];
+        setUpdatedTime(updateTime);
+      } else {
+        if (time1[1] == 0) {
+          str = toString(time1[2]);
+          updateTime = time1[0] + '.00.' + time1[2];
+          setUpdatedTime(updateTime);
+        } else {
+          updateTime = time1[0] + '.' + time1[1] + '.' + time1[2];
+          setUpdatedTime(updateTime);
+        }
+      }
+    }
+  }, [continueData?.pauseTime]);
+
+  
   return (
-    <Modal animationType="slide" transparent={true} visible={filterState} >
-      <View style={styles.container}> 
+    <Modal transparent={true} visible={filterState}>
+      <View style={styles.container}>
         <View style={styles.containerView}>
           <View style={styles.messageContainer}>
             <View style={styles.textView}>
-              <Text style={styles.textStyle}>Your Lesson paused at 1.21</Text>
               <Text style={styles.textStyle}>
-                Do you want to continue watching
+                Your Lesson paused at {updatedTime}
+              </Text>
+              <Text style={styles.textStyle}>
+                Do you want to continue watching?
               </Text>
             </View>
 
@@ -30,6 +67,16 @@ export const ContinuePopUp = () => {
                 text={'Continue Watching'}
                 onPress={() => {
                   dispatch(setPopUpState());
+                  const body = {
+                    chapterId: continueData.chapterId,
+                    chapterNumber: continueData.chapterNumber,
+                    lessonId: continueData.lessonId,
+                    lessonName: continueData.lessonName,
+                    lessonNumber: continueData.lessonNumber,
+                    pauseTime: continueData?.pauseTime,
+                    videoLink: continueData.videoLink,
+                  };
+                  video(body);
                 }}
               />
             </View>
@@ -38,6 +85,16 @@ export const ContinuePopUp = () => {
                 text={'Watch From Beginning'}
                 onPress={() => {
                   dispatch(setPopUpState());
+                  const body = {
+                    chapterId: continueData.chapterId,
+                    chapterNumber: continueData.chapterNumber,
+                    lessonId: continueData.lessonId,
+                    lessonName: continueData.lessonName,
+                    lessonNumber: continueData.lessonNumber,
+                    pauseTime: 0,
+                    videoLink: continueData.videoLink,
+                  };
+                  video(body);
                 }}
               />
             </View>
@@ -53,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#000000AA'
+    backgroundColor: '#000000AA',
   },
   containerView: {
     backgroundColor: 'rgba(255,255,255,0.82)',

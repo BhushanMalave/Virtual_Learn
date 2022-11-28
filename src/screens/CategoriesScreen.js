@@ -22,7 +22,7 @@ import { cdsSubCategories } from '../redux/ThunkToolkit/categoryDisplayScreenApi
 export const CategoriesScreen = ({navigation}) => {
  
   const token = useSelector(state => state.userDetails.token);
-  const catData = useSelector(state => state.searchData.catData);
+  const catData1 = useSelector(state => state.categories.data);
 
   const call = async () => {
     const categories = await searchCategoriesdata(token);
@@ -40,7 +40,7 @@ export const CategoriesScreen = ({navigation}) => {
           <Image source={require('../assets/images/icn_back_header.png')} />
         </Pressable>
 
-        <Pressable>
+        <Pressable  onPress={() => navigation.navigate('HomeSearch')}>
           <Image source={require('../assets/images/icn_search-Search.png')} />
         </Pressable>
       </View>
@@ -50,7 +50,7 @@ export const CategoriesScreen = ({navigation}) => {
       </Text>
 
       <View style={styles.middlecontainer}>
-        {catData.map(item => (
+        {catData1.map(item => (
           <Pressable    onPress={() => {
             dispatch(cdsbasicCourse({token,id:item?.categoryId}))
             dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
