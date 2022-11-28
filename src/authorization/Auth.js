@@ -469,14 +469,14 @@ export const FinalTest = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MjcxMjksImV4cCI6MTY2OTYzNjEyOX0.rMxzWfQoeMJSxEcyojESdnD-4Anzm3BS8D1_oHgT1E1MW2TqecjLEpJ1-_USNs3-zcbZeRdRnNqqCKvyVhUuEQ',
       'Content-Type': 'application/json',
     },
   };
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/moduleTest?testId=${id}`,
+      `https://virtual-learn-app-java.herokuapp.com/user/finalTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -493,14 +493,14 @@ export const SubmitFinalTest = async (token, Body) => {
   const body = JSON.stringify(Body);
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MjcxMjksImV4cCI6MTY2OTYzNjEyOX0.rMxzWfQoeMJSxEcyojESdnD-4Anzm3BS8D1_oHgT1E1MW2TqecjLEpJ1-_USNs3-zcbZeRdRnNqqCKvyVhUuEQ',
       'Content-Type': 'application/json',
     },
   };
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/user/submit',
+      'https://virtual-learn-app-java.herokuapp.com/user/finalSubmit',
       body,
       options,
     );
@@ -518,14 +518,14 @@ export const FinalTestResult = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MjcxMjksImV4cCI6MTY2OTYzNjEyOX0.rMxzWfQoeMJSxEcyojESdnD-4Anzm3BS8D1_oHgT1E1MW2TqecjLEpJ1-_USNs3-zcbZeRdRnNqqCKvyVhUuEQ',
       'Content-Type': 'application/json',
     },
   };
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/resultHeader?testId=${id}`,
+      `https://virtual-learn-app-java.herokuapp.com/user/result?testId=${id}`,
       options,
     );
     if (response.data) {
