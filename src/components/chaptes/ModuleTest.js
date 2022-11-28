@@ -66,24 +66,24 @@ const data = useSelector(state => state.chapterResponse.data);
                   console.log(enrolledghhj)
                   )}
                   }}>
-                  <Text style={styles.chapterText}>{item.test}</Text>
+                  <Text style={styles.chapterText}>{item?.test}</Text>
                   <Text style={styles.chapterTime}>
-                    {item.duration} mins | {item.questions} Questions
+                    {item?.duration} mins | {item?.questions} Questions
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
 
-            {item.rate === -1 ? (
+            {item?.rate === -1 ? (
               <></>
             ) : (
               <>
-                {item.rate === 0 || item.rate ? <></> : <></>}
+                {item?.rate === 0 || item?.rate ? <></> : <></>}
                 <>
                   {' '}
                   <View style={styles.rateView}>
                     <View style={styles.rateNumView}>
-                      <Text style={styles.rateNum}>{item.rate}</Text>
+                      <Text style={styles.rateNum}>{item?.rate}</Text>
                       <Text style={styles.ratePercent}>%</Text>
                     </View>
                     <Text style={styles.rateText}>Approval Rate</Text>

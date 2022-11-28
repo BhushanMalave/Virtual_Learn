@@ -20,7 +20,7 @@ export const RegisterSuccessfully = ({navigation}) => {
             <Image source={require('../assets/images/04.8_VirtualLearn_Register_success/img_Register_sucess_illustration.png')} resizeMode="contain" style={styles.image}/>
             <Text style={styles.text}>Success!</Text>
             <Text style={styles.description}>Your VirtualLearn account has been successfully created!</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Drawer')}>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.button}>Lets Get Started</Text>
             </TouchableOpacity>
             </ScrollView>

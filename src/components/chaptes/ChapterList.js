@@ -13,7 +13,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { changeChapterListStatus } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
-export const ChapterList = item => {
+export const ChapterList = (item) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.chapterList}>

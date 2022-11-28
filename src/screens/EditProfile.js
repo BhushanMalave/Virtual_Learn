@@ -17,68 +17,32 @@ let valueGender = '';
 let valueOccupation = '';
 import icn_dropdown from '../assets/images/icn_dropdown.png';
 import icn_back_header from '../assets/images/icn_back_header.png';
-
 import {ButtonComponent} from '../components/Buttons';
-
 import ImagePicker from 'react-native-image-crop-picker';
-import DropDownField from './../components/DropDownField';
-import {changeUserData} from '../authorization/Auth';
-
 import {TextInputComp} from '../components/TextInputComp';
-
-const data = {
-  fullname: 'Mahendra Singh Dhoni',
-  username: 'Msdian',
-  email: 'msd07@gamil.com',
-  mobilenumber: '9876543211',
-  occupation: 'Design',
-  gender: 'Female',
-};
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {mpChangeUserData} from '../authorization/Auth';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import { getOccupationData } from '../authorization/Auth';
+
+
 export const EditProfile = ({navigation}) => {
   const genderData = [
     {genderId: 1, genderName: 'Female'},
     {genderId: 2, genderName: 'Male'},
   ];
-  const occupationData = [
-    {
-      subCategoryId: 2,
-      subCategoryName: 'UX Design',
-    },
-    {
-      subCategoryId: 3,
-      subCategoryName: 'UI Design',
-    },
-    {
-      subCategoryId: 4,
-      subCategoryName: 'Sales',
-    },
-    {
-      subCategoryId: 5,
-      subCategoryName: 'marketing',
-    },
-    {
-      subCategoryId: 6,
-      subCategoryName: 'Hindustani Music',
-    },
-  ];
-
+  const [occupationData,setOccupationData] = useState(null); 
   const [selected, setSelected] = useState();
   const [selectedOccu, setSelectedOccu] = useState();
-
   const [genderState, setGenderState] = useState(false);
   const [occupationState, setOccupationState] = useState(false);
-
   const [text, setText] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  const [image, setImage] = useState(userData.profilePhoto);
-
+  const [image, setImage] = useState(userData?.profilePhoto);
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
       width: 110,
@@ -123,8 +87,14 @@ export const EditProfile = ({navigation}) => {
     return formData;
   };
 
+  const occupation = async () => {
+   const res = await  getOccupationData(token);
+   setOccupationData(res);
+  }
+
   useEffect(() => {
     dispatch(mpUserDetails(token));
+    occupation();
     // console.log(userData);
   }, []);
   return (
@@ -304,7 +274,7 @@ export const EditProfile = ({navigation}) => {
                           }}>
                           <Image
                             source={require('../assets/images/icn_close_filter.png')}
-                            style={{tintColor:'black'}}
+                            style={{tintColor: 'black'}}
                           />
                         </TouchableOpacity>
                       </>
@@ -324,18 +294,15 @@ export const EditProfile = ({navigation}) => {
                   )}
                   {occupationState ? (
                     <>
-                      <View
-                        style={styles.dropDownBox}>
+                      <View style={styles.dropDownBox}>
                         {occupationData.map(item => (
                           <View key={item.subCategoryId}>
-                            <View
-                              style={styles.dropDownTextView}>
+                            <View style={styles.dropDownTextView}>
                               <TouchableOpacity
                                 onPress={() => {
                                   setSelectedOccu(item.subCategoryName);
                                 }}>
-                                <Text
-                                  style={styles.dropDownText}>
+                                <Text style={styles.dropDownText}>
                                   {item.subCategoryName}
                                 </Text>
                               </TouchableOpacity>
@@ -383,7 +350,7 @@ export const EditProfile = ({navigation}) => {
                           }}>
                           <Image
                             source={require('../assets/images/icn_close_filter.png')}
-                            style={{tintColor:'black'}}
+                            style={{tintColor: 'black'}}
                           />
                         </TouchableOpacity>
                       </>
@@ -413,14 +380,12 @@ export const EditProfile = ({navigation}) => {
                         }}>
                         {genderData.map(item => (
                           <View key={item.genderId}>
-                            <View
-                              style={styles.dropDownTextView}>
+                            <View style={styles.dropDownTextView}>
                               <TouchableOpacity
                                 onPress={() => {
                                   setSelected(item.genderName);
                                 }}>
-                                <Text
-                                  style={styles.dropDownText}>
+                                <Text style={styles.dropDownText}>
                                   {item.genderName}
                                 </Text>
                               </TouchableOpacity>
@@ -588,24 +553,20 @@ const styles = StyleSheet.create({
   // dropDownForm: {
   //   marginTop: Platform.OS == 'ios' ? 30 : 20,
   // },
-  dropDownBox:{
+  dropDownBox: {
     marginTop: 10,
     borderWidth: 1,
     borderColor: '#7A7A7A',
     borderRadius: 10,
   },
-dropDownTextView:{
-  marginTop: 5,
-  marginHorizontal: 20,
-  padding: 5,
-},
-  dropDownText:{
+  dropDownTextView: {
+    marginTop: 5,
+    marginHorizontal: 20,
+    padding: 5,
+  },
+  dropDownText: {
     fontSize: 12,
-    fontFamily:
-      Platform.OS == 'ios'
-        ? 'Proxima Nova'
-        : 'ProximaNova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     color: '#7A7A7A',
   },
-
 });

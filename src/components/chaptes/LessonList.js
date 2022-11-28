@@ -56,11 +56,11 @@ export const LessonList = (item) => {
 
         <View style={styles.container}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={styles.chapterNumber}>0{item.number}</Text>
+            <Text style={styles.chapterNumber}>0{item?.number}</Text>
             <View style={{width: '75%'}}>
               {/* <View > */}
-              <Text style={styles.chapterText}>{item.lessonName}</Text>
-              <Text style={styles.chapterTime}>{item.duration} mins</Text>
+              <Text style={styles.chapterText}>{item?.lessonName}</Text>
+              <Text style={styles.chapterTime}>{item?.duration} mins</Text>
             </View>
           </View>
 

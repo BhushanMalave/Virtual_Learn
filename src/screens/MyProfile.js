@@ -12,15 +12,21 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const refreshToken = async() => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
 
+  };  
   useEffect(() => {
     dispatch(mpUserDetails(token));
-    //console.log(userData);
+    // refreshToken();
+    console.log(userData);
   },[]);
   return (
     <ScrollView>

@@ -18,13 +18,8 @@ import {useSelector,useDispatch} from 'react-redux';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
-import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { overViewData } from '../authorization/Auth';
 
-
-
-export const CategoryDisplayScreen = ({navigation, route}) => {
+export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
   const featuredCourse = useSelector(state => state.advanceCourse.data);
   const subCategories = useSelector(state => state.subCategories.data);
@@ -65,7 +60,6 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
                   courseId={item?.courseId}
                   coursePhoto={item?.coursePhoto}
                   previewVideo={item?.previewVideo}
-                  nav={navigation}
                 />
               </View>
             )}></FlatList>
@@ -87,33 +81,13 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
                       courseId={item?.courseId}
                       coursePhoto={item?.coursePhoto}
                       previewVideo={item?.previewVideo}
-                      nav={navigation}
                     />
                   </View>
                 )}></FlatList>
             </View>
           </View>
-        )} 
-
-        <View>
-          <Text style={styles.text2}>Subcategories</Text>
-
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={styles.viewcatin}>
-              {subCategories?.map(item => (
-                <CategoriesComponents
-                  category={item?.subCategoryName}
-                  onPress={() => {
-                    navigation.navigate('SubCategoryDisplayScreen', {item});
-                    dispatch(cdsbasicCourse({token, id: item?.subCategoryId}));
-                    dispatch(cdsAdvanceCourse({token, id: item?.subCategoryId}));
-                    dispatch(cdsAllCourseOfCategory({token, id: item?.subCategoryId}));
-                  }}
-                />
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+        )}
+        
         <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
           {allcourse?.map(item => (
@@ -124,17 +98,6 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
                 categoryName={item?.categoryName}
                 coursePhoto={item?.coursePhoto}
                 courseId={item?.courseId}
-                key={item?.courseId}
-                id={item?.courseId}
-                onPress={async () => {
-                  const obj = {
-                    courseId: item.courseId,
-                  };
-                  dispatch(csChapterResponse({token, id: item.courseId}));
-                  const res = await overViewData(token, item.courseId);
-                  dispatch(addOverView(res));
-                  navigation.navigate('CourseScreen');
-                }}
               />
             </View>
           ))}
