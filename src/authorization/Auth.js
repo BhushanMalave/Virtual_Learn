@@ -91,7 +91,7 @@ export const mpChangePassword = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/changePassword',
+      'https://virtual-learn-app-java.herokuapp.com/user/changePassword',
       body,
       options,
     );
@@ -107,7 +107,7 @@ export const mpChangePassword = async (token, objBody) => {
 export const mpChangeUserData = async (token, formBody) => {
 
   try {
-    let res = await fetch('https://virtual-learn-app-java.herokuapp.com/save', {
+    let res = await fetch('https://virtual-learn-app-java.herokuapp.com/user/save', {
       method: 'put',
       body: formBody,
       headers: {
