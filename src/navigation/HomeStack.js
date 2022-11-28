@@ -6,6 +6,7 @@ import {CategoriesScreen} from '../screens/CategoriesScreen';
 import {HomeSearch} from '../screens/HomeSearch';
 import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
+import { SubCategoryDisplayScreen } from '../screens/SubCategoryDisplayScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {CongratulationScreen} from '../screens/CongratulationScreen';
 import {TestStack} from './TestStack';
@@ -46,6 +47,11 @@ export const HomeStack = () => {
       <Stack.Screen
         name="CategoryDisplayScreen"
         component={CategoryDisplayScreen}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="SubCategoryDisplayScreen"
+        component={SubCategoryDisplayScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen

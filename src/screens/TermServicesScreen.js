@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState ,useEffect} from 'react';
 import {SafeAreaView, View, StyleSheet, Image, Text,TouchableOpacity} from 'react-native';
-
+import { termsAndConditions } from '../authorization/Auth';
 export const TermServicesScreen = ({navigation}) => {
+
+
+  const [data,setData] = useState('');
+
+  const call = async () => {
+        const res = await termsAndConditions();
+        console.log(res)
+        setData(res);
+  }
+  useEffect(() => {
+  call();
+  },[]);
   return (
     <SafeAreaView style={styles.container}>
            <TouchableOpacity  onPress={ () => {navigation.goBack();}}>
@@ -12,7 +24,8 @@ export const TermServicesScreen = ({navigation}) => {
       </TouchableOpacity>
       <Text style={styles.text}>Terms of Services</Text>
       <View style={styles.description}>
-        <Text style={styles.text1}>These Terms of Services ("Terms") were last updated on September 16,
+      <Text style={styles.text1}>{data}</Text>
+        {/* <Text style={styles.text1}>These Terms of Services ("Terms") were last updated on September 16,
         2020.</Text>
       <Text style={styles.text1}>
         VirtualLearn's mission is to improve lives through learning. We
@@ -30,7 +43,7 @@ export const TermServicesScreen = ({navigation}) => {
         processing of personal data of our students and instructors in our
         Privacy Policy. If you are using VirtualLearn as part of your employer's
         VirtualLearn For Business learning and development program, you can
-        consult our VirtualLearn for Business Privacy Statement.</Text>
+        consult our VirtualLearn for Business Privacy Statement.</Text> */}
       </View>
     </SafeAreaView>
   );

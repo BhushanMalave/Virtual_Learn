@@ -1,13 +1,7 @@
 import React from 'react';
 
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+ LogBox
 } from 'react-native';
 
 import store from './src/redux/Store/store';
@@ -17,7 +11,7 @@ import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
 
 let persistor = persistStore(store);
-
+ //LogBox.ignoreAllLogs();
 const App = () => {
   return (
     <Provider store={store}>

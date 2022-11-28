@@ -17,7 +17,7 @@ export const Completed = createAsyncThunk(
         'https://virtual-learn-app-java.herokuapp.com/user/completedCourses',
         options,
       );
-      console.log(response.data)
+     // console.log(response.data)
       return response.data;
     } catch (error) {
       console.log(error.response.data);

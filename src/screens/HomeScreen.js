@@ -46,6 +46,8 @@ import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreen
 import {VideoPlayer} from '../components/VideoPlayer';
 import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import {OnGoingComponent} from '../components/OnGoingComponent';
+import {getVerifiedKeys} from '../authorization/RefreshToken';
+import {setToken} from '../redux/ReduxPersist/UserDetails';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -61,10 +63,10 @@ export const HomeScreen = ({navigation}) => {
   const topCoursesData = useSelector(state => state.topCourses.data);
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
 
-  const video = url => {
-    console.log(url);
+  const refreshToken = async () => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
   };
-
   const allCourse = async () => {
     const data1 = await all(token);
     if (data1) {
@@ -81,6 +83,7 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
+    // refreshToken();
   }, []);
   return (
     <SafeAreaView style={styles.container}>
@@ -104,34 +107,33 @@ export const HomeScreen = ({navigation}) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
-              <TouchableOpacity  onPress={async () => {
-                dispatch(csChapterResponse({token,id:item.courseId}))
-                const res = await overViewData(token, item.courseId);
-                dispatch(addOverView(res));
-                navigation.navigate('CourseScreen');
-               
-              }}
-              >
-              <View style={styles.itemContainer} key={item.id}>
-                <ImageBackground
-                  source={{uri: item?.coursePhoto}}
-                  style={{
-                    height: 140,
-                    width: 260,
-                    borderRadius: 5,
-                    overflow: 'hidden',
-                  }}>
-                  <View
+              <TouchableOpacity
+                onPress={async () => {
+                  dispatch(csChapterResponse({token, id: item.courseId}));
+                  const res = await overViewData(token, item.courseId);
+                  dispatch(addOverView(res));
+                  navigation.navigate('CourseScreen');
+                }}>
+                <View style={styles.itemContainer} key={item.id}>
+                  <ImageBackground
+                    source={{uri: item?.coursePhoto}}
                     style={{
-                      height: 45,
-                      marginTop: 90,
-                      justifyContent: 'center',
-                      margin: 13,
+                      height: 140,
+                      width: 260,
+                      borderRadius: 5,
+                      overflow: 'hidden',
                     }}>
-                    <Text style={styles.courseText}>{item?.courseName}</Text>
-                  </View>
-                </ImageBackground>
-              </View>
+                    <View
+                      style={{
+                        height: 45,
+                        marginTop: 90,
+                        justifyContent: 'center',
+                        margin: 13,
+                      }}>
+                      <Text style={styles.courseText}>{item?.courseName}</Text>
+                    </View>
+                  </ImageBackground>
+                </View>
               </TouchableOpacity>
             )}></FlatList>
         </View>
@@ -152,7 +154,6 @@ export const HomeScreen = ({navigation}) => {
                     const res = await overViewData(token, item.courseId);
                     dispatch(addOverView(res));
                     navigation.navigate('CourseScreen');
-                   
                   }}
                 />
               </View>
@@ -191,7 +192,6 @@ export const HomeScreen = ({navigation}) => {
                       );
                       dispatch(cdsSubCategories({token, id: item?.categoryId}));
                       navigation.navigate('CategoryDisplayScreen', {item});
-                     
                     }}
                   />
                 </View>
@@ -276,7 +276,6 @@ export const HomeScreen = ({navigation}) => {
                       dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
-                      navigation.navigate('CourseScreen');
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}
@@ -285,9 +284,7 @@ export const HomeScreen = ({navigation}) => {
 
                     <View style={styles.btmitemContainer}>
                       <View>
-                        <Text
-                          style={styles.btmcourseText}
-                          ellipsizeMode="tail">
+                        <Text style={styles.btmcourseText} ellipsizeMode="tail">
                           {item?.courseName}
                         </Text>
                         <Text style={styles.ChoiseCourseChapterNum}>

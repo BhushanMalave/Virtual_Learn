@@ -16,20 +16,25 @@ import {NotificationsComponentUnseen} from '../components/NotificationComponents
 import {NotificationsComponentSeen} from '../components/NotificationComponents';
 import {useDispatch, useSelector} from 'react-redux';
 import {notificationApiCall} from '../redux/ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
-import {iteratorSymbol} from 'immer/dist/internal';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
 import axios from 'axios';
 export const NotificationsScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const notificationData = useSelector(state => state.notificationData.data);
   const token = useSelector(state => state.userDetails.token);
+  const refreshToken = async() => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
 
+  };
  
 
 
 
   useEffect(() => {
     dispatch(notificationApiCall(token));
+    refreshToken();
     // console.log(notificationData)
   }, []);
   return (

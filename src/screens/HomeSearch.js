@@ -32,7 +32,13 @@ import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScree
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 import {topSearchData} from '../authorization/Auth';
 import {setTopSearchData} from '../redux/ReduxPersist/searchDataSlice';
-import { searchDataKeyword } from '../authorization/Auth';
+import {searchDataKeyword} from '../authorization/Auth';
+import {setToken} from '../redux/ReduxPersist/UserDetails';
+import {searchByKeyword} from '../authorization/Auth';
+import {getVerifiedKeys} from '../authorization/RefreshToken';
+import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {overViewData} from '../authorization/Auth';
 export const HomeSearch = ({navigation}) => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
@@ -53,8 +59,10 @@ export const HomeSearch = ({navigation}) => {
     } else {
       dispatch(setComponentRender(3));
     }
-
-    // console.log(data);
+  };
+  const refreshToken = async () => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
   };
 
   const call = () => {
@@ -73,6 +81,7 @@ export const HomeSearch = ({navigation}) => {
     dispatch(setComponentRender(1));
     topSearch();
     call();
+    // refreshToken();
   }, []);
 
   return (
@@ -118,17 +127,25 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.topsearchView}>
             <Text style={styles.texttopsearch}>Top Searches</Text>
             <View style={styles.viewtopsearch}>
-              {/* {topData.map(item => (
-                 <TopSearchComponent text= {item}/>
-              )
-               
-              )} */}
+              {topData?.map(item => (
+                <TopSearchComponent
+                  string={item?.keyWord}
+                  onPress={async () => {
+                    const res = await searchByKeyword(token, item.keyWord);
+
+                    if (res) {
+                      dispatch(setSearchData(res));
+                      dispatch(setComponentRender(2));
+                    }
+                  }}
+                />
+              ))}
             </View>
           </View>
           <View style={styles.searchCatView}>
             <Text style={styles.texttopsearch}>Search From Categories</Text>
             <View style={styles.viewcatin}>
-              {categoriesData.map(item => (
+              {categoriesData?.map(item => (
                 <CategoriesComponent
                   key={item?.categoryId}
                   id={item?.categoryId}
@@ -160,10 +177,16 @@ export const HomeSearch = ({navigation}) => {
                 categoryName={item?.categoryName}
                 key={item?.courseId}
                 id={item?.courseId}
-                onPresss = {async () => {
-                  const msg  = await searchDataKeyword(); 
-                  
+                onPress={async () => {
+                  const obj = {
+                    courseId: item.courseId,
+                  };
+                  const msg = await searchDataKeyword(token, obj);
 
+                  dispatch(csChapterResponse({token, id: item.courseId}));
+                  const res = await overViewData(token, item.courseId);
+                  dispatch(addOverView(res));
+                  navigation.navigate('CourseScreen');
                 }}
               />
             ))}

@@ -22,11 +22,11 @@ import {MyCourseData, overViewData} from '../authorization/Auth';
 import {myCourses} from '../redux/ThunkToolkit/MyCourses/MyCourseApi';
 import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import {Completed} from '../redux/ThunkToolkit/MyCourses/CompletedApi';
-
+import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {chapterListData} from '../authorization/Auth';
 import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-
+import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
@@ -41,10 +41,15 @@ export const MyCourse = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
 
   const dispatch = useDispatch();
+  const refreshToken = async () => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
 
   useEffect(() => {
     dispatch(myCourses(token));
     dispatch(OnGoing(token));
+    refreshToken();
   }, []);
 
   return (
@@ -106,15 +111,10 @@ export const MyCourse = ({navigation}) => {
                     chapter={item?.completedChapter}
                     ctdchapter={item?.totalChapter}
                     onPress={async () => {
-                      navigation.navigate('CourseScreen');
+                      dispatch(csChapterResponse(token, {id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
-                      const chapterRes = await chapterListData(
-                        token,
-                        item.courseId,
-                      );
-                      dispatch(addChapterList(chapterRes));
-                      
+                      navigation.navigate('CourseScreen');
                     }}
                   />
                 )}></FlatList>
@@ -132,14 +132,9 @@ export const MyCourse = ({navigation}) => {
                     name={item?.courseName}
                     percentage={item?.coursePercentage}
                     onPress={async () => {
+                      dispatch(csChapterResponse(token, {id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
-                      const chapterRes = await chapterListData(
-                        token,
-                        item.courseId,
-                      );
-
-                      dispatch(addChapterList(chapterRes));
                       navigation.navigate('CourseScreen');
                     }}
                   />
