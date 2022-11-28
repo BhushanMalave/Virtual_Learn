@@ -26,12 +26,12 @@ export const VideoPlayer = ({navigation, route}) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   const FullScreen = () => {
+    setFullScreen(!fullScreen);
     if (fullScreen) {
       Orientation.lockToPortrait();
     } else {
       Orientation.lockToLandscape();
     }
-    setFullScreen(!fullScreen);
   };
 
   const timeformat = timesec => {
@@ -52,7 +52,7 @@ export const VideoPlayer = ({navigation, route}) => {
       <Pressable
         onPress={() => {
           //console.log('====', time.currentTime);
-          Orientation.lockToPortrait();
+          {fullScreen && FullScreen();}
           navigation.goBack();
         
         }}>
@@ -73,6 +73,7 @@ export const VideoPlayer = ({navigation, route}) => {
         controls={false}
         fullscreen={fullScreen}
         onEnd={() => {
+          {fullScreen && FullScreen();}
           navigation.goBack();
         }}
         onProgress={data => {
@@ -117,8 +118,8 @@ export const VideoPlayer = ({navigation, route}) => {
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-           // onValueChange={(value) => { handleslide(value)}}
-           //onValueChange={value => { videoRef.current.seek(value * time.endingTime); }}
+            onValueChange={(value) => { Platform.OS === 'ios' && handleslide(value)}}
+          
           />
         </View>
       </View>

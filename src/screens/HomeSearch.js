@@ -26,17 +26,20 @@ import {useSelector, useDispatch} from 'react-redux';
 import {searchData} from '../authorization/Auth';
 import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
-import { cdsbasicCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
-import { cdsAdvanceCourse } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
-import { cdsAllCourseOfCategory } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
-import { cdsSubCategories } from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
-
+import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+import {topSearchData} from '../authorization/Auth';
+import {setTopSearchData} from '../redux/ReduxPersist/searchDataSlice';
+import { searchDataKeyword } from '../authorization/Auth';
 export const HomeSearch = ({navigation}) => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const categoriesData = useSelector(state => state.categories.data);
   const data = useSelector(state => state.searchData.data);
+  const topData = useSelector(state => state.searchData.topSearchData);
   const componentrender = useSelector(
     state => state.searchData.componentRender,
   );
@@ -55,13 +58,20 @@ export const HomeSearch = ({navigation}) => {
   };
 
   const call = () => {
-    if (text === '') {
+    if (text == ' ') {
       dispatch(setComponentRender(1));
+    }
+  };
+  const topSearch = async () => {
+    const res = await topSearchData(token);
+    if (res) {
+      dispatch(setTopSearchData(res));
     }
   };
 
   useEffect(() => {
     dispatch(setComponentRender(1));
+    topSearch();
     call();
   }, []);
 
@@ -108,15 +118,11 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.topsearchView}>
             <Text style={styles.texttopsearch}>Top Searches</Text>
             <View style={styles.viewtopsearch}>
-              <TopSearchComponent text="12sadfg34" />
-              <TopSearchComponent text="dfsdfghj" />
-              <TopSearchComponent text="dfgzxczxcvhj" />
-              <TopSearchComponent text="dfsdfgghj" />
-              <TopSearchComponent text="dfsdfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfsdfghj" />
-              <TopSearchComponent text="dfghj" />
-              <TopSearchComponent text="dfdfghj" />
+              {/* {topData.map(item => (
+                 <TopSearchComponent text= {item}/>
+              )
+               
+              )} */}
             </View>
           </View>
           <View style={styles.searchCatView}>
@@ -124,16 +130,18 @@ export const HomeSearch = ({navigation}) => {
             <View style={styles.viewcatin}>
               {categoriesData.map(item => (
                 <CategoriesComponent
-                 key={item?.categoryId}
+                  key={item?.categoryId}
                   id={item?.categoryId}
                   img={item?.categoryPhoto}
                   category={item?.categoryName}
                   onPress={() => {
-                    dispatch(cdsbasicCourse({token,id:item?.categoryId}))
-                    dispatch(cdsAdvanceCourse({token,id:item?.categoryId}))
-                    dispatch(cdsAllCourseOfCategory({token,id:item?.categoryId}))
-                    dispatch(cdsSubCategories({token,id:item?.categoryId}))
-                    navigation.navigate('CategoryDisplayScreen',{item});
+                    dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                    dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+                    dispatch(
+                      cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                    );
+                    dispatch(cdsSubCategories({token, id: item?.categoryId}));
+                    navigation.navigate('CategoryDisplayScreen', {item});
                   }}
                 />
               ))}
@@ -152,6 +160,11 @@ export const HomeSearch = ({navigation}) => {
                 categoryName={item?.categoryName}
                 key={item?.courseId}
                 id={item?.courseId}
+                onPresss = {async () => {
+                  const msg  = await searchDataKeyword(); 
+                  
+
+                }}
               />
             ))}
           </View>
@@ -226,14 +239,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 120,
     marginTop: Platform.OS === 'ios' ? -5 : -5,
-    color:'black'
+    color: 'black',
   },
   textInput: {
     height: 35,
     width: '75%',
     marginLeft: 10,
     marginTop: 2,
-   color: '#2B2B2B',
+    color: '#2B2B2B',
   },
   texttopsearch: {
     fontSize: 18,

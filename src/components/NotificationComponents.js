@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,31 +13,29 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+export const NotificationsComponentUnseen = props => {
+  const notify = props.notify;
 
-export const NotificationsComponentUnseen = (props) => {
-  
-   const notify = props.notify;
-   
   useEffect(() => {
-      notify();
-  },[])
+    notify();
+  }, []);
   return (
-    <TouchableOpacity onPress = { props.onPress}>
-    <View style={styles.view}>
-      <View style={styles.viewin}>
-        <Image source={{uri: props?.img}} style={styles.imageinc} />
-        <View style={styles.viewtext}>
-          <Text style={styles.text2}>{props?.desc}</Text>
-          <Text style={styles.text3}>{props?.time}</Text>
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={styles.view}>
+        <View style={styles.viewin}>
+          <Image source={{uri: props?.img}} style={styles.imageinc} />
+          <View style={styles.viewtext}>
+            <Text style={styles.text2}>{props?.desc}</Text>
+            <Text style={styles.text3}>{props?.time}</Text>
+          </View>
+          <View style={styles.borderpoint1} />
         </View>
-        <View style={styles.borderpoint1} />
       </View>
-    </View>
     </TouchableOpacity>
   );
 };
 
-export const NotificationsComponentSeen = (props) => {
+export const NotificationsComponentSeen = props => {
   return (
     <View style={styles.viewin}>
       <Image source={{uri: props?.img}} style={styles.imageinc} />
@@ -78,7 +76,6 @@ const styles = StyleSheet.create({
     marginRight: 65,
     marginVertical: 22,
     flexDirection: 'row',
-    
   },
   imageinc: {
     height: 24,
@@ -95,7 +92,7 @@ const styles = StyleSheet.create({
   text3: {
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
-   
+
     color: '#7A7A7A',
     marginLeft: 10,
     marginTop: 8,

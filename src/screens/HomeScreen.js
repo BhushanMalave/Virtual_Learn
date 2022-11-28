@@ -104,6 +104,18 @@ export const HomeScreen = ({navigation}) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
+              <TouchableOpacity  onPress={async () => {
+                navigation.navigate('CourseScreen');
+                const res = await overViewData(token, item.courseId);
+                dispatch(addOverView(res));
+                const chapterRes = await chapterListData(
+                  token,
+                  item.courseId,
+                );
+                dispatch(addChapterList(chapterRes));
+               
+              }}
+              >
               <View style={styles.itemContainer} key={item.id}>
                 <ImageBackground
                   source={{uri: item?.coursePhoto}}
@@ -124,6 +136,7 @@ export const HomeScreen = ({navigation}) => {
                   </View>
                 </ImageBackground>
               </View>
+              </TouchableOpacity>
             )}></FlatList>
         </View>
         <View>
@@ -139,16 +152,15 @@ export const HomeScreen = ({navigation}) => {
                   chapter={item?.completedChapter}
                   ctdchapter={item?.totalChapter}
                   onPress={async () => {
+                    navigation.navigate('CourseScreen');
                     const res = await overViewData(token, item.courseId);
                     dispatch(addOverView(res));
                     const chapterRes = await chapterListData(
                       token,
                       item.courseId,
                     );
-                    //  console.log("ohoooo",res);
-                    //  console.log('eyeye',chapterRes);
                     dispatch(addChapterList(chapterRes));
-                    navigation.navigate('CourseScreen');
+                   
                   }}
                 />
               </View>
@@ -180,13 +192,14 @@ export const HomeScreen = ({navigation}) => {
                     img={item?.categoryPhoto}
                     category={item?.categoryName}
                     onPress={() => {
+                      navigation.navigate('CategoryDisplayScreen', {item});
                       dispatch(cdsbasicCourse({token, id: item?.categoryId}));
                       dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
                       dispatch(
                         cdsAllCourseOfCategory({token, id: item?.categoryId}),
                       );
                       dispatch(cdsSubCategories({token, id: item?.categoryId}));
-                      navigation.navigate('CategoryDisplayScreen', {item});
+                     
                     }}
                   />
                 </View>
@@ -269,12 +282,13 @@ export const HomeScreen = ({navigation}) => {
                 <View style={styles.btmcourseview} key={item?.courseId}>
                   <TouchableOpacity
                     onPress={async () => {
+                      navigation.navigate('CourseScreen');
                       dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
-                      if (res) {
-                        navigation.navigate('CourseScreen');
-                      }
+                    
+                       
+                     
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}

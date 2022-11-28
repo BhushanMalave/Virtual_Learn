@@ -29,10 +29,18 @@ export const LessonVideoPlayer = ({route, navigation}) => {
   const title = route.params.item.lessonName;
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
+  const [fullScreen, setFullScreen] = useState(false);
   // console.log(route.params.item.pauseTime)
 
 
-
+  const FullScreen = () => {
+    setFullScreen(!fullScreen);
+    if (fullScreen) {
+      Orientation.lockToPortrait();
+    } else {
+      Orientation.lockToLandscape();
+    }
+  };
 
   const timeformat = timesec => {
     const digit = n => (n < 10 ? `0${n}` : `${n}`);
@@ -132,6 +140,7 @@ if(turn){
           const res = await PauseTime(token, body);
           console.log(res);
           if (res.message == 'Updated SuccessFully') {
+            {fullScreen && FullScreen();}
             navigation.goBack();
           }
         }}
@@ -182,7 +191,7 @@ if(turn){
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-           // onValueChange={v => handleslide(v)}
+            onValueChange={v => handleslide(v)}
           />
         </View>
       </View>
