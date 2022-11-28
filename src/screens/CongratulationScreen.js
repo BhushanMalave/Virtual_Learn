@@ -11,6 +11,7 @@ export const CongratulationScreen = ({navigation, route}) => {
   const dispatch=useDispatch()
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.testdata.question);
+  const testpercentage = useSelector(state => state.testdata.testPercentage);
  
   
 
@@ -32,8 +33,7 @@ export const CongratulationScreen = ({navigation, route}) => {
       />
       <Text style={styles.congratulation}>Congratulations!</Text>
       <Text style={styles.coursename}>
-        You have completed Chapter {route.params.chapterNumber} -{' '}
-        {route.params.chapterName} from Course: {route.params.courseName}
+        {testpercentage?.congratulations}
       </Text>
       <TouchableOpacity
         onPress={
