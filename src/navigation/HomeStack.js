@@ -8,12 +8,13 @@ import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {CongratulationScreen} from '../screens/CongratulationScreen';
-import { TestStack } from './TestStack';
-import { VideoPlayer } from '../components/VideoPlayer';
-import { CourseComponent } from '../components/CourseComponent';
+import {TestStack} from './TestStack';
+import {VideoPlayer} from '../components/VideoPlayer';
+import {CourseComponent} from '../components/CourseComponent';
 
 import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
+import { CertificateScreen } from '../screens/CertificateScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -71,12 +72,17 @@ export const HomeStack = () => {
         component={ContinuePopUp}
         options={{headerShown: false}}
       />
-<Stack.Screen
-name="TestStack"
-          component={TestStack}
-          options={{headerShown: false}}
-        />
-      
+      <Stack.Screen
+        name="TestStack"
+        component={TestStack}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="CertificateScreen"
+        component={CertificateScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
