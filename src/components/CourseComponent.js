@@ -33,6 +33,7 @@ export const CourseComponent = (props)=> {
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
             <View>
+              
               <View style={styles.imageContainer}>
                 <TouchableOpacity
                   onPress={() => {

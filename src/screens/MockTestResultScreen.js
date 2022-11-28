@@ -46,7 +46,7 @@ export const MockTestResultScreen = () => {
         </TouchableOpacity>
         <View style={styles.bodytopin}>
           <View style={styles.bodytopinbox}>
-            <Text style={styles.textno}>{testpercentage?.TestPercentage}</Text>
+            <Text style={styles.textno}>{testpercentage?.chapterTestPercentage}</Text>
           </View>
           <View>
             <Text style={styles.textchaptername}>
