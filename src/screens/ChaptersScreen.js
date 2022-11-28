@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+
 import {useDispatch} from 'react-redux';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ButtonComponent} from '../components/Buttons';
@@ -20,42 +21,70 @@ import {ModularTest} from '../components/chaptes/ModuleTest';
 import Icon from 'react-native-vector-icons/Feather';
 import {useSelector} from 'react-redux';
 
-
 import {continueApi} from '../authorization/Auth';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
-import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
-import { setPopUpState,addContinueData } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {
+  setPopUpState,
+  addContinueData,
+} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 export const ChaptersScreen = ({navigation}) => {
-
-
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
-const data = useSelector(state => state.chapterResponse.data);
-
-  const continueCall = async () => {
-    cont = await continueApi(token, data?.courseId);
-    dispatch(addContinueData(cont));
-  };
+  const coursedata = useSelector(state => state.courseData.overview);
+  const data = useSelector(state => state.chapterResponse.data);
+  console.log(data);
+  const courseId = useSelector(state => state.chapterResponse.courseId);
 
   const continueData = useSelector(state => state.chapterResponse.continueData);
+
+  const continueCall = async () => {
+    const cont = await continueApi(token, coursedata?.courseId);
+    dispatch(addContinueData(cont));
+  };
 
   const focus = useIsFocused();
   useEffect(() => {
     if (focus == true) {
-      dispatch(csChapterResponse({token, id: data?.courseId}));
+      dispatch(csChapterResponse({token, id: coursedata?.courseId}));
       continueCall();
+      time();
+      continueCall();
+      dura();
     }
   }, [focus]);
 
+  let duration1 = [];
+  let b1 = '';
+  let h1 = '';
+  let m1 = '';
+  useEffect(() => {
+    dura();
+  }, [data?.courseCompletedStatus]);
 
- const duration = data?.courseDuration;
-  const b = duration.split(':');
-  const h = Number(b[0]);
-  const m = b[1];
-  const mins = m / 60;
-  const totalHours = h + mins;
+  const dura = () => {
+    if (data?.courseCompletedStatus) {
+      duration1 = data?.totalDuration;
+      b1 = duration1.split(':');
+      h1 = b1[0];
+      m1 = b1[1];
+    }
+  };
+
+  const [totalHours, setTotalHours] = useState(0);
+  const time = () => {
+    if (coursedata?.courseDuration) {
+      const duration = coursedata?.courseDuration;
+      const b = duration.split(':');
+      const h = Number(b[0]);
+      const m = b[1];
+      const mins = Number((m / 60).toFixed(2));
+      const totalHour = h + mins;
+      setTotalHours(totalHour);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -67,10 +96,10 @@ const data = useSelector(state => state.chapterResponse.data);
             <>
               <View style={{marginTop: 29, marginBottom: 30}}>
                 <ButtonComponent
-                  text={'Continue Chapter 3 Lesson 21'}
+                  text={`Continue Chapter ${continueData.chapterNumber} Lesson ${continueData.lessonNumber}`}
                   onPress={() => {
-                    dispatch(setPopUpState())
-                    console.log('navigate to Contiue PopUp')
+                    dispatch(setPopUpState());
+                    console.log('navigate to Contiue PopUp');
                   }}
                 />
               </View>
@@ -92,7 +121,7 @@ const data = useSelector(state => state.chapterResponse.data);
             {data?.chapterResponses.map(item1 => (
               <View key={item1?.chapterId}>
                 <ChapterList
-                chapterId={item1?.chapterId}
+                  chapterId={item1?.chapterId}
                   number={item1?.chapterNumber}
                   name={item1?.chapterName}
                   chapterStatus={item1?.chapterStatus}
@@ -106,7 +135,7 @@ const data = useSelector(state => state.chapterResponse.data);
                       <View key={item?.lessonId}>
                         <LessonList
                           number={item?.lessonNumber}
-                          name={item?.lessonName}
+                          lessonName={item?.lessonName}
                           duration={item?.lessonDuration}
                           completed={item?.lessonCompletedStatus}
                           status={item?.lessonStatus}
@@ -159,9 +188,52 @@ const data = useSelector(state => state.chapterResponse.data);
               <View style={{margin: 24, marginTop: 30}}>
                 <Text style={styles.courseText}>Course Result</Text>
 
-                <Text style={styles.percentText}>{data?.coursePercentage}</Text>
+                <Text style={styles.percentText}>
+                  {data?.coursePercentage}%
+                </Text>
 
                 <Text style={styles.aprrovalText}>approval rate</Text>
+
+                <View>
+                  <View style={styles.box}>
+                    <View style={styles.boxin}>
+                      <Text style={styles.text1}>Joined</Text>
+                      <Text style={styles.text2}>{data?.joinedDate}</Text>
+                    </View>
+                    <View
+                      style={{
+                        height: 34,
+                        backgroundColor: '#7A7A7A',
+                        width: 1,
+                        borderWidth: 1,
+                        opacity: 0.2,
+                        alignSelf: 'center',
+                      }}
+                    />
+
+                    <View style={styles.boxin}>
+                      <Text style={styles.text1}>Completed</Text>
+                      <Text style={styles.text2}>{data?.completedDate}</Text>
+                    </View>
+                    <View
+                      style={{
+                        height: 34,
+                        backgroundColor: '#7A7A7A',
+                        width: 1,
+                        borderWidth: 1,
+                        opacity: 0.2,
+                        alignSelf: 'center',
+                      }}
+                    />
+                    <View style={[styles.boxin]}>
+                      <Text style={styles.text1}>Duration</Text>
+                      {/* <Text style={styles.text2}>{data?.totalDuration}</Text> */}
+                      <Text style={styles.text2}>
+                        {h1}h {m1}m
+                      </Text>
+                    </View>
+                  </View>
+                </View>
 
                 <View style={styles.certificateTextView}>
                   <Text style={styles.courseText}>Course Certificate</Text>
@@ -186,7 +258,7 @@ const data = useSelector(state => state.chapterResponse.data);
         )}
       </ScrollView>
 
-      {data?.enrolled ? (
+      {coursedata?.enrolled ? (
         <></>
       ) : (
         <View style={{bottom: 0}}>
@@ -205,7 +277,7 @@ const data = useSelector(state => state.chapterResponse.data);
           
         </View>
       )}
-      <ContinuePopUp />
+      <ContinuePopUp navigation={navigation} />
     </SafeAreaView>
   );
 };
@@ -255,6 +327,7 @@ const styles = StyleSheet.create({
   },
   percentText: {
     height: 90,
+    // borderWidth:1,
     color: '#1EAB0D',
     fontFamily: 'Biko',
     fontSize: 74,
@@ -263,10 +336,12 @@ const styles = StyleSheet.create({
   },
   aprrovalText: {
     height: 19,
+    // borderWidth:1,
     color: '#DDDDDD',
     fontFamily: 'Biko',
     fontSize: 16,
     lineHeight: 19,
+    marginTop: -15,
   },
   certificateTextView: {
     marginTop: 40,
@@ -285,5 +360,34 @@ const styles = StyleSheet.create({
     height: 184,
     width: 327,
     marginTop: 16,
+  },
+  box: {
+    backgroundColor: '#FFFFFF',
+    height: 80,
+    borderRadius: 6,
+    marginTop: Platform.OS === 'ios' ? 50 : 70,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  boxin: {
+    marginTop: 20,
+    marginHorizontal: 20,
+  },
+  text1: {
+    fontSize: 12,
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    color: '#373737',
+    textAlign: 'center',
+    lineHeight: 16,
+    fontWeight: '500',
+  },
+  text2: {
+    fontSize: 16,
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    color: '#2BB5F4',
+    textAlign: 'center',
+    fontWeight: '500',
+    marginTop: 8,
+    lineHeight: 20,
   },
 });

@@ -29,11 +29,13 @@ const ChapterResponseSlice = createSlice({
         status:null,
         continueData:null,
     popUpState:false,
+    courseId:null,
     },
     reducers: {
 
         addChapterList:(state , action) => {
-          state.data = action.payload
+          state.data = null;
+          console.log('==',state.data);
         },
         changeChapterListStatus: (state, action) => {
           state.data.chapterResponses.map(item => {
@@ -57,6 +59,7 @@ const ChapterResponseSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(csChapterResponse.pending ,(state, action) => {
+          state.continueData= null;
           state.status = 'loading';
         })
         .addCase(csChapterResponse.fulfilled ,(state, action) => {

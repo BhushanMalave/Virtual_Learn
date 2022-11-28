@@ -22,7 +22,6 @@ import {
   removeAll,
   setTestPercentage
 } from '../redux/ReduxPersist/TestSlice';
-import { timing } from 'react-native-reanimated';
 const data=
   {
     courseName:"bcbd",
@@ -82,7 +81,6 @@ export const Test = ({navigation}) => {
 
       'You still have 50 second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
       
-  
 
       [
         {
@@ -139,22 +137,6 @@ export const Test = ({navigation}) => {
         },
       ],
     )
-    const timimg = () =>{
-      const duration = data1?.testDuration;
-      const time = duration.split(':');
-    
-      const hours = Number(time[0]);
-      const m = time[1];
-    
-      const mins = m / 60;
-    
-      const total_hours = hours + mins;
-      console.log(total_hours)
-
-      return Number(total_hours)
-    }
-
-  
     
   return (
     <View style={styles.maincontainer}>
@@ -178,7 +160,7 @@ export const Test = ({navigation}) => {
             />
             <View>
               <CountDown
-                until={60*30+0}
+                until={60 * 30 + 0}
                 size={14}
                 onFinish={() => timeOver()}
                 digitStyle={{backgroundColor: '#FFF'}}
