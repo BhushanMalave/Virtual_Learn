@@ -10,6 +10,7 @@ import { CourseScreen } from '../screens/CourseScreen';
 import {FinalTest} from '../screens/FinalTest'
 import { NavigationContainer } from '@react-navigation/native';
 import {FinalCongratulationScreen} from '../screens/FinalCongratulationScreen'
+import { CertificateScreen } from '../screens/CertificateScreen';
 
 const Stack = createNativeStackNavigator();
 export const FinalTestStack = () => {
@@ -35,11 +36,11 @@ export const FinalTestStack = () => {
           options={{headerShown: false}}
         />
   
-        <Stack.Screen
-          name="CourseScreen"
-          component={CourseScreen}
-          options={{headerShown: false}}
-        />
+         <Stack.Screen
+        name="CertificateScreen"
+        component={CertificateScreen}
+        options={{headerShown: false}}
+      />
       </Stack.Navigator>
     
     </NavigationContainer>

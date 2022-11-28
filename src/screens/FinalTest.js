@@ -11,7 +11,7 @@ import {
 import {TimerComponent} from '../components/TimerComponent';
 import CountDown from 'react-native-countdown-component';
 import {useDispatch, useSelector} from 'react-redux';
-import { SubmitTest } from '../authorization/Auth';
+import { SubmitFinalTest } from '../authorization/Auth';
 import {
   setStatus1,
   setStatus2,
@@ -20,18 +20,19 @@ import {
   addAnswerData,
   addTestId,
   removeAll,
-  setTestPercentage
+  setTestPercentage,
 } from '../redux/ReduxPersist/TestSlice';
-const data=
-  {
-    courseName:"bcbd",
-    chapterNumber:2,
-    chapterName:"bdjhbh",
-    testId:1,
-  }
+const data = {
+  courseName: 'bcbd',
+  chapterNumber: 2,
+  chapterName: 'bdjhbh',
+  testId: 1,
+};
 
 export const FinalTest = ({navigation}) => {
-  const data1 = useSelector(state => state.testdata.question);
+  const data1 = useSelector(state => state.finaltestdata.questionData);
+  console.log(data1)
+
 
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
@@ -69,9 +70,8 @@ export const FinalTest = ({navigation}) => {
         text: 'Quit',
         style: {fontWeight: 'bold'},
         onPress: () => {
-          dispatch(removeAll())
-          console.log("hweyyy",userAnswers)
-       
+          dispatch(removeAll());
+          console.log('hweyyy', userAnswers);
         },
       },
     ]);
@@ -80,7 +80,6 @@ export const FinalTest = ({navigation}) => {
       'Do you want to end the test?\n',
 
       'You still have 50 second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
-      
 
       [
         {
@@ -90,55 +89,50 @@ export const FinalTest = ({navigation}) => {
         {
           text: 'Submit',
           style: {fontWeight: 'bold'},
-          // onPress: async () => {
-          //   const body={
-          //       testId:testid,
-          //       userAnswers:userAnswers
-          //   }
-          //   const res = await SubmitTest(token,body)
-          //   dispatch(setTestPercentage(res))
-          //   if(res){
-          //     navigation.navigate('CongratulationScreen',data)
-          //     dispatch(removeAll())
-            
-          //   }
-          onPress:()=>navigation.navigate('FinalCongratulationScreen')
-            
-          
+          onPress: async () => {
+            const body={
+                testId:data1?.testId,
+                userAnswers:userAnswers
+            }
+            console.log("i am body",body)
+            const res = await SubmitFinalTest(token,body)
+            console.log("+++++",res)
+            // dispatch(setTestPercentage(res))
+            if(res){
+              navigation.navigate('FinalCongratulationScreen')
+              dispatch(removeAll())
+            }
+         
         },
+      },
       ],
     );
 
-    const timeOver = () =>
+  const timeOver = () =>
     Alert.alert(
       'Time is up!',
       'Click on Submit to Submit the Test',
-      
-  
 
       [
         {
           text: 'Submit',
           style: {fontWeight: 'bold'},
           onPress: async () => {
-
-            const body={
-                testId:testid,
-                userAnswers:userAnswers
+            const body = {
+              testId:26,
+              userAnswers: userAnswers,
+            };
+            const res = await SubmitFinalTest(token, body);
+            console.log(res);
+            if (res) {
+              navigation.navigate('FinalCongratulationScreen');
+              dispatch(removeAll());
             }
-            const res = await SubmitTest(token,body)
-            console.log(res)
-            if(res){
-              navigation.navigate('CongratulationScreen',data)
-              dispatch(removeAll())
-            
-            }
-            
           },
         },
       ],
-    )
-    
+    );
+
   return (
     <View style={styles.maincontainer}>
       <ScrollView>
@@ -153,7 +147,7 @@ export const FinalTest = ({navigation}) => {
               style={styles.back}
             />
           </TouchableOpacity>
-          <Text style={styles.testname}>Model Test {data1?.testId}</Text>
+          <Text style={styles.testname}>{data1?.testName}</Text>
           <View style={{flexDirection: 'row', marginLeft: 160, marginTop: 20}}>
             <Image
               source={require('../assets/images/icn_testduration.png')}
@@ -164,14 +158,13 @@ export const FinalTest = ({navigation}) => {
                 until={60 * 30 + 0}
                 size={14}
                 onFinish={() => timeOver()}
-                digitStyle={{backgroundColor: '#FFF'}}
+                digitStyle={{backgroundColor: 'transparent'}}
                 digitTxtStyle={{color: '#2BB5F4'}}
                 timeToShow={['M', 'S']}
                 timeLabels={{m: null, s: null}}
                 showSeparator
                 separatorStyle={{color: '#2BB5F4'}}
                 running={back || submit ? false : true}
-                
               />
             </View>
             <Text style={styles.countdown}>secs remaining</Text>
@@ -189,7 +182,6 @@ export const FinalTest = ({navigation}) => {
 
               <View style={{marginTop: 40}}>
                 <View>
-
                   <TouchableOpacity
                     onPress={() => {
                       dispatch(
@@ -204,7 +196,7 @@ export const FinalTest = ({navigation}) => {
                           data1?.questions[currentQuestion].option_1,
                       };
                       dispatch(addAnswerData(body));
-                      dispatch(addTestId(data1.testId));
+                      dispatch(addTestId(data1?.testId));
                     }}>
                     {!data1?.questions[currentQuestion].state1 ? (
                       <View style={styles.optionUncheckView}>
@@ -283,7 +275,6 @@ export const FinalTest = ({navigation}) => {
                       };
                       dispatch(addAnswerData(body));
                       dispatch(addTestId(data1.testId));
-                      
                     }}>
                     {!data1?.questions[currentQuestion]?.state3 ? (
                       <View style={styles.optionUncheckView}>
@@ -346,10 +337,7 @@ export const FinalTest = ({navigation}) => {
                       </View>
                     )}
                   </TouchableOpacity>
-
-                 
                 </View>
-             
               </View>
             </View>
           </View>

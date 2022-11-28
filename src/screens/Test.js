@@ -168,7 +168,7 @@ export const Test = ({navigation}) => {
                 until={60 * 30 + 0}
                 size={14}
                 onFinish={() => timeOver()}
-                digitStyle={{backgroundColor: '#FFF'}}
+                digitStyle={{backgroundColor: 'transparent'}}
                 digitTxtStyle={{color: '#2BB5F4'}}
                 timeToShow={['M', 'S']}
                 timeLabels={{m: null, s: null}}

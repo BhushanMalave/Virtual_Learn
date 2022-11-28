@@ -5,12 +5,15 @@ import {ResultAnswer} from '../authorization/Auth'
 import {useSelector,useDispatch} from 'react-redux';
 import {setResultHeader} from '../redux/ReduxPersist/TestSlice'
 import {setResultAnswers} from '../redux/ReduxPersist/TestSlice'
+import { FinalTestResult } from '../authorization/Auth';
+import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
+import { setFinalResult } from '../redux/ReduxPersist/FinalTestSlice';
 
 export const FinalCongratulationScreen = ({navigation, route}) => {
   console.log(route.params);
   const dispatch=useDispatch()
   const token = useSelector(state => state.userDetails.token);
-  const data1 = useSelector(state => state.testdata.question);
+  const data1 = useSelector(state => state.finaltestdata.questionData);
   const testpercentage = useSelector(state => state.testdata.testPercentage);
  
   
@@ -38,19 +41,13 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
       <TouchableOpacity
         onPress={
       
-        // async () => {
-          
-           
-        //     const res = await ResultHeader(data1.testId);
-        //     const res2 = await ResultAnswer(data1.testId);
-        
-        //     dispatch(setResultHeader(res))
-        //     dispatch(setResultAnswers(res2))
-            
-        //     navigation.navigate('MockTestResultScreen');
-        //   }
+        async () => {
+            const res = await FinalTestResult(token,data1.testId);
+            console.log("()())",res)
+            dispatch(setFinalResult(res))
+            navigation.navigate('CourseCompletedScreen');
+          }
 
-        navigation.navigate('CourseCompletedScreen')
         }>
         <Text style={styles.result}>Result</Text>
       </TouchableOpacity>
