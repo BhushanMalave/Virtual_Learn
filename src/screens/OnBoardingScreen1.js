@@ -55,8 +55,8 @@ export const OnBoardingScreen1 = ({navigation}) => {
           <View>
             <TouchableOpacity
               onPress={() => {
-                 //  navigation.navigate('Welcome');
-                navigation.navigate('Drawer'); 
+                   navigation.navigate('WelcomeStack');
+               // navigation.navigate('Drawer'); 
               }}>
               <Text style={styles.skiptext}>SKIP</Text>
             </TouchableOpacity>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: 281.19,
     width: '94%',
     alignSelf: 'center',
-    marginTop:Platform.OS=='ios'?85:125,
+    marginTop:Platform.OS=='ios'?85:10,
   },
   imageView: {
     // marginHorizontal:10

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {
   SafeAreaView,
@@ -18,15 +18,21 @@ import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
 import {PauseTime} from '../authorization/Auth';
 import {useDispatch} from 'react-redux';
-export const LessonVideoPlayer = ({navigation, route}) => {
+import { number } from 'yup';
+import { useIsFocused } from '@react-navigation/native';
+
+export const LessonVideoPlayer = ({route, navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const data = useSelector(state => state.chapterResponse.data);
   const dispatch = useDispatch();
-  //   console.log('==-=-=-=-', route.params);
   const url = route.params.item.videoLink;
-  const title = route.params.item.name;
+  const title = route.params.item.lessonName;
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
+  // console.log(route.params.item.pauseTime)
+
+
+
 
   const timeformat = timesec => {
     const digit = n => (n < 10 ? `0${n}` : `${n}`);
@@ -44,48 +50,102 @@ export const LessonVideoPlayer = ({navigation, route}) => {
     const hr = digit(Math.floor((timesec / 3000) % 60));
     return `${hr}:${min}:${sec}`;
   };
+  
+
+  const focus = useIsFocused();
+
+  const timing = () => {
+    if(route.params.item.pauseTime){
+      const b = route.params.item.pauseTime.split(':');
+      const h = Number(b[0]);
+      const m = Number(b[1]);
+      const sec=Number(b[2]);
+      const hrts = h*3600;
+      const mints= m*60;
+      const totalTime= hrts+mints+sec
+     return totalTime;
+     
+      // setStartTime(totalTime)
+      // setStartTime(totalTime)
+    }
+  }
+
+useEffect(() => {
+  // timing();
+const turn = timing();
+if(turn){
+  startTimerr = turn;
+}
+  startTiming();
+},[])
+
+  const startTiming =()=> {
+    videoRef.current.seek(startTimerr * time.endingTime);
+  };
+
   const videoRef = useRef();
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
   };
+  let [startTimerr,setStartTime] = useState(0)
   return (
     <View style={{flex: 1, backgroundColor: '#373737'}}>
-      <Pressable
-        onPress={ async () => {
+      <TouchableOpacity
+        style={styles.imgbackView}
+        onPress={async () => {
           const body = {
             pauseTime: timeformat1(time.currentTime),
             lessonId: route.params.item.lessonId,
             chapterId: route.params.item.chapterId,
             courseId: data?.courseId,
           };
-
-          const res = await PauseTime(token, body);
-          console.log(res)
-          if (res.message == 'Updated SuccessFully') {
-            navigation.goBack();
-          }
+          console.log(body);
+          navigation.goBack();
+          PauseTime(token, body);
+          // console.log(res);
+          // if (res.message == 'Updated SuccessFully') {
+          //   navigation.goBack();
+          // }        
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
           style={styles.imgback}
         />
-      </Pressable>
+      </TouchableOpacity>
       <Video
-        ref={videoRef}
+         controls={false}
+         ref={videoRef}
+         resizeMode='contain'
         source={{
           uri: url,
         }}
         paused={isPlaying}
         fullscreen={true}
-        onEnd={() => {
-          navigation.goBack();
+        onEnd={async () => {
+          const body = {
+            pauseTime: timeformat1(time.currentTime),
+            lessonId: route.params.item.lessonId,
+            chapterId: route.params.item.chapterId,
+            courseId: data?.courseId,
+          };
+          console.log(body);
+          const res = await PauseTime(token, body);
+          console.log(res);
+          if (res.message == 'Updated SuccessFully') {
+            navigation.goBack();
+          }
         }}
+        
         onProgress={data => {
           setTime({...time, currentTime: data.currentTime});
         }}
-        onLoad={data => {
+        onLoad={
+          
+          data => {
           setTime({...time, endingTime: data.duration});
         }}
+
+
         style={styles.backgroundVideo}></Video>
       <View style={styles.control}>
         <View style={styles.view1}>
@@ -93,8 +153,11 @@ export const LessonVideoPlayer = ({navigation, route}) => {
             <Text style={styles.text1}>{timeformat(time.currentTime)}</Text>
             <Text style={styles.text2}>{title}</Text>
           </View>
+          <Pressable onPress={() => FullScreen()}>
           <Image source={require('../assets/images/icn_maximise.png')} />
+          </Pressable>
         </View>
+      
         <View style={styles.view2}>
           {isPlaying ? (
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
@@ -119,7 +182,7 @@ export const LessonVideoPlayer = ({navigation, route}) => {
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={v => handleslide(v)}
+           // onValueChange={v => handleslide(v)}
           />
         </View>
       </View>
@@ -131,16 +194,22 @@ const styles = StyleSheet.create({
   backgroundVideo: {
     flex: 1,
   },
+  imgbackView:{
+    height: 20,
+    width: 40,
+    marginTop: 48,
+    marginLeft: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   imgback: {
     height: 14,
     width: 22,
-    marginTop: 50,
     tintColor: 'white',
-    marginLeft: 24,
   },
   control: {
     backgroundColor: '#2B2B2B',
-    height: Platform.OS === 'ios' ? 120 : 90,
+    height: Platform.OS === 'ios' ? 100 : 90,
   },
   view1: {
     flexDirection: 'row',

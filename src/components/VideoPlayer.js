@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
-import { RotateInDownRight } from 'react-native-reanimated';
+import Orientation from 'react-native-orientation-locker';
 
 export const VideoPlayer = ({navigation, route}) => {
   //   console.log('==-=-=-=-', route.params);
@@ -23,8 +23,16 @@ export const VideoPlayer = ({navigation, route}) => {
   const title = route.params.item.courseName;
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
+  const [fullScreen, setFullScreen] = useState(false);
 
-
+  const FullScreen = () => {
+    if (fullScreen) {
+      Orientation.lockToPortrait();
+    } else {
+      Orientation.lockToLandscape();
+    }
+    setFullScreen(!fullScreen);
+  };
 
   const timeformat = timesec => {
     const digit = n => (n < 10 ? `0${n}` : `${n}`);
@@ -35,6 +43,7 @@ export const VideoPlayer = ({navigation, route}) => {
     return `${min}:${sec}`;
   };
   const videoRef = useRef();
+
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
   };
@@ -42,21 +51,27 @@ export const VideoPlayer = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <Pressable
         onPress={() => {
-          console.log("====",time.currentTime);
+          //console.log('====', time.currentTime);
+          Orientation.lockToPortrait();
           navigation.goBack();
+        
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
           style={styles.imgback}
         />
       </Pressable>
+
       <Video
+        muted={false}
         ref={videoRef}
+        resizeMode={fullScreen ? 'cover' : 'contain'}
         source={{
           uri: url,
         }}
         paused={isPlaying}
-        fullscreen={true}
+        controls={false}
+        fullscreen={fullScreen}
         onEnd={() => {
           navigation.goBack();
         }}
@@ -66,15 +81,17 @@ export const VideoPlayer = ({navigation, route}) => {
         onLoad={data => {
           setTime({...time, endingTime: data.duration});
         }}
-        style={styles.backgroundVideo}>
-        </Video>
+        style={fullScreen ? styles.fullscreenVideo : styles.backgroundVideo}
+      />
       <View style={styles.control}>
         <View style={styles.view1}>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.text1}>{timeformat(time.currentTime)}</Text>
             <Text style={styles.text2}>{title}</Text>
           </View>
-          <Image source={require('../assets/images/icn_maximise.png')} />
+          <Pressable onPress={() => FullScreen()}>
+            <Image source={require('../assets/images/icn_maximise.png')} />
+          </Pressable>
         </View>
         <View style={styles.view2}>
           {isPlaying ? (
@@ -88,7 +105,7 @@ export const VideoPlayer = ({navigation, route}) => {
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_pausevideo.png')}
-                style={{height: 16, width: 14, transform:[{rotate:'90 deg'}]}}
+                style={{height: 16, width: 14, transform: [{rotate: '90 deg'}]}}
               />
             </Pressable>
           )}
@@ -100,7 +117,8 @@ export const VideoPlayer = ({navigation, route}) => {
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={v => handleslide(v)}
+           // onValueChange={(value) => { handleslide(value)}}
+           //onValueChange={value => { videoRef.current.seek(value * time.endingTime); }}
           />
         </View>
       </View>
@@ -120,8 +138,8 @@ const styles = StyleSheet.create({
     marginLeft: 24,
   },
   control: {
-    backgroundColor: '#2B2B2B',
-    height: Platform.OS === 'ios' ? 120 : 90,
+    backgroundColor: 'transprant',
+    height: Platform.OS === 'ios' ? 100 : 90,
   },
   view1: {
     flexDirection: 'row',
@@ -144,5 +162,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginLeft: 20,
+  },
+  fullscreenVideo: {
+    flex: 1,
   },
 });

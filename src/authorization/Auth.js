@@ -12,8 +12,8 @@ export const refreshToken = async (token) => {
       'https://virtual-learn-app-java.herokuapp.com/refreshToken',
       options,
     );
-    if (response.data) {
-      return response.data;
+    if (response.data.jwtToken) {
+      return response.data.jwtToken;
     }
   } catch (error) {
     console.log(error.response.data);

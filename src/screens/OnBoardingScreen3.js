@@ -41,12 +41,12 @@ export const OnBoardingScreen3 = ({navigation}) => {
             <View style={styles.borderpoint1} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('OnBoardingScreen1')}>
+            onPress={() => navigation.navigate('OnBoardingScreen2')}>
             <View style={styles.borderpoint1} />
           </TouchableOpacity>
           <View style={styles.bottomoLine} />
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
+        <TouchableOpacity onPress={() => navigation.navigate('WelcomeStack')}>
           <Image source={require('../assets/images/btn_done.png')} />
         </TouchableOpacity>
       </View>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   image: {
     height: 281.19,
     width: '100%',
-    marginTop: Platform.OS == 'ios' ? 75 : 120,
+    marginTop: Platform.OS == 'ios' ? 75 : 10,
     alignSelf: 'center',
   },
   imageView: {
