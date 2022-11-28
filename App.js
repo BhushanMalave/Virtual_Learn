@@ -28,7 +28,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-      <TestBottomPopUp/>
+      <Router/>
       </PersistGate>
     </Provider>
   );

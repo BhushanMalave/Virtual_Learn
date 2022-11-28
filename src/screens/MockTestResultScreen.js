@@ -6,42 +6,61 @@ import {
   Platform,
   Text,
   ScrollView,
+  TouchableOpacity,
   Pressable,
   SafeAreaView,
-  ImageBackground,
+  StatusBar,
+  useColorScheme,
 } from 'react-native';
-import { QuestionListComponent } from '../components/QuestionListComponent';
-import { TestBottomPopUp } from '../components/TestBottomPopUp';
-import { setMockstate } from '../redux/ReduxPersist/FilterSlice';
-import { useDispatch,useSelector } from 'react-redux';
-import { setCorrectAnswers } from '../redux/ReduxPersist/TestSlice';
+import {QuestionListComponent} from '../components/QuestionListComponent';
+import {TestBottomPopUp} from '../components/TestBottomPopUp';
+import {setMockstate} from '../redux/ReduxPersist/FilterSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  removeAnswers,
+  setCorrectAnswers,
+  testPercentage,
+} from '../redux/ReduxPersist/TestSlice';
+import {setResultHeader} from '../redux/ReduxPersist/TestSlice';
+import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
+
 export const MockTestResultScreen = () => {
+  const resultheader = useSelector(state => state.testdata.resultHeader);
+  const resultanswers = useSelector(state => state.testdata.resultAnswers);
+  // const correctAnswers = useSelector(state => state.testdata.resultAnswers);
+  const testpercentage = useSelector(state => state.testdata.testPercentage);
+  console.log('()()((((', testpercentage);
 
   const dispatch = useDispatch();
   return (
-    <View style={{flex:1}}>
+    <View style={{flex: 1}}>
       <View style={styles.bodytop}>
-        <Image
-          source={require('../assets/images/icn_close_white.png')}
-          style={styles.imgcross}
-        />
+        <TouchableOpacity
+          onPress={() => {
+            res = dispatch(removeAnswers());
+          }}>
+          <Image
+            source={require('../assets/images/icn_close_white.png')}
+            style={styles.imgcross}
+          />
+        </TouchableOpacity>
         <View style={styles.bodytopin}>
           <View style={styles.bodytopinbox}>
-            <Text style={styles.textno}>80</Text>
+            <Text style={styles.textno}>{testpercentage?.TestPercentage}</Text>
           </View>
           <View>
             <Text style={styles.textchaptername}>
-              Chapter 3: Setting up a new project
+              Chapter {resultheader?.chapterNumber}: {resultheader?.chapterName}
             </Text>
           </View>
         </View>
         <Text style={styles.textcoursename} numberOfLines={2}>
-          Course: Learn Figma - UI/UX Design Essential Training
+          Course: {resultheader?.courseName}
         </Text>
         <View style={styles.box}>
           <View style={styles.boxin}>
             <Text style={styles.text1}>Passing Grade</Text>
-            <Text style={styles.text2}>75/100</Text>
+            <Text style={styles.text2}>{resultheader?.passingGrade}/100</Text>
           </View>
           <View
             style={{
@@ -56,7 +75,10 @@ export const MockTestResultScreen = () => {
 
           <View style={styles.boxin}>
             <Text style={styles.text1}>Correct</Text>
-            <Text style={styles.text2}>75/100</Text>
+            <Text style={styles.text2}>
+              {resultheader?.correctAnswers}/
+              {resultheader?.totalNumberOfQuestions}
+            </Text>
           </View>
           <View
             style={{
@@ -70,36 +92,29 @@ export const MockTestResultScreen = () => {
           />
           <View style={styles.boxin}>
             <Text style={styles.text1}>Wrong</Text>
-            <Text style={styles.text2}>75/100</Text>
+            <Text style={styles.text2}>
+              {resultheader?.wrongAnswers}/
+              {resultheader?.totalNumberOfQuestions}
+            </Text>
           </View>
         </View>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{marginTop: 70, marginHorizontal: 24,
-        }}>
+        style={{marginTop: 70, marginHorizontal: 24}}>
         <Text style={styles.textlist}>List of Questions</Text>
         <View style={{marginTop: 30}}>
-
-          
-         <QuestionListComponent state={true} onPress={()=>{
-          // dispatch(setCorrectAnswers(item))
-          dispatch(setMockstate())}}/>
-
-
-
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={true} onPress={()=>{dispatch(setMockstate())}}/>
-         <QuestionListComponent state={false} onPress={()=>{dispatch(setMockstate())}}/>
+          {resultanswers?.map(item => (
+            <QuestionListComponent
+              questionId={item.questionId}
+              state={item.userAnswerStatus}
+              onPress={() => {
+                dispatch(setCorrectAnswers(item));
+                dispatch(setMockstate());
+              }}
+            />
+          ))}
         </View>
-
       </ScrollView>
       <TestBottomPopUp />
     </View>

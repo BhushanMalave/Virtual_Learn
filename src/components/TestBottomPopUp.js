@@ -69,13 +69,15 @@ export const TestBottomPopUp = () => {
   const dispatch=useDispatch()
   const mockState = useSelector(state => state.filterState.mockState);
   const data2=useSelector(state=>state.testdata.correctAnswers);
+  console.log(data2)
 
+  const resultanswers= useSelector(state=>state.testdata.resultAnswers)
   return (
     
     <Modal
     animationType="fade"
     transparent={true}
-    visible={true}
+    visible={mockState}
     onRequestClose={() => {
       Alert.alert('Modal has been closed.');
       {dispatch(setMockstate())}
@@ -85,34 +87,34 @@ export const TestBottomPopUp = () => {
      
     <View style={styles.modalContainer}>
       <View style={{flexDirection:"row", marginLeft:60}}>
-      <Text style={styles.questionid}>Question{data?.questionId}</Text>
+      <Text style={styles.questionid}>Question{data2?.questionId}</Text>
       <TouchableOpacity onPress={() => {dispatch(setMockstate())}}>
       <Image source={require('../assets/images/icn_close_filter.png')} style={styles.image}/>
       </TouchableOpacity>
       </View>
-      <Text style={styles.questionname}>{data?.questionName}</Text>
+      <Text style={styles.questionname}>{data2?.questionName}</Text>
 
 
       
         <View>
-          {correctAnswer == data?.option_1 ? (
+          {data2?.correctAnswer === data2?.option_1 ? (
           
             <View style={styles.optioncheckCorrectView}>
               <Image
                 source={require('../assets/images/icn_optionchecked.png')}
                 style={styles.IconChecked}
               />
-              <Text style={styles.optionCheck}>{data?.option_1}</Text>
+              <Text style={styles.optionCheck}>{data2?.option_1}</Text>
             </View>
           ) : (
             <>
-              {wrongAnswer === data?.option_1 ? (
+              {data2?.userAnswer === data2?.option_1 ? (
                 <View style={styles.optionCheckView}>
                   <Image
                     source={require('../assets/images/icn_optionwrong.png')}
                     style={styles.IconChecked}
                   />
-                  <Text style={styles.optionCheck}>{data?.option_1}</Text>
+                  <Text style={styles.optionCheck}>{data2?.option_1}</Text>
                 </View>
               ) : (
                 <View style={styles.optionUncheckView}>
@@ -120,7 +122,7 @@ export const TestBottomPopUp = () => {
                     source={require('../assets/images/icn_optionunchecked.png')}
                     style={styles.IconUnchecked}
                   />
-                  <Text style={styles.optionUncheck}>{data?.option_1}</Text>
+                  <Text style={styles.optionUncheck}>{data2?.option_1}</Text>
                 </View>
               )}
             </>
@@ -130,24 +132,24 @@ export const TestBottomPopUp = () => {
 
 
         <View>
-          {correctAnswer == data?.option_2 ? (
+          {data2?.correctAnswer === data2?.option_2 ? (
           
             <View style={styles.optioncheckCorrectView}>
               <Image
                 source={require('../assets/images/icn_optionchecked.png')}
                 style={styles.IconChecked}
               />
-              <Text style={styles.optionCheck}>{data?.option_2}</Text>
+              <Text style={styles.optionCheck}>{data2?.option_2}</Text>
             </View>
           ) : (
             <>
-              {wrongAnswer === data?.option_2 ? (
+              {data2?.userAnswer === data2?.option_2 ? (
                 <View style={styles.optionCheckView}>
                   <Image
                     source={require('../assets/images/icn_optionwrong.png')}
                     style={styles.IconChecked}
                   />
-                  <Text style={styles.optionCheck}>{data?.option_2}</Text>
+                  <Text style={styles.optionCheck}>{data2?.option_2}</Text>
                 </View>
               ) : (
                 <View style={styles.optionUncheckView}>
@@ -155,7 +157,7 @@ export const TestBottomPopUp = () => {
                     source={require('../assets/images/icn_optionunchecked.png')}
                     style={styles.IconUnchecked}
                   />
-                  <Text style={styles.optionUncheck}>{data?.option_2}</Text>
+                  <Text style={styles.optionUncheck}>{data2?.option_2}</Text>
                 </View>
               )}
             </>
@@ -165,24 +167,24 @@ export const TestBottomPopUp = () => {
 
 
         <View>
-          {correctAnswer == data?.option_3 ? (
+          {data2?.correctAnswer === data2?.option_3 ? (
           
             <View style={styles.optioncheckCorrectView}>
               <Image
                 source={require('../assets/images/icn_optionchecked.png')}
                 style={styles.IconChecked}
               />
-              <Text style={styles.optionCheck}>{data?.option_3}</Text>
+              <Text style={styles.optionCheck}>{data2?.option_3}</Text>
             </View>
           ) : (
             <>
-              {wrongAnswer === data?.option_3 ? (
+              {data2?.userAnswer === data2?.option_3 ? (
                 <View style={styles.optionCheckView}>
                   <Image
                     source={require('../assets/images/icn_optionwrong.png')}
                     style={styles.IconChecked}
                   />
-                  <Text style={styles.optionCheck}>{data?.option_3}</Text>
+                  <Text style={styles.optionCheck}>{data2?.option_3}</Text>
                 </View>
               ) : (
                 <View style={styles.optionUncheckView}>
@@ -190,7 +192,7 @@ export const TestBottomPopUp = () => {
                     source={require('../assets/images/icn_optionunchecked.png')}
                     style={styles.IconUnchecked}
                   />
-                  <Text style={styles.optionUncheck}>{data?.option_3}</Text>
+                  <Text style={styles.optionUncheck}>{data2?.option_3}</Text>
                 </View>
               )}
             </>
@@ -200,24 +202,24 @@ export const TestBottomPopUp = () => {
 
 
         <View>
-          {correctAnswer ==data?.option_4 ? (
+          {data2?.correctAnswer ===data2?.option_4 ? (
           
             <View style={styles.optioncheckCorrectView}>
               <Image
                 source={require('../assets/images/icn_optionchecked.png')}
                 style={styles.IconChecked}
               />
-              <Text style={styles.optionCheck}>{data?.option_4}</Text>
+              <Text style={styles.optionCheck}>{data2?.option_4}</Text>
             </View>
           ) : (
             <>
-              {wrongAnswer === data?.option_4 ? (
+              {data2?.userAnswer === data2?.option_4 ? (
                 <View style={styles.optionCheckView}>
                   <Image
                     source={require('../assets/images/icn_optionwrong.png')}
                     style={styles.IconChecked}
                   />
-                  <Text style={styles.optionCheck}>{data?.option_4}</Text>
+                  <Text style={styles.optionCheck}>{data2?.option_4}</Text>
                 </View>
               ) : (
                 <View style={styles.optionUncheckView}>
@@ -225,7 +227,7 @@ export const TestBottomPopUp = () => {
                     source={require('../assets/images/icn_optionunchecked.png')}
                     style={styles.IconUnchecked} 
                   />
-                  <Text style={styles.optionUncheck}>{data?.option_4}</Text>
+                  <Text style={styles.optionUncheck}>{data2?.option_4}</Text>
                 </View>
               )}
             </>
@@ -234,14 +236,14 @@ export const TestBottomPopUp = () => {
 
 
 
-      {data.userAnswerStatus=== '1' ? (
+      {data2?.userAnswerStatus=== '1' ? (
         <View>
           <Text style={styles.status}>Correct Answer</Text>
           </View>
       ):(
         <View>
         
-        <Text style={styles.status}>Wrong Answer</Text>
+        <Text style={styles.statusred}>Wrong Answer</Text>
         </View>
 
       )}
@@ -373,6 +375,16 @@ const styles = StyleSheet.create({
   status:{
     height:17,
     color: '#1EAB0D',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
+    fontWeight: 'bold',
+    letterSpacing: 0,
+    lineHeight:17,
+    marginLeft:20
+  },
+  statusred:{
+    height:17,
+    color: 'red',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     fontWeight: 'bold',

@@ -282,24 +282,24 @@ export const SubmitTest = async (token, Body) => {
   const body = JSON.stringify(Body);
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2NjkzODU5MTAsImV4cCI6MTY2OTM5NDkxMH0.AKu0drpb6JAC5pEHrY_Lj7dhkcFZm4f76W-55pcBk8CBVkkrCzoCrC0NcOH0Hqmac-IviAuAgMivdPr2G4vkWQ',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
       'Content-Type': 'application/json',
     },
   };
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/submit',
+      'https://virtual-learn-app-java.herokuapp.com/user/submit',
       body,
       options,
     );
 
     if (response.data) {
-      console.log('tatatatatta', response.data);
+      console.log(response.data);
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
   }
 };
 
@@ -327,3 +327,149 @@ export const PauseTime = async (token, objBody) => {
     console.log(err);
   }
 };
+
+export const ResultHeader = async (id) => {
+ 
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/resultHeader?testId=${id}`,
+      options,
+    );
+    if (response.data) {
+      console.log(response)
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+export const ResultAnswer = async (id) => {
+ 
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/resultAnswers?testId=${id}`,
+      options,
+    );
+    if (response.data) {
+      console.log(response.data)
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const ModuleTest = async (id) => {
+ 
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/moduleTest?testId=${id}`,
+      options,
+    );
+    if (response.data) {
+      console.log(response)
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+//no added url below this
+export const FinalTest = async (id) => {
+ 
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/moduleTest?testId=${id}`,
+      options,
+    );
+    if (response.data) {
+      console.log(response)
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+export const SubmitFinalTest = async (token, Body) => {
+  const body = JSON.stringify(Body);
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      'https://virtual-learn-app-java.herokuapp.com/user/submit',
+      body,
+      options,
+    );
+
+    if (response.data) {
+      console.log(response.data);
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
+export const FinalTestResult = async (id) => {
+ 
+  const options = {
+    headers: {
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learn-app-java.herokuapp.com/user/resultHeader?testId=${id}`,
+      options,
+    );
+    if (response.data) {
+      console.log(response)
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+

@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const data = {
   testId: 1,
-  testName: 'Module Test 1',
+  testName: 'Module final',
   testDuration: '00:30:00',
   questionsCount: 25,
   questions: [
@@ -82,10 +82,10 @@ const data = {
 };
 
 export const TestSlice = createSlice({
-  name: 'testdata',
+  name: 'finaltestdata',
   initialState: {
     question: data,
-    testId: null,
+    finaltestId: null,
     userAnswers: [],
     correctAnswers:[],
     resultHeader:null,
@@ -97,7 +97,7 @@ export const TestSlice = createSlice({
       state.question = action.payload;
     },
     addTestId: (state, action) => {
-      state.testId = action.payload;
+      state.finaltestId = action.payload;
     },
     addAnswerData: (state, action) => {
       const val = state.userAnswers.map(userAnswers => userAnswers.questionId);
