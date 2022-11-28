@@ -90,7 +90,7 @@ export const VerifyAccount = ({navigation}) => {
 
             try {
               const response = await axios.put(
-                'https://virtual-learn-app-java.herokuapp.com/user/resend',
+                'https://virtual-learn-app-java.herokuapp.com/newUser/resend',
                 obj,
               );
               console.log('=====', response.data.message);

@@ -7,28 +7,25 @@ import {MockTestResultScreen} from '../screens/MockTestResultScreen';
 import {CourseCompletedScreen} from '../screens/CourseCompletedScreen';
 import { ChaptersScreen } from '../screens/ChaptersScreen';
 import { CourseScreen } from '../screens/CourseScreen';
+import {FinalTest} from '../screens/FinalTest'
 import { NavigationContainer } from '@react-navigation/native';
+import {FinalCongratulationScreen} from '../screens/FinalCongratulationScreen'
 
 const Stack = createNativeStackNavigator();
-export const TestStack = () => {
+export const FinalTestStack = () => {
   return (
 
-   
+    <NavigationContainer>
 
       <Stack.Navigator>
         <Stack.Screen
-          name="Test"
-          component={Test}
+          name="FinalTest"
+          component={FinalTest}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="CongratulationScreen"
-          component={CongratulationScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="MockTestResultScreen"
-          component={MockTestResultScreen}
+          name="FinalCongratulationScreen"
+          component={FinalCongratulationScreen}
           options={{headerShown: false}}
         />
   
@@ -38,12 +35,13 @@ export const TestStack = () => {
           options={{headerShown: false}}
         />
   
-    <Stack.Screen
+        <Stack.Screen
           name="CourseScreen"
           component={CourseScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
-  
+    
+    </NavigationContainer>
   );
 };

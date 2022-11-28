@@ -8,6 +8,7 @@ export const searchDataSlice = createSlice({
     chaSC: [],
     chaEC: [],
     catData: null,
+    topSearchData:null,
     componentRender:1,
   },
   reducers: {
@@ -19,6 +20,9 @@ export const searchDataSlice = createSlice({
     },
     setCatData: (state, action) => {
       state.catData = action.payload;
+    },
+    setTopSearchData: (state, action) => {
+      state.topSearchData = action.payload;
     },
     removeCatId: (state, action) => {
       state.catId = state.catId.filter(value => value !== action.payload);
@@ -67,7 +71,8 @@ export const {
   clearAllSelected,
   setCatData,
   setCatState,
-  setComponentRender
+  setComponentRender,
+  setTopSearchData,
 } = searchDataSlice.actions;
 
 export default searchDataSlice.reducer;

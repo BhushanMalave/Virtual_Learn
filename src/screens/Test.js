@@ -11,7 +11,7 @@ import {
 import {TimerComponent} from '../components/TimerComponent';
 import CountDown from 'react-native-countdown-component';
 import {useDispatch, useSelector} from 'react-redux';
-import { SubmitTest } from '../authorization/Auth';
+import {SubmitTest} from '../authorization/Auth';
 import {
   setStatus1,
   setStatus2,
@@ -20,16 +20,15 @@ import {
   addAnswerData,
   addTestId,
   removeAll,
-  setTestPercentage
+  setTestPercentage,
 } from '../redux/ReduxPersist/TestSlice';
-import { timing } from 'react-native-reanimated';
-const data=
-  {
-    courseName:"bcbd",
-    chapterNumber:2,
-    chapterName:"bdjhbh",
-    testId:1,
-  }
+import {timing} from 'react-native-reanimated';
+const data = {
+  courseName: 'bcbd',
+  chapterNumber: 2,
+  chapterName: 'bdjhbh',
+  testId: 1,
+};
 
 export const Test = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
@@ -70,9 +69,8 @@ export const Test = ({navigation}) => {
         text: 'Quit',
         style: {fontWeight: 'bold'},
         onPress: () => {
-          dispatch(removeAll())
-          console.log("hweyyy",userAnswers)
-       
+          dispatch(removeAll());
+          console.log('hweyyy', userAnswers);
         },
       },
     ]);
@@ -81,8 +79,6 @@ export const Test = ({navigation}) => {
       'Do you want to end the test?\n',
 
       'You still have 50 second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
-      
-  
 
       [
         {
@@ -93,69 +89,60 @@ export const Test = ({navigation}) => {
           text: 'Submit',
           style: {fontWeight: 'bold'},
           onPress: async () => {
-            const body={
-                testId:testid,
-                userAnswers:userAnswers
+            const body = {
+              testId: testid,
+              userAnswers: userAnswers,
+            };
+            const res = await SubmitTest(token, body);
+            dispatch(setTestPercentage(res));
+            if (res) {
+              navigation.navigate('CongratulationScreen', data);
+              dispatch(removeAll());
             }
-            const res = await SubmitTest(token,body)
-            dispatch(setTestPercentage(res))
-            if(res){
-              navigation.navigate('CongratulationScreen',data)
-              dispatch(removeAll())
-            
-            }
-            
           },
         },
       ],
     );
 
-    const timeOver = () =>
+  const timeOver = () =>
     Alert.alert(
       'Time is up!',
       'Click on Submit to Submit the Test',
-      
-  
 
       [
         {
           text: 'Submit',
           style: {fontWeight: 'bold'},
           onPress: async () => {
-
-            const body={
-                testId:testid,
-                userAnswers:userAnswers
+            const body = {
+              testId: testid,
+              userAnswers: userAnswers,
+            };
+            const res = await SubmitTest(token, body);
+            console.log(res);
+            if (res) {
+              navigation.navigate('CongratulationScreen', data);
+              dispatch(removeAll());
             }
-            const res = await SubmitTest(token,body)
-            console.log(res)
-            if(res){
-              navigation.navigate('CongratulationScreen',data)
-              dispatch(removeAll())
-            
-            }
-            
           },
         },
       ],
-    )
-    const timimg = () =>{
-      const duration = data1?.testDuration;
-      const time = duration.split(':');
-    
-      const hours = Number(time[0]);
-      const m = time[1];
-    
-      const mins = m / 60;
-    
-      const total_hours = hours + mins;
-      console.log(total_hours)
+    );
+  const timimg = () => {
+    const duration = data1?.testDuration;
+    const time = duration.split(':');
 
-      return Number(total_hours)
-    }
+    const hours = Number(time[0]);
+    const m = time[1];
 
-  
-    
+    const mins = m / 60;
+
+    const total_hours = hours + mins;
+    console.log(total_hours);
+
+    return Number(total_hours);
+  };
+
   return (
     <View style={styles.maincontainer}>
       <ScrollView>
@@ -178,7 +165,7 @@ export const Test = ({navigation}) => {
             />
             <View>
               <CountDown
-                until={60*30+0}
+                until={60 * 30 + 0}
                 size={14}
                 onFinish={() => timeOver()}
                 digitStyle={{backgroundColor: '#FFF'}}
@@ -188,7 +175,6 @@ export const Test = ({navigation}) => {
                 showSeparator
                 separatorStyle={{color: '#2BB5F4'}}
                 running={back || submit ? false : true}
-                
               />
             </View>
             <Text style={styles.countdown}>secs remaining</Text>
@@ -206,7 +192,6 @@ export const Test = ({navigation}) => {
 
               <View style={{marginTop: 40}}>
                 <View>
-
                   <TouchableOpacity
                     onPress={() => {
                       dispatch(
@@ -300,7 +285,6 @@ export const Test = ({navigation}) => {
                       };
                       dispatch(addAnswerData(body));
                       dispatch(addTestId(data1.testId));
-                      
                     }}>
                     {!data1?.questions[currentQuestion]?.state3 ? (
                       <View style={styles.optionUncheckView}>
@@ -363,10 +347,7 @@ export const Test = ({navigation}) => {
                       </View>
                     )}
                   </TouchableOpacity>
-
-                 
                 </View>
-             
               </View>
             </View>
           </View>

@@ -35,7 +35,7 @@ export const ChaptersScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const coursedata = useSelector(state => state.courseData.overview);
   const data = useSelector(state => state.chapterResponse.data);
-  console.log(data);
+  
   const courseId = useSelector(state => state.chapterResponse.courseId);
 
   const continueData = useSelector(state => state.chapterResponse.continueData);
@@ -93,7 +93,7 @@ export const ChaptersScreen = ({navigation}) => {
             <>
               <View style={{marginTop: 29, marginBottom: 30}}>
                 <ButtonComponent
-                  text={`Continue Chapter ${continueData.chapterNumber} Lesson ${continueData.lessonNumber}`}
+                  text={`Continue Chapter ${continueData?.chapterNumber} Lesson ${continueData?.lessonNumber}`}
                   onPress={() => {
                     dispatch(setPopUpState());
                     console.log('navigate to Contiue PopUp');
@@ -271,7 +271,6 @@ export const ChaptersScreen = ({navigation}) => {
                 courseId: 3,
                 joinDate: '2022-11-10',
               };
-              console.log('hvhc', coursedata.courseId);
               const res = await joinCourse(token, objBody);
               console.log(res);
               navigation.navigate('Chapters');

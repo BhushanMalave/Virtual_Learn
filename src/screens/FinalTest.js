@@ -30,7 +30,7 @@ const data=
     testId:1,
   }
 
-export const Test = ({navigation}) => {
+export const FinalTest = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
 
   const token = useSelector(state => state.userDetails.token);
@@ -90,20 +90,21 @@ export const Test = ({navigation}) => {
         {
           text: 'Submit',
           style: {fontWeight: 'bold'},
-          onPress: async () => {
-            const body={
-                testId:testid,
-                userAnswers:userAnswers
-            }
-            const res = await SubmitTest(token,body)
-            dispatch(setTestPercentage(res))
-            if(res){
-              navigation.navigate('CongratulationScreen',data)
-              dispatch(removeAll())
+          // onPress: async () => {
+          //   const body={
+          //       testId:testid,
+          //       userAnswers:userAnswers
+          //   }
+          //   const res = await SubmitTest(token,body)
+          //   dispatch(setTestPercentage(res))
+          //   if(res){
+          //     navigation.navigate('CongratulationScreen',data)
+          //     dispatch(removeAll())
             
-            }
+          //   }
+          onPress:()=>navigation.navigate('FinalCongratulationScreen')
             
-          },
+          
         },
       ],
     );

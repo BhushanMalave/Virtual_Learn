@@ -11,7 +11,7 @@ import {CongratulationScreen} from '../screens/CongratulationScreen';
 import {TestStack} from './TestStack';
 import {VideoPlayer} from '../components/VideoPlayer';
 import {CourseComponent} from '../components/CourseComponent';
-
+import { OnGoingComponent } from '../components/OnGoingComponent';
 import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import { CertificateScreen } from '../screens/CertificateScreen';
@@ -59,6 +59,11 @@ export const HomeStack = () => {
       <Stack.Screen
         name="CourseComponent"
         component={CourseComponent}
+        options={{headerShown: false}}
+      />
+        <Stack.Screen
+        name="OnGoingComponent"
+        component={OnGoingComponent}
         options={{headerShown: false}}
       />
       <Stack.Screen
