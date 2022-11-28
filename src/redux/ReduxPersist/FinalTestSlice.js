@@ -38,7 +38,7 @@ const dataNew = {
 export const FinalTestSlice = createSlice({
   name: 'finaltestdata',
   initialState: {
-    questionData: dataNew,
+    questionData: null,
     testId: null,
     userAnswers: [],
     correctAnswers:[],
@@ -47,9 +47,8 @@ export const FinalTestSlice = createSlice({
     // testPercentage:null
   },
   reducers: {
-    addQuestionData: (state, action) => {
+    addFinalQuestionData: (state, action) => {
       state.questionData = action.payload;
-      console.log("++++",state.questionData)
     },
     addTestId: (state, action) => {
       state.testId = action.payload;
@@ -64,7 +63,6 @@ export const FinalTestSlice = createSlice({
       } else {
         state.userAnswers.push(action.payload);
       }
-      console.log(state.userAnswers)
     },
 
     setStatus1: (state, action) => {
@@ -124,6 +122,7 @@ export const FinalTestSlice = createSlice({
     // },
     removeAnswers: (state, action) => {
       state.resultAnswers = [];
+      state.questionData=[]
     },
     setTestPercentage:(state,action)=>{
       state.testPercentage=action.payload
@@ -135,7 +134,7 @@ export const FinalTestSlice = createSlice({
 export const {
   removeAll,
   addAnswerData,
-  addQuestionData,
+  addFinalQuestionData,
   setStatus1,
   setStatus2,
   setStatus3,

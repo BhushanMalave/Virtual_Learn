@@ -30,15 +30,15 @@ export const LessonList = (item) => {
           alignItems: 'center',
           marginBottom: 10,
         }}>
-        {data.enrolled ? (
+        {data?.enrolled ? (
           <View style={{marginRight: 10}}>
-            {item.completed ? (
+            {item?.completed ? (
               <Image
                 source={require('../../assets/images/icn_timeline_completed.png')}
               />
             ) : (
               <>
-                {item.status ? (
+                {item?.status ? (
                   <Image
                     source={require('../../assets/images/icn_timeline_active.png')}
                   />
@@ -64,9 +64,9 @@ export const LessonList = (item) => {
             </View>
           </View>
 
-          {item.status ? (
+          {item?.status ? (
             <TouchableOpacity
-              disabled={!item.status}
+              disabled={!item?.status}
               onPress={() => {
                 {
                   continueData
@@ -86,11 +86,11 @@ export const LessonList = (item) => {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              disabled={!item.status}
+              disabled={!item?.status}
               onPress={() => {
                 console.log(
                   ' set/dispatch status as true in lessons:status  and pressed play',
-                  item.videoLink,
+                  item?.videoLink,
                 );
               }}>
               <View style={{marginLeft: -5}}>

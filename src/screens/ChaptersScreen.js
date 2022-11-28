@@ -35,7 +35,6 @@ export const ChaptersScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const coursedata = useSelector(state => state.courseData.overview);
   const data = useSelector(state => state.chapterResponse.data);
-  
   const courseId = useSelector(state => state.chapterResponse.courseId);
 
   const continueData = useSelector(state => state.chapterResponse.continueData);
@@ -125,7 +124,7 @@ export const ChaptersScreen = ({navigation}) => {
                   completed={item1?.chapterCompletedStatus}
                   id={item1?.chapterId}
                 />
-
+<View>
                 {item1?.chapterStatus ? (
                   <View style={{alignSelf: 'center', justifyContent: 'center'}}>
                     {item1?.lessonResponses.map(item => (
@@ -147,6 +146,7 @@ export const ChaptersScreen = ({navigation}) => {
                 ) : (
                   <></>
                 )}
+                </View>
 
                 {item1?.lessonResponses.map(temp => {
                   if (temp?.completed == true) {
@@ -158,7 +158,7 @@ export const ChaptersScreen = ({navigation}) => {
 
                 {item1?.chapterStatus ? (
                   <>
-                    {item1.testId ? (
+                    {item1?.testId ? (
                       <ModularTest
                         test={item1?.testName}
                         duration={item1?.testDuration}
@@ -167,6 +167,7 @@ export const ChaptersScreen = ({navigation}) => {
                         id={item1?.testId}
                         disable={item1?.disableStatus}
                         completed={item1?.chapterCompletedStatus}
+                        navigation={navigation}
                       />
                     ) : (
                       <></>

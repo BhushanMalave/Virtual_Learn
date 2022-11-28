@@ -16,6 +16,8 @@ import { OnGoingComponent } from '../components/OnGoingComponent';
 import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import { CertificateScreen } from '../screens/CertificateScreen';
+import { ModularTest } from '../components/chaptes/ModuleTest';
+import { FinalTestStack } from './FinalTeststack';
 
 const Stack = createNativeStackNavigator();
 
@@ -88,10 +90,20 @@ export const HomeStack = () => {
         component={TestStack}
         options={{headerShown: false}}
       />
-
+   <Stack.Screen
+        name="FinalTestStack"
+        component={FinalTestStack}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="CertificateScreen"
         component={CertificateScreen}
+        options={{headerShown: false}}
+      />
+
+<Stack.Screen
+        name="ModularTest"
+        component={ModularTest}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
