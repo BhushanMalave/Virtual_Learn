@@ -13,9 +13,8 @@ import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import { setPopUpState } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import { ContinuePopUp } from './ContinuePopUp';
-// import { addPlayStatus } from '../../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
-export const LessonList = item => {
+export const LessonList = (item) => {
   const video = item => {
     item.nav.navigate('LessonVideoPlayer', {item});
   };
@@ -60,7 +59,7 @@ export const LessonList = item => {
             <Text style={styles.chapterNumber}>0{item.number}</Text>
             <View style={{width: '75%'}}>
               {/* <View > */}
-              <Text style={styles.chapterText}>{item.name}</Text>
+              <Text style={styles.chapterText}>{item.lessonName}</Text>
               <Text style={styles.chapterTime}>{item.duration} mins</Text>
             </View>
           </View>
@@ -70,7 +69,7 @@ export const LessonList = item => {
               disabled={!item.status}
               onPress={() => {
                 {
-                  !continueData
+                  continueData
                     ? (console.log(
                         'navigate to model page by sendind vedio link, Pause time and lesson id',
                       ),
@@ -104,7 +103,6 @@ export const LessonList = item => {
           )}
         </View>
       </View>
-          <ContinuePopUp/>
     </>
   );
 };

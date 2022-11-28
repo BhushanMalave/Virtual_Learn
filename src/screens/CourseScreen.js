@@ -10,11 +10,12 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 export const CourseScreen = ({navigation}) => {
 
-
+const dispatch= useDispatch();
   const coursedata = useSelector(state => state.courseData.overview);
 
   return (
@@ -23,7 +24,9 @@ export const CourseScreen = ({navigation}) => {
         <ImageBackground
           source={require('../assets/images/img_designcoursedetail1_bg.png')}
           style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() =>{ 
+            dispatch(addChapterList());
+            navigation.goBack()}}>
             <Image
               source={require('../assets/images/icn_close_white.png')}
               style={styles.image}

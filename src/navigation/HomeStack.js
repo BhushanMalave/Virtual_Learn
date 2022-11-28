@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { HomeScreen } from '../screens/HomeScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { CategoriesScreen } from '../screens/CategoriesScreen';
-import { HomeSearch } from '../screens/HomeSearch';
-import { ChoiceYourCourse } from '../screens/ChoiceYourCourse';
-import { CategoryDisplayScreen } from '../screens/CategoryDisplayScreen';
-import { CourseScreen } from '../screens/CourseScreen';
-import { VideoPlayer } from '../components/VideoPlayer';
-import { CourseComponent } from '../components/CourseComponent';
+import {HomeScreen} from '../screens/HomeScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {CategoriesScreen} from '../screens/CategoriesScreen';
+import {HomeSearch} from '../screens/HomeSearch';
+import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
+import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
+import {CourseScreen} from '../screens/CourseScreen';
+import {VideoPlayer} from '../components/VideoPlayer';
+import {CourseComponent} from '../components/CourseComponent';
 
-import { LessonVideoPlayer } from '../components/LessonVideoPlayer';
+import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
+import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 
 const Stack = createNativeStackNavigator();
 
 export const HomeStack = () => {
   return (
- 
     <Stack.Navigator>
       <Stack.Screen
         name="HomeScreen"
@@ -43,7 +43,7 @@ export const HomeStack = () => {
         component={CategoryDisplayScreen}
         options={{headerShown: false}}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="CourseScreen"
         component={CourseScreen}
         options={{headerShown: false}}
@@ -58,15 +58,17 @@ export const HomeStack = () => {
         component={CourseComponent}
         options={{headerShown: false}}
       />
-<Stack.Screen
+      <Stack.Screen
         name="LessonVideoPlayer"
         component={LessonVideoPlayer}
         options={{headerShown: false}}
       />
 
-      
+      <Stack.Screen
+        name="ContinuePopUp"
+        component={ContinuePopUp}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
-   
- 
   );
 };
