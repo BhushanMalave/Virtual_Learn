@@ -93,7 +93,7 @@ export const ChaptersScreen = ({navigation}) => {
             <>
               <View style={{marginTop: 29, marginBottom: 30}}>
                 <ButtonComponent
-                  text={`Continue Chapter ${continueData.chapterNumber} Lesson ${continueData.lessonNumber}`}
+                  text={`Continue Chapter ${continueData?.chapterNumber} Lesson ${continueData?.lessonNumber}`}
                   onPress={() => {
                     dispatch(setPopUpState());
                     console.log('navigate to Contiue PopUp');

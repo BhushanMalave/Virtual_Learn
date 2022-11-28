@@ -30,12 +30,14 @@ export const CategoryDisplayCourseComponent = props => {
 };
 
 export const CategoriesComponents =({
-category   
+category,onPress 
 }) => {
  return(
+    <TouchableOpacity onPress={onPress}>
      <View style={styles.categorycontainer}>
      <Text style={styles.categorytext}>{category}</Text>
    </View>
+   </TouchableOpacity>
  );
 };
 

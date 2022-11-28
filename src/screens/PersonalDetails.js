@@ -58,7 +58,7 @@ export const PersonalDetails = ({navigation}) => {
 
           <View style={styles.numView}>
             <Text style={styles.text}>Moblie number</Text>
-            <Text style={styles.number}>+919876543211</Text>
+            <Text style={styles.number}>+919591726087</Text>
           </View>
 
           <View>
@@ -105,7 +105,7 @@ export const PersonalDetails = ({navigation}) => {
                     navigation.navigate('Registration Successfull');
                   }
                 } catch (error) {
-                  console.log(error);
+                  console.log(error.response.data);
                 }
               }}>
               {({

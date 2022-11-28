@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { is } from 'immer/dist/internal';
 
 export const refreshToken = async (token) => {
   const options = {
@@ -17,6 +18,42 @@ export const refreshToken = async (token) => {
     }
   } catch (error) {
     console.log(error.response.data);
+  }
+};
+
+export const termsAndConditions = async () => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      'https://virtual-learn-app-java.herokuapp.com/user/termsAndConditions',
+      options,
+    );
+    //console.log("=====",response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const privacyPolicy = async () => {
+  try {
+    const response = await axios.get(
+      'https://virtual-learn-app-java.herokuapp.com/user/privacyPolicy'
+    );
+    console.log("=====",response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -245,11 +282,12 @@ export const topSearchData = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    console.log("=======",error);
   }
 };
 
-export const searchDataKeyword = async (token, body) => {
+export const searchDataKeyword = async (token,obj) => {
+  body = JSON.stringify(obj);
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -259,15 +297,16 @@ export const searchDataKeyword = async (token, body) => {
 
   try {
     const response = await axios.put(
-      `https://virtual-learn-app-java.herokuapp.com/user/keywords?courseId=${body}`,
+      'https://virtual-learn-app-java.herokuapp.com/user/keywords',
+      body,
       options,
     );
-    // console.log(response.data);
+    console.log(response.data);
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    //console.log(error.response.data);
+    console.log(error.response.status);
   }
 };
 

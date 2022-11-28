@@ -32,41 +32,9 @@ const details = [
   },
 ];
 
-const outcomes = [
-  {
-    id: 1,
-    source: require('../assets/images/Circle.png'),
-    description: 'Design Websites',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/Circle.png'),
-    description: 'Design mobile and desktop',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/Circle.png'),
-    description:
-      'You will have a fully interactive design and prototype at the end of this course',
-  },
-  {
-    id: 4,
-    source: require('../assets/images/Circle.png'),
-    description:
-      'You will learn how to reuse design elements for future projects',
-  },
-];
+;
 
-const requirements = [
-  {
-    id: 1,
-    description: '• Internet Access',
-  },
-  {
-    id: 2,
-    description: '• You should know your way around computer basics',
-  },
-];
+
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
   const token = useSelector(state => state.userDetails.token);
@@ -104,7 +72,7 @@ console.log(coursedata)
   };
 
   const duration = coursedata?.courseDuration;
-  const time = duration.split(':');
+  const time = duration.split(":"); 
 
   const hours = Number(time[0]);
   const m = time[1];
@@ -177,14 +145,14 @@ console.log(coursedata)
                 source={require('../assets/images/icn_includes_supportfiles.png')}
               />
               <Text style={styles.coursedescription}>
-                {coursedata.testCount} Modules Test
+                {coursedata?.testCount} Modules Test
               </Text>
             </View>
 
             {details.map(item => (
-              <View style={styles.coursecontent} key={item.id}>
+              <View style={styles.coursecontent} key={item?.id}>
                 <Image source={item.source} />
-                <Text style={styles.coursedescription}>{item.description}</Text>
+                <Text style={styles.coursedescription}>{item?.description}</Text>
               </View>
             ))}
           </View>
@@ -204,7 +172,7 @@ console.log(coursedata)
           <View style={styles.coursecontainer}>
             <Text style={styles.header}>Requirements</Text>
             <View style={styles.requirecontent}>
-              {coursedata.requirements.map(item => (
+              {coursedata?.requirements.map(item => (
                 <View key={item.id}>
                   <Text style={styles.requiredescription}>• {item}</Text>
                 </View>
@@ -230,7 +198,7 @@ console.log(coursedata)
                 renderTruncatedFooter={renderTruncatedFooter}
                 renderRevealedFooter={renderRevealedFooter}>
                 <Text style={styles.instructordescription}>
-                  {coursedata.instructorDescription}
+                  {coursedata?.instructorDescription}
                 </Text>
               </ReadMore>
             </View>

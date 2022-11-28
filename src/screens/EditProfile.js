@@ -58,7 +58,7 @@ export const EditProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  const [image, setImage] = useState(userData.profilePhoto);
+  const [image, setImage] = useState(userData?.profilePhoto);
 
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({

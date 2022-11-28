@@ -19,7 +19,7 @@ import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/Bas
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 
-export const CategoryDisplayScreen = ({navigation, route}) => {
+export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
   const featuredCourse = useSelector(state => state.advanceCourse.data);
   const subCategories = useSelector(state => state.subCategories.data);
@@ -87,26 +87,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
             </View>
           </View>
         )}
-
-        <View>
-          <Text style={styles.text2}>Subcategories</Text>
-
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={styles.viewcatin}>
-              {subCategories?.map(item => (
-                <CategoriesComponents
-                  category={item?.subCategoryName}
-                  onPress={() => {
-                    navigation.navigate('SubCategoryDisplayScreen', {item});
-                    dispatch(cdsbasicCourse({token, id: item?.subCategoryId}));
-                    dispatch(cdsAdvanceCourse({token, id: item?.subCategoryId}));
-                    dispatch(cdsAllCourseOfCategory({token, id: item?.subCategoryId}));
-                  }}
-                />
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+        
         <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
           {allcourse?.map(item => (
