@@ -52,26 +52,8 @@ export const ChaptersScreen = ({navigation}) => {
       continueCall();
       time();
       continueCall();
-      dura();
     }
   }, [focus]);
-
-  let duration1 = [];
-  let b1 = '';
-  let h1 = '';
-  let m1 = '';
-  useEffect(() => {
-    dura();
-  }, [data?.courseCompletedStatus]);
-
-  const dura = () => {
-    if (data?.courseCompletedStatus) {
-      duration1 = data?.totalDuration;
-      b1 = duration1.split(':');
-      h1 = b1[0];
-      m1 = b1[1];
-    }
-  };
 
   const [totalHours, setTotalHours] = useState(0);
   const time = () => {
@@ -85,6 +67,21 @@ export const ChaptersScreen = ({navigation}) => {
       setTotalHours(totalHour);
     }
   };
+
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
+
+  useEffect(() => {
+    if (data?.courseCompletedStatus) {
+      const duration1 = data?.totalDuration;
+      const b1 = duration1.split(':');
+      const h1 = b1[0];
+      const m1 = b1[1];
+      setMinutes(m1);
+      setHours(h1);
+    }
+  }, [data?.courseCompletedStatus]);
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -227,9 +224,8 @@ export const ChaptersScreen = ({navigation}) => {
                     />
                     <View style={[styles.boxin]}>
                       <Text style={styles.text1}>Duration</Text>
-                      {/* <Text style={styles.text2}>{data?.totalDuration}</Text> */}
                       <Text style={styles.text2}>
-                        {h1}h {m1}m
+                        {hours}h {minutes}m
                       </Text>
                     </View>
                   </View>
@@ -244,11 +240,17 @@ export const ChaptersScreen = ({navigation}) => {
                 </View>
 
                 <View style={styles.certificateView}>
-                  <Image
-                    source={require('../assets/images/img_designcoursedetail1_bg.png')}
-                    // source={{uri: courseCompletedStatus?.certificateUrl}}
-                    style={styles.certificate}
-                  />
+                  <TouchableOpacity style={styles.certificateOnPress}
+                  onPress={ ()=> {
+                    navigation.navigate('CertificateScreen',{data})
+                  }}
+                  >
+                    <Image
+                      // source={require('../assets/images/img_designcoursedetail1_bg.png')}
+                      source={{uri: data?.certificateUrl}}
+                      style={styles.certificate}
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -273,8 +275,8 @@ export const ChaptersScreen = ({navigation}) => {
               const res = await joinCourse(token, objBody);
               console.log(res);
               navigation.navigate('Chapters');
-            }}/>
-          
+            }}
+          />
         </View>
       )}
       <ContinuePopUp navigation={navigation} />
@@ -356,10 +358,16 @@ const styles = StyleSheet.create({
   certificateView: {
     alignItems: 'center',
   },
+  certificateOnPress: {
+    borderWidth: 1,
+    width: 327,
+    height: 184,
+    marginTop: 16,
+  },
   certificate: {
     height: 184,
     width: 327,
-    marginTop: 16,
+    // marginTop: 16,
   },
   box: {
     backgroundColor: '#FFFFFF',

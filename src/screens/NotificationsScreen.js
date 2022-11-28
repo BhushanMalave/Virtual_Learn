@@ -69,7 +69,7 @@ export const NotificationsScreen = ({navigation}) => {
 
               try {
                 const response = await axios.put(
-                  'https://virtual-learn-app-java.herokuapp.com/readNotification',
+                  'https://virtual-learn-app-java.herokuapp.com/user/readNotification',
                   body,
                   options,
                 );

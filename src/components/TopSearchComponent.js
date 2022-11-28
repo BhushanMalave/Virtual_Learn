@@ -13,9 +13,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export const TopSearchComponent =({
+export const TopSearchComponent =(
     text
-}) => {
+) => {
     return(
         <View style={styles.combody}>
         <Text style={styles.comtext}>{text}</Text>

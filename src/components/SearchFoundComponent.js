@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export const SearchFoundComponent = (props) => {
   return (
     <View style={{marginTop:15}}>
-      <TouchableOpacity onPress={()=>{}} >
+      <TouchableOpacity onPress={props.onPress} >
     <View style={styles.container} >
       <View style={styles.imageview}>
         <Image
