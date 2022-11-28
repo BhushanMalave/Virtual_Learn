@@ -282,7 +282,7 @@ export const SubmitTest = async (token, Body) => {
   const body = JSON.stringify(Body);
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
@@ -332,7 +332,7 @@ export const ResultHeader = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
@@ -356,7 +356,7 @@ export const ResultAnswer = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
@@ -379,7 +379,7 @@ export const ModuleTest = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
@@ -405,7 +405,7 @@ export const FinalTest = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
@@ -429,7 +429,7 @@ export const SubmitFinalTest = async (token, Body) => {
   const body = JSON.stringify(Body);
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
@@ -454,7 +454,7 @@ export const FinalTestResult = async (id) => {
  
   const options = {
     headers: {
-      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk0NjA2OTcsImV4cCI6MTY2OTQ2OTY5N30.nZN82LHFikfEGQf0MwPGAIAbig5f8ppsSb7GbYg_hYzYA5vpKoyh2-EVA-WT6SgHIURBeEHJ_ZeEHfSvLzcdPw',
+      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc1VzZXIiOnRydWUsInN1YiI6IkJodXNoYW4iLCJpYXQiOjE2Njk2MTAxNzcsImV4cCI6MTY2OTYxOTE3N30.aUc_D_FTNpsY1NvjvIpGxlT1nFT00cbpE_UckqYYpXt2a1qLXYUzQTY7B0X0oE82yzA7bmqzHhjHquKmxFOw4g',
       'Content-Type': 'application/json',
     },
   };
