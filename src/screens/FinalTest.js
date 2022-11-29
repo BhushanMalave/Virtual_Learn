@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -59,11 +59,107 @@ export const FinalTest = ({navigation}) => {
   const PreviousQuestion = currentQuestion - 1;
   const [back, setBack] = useState(false);
   const [submit, setSubmit] = useState(false);
+
+
+
+
+
+  const dur = data1?.testDuration;
+  const time = dur.split(":"); 
+  console.log(time)
+
+  const mins = time[1];
+  const secs = time[2];
+
+  // const mins = m / 60;
+
+  // const total_hours = ,ins + mins;
+
+  const START_MINUTES = '10';
+  const START_SECOND = '10';
+  const START_DERATION = 10;
+
+
+  const [currentMinutes, setMinutes] = useState(START_MINUTES);
+  const [currentSeconds, setSeconds] = useState(START_SECOND);
+  const [isStop, setIsStop] = useState(false);
+  const [duration, setDuration] = useState(START_DERATION);
+  const [isRunning, setIsRunning] = useState(false);
+
+
+  let [submitstop,setSubmitstop]=useState(true);
+
+
+  const startHandler = () => {
+    setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
+    // setMinutes(60 * 5);
+    // setSeconds(0);
+    setIsRunning(true);
+  };
+
+   const stopHandler = () => {
+    // stop timer
+    setIsStop(true);
+    setIsRunning(false);
+  };
+  const resetHandler = () => {
+    setMinutes(START_MINUTES);
+    setSeconds(START_SECOND);
+    setIsRunning(false);
+    setIsStop(false);
+    setDuration(START_DERATION);
+  };
+
+  const resumeHandler = () => {
+    let newDuration =
+      parseInt(currentMinutes, 10) * 60 + parseInt(currentSeconds, 10);
+    setDuration(newDuration);
+
+    setIsRunning(true);
+    setIsStop(false);
+  };
+
+
+
+  useEffect(()=>{
+    startHandler()
+  },[submitstop])
+
+
+
+  useEffect(() => {
+   
+    if (isRunning === true) {
+      let timer = duration;
+      var minutes, seconds;
+      const interval = setInterval(function () {
+        if (--timer == -1) {
+          stopHandler()
+          timeOver()
+        } else {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
+
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          seconds = seconds < 10 ? '0' + seconds : seconds;
+
+          setMinutes(minutes);
+          setSeconds(seconds);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isRunning]);
+
+
+
   const createTwoButtonAlert = () =>
     Alert.alert('', 'Are you sure you want to quit the exam?', [
       {
         text: 'Cancel',
-        onPress: () => setBack(false),
+        onPress: () => resumeHandler(),
+                    
+
       },
       {
         text: 'Quit',
@@ -72,6 +168,7 @@ export const FinalTest = ({navigation}) => {
 
           console.log('hweyyy', userAnswers);
           dispatch(removeAll());
+          navigation.navigate('CourseScreen')
         },
       },
     ]);
@@ -79,12 +176,13 @@ export const FinalTest = ({navigation}) => {
     Alert.alert(
       'Do you want to end the test?\n',
 
-      'You still have 50 second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
+      'You still have '+currentMinutes+':'+currentSeconds+' second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
 
       [
         {
           text: 'Cancel',
-          onPress: () => setSubmit(false),
+          onPress: () => {resumeHandler()
+            setSubmitstop(true)},
         },
         {
           text: 'Submit',
@@ -139,7 +237,7 @@ export const FinalTest = ({navigation}) => {
         <View style={styles.container}>
           <TouchableOpacity
             onPress={() => {
-              setBack(!back);
+              stopHandler()
               createTwoButtonAlert();
             }}>
             <Image
@@ -153,21 +251,8 @@ export const FinalTest = ({navigation}) => {
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}
             />
-            <View>
-              <CountDown
-                until={60 * 30 + 0}
-                size={14}
-                onFinish={() => timeOver()}
-                digitStyle={{backgroundColor: 'transparent'}}
-                digitTxtStyle={{color: '#2BB5F4'}}
-                timeToShow={['M', 'S']}
-                timeLabels={{m: null, s: null}}
-                showSeparator
-                separatorStyle={{color: '#2BB5F4'}}
-                running={back || submit ? false : true}
-              />
-            </View>
-            <Text style={styles.countdown}>secs remaining</Text>
+           
+            <Text style={styles.countdown}> {currentMinutes}:{currentSeconds} secs remaining</Text>
           </View>
 
           <View style={styles.middlecontainer}>
@@ -345,8 +430,8 @@ export const FinalTest = ({navigation}) => {
 
         <View style={styles.bottomview}>
           <View style={styles.innerbtm}>
-            <Text style={styles.chapter}>Chapter 3</Text>
-            <Text style={styles.topic}>Setting up a new project</Text>
+            <Text style={styles.chapter}>Chapter {data1?.chapterNumber}</Text>
+            <Text style={styles.topic}>{data1?.chapterName}</Text>
           </View>
 
           {PreviousQuestion === -1 ? (
@@ -376,7 +461,9 @@ export const FinalTest = ({navigation}) => {
               <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={() => {
-                  setSubmit(!submit);
+                  submitstop=false,
+                  stopHandler(),
+                 
                   handleSubmit({navigation});
                   // navigation.navigate('CongratulationScreen')
                 }}>

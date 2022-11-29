@@ -27,7 +27,9 @@ import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
   console.log(resultheader)
+
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
+  console.log(resultanswers)
   // const correctAnswers = useSelector(state => state.testdata.resultAnswers);
   const testpercentage = useSelector(state => state.testdata.testPercentage);
   // console.log('()()((((', testpercentage);

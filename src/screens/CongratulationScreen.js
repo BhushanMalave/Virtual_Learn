@@ -7,7 +7,7 @@ import {setResultHeader} from '../redux/ReduxPersist/TestSlice'
 import {setResultAnswers} from '../redux/ReduxPersist/TestSlice'
 
 export const CongratulationScreen = ({navigation, route}) => {
-  console.log(route.params);
+
   const dispatch=useDispatch()
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.testdata.question);
@@ -39,11 +39,11 @@ export const CongratulationScreen = ({navigation, route}) => {
         onPress={
       
         async () => {
-          
            
-            const res = await ResultHeader(data1.testId);
-            const res2 = await ResultAnswer(data1.testId);
-        
+            const res = await ResultHeader(token,data1?.testId);
+           
+            const res2 = await ResultAnswer(token,data1?.testId);
+            console.log(res)
             dispatch(setResultHeader(res))
             dispatch(setResultAnswers(res2))
             

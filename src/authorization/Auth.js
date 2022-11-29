@@ -474,7 +474,7 @@ export const ResultHeader = async (token,id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+    
     },
   };
 
@@ -484,7 +484,7 @@ export const ResultHeader = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log(response)
+      console.log("i am response",response.data)
       return response.data;
     }
   } catch (err) {
@@ -605,11 +605,11 @@ export const FinalTestResult = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log(response)
+      console.log(response.data)
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data);
   }
 };
 

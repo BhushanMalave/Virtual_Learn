@@ -22,7 +22,7 @@ const dispatch= useDispatch();
     <View style={styles.container}>
       <View style={styles.header}>
         <ImageBackground
-          source={require('../assets/images/img_designcoursedetail1_bg.png')}
+          source={{uri:coursedata?.coursePhoto}}
           style={styles.header}>
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());

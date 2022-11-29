@@ -13,6 +13,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import ReadMore from 'react-native-read-more-text';
 import {useSelector} from 'react-redux';
 import {joinCourse} from '../authorization/Auth';
+import {useState, useEffect } from 'react';
 
 const details = [
   {
@@ -37,6 +38,7 @@ const details = [
 
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
+  console.log(coursedata)
   const token = useSelector(state => state.userDetails.token);
   renderTruncatedFooter = handlePress => {
     return (
@@ -70,15 +72,25 @@ export const OverviewScreen = ({navigation}) => {
     );
   };
 
-  const duration = coursedata?.courseDuration;
-  const time = duration.split(":"); 
+  const [totalHours, setTotalHours] = useState(0);
+  useEffect(()=>{
 
-  const hours = Number(time[0]);
-  const m = time[1];
+      if (coursedata?.courseDuration) {
+        const duration = coursedata?.courseDuration;
+        const b = duration.split(':');
+        const h = Number(b[0]);
+        const m = b[1];
+        const mins = Number((m / 60).toFixed(2));
+        const totalHour = h + mins;
+        setTotalHours(totalHour);
+      }
 
-  const mins = m / 60;
+  },[coursedata?.courseDuration])
 
-  const total_hours = hours + mins;
+
+  const video = (item) => {
+    navigation.navigate('VideoPlayer',{item});
+    };
 
   return (
     <View style={styles.container}>
@@ -91,11 +103,9 @@ export const OverviewScreen = ({navigation}) => {
               <TouchableOpacity
                 onPress={() => {
                   {
-                    {
-                      coursedata?.previewVideo;
-                    }
+                    video(item=coursedata)
                   }
-                  console.log('vcjhdvsjchbdh');
+                 
                 }}>
                 <ImageBackground
                   source={{uri: coursedata?.coursePhoto}}
@@ -104,12 +114,18 @@ export const OverviewScreen = ({navigation}) => {
                     height: 80,
                     resizeMode: 'cover',
                     borderRadius: 5,
+                    flexDirection:"row",
+                    
                   }}
                   imageStyle={{borderRadius: 5}}>
                   <Image
                     source={require('../assets/images/icn_play_orange.png')}
                     style={styles.videobutton}
                   />
+                  <View style={styles.introview}>
+                  <Text style={styles.introtext}>Introduction</Text>
+                  <Text style={styles.introtext2}>3 mins</Text>
+                  </View>
                 </ImageBackground>
               </TouchableOpacity>
             </View>
@@ -130,7 +146,7 @@ export const OverviewScreen = ({navigation}) => {
                 source={require('../assets/images/icn_includes_duration.png')}
               />
               <Text style={styles.coursedescription}>
-                {total_hours} total hours video
+                {totalHours} total hours video
               </Text>
             </View>
             <View style={styles.coursecontent}>
@@ -211,12 +227,14 @@ export const OverviewScreen = ({navigation}) => {
               style={styles.button}
               onPress={async () => {
                 const objBody = {
-                  courseId:coursedata.courseId,
+                  courseId:coursedata?.courseId,
                 };
                 console.log('hvhc', coursedata.courseId);
                 const res = await joinCourse(token, objBody);
                 console.log(res);
-                navigation.navigate('Chapters');
+                if(res){
+                  navigation.navigate('Chapters');
+                }
               }}>
               <Text style={styles.buttontext}>Join Course</Text>
             </TouchableOpacity>
@@ -256,9 +274,10 @@ const styles = StyleSheet.create({
   },
   videoview: {
     height: 80,
-
+    backgroundColor:'#042C5C',
     marginTop: 12,
     borderRadius: 5,
+    opacity:0.95
   },
   description: {
     height: 140,
@@ -388,5 +407,25 @@ const styles = StyleSheet.create({
   },
   videobutton: {
     margin: 15,
+  },
+  introtext:{
+    color: '#FFFFFF',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 16,
+    letterSpacing: 0,
+    lineHeight: 18,
+    fontWeight:"bold"
+   
+  },
+  introview:{
+    marginTop:22
+  },
+  introtext2:{
+    color: '#FFFFFF',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 12,
+    letterSpacing: 0,
+    lineHeight: 18,
+   
   },
 });
