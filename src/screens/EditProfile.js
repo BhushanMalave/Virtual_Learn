@@ -272,10 +272,12 @@ export const EditProfile = ({navigation}) => {
                           onPress={() => {
                             setOccupationState(false);
                           }}>
+                            <View>
                           <Image
                             source={require('../assets/images/icn_close_filter.png')}
                             style={{tintColor: 'black'}}
                           />
+                          </View>
                         </TouchableOpacity>
                       </>
                     ) : (
@@ -283,7 +285,9 @@ export const EditProfile = ({navigation}) => {
                         onPress={() => {
                           setOccupationState(true);
                         }}>
-                        <Image source={icn_dropdown} />
+                          <View>
+                        <Image style={{tintColor:'#042C5C'}} source={icn_dropdown} />
+                        </View>
                       </TouchableOpacity>
                     )}
                   </View>
@@ -359,7 +363,7 @@ export const EditProfile = ({navigation}) => {
                         onPress={() => {
                           setGenderState(true);
                         }}>
-                        <Image source={icn_dropdown} />
+                        <Image  style={{tintColor:'#042C5C'}} source={icn_dropdown} />
                       </TouchableOpacity>
                     )}
                   </View>

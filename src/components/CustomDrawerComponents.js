@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 import {
   ImageBackground,
@@ -14,14 +14,15 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {useRoute} from '@react-navigation/native';
 import { useSelector ,useDispatch} from 'react-redux';
-import { setNewUser } from '../redux/ReduxPersist/UserDetails';
 import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { drawerData } from '../authorization/Auth';
 
 export const CustomDrawerComponent = props => {
 
   const userData = useSelector(state => state.userData.data);
+  const token = useSelector(state => state.userDetails.token);
+  const [data,setData] =useState(null);
   const dispatch = useDispatch();
   const log = () => {
     Alert.alert('', 'Are you sure want to Logout?', [
@@ -36,26 +37,38 @@ export const CustomDrawerComponent = props => {
     ]);
   };
 
+  const Call = async(token)=> {
+      const res = await drawerData(token);
+      setData(res);
+  }  
+
+  useEffect(() => {
+    Call(token);
+  }, [ ]);
+
   return (
     <View style={{flex: 1,marginTop:Platform.OS === 'ios'? -52:-4,}}>
       <DrawerContentScrollView {...props}>
         <ImageBackground
-          source={{uri: userData?.profilePhoto}}
+          source={{uri: data?.profilePhoto}}
           style={styles.backgroundimg}>
           <View style={styles.backgroundImgBlur}>
             <View style={styles.topinfo}>
               <Image
-              source={{uri: userData?.profilePhoto}}
+              source={{uri: data?.profilePhoto}}
                 style={styles.imgprofile}
               />
               <View style={styles.topinfotext}>
-                <Text style={styles.textname}>{userData?.fullName}</Text>
-                <Text style={styles.textdesc}>{userData?.occupation}</Text>
+                <Text style={styles.textname}>{data?.fullName}</Text>
+                <Text style={styles.textdesc}>{data?.occupation}</Text>
               </View>
             </View>
           </View>
         </ImageBackground>
         <DrawerItemList {...props} />
+        <View style={styles.notify}>
+          <Text style={styles.notifyText}>{data?.notificationCount}</Text>
+        </View>
         <Pressable onPress={log}>
           <View style={styles.ViewText}>
             <Image
@@ -72,12 +85,13 @@ export const CustomDrawerComponent = props => {
 
 const styles = StyleSheet.create({
   backgroundimg: {
-    height: 178,
+    height: 188,
+    marginBottom:30,
   },
   backgroundImgBlur: {
     backgroundColor: '#042C5C',
     opacity: 0.9,
-    height: 178,
+    height: 188,
   },
   topinfo: {
     flexDirection: 'row',
@@ -107,7 +121,7 @@ const styles = StyleSheet.create({
     // marginBottom: 330,
     marginLeft: 20,
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 93,
   },
   textname: {
     color: '#FFFFFF',
@@ -119,18 +133,34 @@ const styles = StyleSheet.create({
   },
   textdesc: {
     color: '#FFFFFF',
-    fontFamily: 'Proxima Nova',
+    fontFamily:Platform.OS === 'ios'? 'Proxima Nova': 'ProximaNova',
     fontWeight: 'bold',
     fontSize: 12,
     marginTop: 10,
   },
   textlog: {
     color: '#373737',
-    fontFamily: 'Proxima Nova',
+    fontFamily:Platform.OS === 'ios'? 'Proxima Nova': 'ProximaNova',
     fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
     fontSize: 16,
     marginLeft: 21,
     marginTop: Platform.OS === 'ios' ? 1 : -3,
+  },
+  notifyText:{
+    color: '#FFFFFF',
+    fontFamily:Platform.OS === 'ios'? 'Proxima Nova': 'ProximaNova',
+    fontWeight: 'bold',
+    fontSize: 12,
+    textAlign:'center',
+     marginTop:Platform.OS === 'ios' ? 4:1,
+  },
+  notify:{
+    height:19,
+    width:28,
+    borderRadius:15,
+    backgroundColor:'#E83F3F',
+    marginLeft:165,
+    marginTop:Platform.OS === 'ios' ? -95: -90,
   },
   imgprofile:{
     height:58,
