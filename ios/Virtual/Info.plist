@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Virtual Learn Requires app requires photo library access.</string>
 	<key>NSCameraUsageDescription</key>
@@ -57,6 +57,8 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Ionicons.ttf</string>
+		<string>MaterialIcons.ttf</string>
 		<string>Biko_Black.otf</string>
 		<string>Biko_Bold.otf</string>
 		<string>Biko_Regular.otf</string>
