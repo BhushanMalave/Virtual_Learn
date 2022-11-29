@@ -1,11 +1,8 @@
 import React from 'react';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {NavigationContainer} from '@react-navigation/native';
-
 import {OverviewScreen} from '../screens/OverviewScreen';
 import { ChaptersScreen } from '../screens/ChaptersScreen';
-import {color} from 'react-native-reanimated';
 import {Platform} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();

@@ -11,7 +11,7 @@ export const cdsSubCategories = createAsyncThunk(
         };
         try{
             const response = await axios.get(
-                `https://virtual-learn-app-java.herokuapp.com/user/subCategoriesWP?categoryId=${id}`,
+                `https://virtual-learning-app-java.herokuapp.com/user/subCategoriesWP?categoryId=${id}`,
                 options,
             );
             return response.data;

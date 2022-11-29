@@ -14,7 +14,7 @@ export const myCourses = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/checkMyCourses',
+        'https://virtual-learning-app-java.herokuapp.com/user/checkMyCourses',
         options,
       );
     console.log(response.data)

@@ -10,7 +10,7 @@ export const refreshToken = async (token) => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/refreshToken',
+      'https://virtual-learning-app-java.herokuapp.com/refreshToken',
       options,
     );
     if (response.data.jwtToken) {
@@ -20,12 +20,32 @@ export const refreshToken = async (token) => {
     console.log(error.response.data);
   }
 };
+export const drawerData = async token => {
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      'https://virtual-learning-app-java.herokuapp.com/user/menu',
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const termsAndConditions = async () => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/termsAndConditions'
+      'https://virtual-learning-app-java.herokuapp.com/termsAndConditions'
     
     );
     console.log("=====",response.data);
@@ -41,7 +61,7 @@ export const termsAndConditions = async () => {
 export const privacyPolicy = async () => {
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/privacyPolicy'
+      'https://virtual-learning-app-java.herokuapp.com/privacyPolicy'
     );
    // console.log("=====",response.data.message);
     if (response.data.message) {
@@ -60,7 +80,7 @@ export const all = async token => {
   };
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/user/home/course/all',
+      'https://virtual-learning-app-java.herokuapp.com/user/home/course/all',
       options,
     );
     if (response.data) {
@@ -80,7 +100,7 @@ export const newest = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/user/home/course/newest',
+      'https://virtual-learning-app-java.herokuapp.com/user/home/course/newest',
       options,
     );
     //console.log("=====",response.data);
@@ -101,7 +121,7 @@ export const popular = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/user/home/course/popular',
+      'https://virtual-learning-app-java.herokuapp.com/user/home/course/popular',
       options,
     );
     if (response.data) {
@@ -123,7 +143,7 @@ export const mpChangePassword = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/user/changePassword',
+      'https://virtual-learning-app-java.herokuapp.com/user/changePassword',
       body,
       options,
     );
@@ -139,7 +159,7 @@ export const mpChangePassword = async (token, objBody) => {
 export const mpChangeUserData = async (token, formBody) => {
 
   try {
-    let res = await fetch('https://virtual-learn-app-java.herokuapp.com/user/save', {
+    let res = await fetch('https://virtual-learning-app-java.herokuapp.com/user/save', {
       method: 'put',
       body: formBody,
       headers: {
@@ -165,7 +185,7 @@ export const changeUserData = async (token,formBody) => {
 
   try {
     const response = await axios.put(
-      'https://virtual-learn-app-java.herokuapp.com/save',
+      'https://virtual-learning-app-java.herokuapp.com/save',
       formBody,
       options,
     );
@@ -187,7 +207,7 @@ export const overViewData = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/courseOverView?courseId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/courseOverView?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -209,7 +229,7 @@ export const continueApi = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/continue?courseId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/continue?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -231,7 +251,7 @@ export const searchData = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/search?searchKey=${string}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/search?searchKey=${string}`,
       options,
     );
     // console.log(response.data);
@@ -252,7 +272,7 @@ export const searchCategoriesdata = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/user/categoriesWP',
+      'https://virtual-learning-app-java.herokuapp.com/user/categoriesWP',
       options,
     );
     if (response.data) {
@@ -272,7 +292,7 @@ export const getOccupationData = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/user/allSubCategoriesWP',
+      'https://virtual-learning-app-java.herokuapp.com/user/allSubCategoriesWP',
       options,
     );
     if (response.data) {
@@ -293,7 +313,7 @@ export const topSearchData = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learn-app-java.herokuapp.com/user/topSearches',
+      'https://virtual-learning-app-java.herokuapp.com/user/topSearches',
       options,
     );
     if (response.data) {
@@ -315,7 +335,7 @@ export const searchDataKeyword = async (token,obj) => {
 
   try {
     const response = await axios.put(
-      'https://virtual-learn-app-java.herokuapp.com/user/keywords',
+      'https://virtual-learning-app-java.herokuapp.com/user/keywords',
       body,
       options,
     );
@@ -338,7 +358,7 @@ export const searchByKeyword = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/searchByKeyword?keyword=${string}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/searchByKeyword?keyword=${string}`,
       options,
     );
     // console.log(response.data);
@@ -361,7 +381,7 @@ export const applySearchFilter = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/user/applyFilter',
+      'https://virtual-learning-app-java.herokuapp.com/user/applyFilter',
       body,
       options,
     );
@@ -384,7 +404,7 @@ export const joinCourse = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/user/enroll',
+      'https://virtual-learning-app-java.herokuapp.com/user/enroll',
       body,
       options,
     );
@@ -410,7 +430,7 @@ export const SubmitTest = async (token, Body) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/user/submit',
+      'https://virtual-learning-app-java.herokuapp.com/user/submit',
       body,
       options,
     );
@@ -436,7 +456,7 @@ export const PauseTime = async (token, objBody) => {
 
   try {
     const response = await axios.put(
-      'https://virtual-learn-app-java.herokuapp.com/user/pauseTime',
+      'https://virtual-learning-app-java.herokuapp.com/user/pauseTime',
       body,
       options,
     );
@@ -460,7 +480,7 @@ export const ResultHeader = async (token,id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/resultHeader?testId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/resultHeader?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -484,7 +504,7 @@ export const ResultAnswer = async (token,id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/resultAnswers?testId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/resultAnswers?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -507,7 +527,7 @@ export const ModuleTest = async (token,id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/moduleTest?testId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/moduleTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -532,7 +552,7 @@ export const FinalTest = async (token,id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/finalTest?testId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/finalTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -556,7 +576,7 @@ export const SubmitFinalTest = async (token, Body) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learn-app-java.herokuapp.com/user/finalSubmit',
+      'https://virtual-learning-app-java.herokuapp.com/user/finalSubmit',
       body,
       options,
     );
@@ -581,7 +601,7 @@ export const FinalTestResult = async (token,id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learn-app-java.herokuapp.com/user/result?testId=${id}`,
+      `https://virtual-learning-app-java.herokuapp.com/user/result?testId=${id}`,
       options,
     );
     if (response.data) {

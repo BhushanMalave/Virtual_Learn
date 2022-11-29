@@ -9,10 +9,11 @@ import {
   FlatList,
   ScrollView,
   ImageBackground,
-  TouchableHighlight,
   TouchableOpacity,
   Pressable,
   Platform,
+  RefreshControl,
+  Touchable
 } from 'react-native';
 import {number} from 'yup';
 import {CourseComponent} from '../components/CourseComponent';
@@ -62,6 +63,7 @@ export const HomeScreen = ({navigation}) => {
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
+  const [refreshing, setRefreshing] = useState(false);
 
   const refreshToken = async () => {
     const key = await getVerifiedKeys(token);
@@ -73,6 +75,23 @@ export const HomeScreen = ({navigation}) => {
       dispatch(setAllData(data1));
     }
   };
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    dispatch(hsTopHeaders(token));
+    dispatch(hsCategories(token));
+    dispatch(hsTopCourses(token));
+    dispatch(mpUserDetails(token));
+    dispatch(OnGoing(token));
+    setClicked1(true);
+    setClicked2(false);
+    setClicked3(false);
+    allCourse();
+    setRefreshing(false);
+  }, [refreshing]);
+   
+
+
   useEffect(() => {
     dispatch(hsTopHeaders(token));
     dispatch(hsCategories(token));
@@ -87,17 +106,18 @@ export const HomeScreen = ({navigation}) => {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView  refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={styles.view}>
-          <Pressable onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Image source={require('../assets/images/icn_hamburgermenu.png')} />
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate('HomeSearch')}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('HomeSearch')}>
             <Image
               source={require('../assets/images/icn_search-Search.png')}
               style={styles.search}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
         <Text style={styles.name}>{userData?.fullName}</Text>
@@ -276,6 +296,7 @@ export const HomeScreen = ({navigation}) => {
                       dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
+                      navigation.navigate('CourseScreen');
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}
@@ -311,7 +332,7 @@ export const HomeScreen = ({navigation}) => {
               dispatch(cdsAllCourseOfCategory({token, id: item?.categoryId}));
               dispatch(cdsSubCategories({token, id: item?.categoryId}));
               navigation.navigate('CategoryDisplayScreen', {item});
-            }}
+            }} 
           />
         ))}
       </ScrollView>

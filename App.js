@@ -11,7 +11,7 @@ import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
 
 let persistor = persistStore(store);
- //LogBox.ignoreAllLogs();
+ LogBox.ignoreAllLogs();
 const App = () => {
   return (
     <Provider store={store}>
