@@ -1,7 +1,6 @@
-import {useIsFocused} from '@react-navigation/native';
-import {original} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
 
+import RNFetchBlob from 'rn-fetch-blob';
 import {
   View,
   Text,
@@ -10,17 +9,20 @@ import {
   TouchableOpacity,
   Image,
   Platform,
+  ScrollView,
+  PermissionsAndroid
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-
 import {Dimensions} from 'react-native';
-
 import Icon from 'react-native-vector-icons/Feather';
-import {render} from 'react-dom';
+
+import {CertificateDownload} from '../authorization/Auth';
+
+import {useSelector, useDispatch} from 'react-redux';
 
 export const CertificateScreen = ({route, navigation}) => {
+  const token = useSelector(state => state.userDetails.token);
+let [url,setUrl] = useState('')
   const [portrait, setPortrait] = useState(true);
-
   const isPortrait = () => {
     const dim = Dimensions.get('screen');
     return dim.height >= dim.width;
@@ -30,8 +32,87 @@ export const CertificateScreen = ({route, navigation}) => {
     Dimensions.addEventListener('change', () => {
       setPortrait(isPortrait());
     });
-  },[]);
-  console.log(route.params);
+  }, []);
+
+  const checkPremission = async () => {
+    if ( Platform.OS === 'ios') {
+      downloadImage();
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: 'Storage Permissions Requires',
+            Message: 'App needs access to your storage to download Photos',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Storage Permissions Granted');
+          downloadImage();
+        } else {
+          alert('storage Permission Not Granted');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+const downloadImage = () => {
+  const { config, fs } = RNFetchBlob;
+  const isIOS= Platform.OS === 'ios';
+  let date = new Date();
+  let PictureDir = Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
+  var ext = 'pdf'
+  var file_ex = `certificate_${Math.floor(date.getTime() + date.getSeconds() / 2)}.pdf`
+  const fPath = `${PictureDir}/${file_ex}`
+
+const configOptons = Platform.select({
+  ios:{
+    fileCache: true,
+    path: fPath,
+    appendEXt:ext,
+  },
+
+  android:{
+    fileCache:false,
+    appendEXt:ext,
+    addAndroidDownloads:{
+      useDownloadManager : true, 
+      notification : false,
+      path: PictureDir + "/me_"+Math.floor(date.getTime() + date.getSeconds() / 2)+file_ex,
+      description : 'Downloading File.',
+    }   
+  },
+})  
+
+if(isIOS){
+  RNFetchBlob.config(configOptons)
+  .fetch('GET',url)
+  .then((res) => {
+    console.log('file ',res)
+    RNFetchBlob.ios.previewDocument('file://'+res.path())
+  });
+  return;
+} else {
+  config(configOptons).
+  fetch('GET',url)
+  .progress((received, total)=> {
+    console.log('progress',received/total);
+  })
+  .then((res)=> {
+    console.log('file_download', res)
+    RNFetchBlob.android.actionViewIntent(res.path())
+  })
+  .catch((errorMessage)=> {
+    console.log('error with downloading file  ', errorMessage)
+  })
+}
+
+}
+
+
+  // console.log(route.params);
   return (
     <View style={{backgroundColor: '#2B2B2B', flex: 1}}>
       <SafeAreaView style={{flex: 1}}>
@@ -54,7 +135,16 @@ export const CertificateScreen = ({route, navigation}) => {
                 style={styles.closeIcon}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={async () => {
+                const response = await CertificateDownload(
+                  token,
+                  route.params.data?.courseId,
+                );
+                console.log(response);
+                url = response.certificate;
+                checkPremission();
+              }}>
               <Icon name="download" size={24} color="white" />
             </TouchableOpacity>
           </View>

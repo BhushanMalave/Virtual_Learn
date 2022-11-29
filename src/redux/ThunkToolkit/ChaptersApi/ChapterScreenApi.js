@@ -30,6 +30,7 @@ const ChapterResponseSlice = createSlice({
     continueData: null,
     popUpState: false,
     courseId: null,
+    certificate:null,
   },
   reducers: {
     addChapterList: (state, action) => {
@@ -49,6 +50,9 @@ const ChapterResponseSlice = createSlice({
 
     setPopUpState: (state, action) => {
       state.popUpState = !state.popUpState;
+    },
+    addCertificate: (state, action) => {
+      state.certificate = action.payload;
     },
   },
   extraReducers: builder => {
@@ -72,6 +76,7 @@ export const {
   changeChapterListStatus,
   addContinueData,
   setPopUpState,
+  addCertificate
 } = ChapterResponseSlice.actions;
 
 export default ChapterResponseSlice.reducer;

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   View,
@@ -10,84 +10,37 @@ import {
   Image,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
 
 import {FinalTest, ModuleTest} from '../../authorization/Auth';
-import { addQuestionData } from '../../redux/ReduxPersist/TestSlice';
-import {addFinalQuestionData} from '../../redux/ReduxPersist/FinalTestSlice'
-import { TestStack } from '../../navigation/TestStack';
-import { Test } from '../../screens/Test';
+import {addQuestionData} from '../../redux/ReduxPersist/TestSlice';
+import {addFinalQuestionData} from '../../redux/ReduxPersist/FinalTestSlice';
+import {TestStack} from '../../navigation/TestStack';
+import {Test} from '../../screens/Test';
 const completed = false;
 const START_MINUTES = '00';
 const START_SECOND = '15';
 const START_DERATION = 10;
-export const ModularTest = (item) => {
+export const ModularTest = item => {
   // const data = useSelector(state => state.courseData.data);
-const data = useSelector(state => state.chapterResponse.data);
-const token = useSelector(state => state.userDetails.token);
-const dispatch = useDispatch()
+  const data = useSelector(state => state.chapterResponse.data);
+  const token = useSelector(state => state.userDetails.token);
+  const dispatch = useDispatch();
 
+  const [totalMinutes, setTotalMinutes] = useState(0);
+  useEffect(() => {
+    if (item?.duration) {
+      const duration = item?.duration;
+      const b = duration.split(':');
+      const h = Number(b[0] * 60);
+      const m = Number(b[1]);
+      const mins = h + m;
+      const sec = Number((b[2] / 100).toFixed(2));
+      const totalmin = (mins + sec).toFixed(2);
+      setTotalMinutes(totalmin);
+    }
+  }, [item?.duration]);
 
-
-
-const [currentMinutes, setMinutes] = useState(START_MINUTES);
-const [currentSeconds, setSeconds] = useState(START_SECOND);
-const [isStop, setIsStop] = useState(false);
-const [duration, setDuration] = useState(START_DERATION);
-const [isRunning, setIsRunning] = useState(false);
-
-
-const startHandler = () => {
-  setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
-  // setMinutes(60 * 5);
-  // setSeconds(0);
-  setIsRunning(true);
-};
-
-const stopHandler = () => {
-  // stop timer
-  setIsStop(true);
-  setIsRunning(false);
-};
-const resetHandler = () => {
-  setMinutes(START_MINUTES);
-  setSeconds(START_SECOND);
-  setIsRunning(false);
-  setIsStop(false);
-  setDuration(START_DERATION);
-};
-
-const resumeHandler = () => {
-  let newDuration =
-    parseInt(currentMinutes, 10) * 60 + parseInt(currentSeconds, 10);
-  setDuration(newDuration);
-
-  setIsRunning(true);
-  setIsStop(false);
-};
-
-
-useEffect(() => {
-  if (isRunning === true) {
-    let timer = duration;
-    var minutes, seconds;
-    const interval = setInterval(function () {
-      if (--timer == -1) {
-        alert('timer over');
-        stopHandler()
-      } else {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-
-        setMinutes(minutes);
-        setSeconds(seconds);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }
-}, [isRunning]);
   return (
     <>
       <View>
@@ -125,28 +78,23 @@ useEffect(() => {
               <View style={{width: '70%'}}>
                 {/* <View > */}
                 <TouchableOpacity
-                  disabled={!!item?.disable}
+                  disabled={!item?.disable}
                   onPress={async () => {
-                    {if(item?.test ==='Final Test')
-                  {
-                    const res = await FinalTest(token,item?.id);
-                    dispatch(addFinalQuestionData(res));
-                    item.navigation.navigate('FinalTestStack')
-                  }else {
-                    const res = await ModuleTest(token,item?.id);
-                    dispatch(addQuestionData(res));
-                    item.navigation.navigate('TestStack');
-                  }
-                
-                
-                } 
-                startHandler()
-                
-                    
+                    {
+                      if (item?.test === 'Final Test') {
+                        const res = await FinalTest(token, item?.id);
+                        dispatch(addFinalQuestionData(res));
+                        item.navigation.navigate('FinalTestStack');
+                      } else {
+                        const res = await ModuleTest(token, item?.id);
+                        dispatch(addQuestionData(res));
+                        item.navigation.navigate('TestStack');
+                      }
+                    }
                   }}>
                   <Text style={styles.chapterText}>{item?.test}</Text>
                   <Text style={styles.chapterTime}>
-                    {item?.duration} mins | {item?.questions} Questions
+                    {totalMinutes} mins | {item?.questions} Questions
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -157,21 +105,19 @@ useEffect(() => {
             ) : (
               <>
                 {item?.rate === 0 || item?.rate ? (
-                   <View style={styles.rateView}>
-                   <View style={styles.rateNumView}>
-                     <Text style={styles.rateNum}>{item?.rate}</Text>
-                     <Text style={styles.ratePercent}>%</Text>
-                   </View>
-                   <Text style={styles.rateText}>Approval Rate</Text>
-                 </View>
-                )
-
-                 :
-                 (<></>)}
-                <>
-
-                 
-                </>
+                  <View style={styles.rateView}>
+                    <View style={styles.rateNumView}>
+                      <Text style={styles.rateNum}>
+                        {Number((item?.rate).toFixed(2))}
+                      </Text>
+                      <Text style={styles.ratePercent}>%</Text>
+                    </View>
+                    <Text style={styles.rateText}>Approval Rate</Text>
+                  </View>
+                ) : (
+                  <></>
+                )}
+                <></>
               </>
             )}
           </View>

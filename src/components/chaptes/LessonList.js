@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   View,
@@ -18,6 +18,26 @@ export const LessonList = (item) => {
   const video = item => {
     item.nav.navigate('LessonVideoPlayer', {item});
   };
+const [totalMinutes, setTotalMinutes] = useState(0)
+
+useEffect(()=>{
+  if(item?.duration)
+  {
+    const duration = item?.duration;
+    const b = duration.split(':');
+    const h = Number(b[0]*60);
+    const m = Number(b[1]);
+    const mins =h+m;
+    const sec= b[2]/100;
+    const totalmin = (mins+sec).toFixed(2);
+    setTotalMinutes(totalmin);
+  }
+    
+},[item?.duration])
+
+
+
+
   // const data = useSelector(state => state.courseData.data);
   const data = useSelector(state => state.chapterResponse.data);
   const continueData = useSelector(state => state.chapterResponse.continueData);
@@ -60,7 +80,7 @@ export const LessonList = (item) => {
             <View style={{width: '75%'}}>
               {/* <View > */}
               <Text style={styles.chapterText}>{item?.lessonName}</Text>
-              <Text style={styles.chapterTime}>{item?.duration} mins</Text>
+              <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
             </View>
           </View>
 

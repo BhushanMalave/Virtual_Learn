@@ -613,3 +613,24 @@ export const FinalTestResult = async (token,id) => {
   }
 };
 
+export const CertificateDownload = async (token,id) => {
+ 
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `https://virtual-learning-app-java.herokuapp.com/user/pdf?courseId=${id}`,
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
