@@ -10,8 +10,6 @@ import {
   Image,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useState} from 'react';
-
 import {FinalTest, ModuleTest} from '../../authorization/Auth';
 import {addQuestionData} from '../../redux/ReduxPersist/TestSlice';
 import {addFinalQuestionData} from '../../redux/ReduxPersist/FinalTestSlice';
