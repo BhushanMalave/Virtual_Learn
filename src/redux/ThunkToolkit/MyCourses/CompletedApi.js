@@ -14,7 +14,7 @@ export const Completed = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learn-app-java.herokuapp.com/user/completedCourses',
+        'https://virtual-learning-app-java.herokuapp.com/user/completedCourses',
         options,
       );
      // console.log(response.data)

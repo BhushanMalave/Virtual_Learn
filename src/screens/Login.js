@@ -75,7 +75,7 @@ export const Login = ({navigation}) => {
 
                 try {
                   const response = await axios.put(
-                    'https://virtual-learn-app-java.herokuapp.com/login',
+                    'https://virtual-learning-app-java.herokuapp.com/login',
                     obj,
                   );
                   //console.log('=====', response.data);

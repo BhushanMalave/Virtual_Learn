@@ -276,6 +276,7 @@ export const HomeScreen = ({navigation}) => {
                       dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
+                      navigation.navigate('CourseScreen');
                     }}>
                     <Image
                       source={{uri: item?.coursePhoto}}

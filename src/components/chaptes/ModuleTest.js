@@ -10,6 +10,7 @@ import {
   Image,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import { useEffect,useState } from 'react';
 
 import {FinalTest, ModuleTest} from '../../authorization/Auth';
 import { addQuestionData } from '../../redux/ReduxPersist/TestSlice';
@@ -21,6 +22,23 @@ export const ModularTest = (item) => {
 const data = useSelector(state => state.chapterResponse.data);
 const token = useSelector(state => state.userDetails.token);
 const dispatch = useDispatch()
+
+const [totalMinutes, setTotalMinutes] = useState(0)
+useEffect(()=>{
+  if(item?.duration)
+  {
+    const duration = item?.duration;
+    const b = duration.split(':');
+    const h = Number(b[0]*60);
+    const m = Number(b[1]);
+    const mins =h+m;
+    const sec=Number((b[2]/100).toFixed(2));
+    const totalmin = (mins+sec).toFixed(2);
+    setTotalMinutes(totalmin);
+  }
+    
+},[item?.duration])
+
   return (
     <>
       <View>
@@ -58,7 +76,7 @@ const dispatch = useDispatch()
               <View style={{width: '70%'}}>
                 {/* <View > */}
                 <TouchableOpacity
-                  disabled={!!item?.disable}
+                  disabled={!item?.disable}
                   onPress={async () => {
                     {if(item?.test ==='Final Test')
                   {
@@ -77,7 +95,7 @@ const dispatch = useDispatch()
                   }}>
                   <Text style={styles.chapterText}>{item?.test}</Text>
                   <Text style={styles.chapterTime}>
-                    {item?.duration} mins | {item?.questions} Questions
+                    {totalMinutes} mins | {item?.questions} Questions
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -90,7 +108,7 @@ const dispatch = useDispatch()
                 {item?.rate === 0 || item?.rate ? (
                    <View style={styles.rateView}>
                    <View style={styles.rateNumView}>
-                     <Text style={styles.rateNum}>{item?.rate}</Text>
+                     <Text style={styles.rateNum}>{Number((item?.rate).toFixed(2))}</Text>
                      <Text style={styles.ratePercent}>%</Text>
                    </View>
                    <Text style={styles.rateText}>Approval Rate</Text>
