@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
-
+import RNFetchBlob from 'rn-fetch-blob';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  PermissionsAndroid,
   RefreshControl,
 } from 'react-native';
 
@@ -31,7 +32,10 @@ import {
   addContinueData,
 } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
+import {CertificateDownload} from '../authorization/Auth';
+
 export const ChaptersScreen = ({navigation}) => {
+
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const coursedata = useSelector(state => state.courseData.overview);
@@ -88,6 +92,85 @@ export const ChaptersScreen = ({navigation}) => {
       setHours(h1);
     }
   }, [data?.courseCompletedStatus]);
+
+  let [url,setUrl] = useState('')
+
+  const checkPremission = async () => {
+    if ( Platform.OS === 'ios') {
+      downloadImage();
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: 'Storage Permissions Requires',
+            Message: 'App needs access to your storage to download Photos',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Storage Permissions Granted');
+          downloadImage();
+        } else {
+          alert('storage Permission Not Granted');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+const downloadImage = () => {
+  const { config, fs } = RNFetchBlob;
+  const isIOS= Platform.OS === 'ios';
+  let date = new Date();
+  let PictureDir = Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
+  var ext = 'pdf'
+  var file_ex = `certificate_${Math.floor(date.getTime() + date.getSeconds() / 2)}.pdf`
+  const fPath = `${PictureDir}/${file_ex}`
+
+const configOptons = Platform.select({
+  ios:{
+    fileCache: true,
+    path: fPath,
+    appendEXt:ext,
+  },
+
+  android:{
+    fileCache:false,
+    appendEXt:ext,
+    addAndroidDownloads:{
+      useDownloadManager : true, 
+      notification : false,
+      path: PictureDir + "/me_"+Math.floor(date.getTime() + date.getSeconds() / 2)+file_ex,
+      description : 'Downloading File.',
+    }   
+  },
+})  
+
+if(isIOS){
+  RNFetchBlob.config(configOptons)
+  .fetch('GET',url)
+  .then((res) => {
+    // console.log('file ',res)
+    RNFetchBlob.ios.previewDocument('file://'+res.path())
+  });
+  return;
+} else {
+  config(configOptons).
+  fetch('GET',url)
+  .progress((received, total)=> {
+    // console.log('progress',received/total);
+  })
+  .then((res)=> {
+    // console.log('file_download', res)
+    RNFetchBlob.android.actionViewIntent(res.path())
+  })
+  .catch((errorMessage)=> {
+    console.log('error with downloading file  ', errorMessage)
+  })
+}
+
+}
 
   return (
     <SafeAreaView style={styles.container}>
@@ -198,7 +281,7 @@ export const ChaptersScreen = ({navigation}) => {
                 <Text style={styles.courseText}>Course Result</Text>
 
                 <Text style={styles.percentText}>
-                  {data?.coursePercentage}%
+                {Number((data?.coursePercentage).toFixed(2))}%
                 </Text>
 
                 <Text style={styles.aprrovalText}>approval rate</Text>
@@ -246,7 +329,19 @@ export const ChaptersScreen = ({navigation}) => {
                 <View style={styles.certificateTextView}>
                   <Text style={styles.courseText}>Course Certificate</Text>
 
-                  <TouchableOpacity style={{width: 26}}>
+                  <TouchableOpacity 
+                  style={{width: 26}}
+                  onPress={async () => {
+                      const response = await CertificateDownload(
+                        token,
+                        data?.courseId,
+                      );
+                      console.log(response);
+                      url = response.certificate;
+                      checkPremission();
+                    }
+                  }
+                  >
                     <Icon name="download" size={24} color="white" />
                   </TouchableOpacity>
                 </View>
@@ -258,7 +353,6 @@ export const ChaptersScreen = ({navigation}) => {
                       navigation.navigate('CertificateScreen', {data});
                     }}>
                     <Image
-                      // source={require('../assets/images/img_designcoursedetail1_bg.png')}
                       source={{uri: data?.certificateUrl}}
                       style={styles.certificate}
                     />

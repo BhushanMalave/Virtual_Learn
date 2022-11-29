@@ -164,7 +164,6 @@ export const TestSlice = createSlice({
       state.resultHeader = action.payload
     },
     setResultAnswers:(state,action)=>{
-      // console.log("++++++++",action.payload)
       state.resultAnswers = action.payload
     },
     removeAnswers: (state, action) => {
