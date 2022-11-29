@@ -9,6 +9,7 @@ import {
   Platform,
   TouchableOpacity,
   Image,
+  RefreshControl,
 } from 'react-native';
 
 import {useDispatch} from 'react-redux';
@@ -36,7 +37,7 @@ export const ChaptersScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
   const data = useSelector(state => state.chapterResponse.data);
   const courseId = useSelector(state => state.chapterResponse.courseId);
-
+  const [refreshing, setRefreshing] = useState(false);
   const continueData = useSelector(state => state.chapterResponse.continueData);
 
   const continueCall = async () => {
@@ -70,6 +71,13 @@ export const ChaptersScreen = ({navigation}) => {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
 
+  
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    continueCall();
+    setRefreshing(false);
+  }, [refreshing]);
+
   useEffect(() => {
     if (data?.courseCompletedStatus) {
       const duration1 = data?.totalDuration;
@@ -81,12 +89,14 @@ export const ChaptersScreen = ({navigation}) => {
     }
   }, [data?.courseCompletedStatus]);
 
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
         style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={styles.mainView}>
           {continueData ? (
             <>
@@ -124,28 +134,29 @@ export const ChaptersScreen = ({navigation}) => {
                   completed={item1?.chapterCompletedStatus}
                   id={item1?.chapterId}
                 />
-<View>
-                {item1?.chapterStatus ? (
-                  <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                    {item1?.lessonResponses.map(item => (
-                      <View key={item?.lessonId}>
-                        <LessonList
-                          number={item?.lessonNumber}
-                          lessonName={item?.lessonName}
-                          duration={item?.lessonDuration}
-                          completed={item?.lessonCompletedStatus}
-                          status={item?.lessonStatus}
-                          lessonId={item?.lessonId}
-                          videoLink={item?.videoLink}
-                          nav={navigation}
-                          chapterId={item1?.chapterId}
-                        />
-                      </View>
-                    ))}
-                  </View>
-                ) : (
-                  <></>
-                )}
+                <View>
+                  {item1?.chapterStatus ? (
+                    <View
+                      style={{alignSelf: 'center', justifyContent: 'center'}}>
+                      {item1?.lessonResponses.map(item => (
+                        <View key={item?.lessonId}>
+                          <LessonList
+                            number={item?.lessonNumber}
+                            lessonName={item?.lessonName}
+                            duration={item?.lessonDuration}
+                            completed={item?.lessonCompletedStatus}
+                            status={item?.lessonStatus}
+                            lessonId={item?.lessonId}
+                            videoLink={item?.videoLink}
+                            nav={navigation}
+                            chapterId={item1?.chapterId}
+                          />
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <></>
+                  )}
                 </View>
 
                 {item1?.lessonResponses.map(temp => {
@@ -241,11 +252,11 @@ export const ChaptersScreen = ({navigation}) => {
                 </View>
 
                 <View style={styles.certificateView}>
-                  <TouchableOpacity style={styles.certificateOnPress}
-                  onPress={ ()=> {
-                    navigation.navigate('CertificateScreen',{data})
-                  }}
-                  >
+                  <TouchableOpacity
+                    style={styles.certificateOnPress}
+                    onPress={() => {
+                      navigation.navigate('CertificateScreen', {data});
+                    }}>
                     <Image
                       // source={require('../assets/images/img_designcoursedetail1_bg.png')}
                       source={{uri: data?.certificateUrl}}

@@ -52,23 +52,22 @@ export const HomeSearch = ({navigation}) => {
 
   const handleText = async string => {
     setText(string);
-    const res = await searchData(token, text);
-    if (res) {
-      dispatch(setComponentRender(2));
-      dispatch(setSearchData(res));
+    if (text==='') {
+      dispatch(setComponentRender(1));
+      dispatch(setSearchData(null));
     } else {
-      dispatch(setComponentRender(3));
+      const res = await searchData(token, text);
+      if (res) {
+        dispatch(setComponentRender(2));
+        dispatch(setSearchData(res));
+      } else {
+        dispatch(setComponentRender(3));
+      }
     }
   };
   const refreshToken = async () => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
-  };
-
-  const call = () => {
-    if (text == ' ') {
-      dispatch(setComponentRender(1));
-    }
   };
   const topSearch = async () => {
     const res = await topSearchData(token);
@@ -80,7 +79,6 @@ export const HomeSearch = ({navigation}) => {
   useEffect(() => {
     dispatch(setComponentRender(1));
     topSearch();
-    call();
     // refreshToken();
   }, []);
 

@@ -13,7 +13,7 @@ import {Test} from './src/screens/Test'
 import { TimerComponent } from './src/components/TimerComponent';
 
 let persistor = persistStore(store);
- //LogBox.ignoreAllLogs();
+ LogBox.ignoreAllLogs();
 const App = () => {
   return (
     <Provider store={store}>

@@ -20,6 +20,26 @@ export const refreshToken = async (token) => {
     console.log(error.response.data);
   }
 };
+export const drawerData = async token => {
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      'https://virtual-learning-app-java.herokuapp.com/user/menu',
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const termsAndConditions = async () => {
 
