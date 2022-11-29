@@ -1,26 +1,80 @@
-import React,{useRef} from 'react'
-import { Text, View,StyleSheet } from 'react-native'
-import CountDown from 'react-native-countdown-component'
+import React,{useRef,useState,useEffect} from 'react'
+import { Text, View,StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native'
 
+
+
+
+  const START_MINUTES = '00';
+const START_SECOND = '15';
+const START_DERATION = 10;
 
 export const TimerComponent=()=> {
-  
-return (
-   <View>
-         <CountDown
-        until={60 * 29 + 0}
-        size={14}
-        onFinish={() => alert('Finished')}
-        digitStyle={{backgroundColor: '#FFF'}}
-        digitTxtStyle={{color: '#2BB5F4'}}
-        timeToShow={['M','S']}
-        timeLabels={{m:null,s:null}}
-        showSeparator
-        separatorStyle={{color:"#2BB5F4"}}
-        
-        
-      />
+  const [currentMinutes, setMinutes] = useState(START_MINUTES);
+  const [currentSeconds, setSeconds] = useState(START_SECOND);
+  const [isStop, setIsStop] = useState(false);
+  const [duration, setDuration] = useState(START_DERATION);
+  const [isRunning, setIsRunning] = useState(false);
 
-   </View>
+  const startHandler = () => {
+    setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
+    // setMinutes(60 * 5);
+    // setSeconds(0);
+    setIsRunning(true);
+  };
+  const stopHandler = () => {
+    // stop timer
+    setIsStop(true);
+    setIsRunning(false);
+  };
+  const resetHandler = () => {
+    setMinutes(START_MINUTES);
+    setSeconds(START_SECOND);
+    setIsRunning(false);
+    setIsStop(false);
+    setDuration(START_DERATION);
+  };
+
+  const resumeHandler = () => {
+    let newDuration =
+      parseInt(currentMinutes, 10) * 60 + parseInt(currentSeconds, 10);
+    setDuration(newDuration);
+
+    setIsRunning(true);
+    setIsStop(false);
+  };
+
+  useEffect(() => {
+    if (isRunning === true) {
+      let timer = duration;
+      var minutes, seconds;
+      const interval = setInterval(function () {
+        if (--timer == -1) {
+          alert('timer over');
+          stopHandler()
+        } else {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
+
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          seconds = seconds < 10 ? '0' + seconds : seconds;
+
+          setMinutes(minutes);
+          setSeconds(seconds);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isRunning]);
+return (
+   <SafeAreaView>
+
+      <Text>{currentMinutes}:{currentSeconds}</Text>
+      <TouchableOpacity onPress={()=>{startHandler()}}><Text>start</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>{stopHandler()}}><Text>stop</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>{resumeHandler()}}><Text>resume</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>{resetHandler()}}><Text>reset</Text></TouchableOpacity>
+
+   </SafeAreaView>
   )
+
 }

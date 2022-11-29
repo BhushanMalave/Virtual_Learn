@@ -9,7 +9,8 @@ import {
   Platform,
   TouchableOpacity,
   Image,
-  PermissionsAndroid
+  PermissionsAndroid,
+  RefreshControl,
 } from 'react-native';
 
 import {useDispatch} from 'react-redux';
@@ -25,7 +26,7 @@ import {useSelector} from 'react-redux';
 import {continueApi} from '../authorization/Auth';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-
+import { joinCourse } from '../authorization/Auth';
 import {
   setPopUpState,
   addContinueData,
@@ -40,7 +41,7 @@ export const ChaptersScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
   const data = useSelector(state => state.chapterResponse.data);
   const courseId = useSelector(state => state.chapterResponse.courseId);
-
+  const [refreshing, setRefreshing] = useState(false);
   const continueData = useSelector(state => state.chapterResponse.continueData);
 
   const continueCall = async () => {
@@ -73,6 +74,13 @@ export const ChaptersScreen = ({navigation}) => {
 
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
+
+  
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    continueCall();
+    setRefreshing(false);
+  }, [refreshing]);
 
   useEffect(() => {
     if (data?.courseCompletedStatus) {
@@ -168,7 +176,10 @@ if(isIOS){
     <SafeAreaView style={styles.container}>
       <ScrollView
         style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={styles.mainView}>
           {continueData ? (
             <>
@@ -206,28 +217,29 @@ if(isIOS){
                   completed={item1?.chapterCompletedStatus}
                   id={item1?.chapterId}
                 />
-<View>
-                {item1?.chapterStatus ? (
-                  <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                    {item1?.lessonResponses.map(item => (
-                      <View key={item?.lessonId}>
-                        <LessonList
-                          number={item?.lessonNumber}
-                          lessonName={item?.lessonName}
-                          duration={item?.lessonDuration}
-                          completed={item?.lessonCompletedStatus}
-                          status={item?.lessonStatus}
-                          lessonId={item?.lessonId}
-                          videoLink={item?.videoLink}
-                          nav={navigation}
-                          chapterId={item1?.chapterId}
-                        />
-                      </View>
-                    ))}
-                  </View>
-                ) : (
-                  <></>
-                )}
+                <View>
+                  {item1?.chapterStatus ? (
+                    <View
+                      style={{alignSelf: 'center', justifyContent: 'center'}}>
+                      {item1?.lessonResponses.map(item => (
+                        <View key={item?.lessonId}>
+                          <LessonList
+                            number={item?.lessonNumber}
+                            lessonName={item?.lessonName}
+                            duration={item?.lessonDuration}
+                            completed={item?.lessonCompletedStatus}
+                            status={item?.lessonStatus}
+                            lessonId={item?.lessonId}
+                            videoLink={item?.videoLink}
+                            nav={navigation}
+                            chapterId={item1?.chapterId}
+                          />
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <></>
+                  )}
                 </View>
 
                 {item1?.lessonResponses.map(temp => {
@@ -335,11 +347,11 @@ if(isIOS){
                 </View>
 
                 <View style={styles.certificateView}>
-                  <TouchableOpacity style={styles.certificateOnPress}
-                  onPress={ ()=> {
-                    navigation.navigate('CertificateScreen',{data})
-                  }}
-                  >
+                  <TouchableOpacity
+                    style={styles.certificateOnPress}
+                    onPress={() => {
+                      navigation.navigate('CertificateScreen', {data});
+                    }}>
                     <Image
                       source={{uri: data?.certificateUrl}}
                       style={styles.certificate}
@@ -362,12 +374,10 @@ if(isIOS){
             text={'Join Course'}
             onPress={async () => {
               const objBody = {
-                courseId: 3,
-                joinDate: '2022-11-10',
+                courseId: coursedata?.courseId
               };
               const res = await joinCourse(token, objBody);
               console.log(res);
-              navigation.navigate('Chapters');
             }}
           />
         </View>

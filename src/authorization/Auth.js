@@ -20,6 +20,26 @@ export const refreshToken = async (token) => {
     console.log(error.response.data);
   }
 };
+export const drawerData = async token => {
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      'https://virtual-learning-app-java.herokuapp.com/user/menu',
+      options,
+    );
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const termsAndConditions = async () => {
 
@@ -454,7 +474,7 @@ export const ResultHeader = async (token,id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+    
     },
   };
 
@@ -464,7 +484,7 @@ export const ResultHeader = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log(response)
+      console.log("i am response",response.data)
       return response.data;
     }
   } catch (err) {
@@ -585,11 +605,11 @@ export const FinalTestResult = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log(response)
+      console.log(response.data)
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data);
   }
 };
 

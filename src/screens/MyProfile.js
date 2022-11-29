@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState,useCallback} from 'react';
 import {
   ImageBackground,
   Text,
@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
@@ -18,18 +19,26 @@ export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const [refreshing, setRefreshing] = useState(false);
   const refreshToken = async() => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
 
   };  
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    continueCall();
+    setRefreshing(false);
+  }, [refreshing]);
   useEffect(() => {
     dispatch(mpUserDetails(token));
-    // refreshToken();
-    console.log(userData);
+     refreshToken();
+   // console.log(userData);
   },[]);
   return (
-    <ScrollView>
+    <ScrollView  refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    }>
       <View>
         <ImageBackground
           source={{uri: userData?.profilePhoto}}
