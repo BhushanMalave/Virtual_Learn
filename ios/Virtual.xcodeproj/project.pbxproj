@@ -20,6 +20,7 @@
 		CB944560D2AE4117AC970DE5 /* Biko_Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FE3AD5F5B8FF4934924E59AB /* Biko_Regular.otf */; };
 		DA75A46811614DD6AD0D8843 /* SFNS Display Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B703C1BA027A4D27925E82C4 /* SFNS Display Regular.ttf */; };
 		F8636C8FDC8F4D5C810D0FDF /* proximanova-semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D8FE8A130BC4435A60CEE7E /* proximanova-semibold.otf */; };
+		FA5B002F293633D100682A7F /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5B002E293633D100682A7F /* BootSplash.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +52,11 @@
 		676F278100B34DA587A44A71 /* Biko_Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Biko_Bold.otf; path = ../src/assets/fonts/Biko_Bold.otf; sourceTree = "<group>"; };
 		6D8FE8A130BC4435A60CEE7E /* proximanova-semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "proximanova-semibold.otf"; path = "../src/assets/fonts/proximanova-semibold.otf"; sourceTree = "<group>"; };
 		77F3CD09392942E0A97DA759 /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ProximaNova-Regular.otf"; path = "../src/assets/fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Virtual/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Virtual-VirtualTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Virtual-VirtualTests.release.xcconfig"; path = "Target Support Files/Pods-Virtual-VirtualTests/Pods-Virtual-VirtualTests.release.xcconfig"; sourceTree = "<group>"; };
-		B703C1BA027A4D27925E82C4 /* SFNS Display Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SFNS Display Regular.ttf"; path = "../src/assets/fonts/SFNS Display Regular.ttf"; sourceTree = "<group>"; };
+		B703C1BA027A4D27925E82C4 /* SFNS Display Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFNS Display Regular.ttf"; path = "../src/assets/fonts/SFNS Display Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FA5B002E293633D100682A7F /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BootSplash.storyboard; sourceTree = "<group>"; };
 		FE3AD5F5B8FF4934924E59AB /* Biko_Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Biko_Regular.otf; path = ../src/assets/fonts/Biko_Regular.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,10 +101,11 @@
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				FA5B002E293633D100682A7F /* BootSplash.storyboard */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = Virtual;
@@ -271,6 +274,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				A695DEB6CB5748E69D1F643B /* Biko_Black.otf in Resources */,
+				FA5B002F293633D100682A7F /* BootSplash.storyboard in Resources */,
 				463BA73B756243E3B2DAB873 /* Biko_Bold.otf in Resources */,
 				CB944560D2AE4117AC970DE5 /* Biko_Regular.otf in Resources */,
 				7A0A30A04DBE471F927A1237 /* ProximaNova-Regular.otf in Resources */,

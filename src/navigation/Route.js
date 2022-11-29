@@ -7,6 +7,8 @@ import {WelcomeStack} from './WelcomeStack';
 import {DrawerNav} from './DrawerNav';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
+import RNBootSplash from "react-native-bootsplash";
+
 
 const Stack = createNativeStackNavigator();
 export const Router = () => {
@@ -33,7 +35,7 @@ export const Router = () => {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={() => RNBootSplash.hide()}>
       <Stack.Navigator>
         {newUser !== false && (
           <Stack.Screen
