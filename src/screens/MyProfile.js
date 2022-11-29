@@ -15,6 +15,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
+import Icons from 'react-native-vector-icons/Ionicons'
+import Iconss from 'react-native-vector-icons/MaterialIcons'
+
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
@@ -59,7 +62,7 @@ export const MyProfile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate('EditProfile');
                 }}>
-                <Icon name="edit-2" size={20} color="white" />
+                <Iconss name="edit" size={20} color="white" />
               </TouchableOpacity>
             </View>
             <View style={styles.topinfo}>
