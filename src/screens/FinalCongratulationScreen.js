@@ -42,8 +42,11 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
         async () => {
             const res = await FinalTestResult(token,data1.testId);
             console.log("()())",res)
+
             dispatch(setFinalResult(res))
-            navigation.navigate('CourseCompletedScreen');
+            if(res){
+              navigation.navigate('CourseCompletedScreen');
+            }
           }
 
         }>

@@ -24,7 +24,7 @@ import {useSelector} from 'react-redux';
 import {continueApi} from '../authorization/Auth';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-
+import { joinCourse } from '../authorization/Auth';
 import {
   setPopUpState,
   addContinueData,
@@ -269,12 +269,10 @@ export const ChaptersScreen = ({navigation}) => {
             text={'Join Course'}
             onPress={async () => {
               const objBody = {
-                courseId: 3,
-                joinDate: '2022-11-10',
+                courseId: coursedata?.courseId
               };
               const res = await joinCourse(token, objBody);
               console.log(res);
-              navigation.navigate('Chapters');
             }}
           />
         </View>

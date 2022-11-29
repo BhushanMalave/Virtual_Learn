@@ -97,7 +97,7 @@ export const PersonalDetails = ({navigation}) => {
 
                 try {
                   const response = await axios.post(
-                    'https://virtual-learn-app-java.herokuapp.com/newUser/register',
+                    'https://virtual-learning-app-java.herokuapp.com/newUser/register',
                     obj,
                   );
                   console.log('=====', response.data.message);

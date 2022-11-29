@@ -9,6 +9,8 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
+import {Test} from './src/screens/Test'
+import { TimerComponent } from './src/components/TimerComponent';
 
 let persistor = persistStore(store);
  //LogBox.ignoreAllLogs();

@@ -34,7 +34,7 @@ export const Verification = ({navigation}) => {
 
         try {
             const response = await axios.post(
-              'https://virtual-learn-app-java.herokuapp.com/newUser/verify',
+              'https://virtual-learning-app-java.herokuapp.com/newUser/verify',
                obj,
             );
             console.log("=====",response.data.message);
@@ -94,7 +94,7 @@ export const Verification = ({navigation}) => {
 
             try {
               const response = await axios.put(
-                'https://virtual-learn-app-java.herokuapp.com/user/resend',
+                'https://virtual-learning-app-java.herokuapp.com/user/resend',
                 obj,
               );
               console.log('=====', response.data.message);

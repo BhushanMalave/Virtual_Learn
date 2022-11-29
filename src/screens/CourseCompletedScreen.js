@@ -9,14 +9,21 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 export const CourseCompletedScreen = ({navigation}) => {
-  const testpercentage = useSelector(state => state.finaltestdata.testPercentage);
-  const data = testpercentage;
+  const testpercentage = useSelector(
+    state => state.finaltestdata.testPercentage,
+  );
+  const finalresult = useSelector(state => state.finaltestdata.finalresult);
+  const data = finalresult;
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
-        <TouchableOpacity style={{width: 18}}>
+        <TouchableOpacity
+          style={{width: 18}}
+          onPress={() => {
+            navigation.navigate('CourseScreen');
+          }}>
           <Image
             source={require('../assets/images/icn_close_filter.png')}
             style={styles.closeIcon}
@@ -37,19 +44,23 @@ export const CourseCompletedScreen = ({navigation}) => {
 
           <View>
             <Text style={styles.text}>
-              You have completed the course:
+              You have completed the course:{' '}
               <Text style={{color: 'black'}}>
-                {' '}
-                Learn Figma - UI/UX Design Essential Training{' '}
-              </Text>
+                {finalresult?.congratulations}
+              </Text>{' '}
               with
             </Text>
           </View>
 
-          <Text style={styles.percentText}>90%</Text>
+          <Text style={styles.percentText}>
+            {(finalresult?.approvalRate).toFixed(1)}%
+          </Text>
           <Text style={styles.approvalText}>approval rate</Text>
 
-          <TouchableOpacity onPress={()=> {navigation.navigate('CertificateScreen',{data})}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('CertificateScreen', {data});
+            }}>
             <Text style={styles.viewCetificateButton}>View Certificate</Text>
           </TouchableOpacity>
         </View>

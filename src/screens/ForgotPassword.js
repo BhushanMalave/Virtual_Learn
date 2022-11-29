@@ -32,7 +32,7 @@ export const ForgotPassword = ({navigation}) => {
         }
        try {
             const response = await axios.put(
-              'https://virtual-learn-app-java.herokuapp.com/newUser/resend',
+              'https://virtual-learning-app-java.herokuapp.com/newUser/resend',
                obj,
             );
             console.log("=====",response.data.message);
