@@ -12,18 +12,10 @@ import {
 } from 'react-native';
 
 import {Formik} from 'formik';
-import * as yup from 'yup';
-
-import icn_dropdown from '../assets/images/icn_dropdown.png';
 import img_edit_profile_bg from '../assets/images/img_edit_profile_bg.png';
-
 import img_profile_change from '../assets/images/img_profile_change.png';
-
 import icn_back_header from '../assets/images/icn_back_header.png';
-
 import {ButtonComponent} from '../components/Buttons';
-
-import ImagePicker from 'react-native-image-crop-picker';
 import DropDownField from './../components/DropDownField';
 
 const data = {
@@ -39,14 +31,14 @@ export const DropDown = ({navigation}) => {
     {key: 2, value: 'Male'},
   ];
   const occupationData = [
-     { categoryId:1 , categoryName:'design' },
-    {  categoryId:2 , categoryName:'development' },
-     { categoryId:3 , categoryName:'music' },
-  ]
+    {categoryId: 1, categoryName: 'design'},
+    {categoryId: 2, categoryName: 'development'},
+    {categoryId: 3, categoryName: 'music'},
+  ];
 
   const [selected, setSelected] = useState('');
 
-  const [selectedOccu, setSelectedOccu] = useState('')
+  const [selectedOccu, setSelectedOccu] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState({img_edit_profile_bg});
 
@@ -285,7 +277,6 @@ export const DropDown = ({navigation}) => {
                     ) : (
                       <View style={styles.dropDownBottom2}></View>
                     )}
-
                   </>
 
                   <>
@@ -318,8 +309,6 @@ export const DropDown = ({navigation}) => {
                   ) : (
                     <View style={styles.dropDownBottom2}></View>
                   )}
-
-
 
                   {values.dateofbirth ? (
                     <View style={styles.form1}></View>

@@ -19,7 +19,6 @@ import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {drawerData} from '../authorization/Auth';
 
 export const CustomDrawerComponent = props => {
-  const userData = useSelector(state => state.userData.data);
   const token = useSelector(state => state.userDetails.token);
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
@@ -32,7 +31,6 @@ export const CustomDrawerComponent = props => {
       {
         text: 'Logout',
         onPress: () => {
-          // dispatch(setNewUser(true));
           dispatch(setToken(null));
         },
       },
@@ -46,7 +44,7 @@ export const CustomDrawerComponent = props => {
 
   useEffect(() => {
     Call(token);
-  }, []);
+  },[]);
 
   return (
     <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? -52 : -4}}>
@@ -70,10 +68,26 @@ export const CustomDrawerComponent = props => {
         <DrawerItemList {...props} />
         {data?.notificationCount > 0 ? (
           <>
-          <View style={styles.notify}>
-            <Text style={styles.notifyText}>{data?.notificationCount}</Text>
-          </View>
-            <Pressable style={{marginTop: 93}} onPress={log}>
+            <View style={styles.notify}>
+              <Text style={styles.notifyText}>{data?.notificationCount}</Text>
+            </View>
+            <Pressable style={{marginTop: 95}} onPress={log}>
+              <View style={styles.ViewText}>
+                <Image
+                  source={require('../assets/images/icn_logout_menu.png')}
+                  style={{
+                    height: 16,
+                    width: 15,
+                    marginBottom: 0,
+                    tintColor: 'black',
+                  }}
+                />
+                <Text style={styles.textlog}>Logout</Text>
+              </View>
+            </Pressable>
+          </>
+        ) : (
+          <Pressable style={{marginTop: 20}} onPress={log}>
             <View style={styles.ViewText}>
               <Image
                 source={require('../assets/images/icn_logout_menu.png')}
@@ -87,26 +101,7 @@ export const CustomDrawerComponent = props => {
               <Text style={styles.textlog}>Logout</Text>
             </View>
           </Pressable>
-          </>
-        ): (
-          <Pressable style={{marginTop: 20}} onPress={log}>
-          <View style={styles.ViewText}>
-            <Image
-              source={require('../assets/images/icn_logout_menu.png')}
-              style={{
-                height: 16,
-                width: 15,
-                marginBottom: 0,
-                tintColor: 'black',
-              }}
-            />
-            <Text style={styles.textlog}>Logout</Text>
-          </View>
-        </Pressable>
-          
         )}
-
-      
       </DrawerContentScrollView>
     </View>
   );
@@ -147,10 +142,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   ViewText: {
-    // marginBottom: 330,
     marginLeft: 20,
     flexDirection: 'row',
-    // marginTop: 93,
   },
   textname: {
     color: '#FFFFFF',
@@ -189,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#E83F3F',
     marginLeft: 165,
-    marginTop: Platform.OS === 'ios' ? -87 : -93,
+    marginTop: Platform.OS === 'ios' ? -95 : -95,
   },
   imgprofile: {
     height: 58,

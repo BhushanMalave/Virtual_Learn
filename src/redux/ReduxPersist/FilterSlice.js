@@ -4,7 +4,7 @@ export const FilterSlice = createSlice({
   name: 'filterState',
   initialState: {
     state: false,
-    mockState:false,
+    mockState: false,
   },
   reducers: {
     setFilterState: (state, action) => {
@@ -16,6 +16,6 @@ export const FilterSlice = createSlice({
   },
 });
 
-export const {setFilterState,setMockstate} = FilterSlice.actions;
+export const {setFilterState, setMockstate} = FilterSlice.actions;
 
 export default FilterSlice.reducer;

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   View,
@@ -10,29 +10,26 @@ import {
   Platform,
   TextInput,
   ScrollView,
-  FlatList,
-  VirtualizedList,
-  Modal,
   Pressable,
 } from 'react-native';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
 import {BottomPopup} from '../components/BottomPopup';
 import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
-import { hsCategories } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
-import { all } from '../authorization/Auth';
-import { setAllData } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
+import {all} from '../authorization/Auth';
+import {setAllData} from '../redux/ReduxPersist/ChoiceYourCourseSlice';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
-import { overViewData } from '../authorization/Auth';
-import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import { setComponentRender } from '../redux/ReduxPersist/searchDataSlice';
-import { setSearchData } from '../redux/ReduxPersist/searchDataSlice';
-import { searchData } from '../authorization/Auth';
-import { searchDataKeyword } from '../authorization/Auth';
+import {overViewData} from '../authorization/Auth';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
+import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
+import {searchData} from '../authorization/Auth';
+import {searchDataKeyword} from '../authorization/Auth';
 import {useSelector, useDispatch} from 'react-redux';
 
 export const ChoiceYourCourse = ({navigation}) => {
@@ -46,10 +43,10 @@ export const ChoiceYourCourse = ({navigation}) => {
     state => state.searchData.componentRender,
   );
   const dispatch = useDispatch();
- 
+
   const handleText = async string => {
     setText(string);
-    if (text==='' ) {
+    if (text === '') {
       dispatch(setComponentRender(1));
       dispatch(setSearchData(null));
     } else {
@@ -115,120 +112,137 @@ export const ChoiceYourCourse = ({navigation}) => {
         </View>
         {componentrender === 1 && (
           <>
-        <Text style={styles.categoryText}>Categories</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View
-            style={{
-              height: 104,
-              width: '100%',
-              flexDirection: 'column',
-              flexWrap: 'wrap',
-              display: 'flex',
-              marginLeft: 20,
-              marginTop: 10,
-            }}>
-           {categoriesData?.map(item => (
-                <View key={item?.categoryId}>
-                  <CategoriesComponent
-                    id={item?.categoryId}
-                    img={item?.categoryPhoto}
-                    category={item?.categoryName}
-                    onPress={() => {
-                      dispatch(cdsbasicCourse({token, id: item?.categoryId}));
-                      dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
-                      dispatch(
-                        cdsAllCourseOfCategory({token, id: item?.categoryId}),
-                      );
-                      dispatch(cdsSubCategories({token, id: item?.categoryId}));
-                      navigation.navigate('CategoryDisplayScreen', {item});
+            <Text style={styles.categoryText}>Categories</Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <View
+                style={{
+                  height: 104,
+                  width: '100%',
+                  flexDirection: 'column',
+                  flexWrap: 'wrap',
+                  display: 'flex',
+                  marginLeft: 20,
+                  marginTop: 10,
+                }}>
+                {categoriesData?.map(item => (
+                  <View key={item?.categoryId}>
+                    <CategoriesComponent
+                      id={item?.categoryId}
+                      img={item?.categoryPhoto}
+                      category={item?.categoryName}
+                      onPress={() => {
+                        dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                        dispatch(
+                          cdsAdvanceCourse({token, id: item?.categoryId}),
+                        );
+                        dispatch(
+                          cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                        );
+                        dispatch(
+                          cdsSubCategories({token, id: item?.categoryId}),
+                        );
+                        navigation.navigate('CategoryDisplayScreen', {item});
+                      }}
+                    />
+                  </View>
+                ))}
+              </View>
+            </ScrollView>
+            <View style={styles.CourseView}>
+              <Text style={styles.courseHeader}>All Courses</Text>
+              <View style={{marginTop: 10}}>
+                {choiceYourCourse?.map(item => (
+                  <SearchFoundComponent
+                    coursePhoto={item?.coursePhoto}
+                    courseName={item?.courseName}
+                    chapterCount={item?.chapterCount}
+                    categoryName={item?.categoryName}
+                    key={item?.courseId}
+                    id={item?.courseId}
+                    onPress={async () => {
+                      const obj = {
+                        courseId: item.courseId,
+                      };
+                      dispatch(csChapterResponse({token, id: item.courseId}));
+                      const res = await overViewData(token, item.courseId);
+                      dispatch(addOverView(res));
+                      navigation.navigate('CourseScreen');
                     }}
                   />
-                </View>
-              ))}
-          </View>
-        </ScrollView>
-        <View style={styles.CourseView}>
-          <Text style={styles.courseHeader}>All Courses</Text>
-          <View style={{marginTop: 10}}>
-            {choiceYourCourse?.map(item => (
-              <SearchFoundComponent
-                coursePhoto={item?.coursePhoto}
-                courseName={item?.courseName}
-                chapterCount={item?.chapterCount}
-                categoryName={item?.categoryName}
-                key={item?.courseId}
-                id={item?.courseId}
-                onPress={async () => {
-                  const obj = {
-                    courseId: item.courseId,
-                  };
-                  dispatch(csChapterResponse({token, id: item.courseId}));
-                  const res = await overViewData(token, item.courseId);
-                  dispatch(addOverView(res));
-                  navigation.navigate('CourseScreen');
-                }}
-              />
-            ))}
-          </View>
-        </View>
-        </>
+                ))}
+              </View>
+            </View>
+          </>
         )}
-         {componentrender == 2 && (
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{marginTop: 30,marginLeft:24}}>
-            {data?.map(item => (
-              <SearchFoundComponent
-                coursePhoto={item?.coursePhoto}
-                courseName={item?.courseName}
-                chapterCount={item?.chapterCount}
-                categoryName={item?.categoryName}
-                key={item?.courseId}
-                id={item?.courseId}
-                onPress={async () => {
-                  const obj = {
-                    courseId: item.courseId,
-                  };
-                  const msg = await searchDataKeyword(token, obj);
+        {componentrender == 2 && (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{marginTop: 30, marginLeft: 24}}>
+              {data?.map(item => (
+                <SearchFoundComponent
+                  coursePhoto={item?.coursePhoto}
+                  courseName={item?.courseName}
+                  chapterCount={item?.chapterCount}
+                  categoryName={item?.categoryName}
+                  key={item?.courseId}
+                  id={item?.courseId}
+                  onPress={async () => {
+                    const obj = {
+                      courseId: item.courseId,
+                    };
+                    const msg = await searchDataKeyword(token, obj);
 
-                  dispatch(csChapterResponse({token, id: item.courseId}));
-                  const res = await overViewData(token, item.courseId);
-                  dispatch(addOverView(res));
-                  navigation.navigate('CourseScreen');
-                }}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      )}
-
-      {componentrender == 3 && (
-        <View style={{marginTop: 30}}>
-          <Image
-            source={require('../assets/images/img_searchnoresult.png')}
-            style={styles.imgnosearch}
-          />
-          <Text style={styles.text1}>No matching course</Text>
-          <Text style={styles.text2}>
-            Try a different search browse categories
-          </Text>
-          <View style={styles.searchCatView1}>
-            <Text style={styles.texttopsearch}>Search From Categories</Text>
-            <View style={styles.viewcatin}>
-              {categoriesData.map(item => (
-                <CategoriesComponent
-                  key={item?.categoryId}
-                  id={item?.categoryId}
-                  img={item?.categoryPhoto}
-                  category={item?.categoryName}
-                  onPress={() => {
-                    // navigation.navigate('CategoryDisplayScreen');
+                    dispatch(csChapterResponse({token, id: item.courseId}));
+                    const res = await overViewData(token, item.courseId);
+                    dispatch(addOverView(res));
+                    navigation.navigate('CourseScreen');
                   }}
                 />
               ))}
             </View>
+          </ScrollView>
+        )}
+
+        {componentrender == 3 && (
+          <View style={{marginTop: 30}}>
+            <Image
+              source={require('../assets/images/img_searchnoresult.png')}
+              style={styles.imgnosearch}
+            />
+            <Text style={styles.text1}>No matching course</Text>
+            <Text style={styles.text2}>
+              Try a different search browse categories
+            </Text>
+            <View style={styles.searchCatView1}>
+              <Text style={styles.texttopsearch}>Search From Categories</Text>
+              <View style={styles.viewcatin}>
+                {categoriesData?.map(item => (
+                  <View key={item?.categoryId}>
+                    <CategoriesComponent
+                      id={item?.categoryId}
+                      img={item?.categoryPhoto}
+                      category={item?.categoryName}
+                      onPress={() => {
+                        dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                        dispatch(
+                          cdsAdvanceCourse({token, id: item?.categoryId}),
+                        );
+                        dispatch(
+                          cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                        );
+                        dispatch(
+                          cdsSubCategories({token, id: item?.categoryId}),
+                        );
+                        navigation.navigate('CategoryDisplayScreen', {item});
+                      }}
+                    />
+                  </View>
+                ))}
+              </View>
+            </View>
           </View>
-        </View>
-      )}
+        )}
       </ScrollView>
       <BottomPopup show={filterState} />
     </SafeAreaView>
@@ -264,7 +278,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     display: 'flex',
     flexWrap: 'wrap',
-    marginLeft:24,
+    marginLeft: 24,
   },
   searchview: {
     marginHorizontal: 24,
@@ -299,7 +313,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight: 'bold',
     color: '#2B2B2B',
-    marginLeft:24,
+    marginLeft: 24,
   },
   text1: {
     fontSize: 18,
@@ -343,7 +357,6 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == 'ios' ? 30 : 30,
   },
   CourseView: {
-    // flex:1,
     marginLeft: 24,
     marginRight: 24,
   },

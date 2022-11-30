@@ -7,10 +7,6 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Pressable,
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
 } from 'react-native';
 import {QuestionListComponent} from '../components/QuestionListComponent';
 import {TestBottomPopUp} from '../components/TestBottomPopUp';
@@ -19,20 +15,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   removeAnswers,
   setCorrectAnswers,
-  testPercentage,
 } from '../redux/ReduxPersist/TestSlice';
-import {setResultHeader} from '../redux/ReduxPersist/TestSlice';
-import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
-  console.log(resultheader)
+  console.log(resultheader);
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
-  console.log(resultanswers)
-  // const correctAnswers = useSelector(state => state.testdata.resultAnswers);
+  console.log(resultanswers);
   const testpercentage = useSelector(state => state.testdata.testPercentage);
-  // console.log('()()((((', testpercentage);
 
   const dispatch = useDispatch();
   return (
@@ -50,7 +41,9 @@ export const MockTestResultScreen = ({navigation}) => {
         </TouchableOpacity>
         <View style={styles.bodytopin}>
           <View style={styles.bodytopinbox}>
-            <Text style={styles.textno}>{testpercentage?.chapterTestPercentage}</Text>
+            <Text style={styles.textno}>
+              {testpercentage?.chapterTestPercentage}
+            </Text>
           </View>
           <View>
             <Text style={styles.textchaptername}>

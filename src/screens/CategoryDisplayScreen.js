@@ -6,23 +6,19 @@ import {
   Platform,
   Text,
   ScrollView,
-  Pressable,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import {CategoryDisplayCourseComponent} from '../components/CategoryDisplayCourseComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
 import {CategoriesComponents} from '../components/CategoryDisplayCourseComponent';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector,useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
-import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { overViewData } from '../authorization/Auth';
-
-
+import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import {overViewData} from '../authorization/Auth';
 
 export const CategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
@@ -30,7 +26,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
   const subCategories = useSelector(state => state.subCategories.data);
   const allcourse = useSelector(state => state.allCourseOfCategory.data);
   const token = useSelector(state => state.userDetails.token);
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.body}>
@@ -93,7 +89,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
                 )}></FlatList>
             </View>
           </View>
-        )} 
+        )}
 
         <View>
           <Text style={styles.text2}>Subcategories</Text>
@@ -106,8 +102,12 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
                   onPress={() => {
                     navigation.navigate('SubCategoryDisplayScreen', {item});
                     dispatch(cdsbasicCourse({token, id: item?.subCategoryId}));
-                    dispatch(cdsAdvanceCourse({token, id: item?.subCategoryId}));
-                    dispatch(cdsAllCourseOfCategory({token, id: item?.subCategoryId}));
+                    dispatch(
+                      cdsAdvanceCourse({token, id: item?.subCategoryId}),
+                    );
+                    dispatch(
+                      cdsAllCourseOfCategory({token, id: item?.subCategoryId}),
+                    );
                   }}
                 />
               ))}
@@ -146,7 +146,6 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    // marginLeft: 24,
   },
   topbar: {
     marginTop: Platform.OS === 'ios' ? 80 : 40,

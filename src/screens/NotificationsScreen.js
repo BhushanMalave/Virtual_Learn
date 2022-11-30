@@ -2,12 +2,8 @@ import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  TextInput,
-  useColorScheme,
-  View,
   Image,
   Platform,
   TouchableOpacity,
@@ -16,26 +12,21 @@ import {NotificationsComponentUnseen} from '../components/NotificationComponents
 import {NotificationsComponentSeen} from '../components/NotificationComponents';
 import {useDispatch, useSelector} from 'react-redux';
 import {notificationApiCall} from '../redux/ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
-import { setToken } from '../redux/ReduxPersist/UserDetails';
+import {setToken} from '../redux/ReduxPersist/UserDetails';
 import axios from 'axios';
 export const NotificationsScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const notificationData = useSelector(state => state.notificationData.data);
   const token = useSelector(state => state.userDetails.token);
-  const refreshToken = async() => {
+  const refreshToken = async () => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
-
   };
- 
-
-
 
   useEffect(() => {
     dispatch(notificationApiCall(token));
     refreshToken();
-    // console.log(notificationData)
   }, []);
   return (
     <SafeAreaView style={styles.body}>
@@ -50,45 +41,45 @@ export const NotificationsScreen = ({navigation}) => {
       </TouchableOpacity>
       <Text style={styles.text}>Notifications</Text>
       <ScrollView>
-      {notificationData?.map(items => {
-        return items.readStatus === true ? (
-          <NotificationsComponentSeen
-            desc={items.description}
-            img={items.notificationUrl}
-            time={items.timeStamp}
-          />
-        ) : (
-          <NotificationsComponentUnseen
-            desc={items.description}
-            img={items.notificationUrl}
-            time={items.timeStamp}
-            notify={ async () => {
-              const body = {
-                notificationId: items.notificationId,
-              };
-              const options = {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              };
+        {notificationData?.map(items => {
+          return items.readStatus === true ? (
+            <NotificationsComponentSeen
+              desc={items.description}
+              img={items.notificationUrl}
+              time={items.timeStamp}
+            />
+          ) : (
+            <NotificationsComponentUnseen
+              desc={items.description}
+              img={items.notificationUrl}
+              time={items.timeStamp}
+              notify={async () => {
+                const body = {
+                  notificationId: items.notificationId,
+                };
+                const options = {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                };
 
-              try {
-                const response = await axios.put(
-                  'https://virtual-learning-app-java.herokuapp.com/user/readNotification',
-                  body,
-                  options,
-                );
-                // console.log(response.data)
-                if (response.data) {
-                  return response.data;
+                try {
+                  const response = await axios.put(
+                    'https://virtual-learning-app-java.herokuapp.com/user/readNotification',
+                    body,
+                    options,
+                  );
+
+                  if (response.data) {
+                    return response.data;
+                  }
+                } catch (error) {
+                  console.log(error);
                 }
-              } catch (error) {
-                console.log(error);
-              }
-            }}
-          />
-        );
-      })}
+              }}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );

@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   Platform,
   Image,
   TouchableOpacity,
@@ -14,8 +13,6 @@ import ReadMore from 'react-native-read-more-text';
 import {useDispatch, useSelector} from 'react-redux';
 import {joinCourse} from '../authorization/Auth';
 import {useState, useEffect } from 'react';
-import {overViewData} from '../authorization/Auth';
-import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 const details = [
   {
@@ -35,13 +32,9 @@ const details = [
   },
 ];
 
-;
-
-
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
-  // console.log(coursedata)
-  const dispatch = useDispatch();
+  console.log(coursedata)
   const token = useSelector(state => state.userDetails.token);
   renderTruncatedFooter = handlePress => {
     return (
@@ -76,24 +69,21 @@ export const OverviewScreen = ({navigation}) => {
   };
 
   const [totalHours, setTotalHours] = useState(0);
-  useEffect(()=>{
+  useEffect(() => {
+    if (coursedata?.courseDuration) {
+      const duration = coursedata?.courseDuration;
+      const b = duration.split(':');
+      const h = Number(b[0]);
+      const m = b[1];
+      const mins = Number((m / 60).toFixed(2));
+      const totalHour = h + mins;
+      setTotalHours(totalHour);
+    }
+  }, [coursedata?.courseDuration]);
 
-      if (coursedata?.courseDuration) {
-        const duration = coursedata?.courseDuration;
-        const b = duration.split(':');
-        const h = Number(b[0]);
-        const m = b[1];
-        const mins = Number((m / 60).toFixed(2));
-        const totalHour = h + mins;
-        setTotalHours(totalHour);
-      }
-
-  },[coursedata?.courseDuration])
-
-
-  const video = (item) => {
-    navigation.navigate('VideoPlayer',{item});
-    };
+  const video = item => {
+    navigation.navigate('VideoPlayer', {item});
+  };
 
   return (
     <View style={styles.container}>
@@ -106,9 +96,8 @@ export const OverviewScreen = ({navigation}) => {
               <TouchableOpacity
                 onPress={() => {
                   {
-                    video(item=coursedata)
+                    video((item = coursedata));
                   }
-                 
                 }}>
                 <ImageBackground
                   source={{uri: coursedata?.coursePhoto}}
@@ -117,8 +106,7 @@ export const OverviewScreen = ({navigation}) => {
                     height: 80,
                     resizeMode: 'cover',
                     borderRadius: 5,
-                    flexDirection:"row",
-                    
+                    flexDirection: 'row',
                   }}
                   imageStyle={{borderRadius: 5}}>
                   <Image
@@ -126,8 +114,8 @@ export const OverviewScreen = ({navigation}) => {
                     style={styles.videobutton}
                   />
                   <View style={styles.introview}>
-                  <Text style={styles.introtext}>Introduction</Text>
-                  <Text style={styles.introtext2}>3 mins</Text>
+                    <Text style={styles.introtext}>Introduction</Text>
+                    <Text style={styles.introtext2}>3 mins</Text>
                   </View>
                 </ImageBackground>
               </TouchableOpacity>
@@ -170,7 +158,9 @@ export const OverviewScreen = ({navigation}) => {
             {details.map(item => (
               <View style={styles.coursecontent} key={item?.id}>
                 <Image source={item.source} />
-                <Text style={styles.coursedescription}>{item?.description}</Text>
+                <Text style={styles.coursedescription}>
+                  {item?.description}
+                </Text>
               </View>
             ))}
           </View>
@@ -230,15 +220,13 @@ export const OverviewScreen = ({navigation}) => {
               style={styles.button}
               onPress={async () => {
                 const objBody = {
-                  courseId:coursedata?.courseId,
+                  courseId: coursedata?.courseId,
                 };
                 console.log('hvhc', coursedata.courseId);
           
                 const res = await joinCourse(token, objBody);
                 console.log(res);
                 if(res){
-                  const response = await overViewData(token, coursedata?.courseId);
-                  dispatch(addOverView(response));
                   navigation.navigate('Chapters');
                 }
               }}>
@@ -280,10 +268,10 @@ const styles = StyleSheet.create({
   },
   videoview: {
     height: 80,
-    backgroundColor:'#042C5C',
+    backgroundColor: '#042C5C',
     marginTop: 12,
     borderRadius: 5,
-    opacity:0.95
+    opacity: 0.95,
   },
   description: {
     height: 140,
@@ -321,8 +309,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   outcomedescription: {
-    // height: 17,
-
     color: '#2B2B2B',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
@@ -334,7 +320,6 @@ const styles = StyleSheet.create({
   header: {
     height: 22,
     color: '#2B2B2B',
-
     fontSize: 18,
     fontWeight: '400',
     letterSpacing: 0,
@@ -348,7 +333,6 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     fontWeight: '400',
-
     lineHeight: 17,
   },
   instructorview: {
@@ -361,9 +345,7 @@ const styles = StyleSheet.create({
   instructor: {
     height: 22,
     color: '#2B2B2B',
-
     fontSize: 18,
-
     letterSpacing: 0,
     lineHeight: 21,
   },
@@ -414,24 +396,22 @@ const styles = StyleSheet.create({
   videobutton: {
     margin: 15,
   },
-  introtext:{
+  introtext: {
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 18,
-    fontWeight:"bold"
-   
+    fontWeight: 'bold',
   },
-  introview:{
-    marginTop:22
+  introview: {
+    marginTop: 22,
   },
-  introtext2:{
+  introtext2: {
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 18,
-   
   },
 });

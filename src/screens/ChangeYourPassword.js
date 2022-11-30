@@ -16,22 +16,21 @@ import {
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import { useSelector,useDispatch } from 'react-redux';
-import { mpChangePassword } from '../authorization/Auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {mpChangePassword} from '../authorization/Auth';
 
 export const ChangeYourPassword = ({navigation}) => {
   const [info, setInfo] = useState(false);
   const token = useSelector(state => state.userDetails.token);
-  
 
   const registerValidationScheme = yup.object().shape({
     currentpassword: yup
-    .string()
-    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
-    .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
-    .matches(/\d/, 'Password must have a number')
-    .min(6, ({min}) => `Password must be at least ${min} characters`)
-    .required(''),
+      .string()
+      .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
+      .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+      .matches(/\d/, 'Password must have a number')
+      .min(6, ({min}) => `Password must be at least ${min} characters`)
+      .required(''),
     newpassword: yup
       .string()
       .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
@@ -49,9 +48,12 @@ export const ChangeYourPassword = ({navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.body}>
         <ScrollView>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-         <Image source={require('../assets/images/icn_back_header.png')} style={styles.image}/>
-         </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require('../assets/images/icn_back_header.png')}
+              style={styles.image}
+            />
+          </TouchableOpacity>
           <View style={styles.textView}>
             <Text style={styles.text1}>Change your Password </Text>
             <Text style={styles.text2}>
@@ -63,21 +65,20 @@ export const ChangeYourPassword = ({navigation}) => {
             <Formik
               validationSchema={registerValidationScheme}
               initialValues={{
-                currentpassword:'',
+                currentpassword: '',
                 newpassword: '',
                 confirmnewpassword: '',
               }}
-              onSubmit={ async values => {
-                const objBody ={
-                    "currentPassword":values.currentpassword,
-                    "newPassword":values.newpassword,
+              onSubmit={async values => {
+                const objBody = {
+                  currentPassword: values.currentpassword,
+                  newPassword: values.newpassword,
                 };
-                 
-                const res = await mpChangePassword(token,objBody);
+
+                const res = await mpChangePassword(token, objBody);
                 console.log(res);
-                if(res.message === "Password Changed Successfully")
-                {
-                  navigation.navigate("Profile");
+                if (res.message === 'Password Changed Successfully') {
+                  navigation.navigate('Profile');
                 }
               }}>
               {({
@@ -90,49 +91,45 @@ export const ChangeYourPassword = ({navigation}) => {
               }) => (
                 <>
                   <>
+                    <View>
+                      <>
+                        {values.currentpassword ? (
+                          <View>
+                            <Text style={styles.text}>Current Password</Text>
+                          </View>
+                        ) : (
+                          <></>
+                        )}
+                      </>
 
-                  <View>
-                         
-                          <>
-                            {values.currentpassword ? (
-                              <View>
-                                <Text style={styles.text}>
-                                  Current Password
-                                </Text>
-                              </View>
-                            ) : (
-                              <></>
-                            )}
-                          </>
+                      <TextInput
+                        name="currentpassword"
+                        placeholder="Current Password"
+                        placeholderTextColor={'grey'}
+                        onChangeText={handleChange('currentpassword')}
+                        onBlur={handleBlur('currentpassword')}
+                        value={values.currentpassword}
+                        style={styles.textinput}
+                        secureTextEntry
+                      />
+                      {values.currentpassword ? (
+                        <View style={styles.bottom}></View>
+                      ) : (
+                        <View style={styles.bottom2}></View>
+                      )}
 
-                          <TextInput
-                            name="currentpassword"
-                            placeholder="Current Password"
-                            placeholderTextColor={'grey'}
-                            onChangeText={handleChange('currentpassword')}
-                            onBlur={handleBlur('currentpassword')}
-                            value={values.currentpassword}
-                            style={styles.textinput}
-                            secureTextEntry
-                          />
-                          {values.currentpassword ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                      {errors.currentpassword && (
+                        <Text style={{fontSize: 10, color: 'red'}}>
+                          {errors.currentpassword}
+                        </Text>
+                      )}
+                    </View>
 
-                          {errors.currentpassword && (
-                            <Text style={{fontSize: 10, color: 'red'}}>
-                              {errors.currentpassword}
-                            </Text>
-                          )}
-                        </View>
-
-                        {values.newpassword ? (
-                            <View style={styles.form1}></View>
-                          ) : (
-                            <View style={styles.form}></View>
-                          )}
+                    {values.newpassword ? (
+                      <View style={styles.form1}></View>
+                    ) : (
+                      <View style={styles.form}></View>
+                    )}
                     {values.newpassword ? (
                       <View>
                         <Text style={styles.text}>New Password</Text>
@@ -154,18 +151,18 @@ export const ChangeYourPassword = ({navigation}) => {
                       secureTextEntry
                     />
                     {values.newpassword ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                      <View style={styles.bottom}></View>
+                    ) : (
+                      <View style={styles.bottom2}></View>
+                    )}
 
                     {errors.newpassword && (
                       <Text style={{fontSize: 10, color: 'red'}}>
                         {errors.newpassword}
                       </Text>
                     )
-                      ? (setInfo(true))
-                      : (setInfo(false))}
+                      ? setInfo(true)
+                      : setInfo(false)}
                   </View>
 
                   <>
@@ -199,10 +196,10 @@ export const ChangeYourPassword = ({navigation}) => {
                             style={styles.textinput}
                           />
                           {values.confirmnewpassword ? (
-                    <View style={styles.bottom}></View>
-                  ) : (
-                    <View style={styles.bottom2}></View>
-                  )}
+                            <View style={styles.bottom}></View>
+                          ) : (
+                            <View style={styles.bottom2}></View>
+                          )}
 
                           {errors.confirmnewpassword && (
                             <Text style={{fontSize: 10, color: 'red'}}>
@@ -250,21 +247,19 @@ export const ChangeYourPassword = ({navigation}) => {
   );
 };
 
-
-
 const styles = StyleSheet.create({
-    image:{
-        height:16,
-        width:26,  
-        marginTop:Platform.OS=='ios'? 30:30,
-        tintColor:'#373737',
-    },
+  image: {
+    height: 16,
+    width: 26,
+    marginTop: Platform.OS == 'ios' ? 30 : 30,
+    tintColor: '#373737',
+  },
   body: {
     flex: 1,
     marginHorizontal: 24,
   },
   textView: {
-    marginTop: Platform.OS== 'ios' ? 20: 15,
+    marginTop: Platform.OS == 'ios' ? 20 : 15,
   },
   textinputView: {
     height: 40,
@@ -324,7 +319,7 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: Platform.OS=='ios'? 'Proxima Nova':'ProximaNova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginTop: Platform.OS == 'ios' ? 3 : 13,
   },
   text3: {
@@ -356,7 +351,6 @@ const styles = StyleSheet.create({
   },
   infoText1: {
     height: 15,
-    // width: 135,
     color: '#042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
@@ -364,11 +358,9 @@ const styles = StyleSheet.create({
   },
   infoText2: {
     height: 30,
-    // width: 306,
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 10,
-    // lineHight: 15,
   },
   infobottom: {
     marginTop: 15,

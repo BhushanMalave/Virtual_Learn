@@ -6,7 +6,6 @@ import {TermServicesScreen} from '../screens/TermServicesScreen';
 import {RegistrationStack} from './RegistrationStack';
 import {LoginStack} from './LoginStack';
 
-
 const Stack = createNativeStackNavigator();
 
 export const WelcomeStack = () => {

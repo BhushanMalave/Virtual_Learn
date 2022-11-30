@@ -1,5 +1,5 @@
 import React from "react";
-import { View,StyleSheet,Text,TouchableOpacity,FlatList,Image, Pressable} from "react-native";
+import { View,StyleSheet,Text,Image,Pressable} from "react-native";
 
 
 export const CategoriesComponent =({

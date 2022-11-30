@@ -1,13 +1,11 @@
 import React from 'react';
 
 import {
-  View,
   Text,
   Image,
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  Pressable,
   TouchableOpacity,
 } from 'react-native';
 import image_Register_sucess_illustrations from '../assets/images/04.8_VirtualLearn_Register_success/img_Register_sucess_illustration.png';

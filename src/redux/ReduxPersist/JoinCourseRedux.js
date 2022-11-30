@@ -3,14 +3,12 @@ import {createSlice} from '@reduxjs/toolkit';
 export const JoinCourseSlice = createSlice({
   name: 'JoinCourse',
   initialState: {
-    courseId:null
+    courseId: null,
   },
   reducers: {
     setJoinState: (state, action) => {
       state.courseId = action.payload;
     },
-  
-   
   },
 });
 

@@ -87,10 +87,10 @@ export const TestSlice = createSlice({
     question: null,
     testId: null,
     userAnswers: [],
-    correctAnswers:[],
-    resultHeader:null,
-    resultAnswers:[],
-    testPercentage:null
+    correctAnswers: [],
+    resultHeader: null,
+    resultAnswers: [],
+    testPercentage: null,
   },
   reducers: {
     addQuestionData: (state, action) => {
@@ -109,7 +109,7 @@ export const TestSlice = createSlice({
       } else {
         state.userAnswers.push(action.payload);
       }
-      console.log(state.userAnswers)
+      console.log(state.userAnswers);
     },
 
     setStatus1: (state, action) => {
@@ -153,26 +153,25 @@ export const TestSlice = createSlice({
       });
     },
     removeAll: (state, action) => {
-      state.userAnswers = []
+      state.userAnswers = [];
     },
-    setCorrectAnswers:(state,action)=>{
-      state.correctAnswers=action.payload
-      console.log("++++++",state.correctAnswers)
+    setCorrectAnswers: (state, action) => {
+      state.correctAnswers = action.payload;
+      console.log('++++++', state.correctAnswers);
     },
 
-    setResultHeader:(state,action)=>{
-      state.resultHeader = action.payload
+    setResultHeader: (state, action) => {
+      state.resultHeader = action.payload;
     },
-    setResultAnswers:(state,action)=>{
-      state.resultAnswers = action.payload
+    setResultAnswers: (state, action) => {
+      state.resultAnswers = action.payload;
     },
     removeAnswers: (state, action) => {
       state.resultAnswers = [];
     },
-    setTestPercentage:(state,action)=>{
-      state.testPercentage=action.payload
+    setTestPercentage: (state, action) => {
+      state.testPercentage = action.payload;
     },
-
   },
 });
 
@@ -189,6 +188,6 @@ export const {
   setResultHeader,
   setResultAnswers,
   removeAnswers,
-  setTestPercentage
+  setTestPercentage,
 } = TestSlice.actions;
 export default TestSlice.reducer;

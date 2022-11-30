@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import {useDispatch} from 'react-redux';
+import {View, StyleSheet, Text, Image, Pressable} from 'react-native';
 import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  Pressable,
-} from 'react-native';
-import { setCatId,removeCatId,setCatState } from '../redux/ReduxPersist/searchDataSlice';
+  setCatId,
+  removeCatId,
+  setCatState,
+} from '../redux/ReduxPersist/searchDataSlice';
 
-export const FilterCategoriesComponent = (props) => {
-  //const [state,setState] =useState(props.status);
-  const catId=[];
-  const dispatch =useDispatch();
-   return (
+export const FilterCategoriesComponent = props => {
+  const dispatch = useDispatch();
+  return (
     <View>
       {!props.status ? (
         <>
-          <Pressable onPress={() => {
-          
-             dispatch(setCatId(props.id));
-             dispatch(setCatState(props.id));
-            
-          }}>
+          <Pressable
+            onPress={() => {
+              dispatch(setCatId(props.id));
+              dispatch(setCatState(props.id));
+            }}>
             <View style={styles.categorycontainer}>
               <Image source={{uri: props.img}} style={styles.img} />
               <Text style={styles.categorytext}>{props.category}</Text>
@@ -32,10 +25,11 @@ export const FilterCategoriesComponent = (props) => {
           </Pressable>
         </>
       ) : (
-        <Pressable onPress={() => {
-          dispatch(setCatState(props.id));
-          dispatch(removeCatId(props.id));
-        }}>
+        <Pressable
+          onPress={() => {
+            dispatch(setCatState(props.id));
+            dispatch(removeCatId(props.id));
+          }}>
           <View style={styles.categorycontainer1}>
             <Image source={{uri: props.img}} style={styles.img} />
             <Text style={styles.categorytext}>{props.category}</Text>
@@ -62,7 +56,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 30,
     padding: 5,
-    borderColor:'#FCBE4B',
+    borderColor: '#FCBE4B',
     flexDirection: 'row',
     backgroundColor: '#FCBE4B',
   },

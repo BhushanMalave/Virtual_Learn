@@ -16,16 +16,17 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
 import {searchCategoriesdata} from '../authorization/Auth';
 import {FilterCategoriesComponent} from './FilterCategoryComponent';
-import { setSearchData } from '../redux/ReduxPersist/searchDataSlice';
-import { clearAllSelected,
+import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
+import {
+  clearAllSelected,
   setChaEc,
   setChaSc,
   removeChaEc,
   removeChaSc,
-  setCatData,setComponentRender,
+  setCatData,
+  setComponentRender,
 } from '../redux/ReduxPersist/searchDataSlice';
 import {applySearchFilter} from '../authorization/Auth';
-import { clearAllListeners } from '@reduxjs/toolkit';
 
 export const BottomPopup = () => {
   const filterState = useSelector(state => state.filterState.state);
@@ -53,13 +54,12 @@ export const BottomPopup = () => {
     };
     console.log(body);
     const res = await applySearchFilter(token, body);
-   if(res)
-   {
-   dispatch(setSearchData(res));
-   dispatch(setFilterState());
-   dispatch(setComponentRender(2));
-   clearAll();
-   }
+    if (res) {
+      dispatch(setSearchData(res));
+      dispatch(setFilterState());
+      dispatch(setComponentRender(2));
+      clearAll();
+    }
   };
   const clearAll = () => {
     setClick1(false);
@@ -68,11 +68,11 @@ export const BottomPopup = () => {
     setClick4(false);
     setClick5(false);
     dispatch(clearAllSelected());
-  }
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
-     call();
+    call();
   }, []);
   return (
     <Modal
@@ -121,8 +121,6 @@ export const BottomPopup = () => {
                     setClick1(!click1);
                     dispatch(setChaSc(5));
                     dispatch(setChaEc(10));
-                    // console.log(catSC);
-                    // console.log(catEC);
                   }}>
                   <View style={styles.durview}>
                     <Text style={styles.durtext}>5/10 Chapters</Text>
@@ -134,8 +132,6 @@ export const BottomPopup = () => {
                     setClick1(!click1);
                     dispatch(removeChaEc());
                     dispatch(removeChaSc());
-                    // console.log(catSC);
-                    // console.log(catEC);
                   }}>
                   <View style={styles.durview1}>
                     <Text style={styles.durtext}>5/10 Chapters</Text>
@@ -249,9 +245,12 @@ export const BottomPopup = () => {
           </View>
 
           <View style={{marginTop: Platform.OS === 'ios' ? 15 : 5}}>
-            <ButtonComponent3 text="Clear All" onPress={() => {
-              clearAll();
-            }} />
+            <ButtonComponent3
+              text="Clear All"
+              onPress={() => {
+                clearAll();
+              }}
+            />
           </View>
           <View></View>
         </View>

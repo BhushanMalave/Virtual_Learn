@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {OnBoardingScreen1} from '../screens/OnBoardingScreen1';
 import {OnBoardingScreen2} from '../screens/OnBoardingScreen2';
 import {OnBoardingScreen3} from '../screens/OnBoardingScreen3';
-import { WelcomeStack } from './WelcomeStack';
+import {WelcomeStack} from './WelcomeStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +28,7 @@ export const OnboardingStack = () => {
         options={{headerShown: false}}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="WelcomeStack"
         component={WelcomeStack}
         options={{headerShown: false}}

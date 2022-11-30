@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import {KeyboardAwareView} from 'react-native-keyboard-aware-view';
 import {Formik} from 'formik';
-import * as yup from 'yup';
 let valueGender = '';
 let valueOccupation = '';
 import icn_dropdown from '../assets/images/icn_dropdown.png';
@@ -21,7 +20,6 @@ import {ButtonComponent} from '../components/Buttons';
 import ImagePicker from 'react-native-image-crop-picker';
 import {TextInputComp} from '../components/TextInputComp';
 import {useSelector, useDispatch} from 'react-redux';
-import {setUserData} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {mpChangeUserData} from '../authorization/Auth';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {getOccupationData} from '../authorization/Auth';
@@ -48,11 +46,9 @@ export const EditProfile = ({navigation}) => {
       height: 110,
       cropping: true,
     }).then(img => {
-      // console.log(img);
       setImage(img.path);
       const {filename, mime, path} = img;
       setProfilePhoto({filename, mime, path});
-      // console.log('--9090---', profilePhoto);
     });
   };
   const changeProfileImageFromCamera = () => {
@@ -188,28 +184,14 @@ export const EditProfile = ({navigation}) => {
                     twtterLink: values?.twitterlink,
                     faceBookLink: values?.facebooklink,
                   });
-                  console.log(formBody);
-                  // const body = JSON.stringify(formBody);
-                  // console.log(body);
-                  // const data = {
-                  //   profilePhoto: image,
-                  //   fullName: userData?.fullName,
-                  //   userName: userData?.userName,
-                  //   email: userData?.userName,
-                  //   mobileNumber: userData?.mobileNumber,
-                  //   occupation: valueOccupation,
-                  //   gender: valueGender,
-                  //   dateofBirth: values.dateofbirth,
-                  //   twtterLink: values.twitterlink,
-                  //   faceBookLink: values.facebooklink,
-                  // };
+                  console.log(formBody)
                   const res = await mpChangeUserData(token, formBody);
                   console.log(res);
                   if (res == 200) {
                     navigation.navigate('Profile');
                   }
                 }}>
-                {({handleChange, handleBlur, handleSubmit, values, errors}) => (
+                {({handleChange,handleSubmit, values}) => (
                   <View>
                     <TextInputComp
                       name={'fullname'}
@@ -526,7 +508,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     lineHeight: 20,
     fontWeight: '600',
-    // borderWidth:1,
     width: '95%',
   },
   bottom: {
@@ -551,33 +532,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
   },
-  // dropDownTopText: {
-  //   height: 17,
-  //   marginBottom: Platform.OS == 'ios' ? 0 : 0,
-  //   color: Platform.OS == 'ios' ? '#7A7A7A' : '#7A7A7A',
-  //   fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-  //   fontSize: 14,
-  //   letterSpacing: 0.29,
-  //   lineHeight: 17,
-  // },
-  // dropDownBottom: {
-  //   marginTop: Platform.OS == 'ios' ? 0 : 0,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: '#042C5C',
-  // },
-  // dropDownBottom2: {
-  //   marginTop: Platform.OS == 'ios' ? 0 : 0,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: '#7A7A7A',
-  //   opacity: 0.6,
-  // },
-  // dropDownForm1: {
-  //   marginTop: Platform.OS == 'ios' ? 14 : 15,
-  // },
-
-  // dropDownForm: {
-  //   marginTop: Platform.OS == 'ios' ? 30 : 20,
-  // },
   dropDownBox: {
     marginTop: 10,
     borderWidth: 1,

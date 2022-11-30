@@ -21,8 +21,8 @@ import icn_warning from '../assets/images/05.1_VirtualLearn_Login_error/warning/
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
-import { mpUserDetails } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-import { setNewUser } from '../redux/ReduxPersist/UserDetails';
+import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import {setNewUser} from '../redux/ReduxPersist/UserDetails';
 export const Login = ({navigation}) => {
   const [warning, setWarning] = useState(false);
   const dispatch = useDispatch();
@@ -68,8 +68,6 @@ export const Login = ({navigation}) => {
                 password: '',
               }}
               onSubmit={async values => {
-               // console.log(values);
-
                 const obj = {
                   userName: values.username,
                   password: values.password,
@@ -80,14 +78,13 @@ export const Login = ({navigation}) => {
                     'https://virtual-learning-app-java.herokuapp.com/login',
                     obj,
                   );
-                  //console.log('=====', response.data);
-                 
+
                   dispatch(mpUserDetails(token));
                   console.log('token:', token);
                   if (response.data.jwtToken) {
                     dispatch(setToken(response.data.jwtToken));
                     dispatch(setNewUser(false));
-                  }else{
+                  } else {
                     setWarning(true);
                   }
                 } catch (error) {
@@ -338,7 +335,7 @@ const styles = StyleSheet.create({
   registerText1: {
     height: 20,
     color: '#7A7A7A',
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     fontWeight: 'bold',
     letterSpacing: 0.4,

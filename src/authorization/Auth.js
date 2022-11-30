@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const refreshToken = async (token) => {
+export const refreshToken = async token => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -20,7 +20,6 @@ export const refreshToken = async (token) => {
   }
 };
 export const drawerData = async token => {
-
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -41,13 +40,11 @@ export const drawerData = async token => {
 };
 
 export const termsAndConditions = async () => {
-
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/termsAndConditions'
-    
+      'https://virtual-learning-app-java.herokuapp.com/termsAndConditions',
     );
-    console.log("=====",response.data);
+    console.log('=====', response.data);
     if (response.data.message) {
       return response.data.message;
     }
@@ -56,13 +53,12 @@ export const termsAndConditions = async () => {
   }
 };
 
-
 export const privacyPolicy = async () => {
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/privacyPolicy'
+      'https://virtual-learning-app-java.herokuapp.com/privacyPolicy',
     );
-   // console.log("=====",response.data.message);
+    // console.log("=====",response.data.message);
     if (response.data.message) {
       return response.data.message;
     }
@@ -156,29 +152,31 @@ export const mpChangePassword = async (token, objBody) => {
 };
 
 export const mpChangeUserData = async (token, formBody) => {
-
   try {
-    let res = await fetch('https://virtual-learning-app-java.herokuapp.com/user/save', {
-      method: 'put',
-      body: formBody,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
+    let res = await fetch(
+      'https://virtual-learning-app-java.herokuapp.com/user/save',
+      {
+        method: 'put',
+        body: formBody,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       },
-    });
-    const jsonResponse =  res;
+    );
+    const jsonResponse = res;
     console.log(jsonResponse.message);
     return res.status;
-    } catch (err) {
-    console.log("-----",err);
+  } catch (err) {
+    console.log('-----', err);
   }
 };
 
-export const changeUserData = async (token,formBody) => {
+export const changeUserData = async (token, formBody) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
     },
   };
 
@@ -194,7 +192,7 @@ export const changeUserData = async (token,formBody) => {
   } catch (error) {
     console.log(error.response.data);
   }
-}
+};
 
 export const overViewData = async (token, id) => {
   const options = {
@@ -217,7 +215,6 @@ export const overViewData = async (token, id) => {
   }
 };
 
-
 export const continueApi = async (token, id) => {
   const options = {
     headers: {
@@ -238,7 +235,6 @@ export const continueApi = async (token, id) => {
     console.log(error.response.data);
   }
 };
-
 
 export const searchData = async (token, string) => {
   const options = {
@@ -302,7 +298,6 @@ export const getOccupationData = async token => {
   }
 };
 
-
 export const topSearchData = async token => {
   const options = {
     headers: {
@@ -319,11 +314,11 @@ export const topSearchData = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log("=======",error);
+    console.log('=======', error);
   }
 };
 
-export const searchDataKeyword = async (token,obj) => {
+export const searchDataKeyword = async (token, obj) => {
   body = JSON.stringify(obj);
   const options = {
     headers: {
@@ -417,7 +412,6 @@ export const joinCourse = async (token, objBody) => {
   }
 };
 
-
 export const SubmitTest = async (token, Body) => {
   const body = JSON.stringify(Body);
   const options = {
@@ -443,7 +437,6 @@ export const SubmitTest = async (token, Body) => {
   }
 };
 
-
 export const PauseTime = async (token, objBody) => {
   body = JSON.stringify(objBody);
   const options = {
@@ -459,7 +452,7 @@ export const PauseTime = async (token, objBody) => {
       body,
       options,
     );
-    console.log(response.data)
+    console.log(response.data);
     if (response.data) {
       return response.data;
     }
@@ -468,12 +461,10 @@ export const PauseTime = async (token, objBody) => {
   }
 };
 
-export const ResultHeader = async (token,id) => {
- 
+export const ResultHeader = async (token, id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
-    
     },
   };
 
@@ -483,7 +474,7 @@ export const ResultHeader = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log("i am response",response.data)
+      console.log('i am response', response.data);
       return response.data;
     }
   } catch (err) {
@@ -491,9 +482,7 @@ export const ResultHeader = async (token,id) => {
   }
 };
 
-
-export const ResultAnswer = async (token,id) => {
- 
+export const ResultAnswer = async (token, id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -507,7 +496,7 @@ export const ResultAnswer = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log(response.data)
+      console.log(response.data);
       return response.data;
     }
   } catch (err) {
@@ -515,8 +504,7 @@ export const ResultAnswer = async (token,id) => {
   }
 };
 
-export const ModuleTest = async (token,id) => {
- 
+export const ModuleTest = async (token, id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -537,11 +525,8 @@ export const ModuleTest = async (token,id) => {
   }
 };
 
-
-
 //no added url below this
-export const FinalTest = async (token,id) => {
- 
+export const FinalTest = async (token, id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -555,14 +540,13 @@ export const FinalTest = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log('===',response.data)
+      console.log('===', response.data);
       return response.data;
     }
   } catch (err) {
     console.log(err);
   }
 };
-
 
 export const SubmitFinalTest = async (token, Body) => {
   const body = JSON.stringify(Body);
@@ -589,8 +573,7 @@ export const SubmitFinalTest = async (token, Body) => {
   }
 };
 
-export const FinalTestResult = async (token,id) => {
- 
+export const FinalTestResult = async (token, id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -604,7 +587,7 @@ export const FinalTestResult = async (token,id) => {
       options,
     );
     if (response.data) {
-      console.log(response.data)
+      console.log(response.data);
       return response.data;
     }
   } catch (err) {
@@ -612,8 +595,7 @@ export const FinalTestResult = async (token,id) => {
   }
 };
 
-export const CertificateDownload = async (token,id) => {
- 
+export const CertificateDownload = async (token, id) => {
   const options = {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -1,28 +1,25 @@
 import React from 'react';
 import {
   ImageBackground,
-  SafeAreaView,
   View,
   StyleSheet,
   Text,
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
-import { useDispatch, useSelector } from 'react-redux';
-import { addChapterList } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {useDispatch, useSelector} from 'react-redux';
+import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 export const CourseScreen = ({navigation}) => {
-
-const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const coursedata = useSelector(state => state.courseData.overview);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <ImageBackground
-          source={{uri:coursedata?.coursePhoto}}
+          source={{uri: coursedata?.coursePhoto}}
           style={styles.header}>
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());
@@ -42,7 +39,10 @@ const dispatch= useDispatch();
             <View style={styles.designview}>
               <Text style={styles.design}>{coursedata?.categoryName}</Text>
             </View>
-            <Text style={styles.chapter}>{coursedata?.chapterCount} Chapters | {coursedata?.lessonCount} Lessons</Text>
+            <Text style={styles.chapter}>
+              {coursedata?.chapterCount} Chapters | {coursedata?.lessonCount}{' '}
+              Lessons
+            </Text>
           </View>
         </ImageBackground>
       </View>
@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
    
   },
   maintext: {
-    // marginTop: 18,
     marginLeft: 20,
     color: '#FFFFFF',
     fontFamily: 'Biko',
