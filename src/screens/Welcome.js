@@ -21,7 +21,7 @@ export const WelcomeScreen = ({navigation}) => {
     navigation.navigate('LoginStack');
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>    
       <View>
         <Image
           source={require('../assets/images/virtualLearnIcon.png')}

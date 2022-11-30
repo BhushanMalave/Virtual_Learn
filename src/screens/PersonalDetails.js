@@ -11,10 +11,9 @@ import {
   Platform,
   TextInput,
 } from 'react-native';
-
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
 import { setUserData } from '../redux/ReduxPersist/UserDetails';
@@ -44,7 +43,8 @@ export const PersonalDetails = ({navigation}) => {
       .required(''),
   });
   return (
-    <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF' , flex:1}}>
+      <KeyboardAwareView animated = {true}>
       <ScrollView
         style={{backgroundColor: Platform.OS == 'ios' ? '#FFFFFF' : '#FFFFFF'}}>
         <View style={styles.container}>
@@ -365,6 +365,7 @@ export const PersonalDetails = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+      </KeyboardAwareView>
     </SafeAreaView>
   );
 };

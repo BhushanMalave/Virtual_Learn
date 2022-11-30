@@ -9,7 +9,8 @@ import {
   Text,
   useColorScheme,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: 20,
     fontSize: 16,
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:'bold',
     color: '#FFFFFF',
     marginTop: 13,
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth:2,
     borderColor:'#EE5C4D',
+    justifyContent:'center',
   },
   body2: {
     backgroundColor: '#FFFFFF',
@@ -87,18 +89,16 @@ const styles = StyleSheet.create({
   },
   text1: {
     textAlign: 'center',
-    height: 20,
     fontSize: 16,
-    fontFamily: 'Proxima Nova',
-    fontWeight:'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontWeight:Platform.OS == 'ios'? 'bold': 'bold',
     color: '#EE5C4D',
-    marginTop: 13,
   },
   text2: {
     textAlign: 'center',
     height: 20,
     fontSize: 16,
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:'bold',
     color: '#373737',
     marginTop: 13,

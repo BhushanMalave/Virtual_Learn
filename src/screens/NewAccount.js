@@ -56,6 +56,7 @@ export const NewAccount = ({navigation}) => {
           placeholderTextColor={'grey'}
           style={styles.textInput}
           onChangeText={handleText}
+          keyboardType='number-pad'
         />
       </View>
       <View style={styles.button}>
