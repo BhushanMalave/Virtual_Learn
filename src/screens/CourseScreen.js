@@ -26,7 +26,7 @@ const dispatch= useDispatch();
           style={styles.header}>
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());
-            navigation.navigate('HomeScreen')}}>
+            navigation.goBack()}}>
             <Image
               source={require('../assets/images/icn_close_white.png')}
               style={styles.image}

@@ -191,7 +191,7 @@ if(turn){
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={v => handleslide(v)}
+            onValueChange={(value) => { Platform.OS === 'ios' && handleslide(value)}}
           />
         </View>
       </View>

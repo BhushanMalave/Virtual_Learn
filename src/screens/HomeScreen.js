@@ -65,7 +65,7 @@ export const HomeScreen = ({navigation}) => {
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
   const [refreshing, setRefreshing] = useState(false);
 
-  const refreshToken = async () => {
+  const refreshToken = async (token) => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
   };
@@ -102,7 +102,7 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
-    // refreshToken();
+   //refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
