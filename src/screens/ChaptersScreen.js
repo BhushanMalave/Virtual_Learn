@@ -17,6 +17,8 @@ import {useDispatch} from 'react-redux';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ButtonComponent} from '../components/Buttons';
 import {ChapterList} from '../components/chaptes/ChapterList';
+import {overViewData} from '../authorization/Auth';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 import {LessonList} from '../components/chaptes/LessonList';
 import {ModularTest} from '../components/chaptes/ModuleTest';
@@ -378,6 +380,10 @@ if(isIOS){
               };
               const res = await joinCourse(token, objBody);
               console.log(res);
+              if(res){
+                const response = await overViewData(token, coursedata?.courseId);
+                dispatch(addOverView(response));
+              }
             }}
           />
         </View>

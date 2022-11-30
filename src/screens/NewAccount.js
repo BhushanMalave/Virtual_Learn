@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
 
-    marginTop: Platform.OS == 'ios' ? 2 : -3,
+    
   },
   images: {
     height: 43,
