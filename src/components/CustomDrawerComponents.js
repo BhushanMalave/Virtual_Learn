@@ -147,9 +147,9 @@ const styles = StyleSheet.create({
   },
   textname: {
     color: '#FFFFFF',
-    fontFamily: 'Biko',
+    fontWeight:  Platform.OS == 'ios' ? 'bold': 'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 16,
-    fontWeight: 'bold',
     marginTop: 15,
     textAlign: 'left',
   },

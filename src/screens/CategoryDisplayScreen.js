@@ -168,8 +168,8 @@ const styles = StyleSheet.create({
 
   text1: {
     fontSize: 26,
-    fontFamily: 'Biko',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
+    ffontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     textAlign: 'left',
     color: '#2B2B2B',
     marginTop: 30,

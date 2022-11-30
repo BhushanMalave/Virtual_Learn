@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
   text: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 35,
     marginTop: 15,

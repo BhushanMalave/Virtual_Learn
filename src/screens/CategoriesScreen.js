@@ -77,11 +77,10 @@ const styles = StyleSheet.create({
   },
   name: {
     height: 35,
-    width: 128,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     letterSpacing: 0,
     lineHeight: 35,
     marginTop: 15,

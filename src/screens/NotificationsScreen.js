@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     tintColor: '#373737',
   },
   text: {
-    fontFamily: 'Biko',
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
     height: 35,
     color: '#2B2B2B',

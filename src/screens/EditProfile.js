@@ -94,7 +94,7 @@ export const EditProfile = ({navigation}) => {
   }, []);
   return (
     <View style={{flex: 1}}>
-      <KeyboardAwareView >
+      <KeyboardAwareView>
         <ScrollView>
           <ImageBackground
             source={{uri: image}}
@@ -111,31 +111,18 @@ export const EditProfile = ({navigation}) => {
 
                 <Text style={styles.editText}>Edit Profile</Text>
 
-                <View style={{alignItems: 'center', marginTop: 30}}>
-                  <Image
-                    source={{uri: image}}
-                    style={{
-                      height: 110,
-                      width: 110,
-                      marginRight: 40,
-                      borderRadius: 6,
-                    }}
-                  />
+                <View style={styles.imageProfileView}>
+                  <Image source={{uri: image}} style={styles.impageProfile} />
                   <TouchableOpacity
                     onPress={() => changeProfileImageFromCamera()}>
                     <Image
                       source={require('../assets/images/icn_changeprofilepic.png')}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        marginTop: -25,
-                        marginLeft: 45,
-                      }}
+                      style={styles.iconChangeProfilePic}
                     />
                   </TouchableOpacity>
                 </View>
 
-                <View style={{alignItems: 'flex-end', marginRight: 16}}>
+                <View style={styles.changeImageTextView}>
                   <TouchableOpacity
                     onPress={() => changeProfileImageFromLibrary()}>
                     <Text style={styles.changeText}>Change image</Text>
@@ -184,14 +171,14 @@ export const EditProfile = ({navigation}) => {
                     twtterLink: values?.twitterlink,
                     faceBookLink: values?.facebooklink,
                   });
-                  console.log(formBody)
+                  console.log(formBody);
                   const res = await mpChangeUserData(token, formBody);
                   console.log(res);
                   if (res == 200) {
                     navigation.navigate('Profile');
                   }
                 }}>
-                {({handleChange,handleSubmit, values}) => (
+                {({handleChange, handleSubmit, values}) => (
                   <View>
                     <TextInputComp
                       name={'fullname'}
@@ -234,12 +221,7 @@ export const EditProfile = ({navigation}) => {
                     ) : (
                       <></>
                     )}
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}>
+                    <View style={styles.textInputView}>
                       <TextInput
                         name="occupation"
                         editable={false}
@@ -325,11 +307,7 @@ export const EditProfile = ({navigation}) => {
                       <></>
                     )}
                     <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}>
+                      style={styles.textInputView}>
                       <TextInput
                         name="gender"
                         editable={false}
@@ -459,6 +437,26 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginLeft: 24,
   },
+  imageProfileView: {
+    alignItems: 'center',
+    marginTop: 30,
+  },
+  impageProfile: {
+    height: 110,
+    width: 110,
+    marginRight: 40,
+    borderRadius: 6,
+  },
+  iconChangeProfilePic: {
+    height: 30,
+    width: 30,
+    marginTop: -25,
+    marginLeft: 45,
+  },
+  changeImageTextView: {
+    alignItems: 'flex-end',
+    marginRight: 16,
+  },
   scrollview: {
     flex: 1,
   },
@@ -477,9 +475,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 35,
     color: '#FFFFFF',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     lineHeight: 35,
   },
   changeText: {
@@ -491,6 +489,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.35,
     lineHeight: 17,
     textAlign: 'center',
+  },
+  textInputView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   text: {
     height: 17,

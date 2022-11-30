@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Login} from '../screens/Login';
+
 import {ForgotPassword} from '../screens/ForgotPassword';
 import {Verification} from '../screens/Verification';
 import {PasswordChange} from '../screens/PasswordChangeSuccessfully';
 import {CreateNewPassword} from '../screens/CreateNewPassword';
+import { Login } from '../screens/Login';
 
 const Stack = createNativeStackNavigator();
 

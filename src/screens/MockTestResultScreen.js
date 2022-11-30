@@ -155,14 +155,14 @@ const styles = StyleSheet.create({
   },
   textno: {
     fontSize: 42,
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     marginTop: Platform.OS === 'ios' ? 17 : 5,
     color: '#FFFFFF',
   },
   textchaptername: {
     fontSize: 26,
-    fontFamily: 'Biko',
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     marginTop: 10,
     color: '#FFFFFF',
     marginLeft: 20,

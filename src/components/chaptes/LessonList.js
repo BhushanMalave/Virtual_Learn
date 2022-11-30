@@ -64,54 +64,111 @@ export const LessonList = item => {
         ) : (
           <></>
         )}
+        {data?.enrolled ? (
+          <>
+            <View style={styles.container}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={styles.chapterNumber}>0{item?.number}</Text>
+                <View style={{width: '75%'}}>
+                  <Text style={styles.chapterText}>{item?.lessonName}</Text>
+                  <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
+                </View>
+              </View>
 
-        <View style={styles.container}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={styles.chapterNumber}>0{item?.number}</Text>
-            <View style={{width: '75%'}}>
-              <Text style={styles.chapterText}>{item?.lessonName}</Text>
-              <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
+              {item?.status ? (
+                <TouchableOpacity
+                  disabled={!item?.status}
+                  onPress={() => {
+                    {
+                      continueData
+                        ? (console.log(
+                            'navigate to model page by sendind vedio link, Pause time and lesson id',
+                          ),
+                          dispatch(setPopUpState()))
+                        : video(item);
+                    }
+                  }}>
+                  <View style={{marginLeft: -30}}>
+                    <Image
+                      source={require('../../assets/images/icn_lessonplay_active.png')}
+                      style={styles.activePlay}
+                    />
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  disabled={!item?.status}
+                  onPress={() => {
+                    console.log(
+                      ' set/dispatch status as true in lessons:status  and pressed play',
+                      item?.videoLink,
+                    );
+                  }}>
+                  <View style={{marginLeft: -30}}>
+                    <Image
+                      source={require('../../assets/images/icn_lessonplay_inactive.png')}
+                      style={styles.activePlay}
+                    />
+                  </View>
+                </TouchableOpacity>
+              )}
             </View>
-          </View>
+          </>
+        ) : (
+          <>
+            <View style={styles.container2}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={styles.chapterNumber}>0{item?.number}</Text>
+                <View style={{width: '80%'}}>
+                  <Text style={styles.chapterText}>{item?.lessonName}</Text>
+                  <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
+                </View>
+              </View>
 
-          {item?.status ? (
-            <TouchableOpacity
-              disabled={!item?.status}
-              onPress={() => {
-                {
-                  continueData
-                    ? (console.log(
-                        'navigate to model page by sendind vedio link, Pause time and lesson id',
-                      ),
-                      dispatch(setPopUpState()))
-                    : video(item);
-                }
-              }}>
-              <View style={{marginLeft: -5}}>
-                <Image
-                  source={require('../../assets/images/icn_lessonplay_active.png')}
-                  style={styles.activePlay}
-                />
-              </View>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              disabled={!item?.status}
-              onPress={() => {
-                console.log(
-                  ' set/dispatch status as true in lessons:status  and pressed play',
-                  item?.videoLink,
-                );
-              }}>
-              <View style={{marginLeft: -5}}>
-                <Image
-                  source={require('../../assets/images/icn_lessonplay_inactive.png')}
-                  style={styles.activePlay}
-                />
-              </View>
-            </TouchableOpacity>
-          )}
-        </View>
+              {item?.status ? (
+                <TouchableOpacity
+                  disabled={!item?.status}
+                  onPress={() => {
+                    {
+                      continueData
+                        ? (console.log(
+                            'navigate to model page by sendind vedio link, Pause time and lesson id',
+                          ),
+                          dispatch(setPopUpState()))
+                        : video(item);
+                    }
+                  }}>
+                  <View
+                  // style={{marginLeft: -5}}
+                  >
+                    <Image
+                      source={require('../../assets/images/icn_lessonplay_active.png')}
+                      style={styles.activePlay}
+                    />
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  disabled={!item?.status}
+                  onPress={() => {
+                    console.log(
+                      ' set/dispatch status as true in lessons:status  and pressed play',
+                      item?.videoLink,
+                    );
+                  }}>
+                  <View
+                  // style={{marginLeft: -5}}
+                  >
+                    <Image
+                      source={require('../../assets/images/icn_lessonplay_inactive.png')}
+                      style={styles.activePlay}
+                    />
+                  </View>
+                </TouchableOpacity>
+              )}
+            </View>
+          </>
+        )}
       </View>
     </>
   );
@@ -144,9 +201,9 @@ const styles = StyleSheet.create({
     marginRight: 6,
     height: 38,
     color: '#373737',
-    fontFamily: 'Biko',
+    fontWeight:  Platform.OS == 'ios' ? 'bold': 'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 32,
-    fontWeight: 'bold',
     lineHeight: 38,
     width: 40,
   },
@@ -168,5 +225,14 @@ const styles = StyleSheet.create({
   activePlay: {
     height: 24,
     width: 24,
+  },
+  container2: {
+    backgroundColor: Platform.OS === 'ios' ? '#F9F9F9' : '#F9F9F9',
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    paddingTop: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 6,
   },
 });
