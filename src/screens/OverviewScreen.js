@@ -102,7 +102,7 @@ export const OverviewScreen = ({navigation}) => {
                 <ImageBackground
                   source={{uri: coursedata?.coursePhoto}}
                   style={{
-                    width: 340,
+                    width: 345,
                     height: 80,
                     resizeMode: 'cover',
                     borderRadius: 5,
