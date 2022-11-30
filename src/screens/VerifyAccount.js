@@ -47,33 +47,34 @@ export const VerifyAccount = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.body}>
-      <View style={{marginHorizontal: 24}}>
-        <TouchableOpacity onPress={() => navigation.navigate('New Account')}>
-          <Image
-            source={require('../assets/images/icn_back_header.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
-        <View style={styles.textView}>
-          <Text style={styles.text1}>Verify Account</Text>
-          <Text style={styles.text2}>
-            Please fill in the verification code that has been sent to your
-            mobile number.
-          </Text>
-        </View>
-        <View style={styles.textinputView}>
-          <TextInput
-            name="text"
-            style={styles.textInput}
-            onChangeText={handleText}
-          />
-        </View>
-        <View style={styles.textInputBorder}>
-          <View style={styles.textInputBorderin1}></View>
-          <View style={styles.textInputBorderin2}></View>
-          <View style={styles.textInputBorderin3}></View>
-          <View style={styles.textInputBorderin4}></View>
-        </View>
+      <View style={{ marginHorizontal: 24,}}>
+      <TouchableOpacity onPress={() => navigation.navigate('New Account')}>
+        <Image
+          source={require('../assets/images/icn_back_header.png')}
+          style={styles.image}
+        />
+      </TouchableOpacity>
+      <View style={styles.textView}>
+        <Text style={styles.text1}>Verify Account</Text>
+        <Text style={styles.text2}>
+          Please fill in the verification code that has been sent to your mobile
+          number.
+        </Text>
+      </View>
+      <View style={styles.textinputView}>
+        <TextInput
+          name="text"
+          style={styles.textInput}
+          onChangeText={handleText}
+          keyboardType='numeric'
+        />
+      </View>
+      <View style={styles.textInputBorder}>
+        <View style={styles.textInputBorderin1}></View>
+        <View style={styles.textInputBorderin2}></View>
+        <View style={styles.textInputBorderin3}></View>
+        <View style={styles.textInputBorderin4}></View>
+      </View>
 
         <View style={styles.textView2}>
           <Text style={styles.text3}>Didn’t recieve a code?</Text>

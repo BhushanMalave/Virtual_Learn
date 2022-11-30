@@ -53,6 +53,7 @@ export const NewAccount = ({navigation}) => {
           placeholderTextColor={'grey'}
           style={styles.textInput}
           onChangeText={handleText}
+          keyboardType='number-pad'
         />
       </View>
       <View style={styles.button}>
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
 
-    marginTop: Platform.OS == 'ios' ? 2 : -3,
+    
   },
   images: {
     height: 43,

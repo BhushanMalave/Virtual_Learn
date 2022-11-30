@@ -21,18 +21,20 @@ export const CourseScreen = ({navigation}) => {
         <ImageBackground
           source={{uri: coursedata?.coursePhoto}}
           style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(addChapterList());
-              navigation.navigate('HomeScreen');
-            }}>
+          <TouchableOpacity onPress={() =>{ 
+            dispatch(addChapterList());
+            navigation.navigate('HomeScreen')}}>
             <Image
               source={require('../assets/images/icn_close_white.png')}
               style={styles.image}
             />
           </TouchableOpacity>
+            <View style={{borderWidth:1}}>
 
-          <Text style={styles.maintext}>{coursedata?.courseName}</Text>
+          <Text style={styles.maintext}>
+            {coursedata?.courseName}
+          </Text>
+            </View>
           <View style={styles.text}>
             <View style={styles.designview}>
               <Text style={styles.design}>{coursedata?.categoryName}</Text>
@@ -52,14 +54,13 @@ export const CourseScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
+
   },
   header: {
     height: 213,
-    borderWidth: 1,
+   
   },
   maintext: {
-    marginTop: 18,
     marginLeft: 20,
     color: '#FFFFFF',
     fontFamily: 'Biko',
@@ -71,13 +72,15 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 20,
     flexDirection: 'row',
+    borderWidth:1,
+    marginTop:30
   },
   designview: {
     height: 20,
     width: 60,
     borderRadius: 3,
     backgroundColor: '#FCBE4B',
-    marginTop: 10,
+    
   },
   design: {
     height: 12,

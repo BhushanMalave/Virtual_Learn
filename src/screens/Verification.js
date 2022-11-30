@@ -51,18 +51,14 @@ export const Verification = ({navigation}) => {
             mobile number.
           </Text>
         </View>
-        <View style={styles.textinputView}>
-          <TextInput
-            name="text"
-            style={styles.textInput}
-            onChangeText={handleText}
-          />
-        </View>
-        <View style={styles.textInputBorder}>
-          <View style={styles.textInputBorderin1}></View>
-          <View style={styles.textInputBorderin2}></View>
-          <View style={styles.textInputBorderin3}></View>
-          <View style={styles.textInputBorderin4}></View>
+        <View style={styles.textinputView} >
+        <TextInput
+                name="text"
+                style={styles.textInput}
+                onChangeText={handleText}
+                keyboardType='numeric'
+              />   
+             
         </View>
 
         <View style={styles.textView2}>

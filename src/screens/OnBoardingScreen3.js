@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Text,
-  SafeAreaView,
   Image,
   TouchableOpacity,
   Platform,
@@ -11,7 +10,9 @@ import {
 
 export const OnBoardingScreen3 = ({navigation}) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
       <View>
         <Image
           source={require('../assets/images/virtualLearnIcon.png')}
@@ -49,7 +50,8 @@ export const OnBoardingScreen3 = ({navigation}) => {
           <Image source={require('../assets/images/btn_done.png')} />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -57,25 +59,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 25,
+   
   },
 
   Icon: {
     height: 37,
     width: 182,
-    marginTop: Platform.OS == 'ios' ? 20 : 0,
-    marginLeft: 10,
+    // marginTop: 10,
+    marginTop: Platform.OS == 'ios' ? 30 : 0,
+
   },
   image: {
     height: 281.19,
     width: '100%',
-    marginTop: Platform.OS == 'ios' ? 75 : 10,
+    marginTop: Platform.OS == 'ios' ? 75 : 50,
     alignSelf: 'center',
   },
   imageView: {},
   textView: {
     height: 70,
     width: '100%',
-    marginTop: Platform.OS == 'ios' ? 85 : 105,
+    marginTop: Platform.OS == 'ios' ? 85 : 80,
   },
   text: {
     color: '#2B2B2B',
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     flexDirection: 'row',
-    marginTop: Platform.OS === 'ios' ? 35 : 70,
+    marginTop:Platform.OS === 'ios' ? 35: 25,
     justifyContent: 'space-between',
     marginLeft: 100,
     alignItems: 'center',

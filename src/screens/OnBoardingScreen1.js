@@ -16,7 +16,9 @@ export const OnBoardingScreen1 = ({navigation}) => {
   const userData = useSelector(state => state.userData.data);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
       <View>
         <Image
           source={require('../assets/images/virtualLearnIcon.png')}
@@ -66,7 +68,8 @@ export const OnBoardingScreen1 = ({navigation}) => {
           <Image source={require('../assets/images/btn_next.png')} />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -74,13 +77,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 24,
+    marginTop:Platform.OS=='ios'?30:0,
   },
 
   Icon: {
     height: 37,
     width: 182,
     marginTop: 25,
-    marginLeft: 30,
   },
   image: {
     height: 281.19,
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     fontFamily: 'Biko',
     paddingBottom: 4,
+    fontWeight:"bold"
   },
   descriptionview: {
     width: '100%',
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
   skiptext: {
     height: 35,
     color: '#373737',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 35,

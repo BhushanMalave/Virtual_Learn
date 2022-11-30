@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
-    marginRight: 25,
+    marginRight: 30,
   },
 
   imageContainer: {

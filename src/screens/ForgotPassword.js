@@ -60,15 +60,16 @@ export const ForgotPassword = ({navigation}) => {
             new password.
           </Text>
         </View>
-        <View style={styles.textinputView}>
-          <Text style={styles.textno}>+91</Text>
-          <TextInput
-            name="text"
-            placeholder="Enter your mobile number"
-            placeholderTextColor={'#7A7A7A'}
-            style={styles.textInput}
-            onChangeText={handleText}
-          />
+        <View style={styles.textinputView} >
+        <Text style={styles.textno} >+91</Text>
+        <TextInput
+                name="text"
+                placeholder="Enter your mobile number"
+                placeholderTextColor={'#7A7A7A'}
+                style={styles.textInput}
+                onChangeText={handleText}
+               keyboardType='numeric'
+              />    
         </View>
         <View style={styles.button}>
           <ButtonComponent text="Send" onPress={() => handleProcess()} />
