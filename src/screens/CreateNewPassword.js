@@ -8,6 +8,8 @@ import {
   TextInput,
   View,
   Platform,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
@@ -84,51 +86,64 @@ export const CreateNewPassword = ({navigation}) => {
                 <>
                   <>
                     {values.newpassword ? (
-                      <View>
-                        <Text style={styles.text}>New Password</Text>
-                      </View>
+                      <View style={styles.from1}></View>
                     ) : (
-                      <></>
+                      <View style={styles.form}></View>
                     )}
-                  </>
-                  <View>
-                    <TextInput
-                      name="newpassword"
-                      placeholder="New Password"
-                      // keyboardType='text'
-                      placeholderTextColor={'grey'}
-                      onChangeText={handleChange('newpassword')}
-                      onBlur={handleBlur('newpassword')}
-                      value={values.newpassword}
-                      style={styles.textinput}
-                    />
-                    <View style={styles.bottom}></View>
+                    <>
+                      {values.newpassword ? (
+                        <>
+                          <View>
+                            <Text style={styles.text}>New Password</Text>
+                          </View>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
 
-                    {errors.newpassword && (
-                      <Text style={{fontSize: 10, color: 'red'}}>
-                        {errors.newpassword}
-                      </Text>
-                    )
-                      ? setInfo(true)
-                      : setInfo(false)}
-                  </View>
-
-                  <>
+                      <TextInput
+                        name="newpassword"
+                        placeholder="New Password"
+                        onChangeText={handleChange('newpassword')}
+                        onBlur={handleBlur('newpassword')}
+                        value={values.password}
+                        style={styles.textinput}
+                        placeholderTextColor={'#7A7A7A'}
+                        secureTextEntry={true}
+                      />
+                      {values.newpassword ? (
+                        <View style={styles.bottom}></View>
+                      ) : (
+                        <View style={styles.bottom2}></View>
+                      )}
+                      {errors.newpassword && (
+                        <Text style={{fontSize: 10, color: 'red'}}>
+                          {errors.newpassword}
+                        </Text>
+                      )
+                        ? setInfo(true)
+                        : setInfo(false)}
+ 
                     {!info ? (
                       <>
                         <View>
+                          {errors.newpassword && (
+                            <Text style={{fontSize: 10, color: 'red'}}>
+                              {errors.password}
+                            </Text>
+                          )}
+                        </View>
+
+                        <View>
                           {values.confirmnewpassword ? (
-                            <View style={styles.form1}></View>
+                            <View style={styles.from1}></View>
                           ) : (
                             <View style={styles.form}></View>
                           )}
                           <>
                             {values.confirmnewpassword ? (
-                              <View>
-                                <Text style={styles.text}>
-                                  Confirm New Password
-                                </Text>
-                              </View>
+                              <Text style={styles.text}>Confirm Password</Text>
                             ) : (
                               <></>
                             )}
@@ -136,42 +151,36 @@ export const CreateNewPassword = ({navigation}) => {
 
                           <TextInput
                             name="confirmnewpassword"
-                            placeholder="Confrim New Password"
-                            placeholderTextColor={'grey'}
+                            placeholder="Confirm New Password"
+                            placeholderTextColor={'#7A7A7A'}
                             onChangeText={handleChange('confirmnewpassword')}
                             onBlur={handleBlur('confirmnewpassword')}
                             value={values.confirmnewpassword}
                             style={styles.textinput}
                           />
-                          <View style={styles.bottom}></View>
-
-                          {errors.confirmnewpassword && (
-                            <Text style={{fontSize: 10, color: 'red'}}>
-                              {errors.confirmnewpassword}
-                            </Text>
-                          )}
+                              {values.confirmnewpassword ? (
+                      <View style={styles.bottom}></View>
+                    ) : (
+                      <View style={styles.bottom2}></View>
+                    )}
+                    {errors.confirmnewpassword && (
+                      <Text style={{fontSize: 10, color: 'red'}}>
+                        {errors.confirmnewpassword}
+                      </Text>
+                    )}
                         </View>
                       </>
                     ) : (
                       <>
-                        <View
-                          style={{
-                            marginTop: 20,
-                            borderWidth: 1,
-                            borderRadius: 10,
-                            padding: 10,
-                          }}>
+                        <View style={[styles.infoBoxView]}>
                           <Text style={styles.infoText1}>
                             Our minimum Reqiurement
                           </Text>
-                          <View>
-                            <Text style={styles.infoText2}>
-                              At least 6 characters long with one number, one
-                              uppercase letter, and one lowercase letter.
-                            </Text>
-                          </View>
+                          <Text style={styles.infoText2}>
+                            At least 6 characters long with one number, one
+                            uppercase letter, and one lowercase letter.
+                          </Text>
                         </View>
-                        <View style={styles.infobottom}></View>
                       </>
                     )}
                   </>
@@ -250,8 +259,8 @@ const styles = StyleSheet.create({
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: 'bold',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {
     height: 40,
@@ -268,19 +277,36 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   form: {
-    marginTop: 40,
+    marginTop: Platform.OS == 'ios' ? 40 : 30,
   },
-  form1: {
-    marginTop: 14,
+  from1: {
+    marginTop: Platform.OS == 'ios' ? 14 : 15,
   },
   bottom: {
     marginTop: 10,
     borderBottomWidth: 1,
+    borderBottomColor: '#042C5C',
+  },
+  bottom2: {
+    marginTop: Platform.OS == 'ios' ? 10 : -3,
+    borderBottomWidth: 1,
     borderBottomColor: '#7A7A7A',
-    opacity: 0.6,
+    opacity: 0.3,
   },
   formikView: {
     marginTop: 23,
+  },
+  infoBoxView: {
+    marginTop: 2,
+    paddingLeft: 20,
+    paddingVertical: 12,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#25334b',
+    shadowOffset: {width: 1, height: 3},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 5,
+    borderRadius: 12.5,
   },
   infoText1: {
     height: 15,
@@ -294,12 +320,6 @@ const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 10,
-  },
-  infobottom: {
-    marginTop: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#7A7A7A',
-    opacity: 0.6,
-    marginBottom: 8,
+    lineHeight: 15,
   },
 });

@@ -11,7 +11,7 @@ import {
   Platform,
   TextInput,
 } from 'react-native';
-import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
+import {KeyboardAwareView} from 'react-native-keyboard-aware-view';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {ButtonComponent} from '../components/Buttons';
@@ -43,213 +43,230 @@ export const PersonalDetails = ({navigation}) => {
       .required(''),
   });
   return (
-    <SafeAreaView style={{backgroundColor: '#FFFFFF' , flex:1}}>
-      <KeyboardAwareView animated = {true}>
-      <ScrollView
-        style={{backgroundColor: Platform.OS == 'ios' ? '#FFFFFF' : '#FFFFFF'}}>
-        <View style={styles.container}>
-          <View>
-            <Text style={styles.header}>Personal Details</Text>
-            <Text style={styles.headertext}>
-              Please fill out the feilds below so we can learn some information
-              about you.
-            </Text>
-          </View>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF', flex: 1}}>
+      <KeyboardAwareView animated={true}>
+        <ScrollView
+          style={{
+            backgroundColor: Platform.OS == 'ios' ? '#FFFFFF' : '#FFFFFF',
+          }}>
+          <View style={styles.container}>
+            <View>
+              <Text style={styles.header}>Personal Details</Text>
+              <Text style={styles.headertext}>
+                Please fill out the feilds below so we can learn some
+                information about you.
+              </Text>
+            </View>
 
-          <View style={styles.numView}>
-            <Text style={styles.text}>Moblie number</Text>
-            <Text style={styles.number}>+919591726087</Text>
-          </View>
+            <View style={styles.numView}>
+              <Text style={styles.text}>Moblie number</Text>
+              <Text style={styles.number}>+919591726087</Text>
+            </View>
 
-          <View>
-            <Formik
-              validationSchema={registerValidationScheme}
-              initialValues={{
-                fullname: '',
-                username: '',
-                email: '',
-                password: '',
-                confirmpassword: '',
-              }}
-              onSubmit={async values => {
-                console.log(values);
+            <View>
+              <Formik
+                validationSchema={registerValidationScheme}
+                initialValues={{
+                  fullname: '',
+                  username: '',
+                  email: '',
+                  password: '',
+                  confirmpassword: '',
+                }}
+                onSubmit={async values => {
+                  console.log(values);
 
-                const obj = {
-                  mobileNumber: '+919591726087',
-                  fullName: values.fullname,
-                  userName: values.username,
-                  email: values.email,
-                  password: values.password,
-                };
-                const userData = {
-                  profilePhoto: null,
-                  fullName: values.fullname,
-                  userName: values.username,
-                  email: values.email,
-                  mobileNumber: '9591726087',
-                  occupation: null,
-                  gender: null,
-                  dateOfBirth: null,
-                  twitterLink: null,
-                  faceBookLink: null,
-                };
-                dispatch(setUserData(userData));
+                  const obj = {
+                    mobileNumber: '+919591726087',
+                    fullName: values.fullname,
+                    userName: values.username,
+                    email: values.email,
+                    password: values.password,
+                  };
+                  const userData = {
+                    profilePhoto: null,
+                    fullName: values.fullname,
+                    userName: values.username,
+                    email: values.email,
+                    mobileNumber: '9591726087',
+                    occupation: null,
+                    gender: null,
+                    dateOfBirth: null,
+                    twitterLink: null,
+                    faceBookLink: null,
+                  };
+                  dispatch(setUserData(userData));
 
-                try {
-                  const response = await axios.post(
-                    'https://virtual-learning-app-java.herokuapp.com/newUser/register',
-                    obj,
-                  );
-                  console.log('=====', response.data.message);
-                  if (response.data.message === 'User Created') {
-                    navigation.navigate('Registration Successfull');
+                  try {
+                    const response = await axios.post(
+                      'https://virtual-learning-app-java.herokuapp.com/newUser/register',
+                      obj,
+                    );
+                    console.log('=====', response.data.message);
+                    if (response.data.message === 'User Created') {
+                      navigation.navigate('Registration Successfull');
+                    }
+                  } catch (error) {
+                    console.log(error.response.data);
                   }
-                } catch (error) {
-                  console.log(error.response.data);
-                }
-              }}>
-              {({
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                values,
-                errors,
-                isValid,
-              }) => (
-                <>
-                  <View style={styles.formikView}>
-                    {values.fullname ? (
-                      <View style={styles.from1}></View>
-                    ) : (
-                      <View style={styles.form}></View>
-                    )}
-
-                    <View>
-                      <>
-                        {values.fullname ? (
-                          <View>
-                            <Text style={styles.text}>Full name</Text>
-                          </View>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                      <View>
-                        <TextInput
-                          name="fullname"
-                          placeholder="FullName"
-                          placeholderTextColor={'#7A7A7A'}
-                          onChangeText={handleChange('fullname')}
-                          onBlur={handleBlur('fullname')}
-                          value={values.fullname}
-                          style={styles.textinput}
-                        />
-                        {values.fullname ? (
-                          <View style={styles.bottom}></View>
-                        ) : (
-                          <View style={styles.bottom2}></View>
-                        )}
-
-                        {errors.fullname && (
-                          <Text style={{fontSize: 10, color: 'red'}}>
-                            {errors.fullname}
-                          </Text>
-                        )}
-                      </View>
-
-                      {values.username ? (
+                }}>
+                {({
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  values,
+                  errors,
+                  isValid,
+                }) => (
+                  <>
+                    <View style={styles.formikView}>
+                      {values.fullname ? (
                         <View style={styles.from1}></View>
                       ) : (
                         <View style={styles.form}></View>
                       )}
-                      <>
-                        {values.username ? (
-                          <View>
-                            <Text style={styles.text}>Username</Text>
-                          </View>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                      <View>
-                        <TextInput
-                          name="Username"
-                          placeholder="Username"
-                          // keyboardType='text'
-                          placeholderTextColor={'#7A7A7A'}
-                          onChangeText={handleChange('username')}
-                          onBlur={handleBlur('username')}
-                          value={values.username}
-                          style={styles.textinput}
-                        />
-                        {values.username ? (
-                          <View style={styles.bottom}></View>
-                        ) : (
-                          <View style={styles.bottom2}></View>
-                        )}
-                        {errors.username && (
-                          <Text style={{fontSize: 10, color: 'red'}}>
-                            {errors.username}
-                          </Text>
-                        )}
-                      </View>
 
                       <View>
-                        {values.email ? (
-                          <View style={styles.from1}></View>
-                        ) : (
-                          <View style={styles.form}></View>
-                        )}
                         <>
-                          {values.email ? (
+                          {values.fullname ? (
                             <View>
-                              <Text style={styles.text}>Email</Text>
+                              <Text style={styles.text}>Full name</Text>
                             </View>
                           ) : (
                             <></>
                           )}
                         </>
+                        <View>
+                          <TextInput
+                            name="fullname"
+                            placeholder="FullName"
+                            placeholderTextColor={'#7A7A7A'}
+                            onChangeText={handleChange('fullname')}
+                            onBlur={handleBlur('fullname')}
+                            value={values.fullname}
+                            style={styles.textinput}
+                          />
+                          {values.fullname ? (
+                            <View style={styles.bottom}></View>
+                          ) : (
+                            <View style={styles.bottom2}></View>
+                          )}
 
-                        <TextInput
-                          name="email"
-                          placeholder="Email"
-                          // keyboardType='text'
-                          placeholderTextColor={'#7A7A7A'}
-                          onChangeText={handleChange('email')}
-                          onBlur={handleBlur('email')}
-                          value={values.email}
-                          style={styles.textinput}
-                        />
-                        {values.email ? (
-                          <View style={styles.bottom}></View>
-                        ) : (
-                          <View style={styles.bottom2}></View>
-                        )}
-                        {errors.email && (
-                          <Text style={{fontSize: 10, color: 'red'}}>
-                            {errors.email}
-                          </Text>
-                        )}
-                      </View>
+                          {errors.fullname && (
+                            <Text style={{fontSize: 10, color: 'red'}}>
+                              {errors.fullname}
+                            </Text>
+                          )}
+                        </View>
 
-                      {values.password ? (
-                        <View style={styles.from1}></View>
-                      ) : (
-                        <View style={styles.form3}></View>
-                      )}
-                      <>
-                        {values.password ? (
-                          <View>
-                            <Text style={styles.text}>Password</Text>
-                          </View>
+                        {values.username ? (
+                          <View style={styles.from1}></View>
                         ) : (
+                          <View style={styles.form}></View>
+                        )}
+                        <>
+                          {values.username ? (
+                            <View>
+                              <Text style={styles.text}>Username</Text>
+                            </View>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <View>
+                          <TextInput
+                            name="Username"
+                            placeholder="Username"
+                            // keyboardType='text'
+                            placeholderTextColor={'#7A7A7A'}
+                            onChangeText={handleChange('username')}
+                            onBlur={handleBlur('username')}
+                            value={values.username}
+                            style={styles.textinput}
+                          />
+                          {values.username ? (
+                            <View style={styles.bottom}></View>
+                          ) : (
+                            <View style={styles.bottom2}></View>
+                          )}
+                          {errors.username && (
+                            <Text style={{fontSize: 10, color: 'red'}}>
+                              {errors.username}
+                            </Text>
+                          )}
+                        </View>
+
+                        <View>
+                          {values.email ? (
+                            <View style={styles.from1}></View>
+                          ) : (
+                            <View style={styles.form}></View>
+                          )}
                           <>
-                            <View
-                              style={{
-                                flexDirection: 'row',
-                                marginBottom: Platform.OS == 'ios' ? 0 : -5,
-                              }}>
-                              <View style={{marginHorizontal: 42}}></View>
+                            {values.email ? (
+                              <View>
+                                <Text style={styles.text}>Email</Text>
+                              </View>
+                            ) : (
+                              <></>
+                            )}
+                          </>
+
+                          <TextInput
+                            name="email"
+                            placeholder="Email"
+                            // keyboardType='text'
+                            placeholderTextColor={'#7A7A7A'}
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                            value={values.email}
+                            style={styles.textinput}
+                          />
+                          {values.email ? (
+                            <View style={styles.bottom}></View>
+                          ) : (
+                            <View style={styles.bottom2}></View>
+                          )}
+                          {errors.email && (
+                            <Text style={{fontSize: 10, color: 'red'}}>
+                              {errors.email}
+                            </Text>
+                          )}
+                        </View>
+
+                        {values.password ? (
+                          <View style={styles.from1}></View>
+                        ) : (
+                          <View style={styles.form3}></View>
+                        )}
+                        <>
+                          {values.password ? (
+                            <>
+                              <View>
+                                <Text style={styles.text}>Password</Text>
+                              </View>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                        <View
+                          style={{
+                            flexDirection: 'row',alignItems:'center'
+                          }}>
+                          <TextInput
+                            name="password"
+                            placeholder="Password"
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                            value={values.password}
+                            style={styles.textinput1}
+                            placeholderTextColor={'#7A7A7A'}
+                          />
+                          {values.password ? (
+                            <></>
+                          ) : (
+                            <>
                               <TouchableOpacity
                                 onPress={() => {
                                   setInfo(!info);
@@ -260,108 +277,90 @@ export const PersonalDetails = ({navigation}) => {
                                   style={styles.info}
                                 />
                               </TouchableOpacity>
+                            </>
+                          )}
+                        </View>
+                        {!info ? (
+                          <>
+                            <View>
+                              {values.password ? (
+                                <View style={styles.bottom}></View>
+                              ) : (
+                                <View style={styles.bottom2}></View>
+                              )}
+                              {errors.password && (
+                                <Text style={{fontSize: 10, color: 'red'}}>
+                                  {errors.password}
+                                </Text>
+                              )}
+                            </View>
+
+                            <View>
+                              {values.confirmpassword ? (
+                                <View style={styles.from1}></View>
+                              ) : (
+                                <View style={styles.form}></View>
+                              )}
+                              <>
+                                {values.confirmpassword ? (
+                                  <Text style={styles.text}>
+                                    Confirm Password
+                                  </Text>
+                                ) : (
+                                  <></>
+                                )}
+                              </>
+
+                              <TextInput
+                                name="confirm password"
+                                placeholder="confirm Password"
+                                placeholderTextColor={'#7A7A7A'}
+                                onChangeText={handleChange('confirmpassword')}
+                                onBlur={handleBlur('confrmpassword')}
+                                value={values.confirmpassword}
+                                style={styles.textinput}
+                              />
                             </View>
                           </>
-                        )}
-                      </>
-
-                      {!info ? (
-                        <>
-                          <View>
-                            <TextInput
-                              name="password"
-                              placeholder="Password"
-                              onChangeText={handleChange('password')}
-                              onBlur={handleBlur('password')}
-                              value={values.password}
-                              style={styles.textinput}
-                            />
-                            {values.password ? (
-                              <View style={styles.bottom}></View>
-                            ) : (
-                              <View style={styles.bottom2}></View>
-                            )}
-                            {errors.password && (
-                              <Text style={{fontSize: 10, color: 'red'}}>
-                                {errors.password}
-                              </Text>
-                            )}
-                          </View>
-
-                          <View>
-                            {values.confirmpassword ? (
-                              <View style={styles.from1}></View>
-                            ) : (
-                              <View style={styles.form}></View>
-                            )}
-                            <>
-                              {values.confirmpassword ? (
-                                <Text style={styles.text}>
-                                  Confirm Password
+                        ) : (
+                          <>
+                            <View style={[styles.infoBoxView]}>
+                                <Text style={styles.infoText1}>
+                                  Our minimum Reqiurement
                                 </Text>
-                              ) : (
-                                <></>
-                              )}
-                            </>
-
-                            <TextInput
-                              name="confirm password"
-                              placeholder="confirm Password"
-                              placeholderTextColor={'#7A7A7A'}
-                              onChangeText={handleChange('confirmpassword')}
-                              onBlur={handleBlur('confrmpassword')}
-                              value={values.confirmpassword}
-                              style={styles.textinput}
-                            />
-                            {values.confirmpassword ? (
-                              <View style={styles.bottom}></View>
-                            ) : (
-                              <View style={styles.bottom2}></View>
-                            )}
-                            {errors.confirmpassword && (
-                              <Text style={{fontSize: 10, color: 'red'}}>
-                                {errors.confirmpassword}
-                              </Text>
-                            )}
-                          </View>
-                        </>
-                      ) : (
-                        <>
-                          <View
-                            style={{
-                              marginTop: 20,
-                              borderWidth: 1,
-                              borderRadius: 10,
-                              padding: 10,
-                            }}>
-                            <Text style={styles.infoText1}>
-                              Our minimum Reqiurement
-                            </Text>
-                            <View>
-                              <Text style={styles.infoText2}>
-                                At least 6 characters long with one number, one
-                                uppercase letter, and one lowercase letter.
-                              </Text>
+                                <Text style={styles.infoText2}>
+                                  At least 6 characters long with one number,
+                                  one uppercase letter, and one lowercase
+                                  letter.
+                                </Text>
                             </View>
-                          </View>
-                          <View style={styles.infobottom}></View>
-                        </>
-                      )}
+                            {/* <View style={styles.infobottom}></View> */}
+                          </>
+                        )}
+                              {values.confirmpassword ? (
+                                <View style={styles.bottom}></View>
+                              ) : (
+                                <View style={styles.bottom2}></View>
+                              )}
+                              {errors.confirmpassword && (
+                                <Text style={{fontSize: 10, color: 'red'}}>
+                                  {errors.confirmpassword}
+                                </Text>
+                              )}
+                      </View>
+                      <View style={styles.button}>
+                        <ButtonComponent
+                          text={'Register'}
+                          onPress={handleSubmit}
+                        />
+                      </View>
                     </View>
-
-                    <View style={styles.button}>
-                      <ButtonComponent
-                        text={'Register'}
-                        onPress={handleSubmit}
-                      />
-                    </View>
-                  </View>
-                </>
-              )}
-            </Formik>
+                  </>
+                )}
+              </Formik>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </KeyboardAwareView>
     </SafeAreaView>
   );
@@ -375,14 +374,14 @@ const styles = StyleSheet.create({
   header: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Black',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
   },
   headertext: {
     height: 40,
     color: '#7A7A7A',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova-Regular',
     fontSize: 16,
     lineHeight: 20,
     marginTop: Platform.OS == 'ios' ? 0 : 10,
@@ -394,7 +393,7 @@ const styles = StyleSheet.create({
     height: 17,
     marginBottom: Platform.OS == 'ios' ? 10 : -2,
     color: Platform.OS == 'ios' ? '#7A7A7A' : '#7A7A7A',
-    fontFamily: 'Proxima Nova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 14,
     letterSpacing: 0.29,
     lineHeight: 17,
@@ -411,10 +410,18 @@ const styles = StyleSheet.create({
 
   textinput: {
     color: Platform.OS == 'ios' ? '#042C5C' : '#042C5C',
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova-Regular',
     fontSize: 16,
     letterSpacing: 0.4,
     lineHeight: 20,
+  },
+  textinput1: {
+    color: Platform.OS == 'ios' ? '#042C5C' : '#042C5C',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova-Regular',
+    fontSize: 16,
+    letterSpacing: 0.4,
+    lineHeight: 20,
+    paddingRight:10,
   },
   bottom: {
     marginTop: Platform.OS == 'ios' ? 10 : -3,
@@ -425,7 +432,7 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == 'ios' ? 10 : -3,
     borderBottomWidth: 1,
     borderBottomColor: '#7A7A7A',
-    opacity: 0.6,
+    opacity: 0.3,
   },
   formikView: {
     marginTop: Platform.OS == 'ios' ? 23 : 20,
@@ -444,12 +451,26 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   infoView: {
-    width: 14,
+    width: 18,
+    alignItems:'center',
   },
   info: {
     height: 12,
     width: 12,
   },
+  infoBoxView: {
+    marginTop: 2,
+    paddingLeft: 20,
+    paddingVertical:12,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#25334b',
+    shadowOffset: {width: 1, height: 3},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 5,
+    borderRadius: 12.5,
+  },
+
   infoText1: {
     height: 15,
     color: '#042C5C',
@@ -462,12 +483,14 @@ const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 10,
+    lineHeight: 15,
   },
   infobottom: {
     marginTop: 15,
     borderBottomWidth: 1,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    opacity: 0.6,
-    marginBottom: 8,
+    opacity: 0.3,
+    borderBottomColor: '#7A7A7A',
+    // marginBottom: 8,
   },
 });

@@ -213,16 +213,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     color: '#FFFFFF',
   },
   textname: {
     color: '#FFFFFF',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 20,
-    fontWeight: 'bold',
     marginTop: 10,
   },
   textdesc: {
@@ -242,8 +242,8 @@ const styles = StyleSheet.create({
   },
   textno: {
     color: '#2BB5F4',
-    fontFamily: 'Biko',
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 32,
     marginTop: 20,
     textAlign: 'center',

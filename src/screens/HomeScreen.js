@@ -356,9 +356,9 @@ const styles = StyleSheet.create({
   name: {
     height: 35,
     color: '#042C5C',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 20,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 35,
     marginLeft: 25,
