@@ -1,25 +1,35 @@
-import React, { useState ,useEffect} from 'react';
-import {SafeAreaView, View, StyleSheet, Image, Text, TouchableOpacity, Pressable} from 'react-native';
-import { privacyPolicy } from '../authorization/Auth';
+import React, {useState, useEffect} from 'react';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
+import {privacyPolicy} from '../authorization/Auth';
 export const PrivacyPolicyScreen = ({navigation}) => {
+  const [data, setData] = useState('');
 
-    const [data,setData] = useState('');
+  const call = async () => {
+    const res = await privacyPolicy();
 
-    const call = async () => {
-          const res = await privacyPolicy();
-     
-          setData(res);
-    }
-    useEffect(() => {
+    setData(res);
+  };
+  useEffect(() => {
     call();
-    },[]);
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
-        <TouchableOpacity  onPress={ () => {navigation.goBack();}}>
-      <Image
-        source={require('../assets/images/icn_back_header.png')}
-        style={styles.backbutton}
-      />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Image
+          source={require('../assets/images/icn_back_header.png')}
+          style={styles.backbutton}
+        />
       </TouchableOpacity>
       <Text style={styles.text}>Privacy Policy</Text>
       <View style={styles.description}>
@@ -36,7 +46,6 @@ export const PrivacyPolicyScreen = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -56,15 +65,15 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     marginTop: 15,
   },
-  description:{
-    marginTop:15
+  description: {
+    marginTop: 15,
   },
-  text1:{
-    color:"#7A7A7A",
+  text1: {
+    color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontSize:16,
-    letterSpacing:0,
-    lineHeight:20,
-    marginBottom:17
-  }
+    fontSize: 16,
+    letterSpacing: 0,
+    lineHeight: 20,
+    marginBottom: 17,
+  },
 });

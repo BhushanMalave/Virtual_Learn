@@ -10,17 +10,20 @@ import {
 export const OnGoingComponent = props => {
   return (
     <View style={styles.mainContainer}>
-     
-      <ImageBackground source={props.source} style={styles.image} imageStyle={{borderRadius:6}}>
-    <Text style={styles.ongoing}>Ongoing</Text>
+      <ImageBackground
+        source={props.source}
+        style={styles.image}
+        imageStyle={{borderRadius: 6}}>
+        <Text style={styles.ongoing}>Ongoing</Text>
         <Text style={styles.name}>{props.name}</Text>
-     
-        <Text style={styles.chapter}>{props.chapter}/{props.ctdchapter} Chapters</Text>
+
+        <Text style={styles.chapter}>
+          {props.chapter}/{props.ctdchapter} Chapters
+        </Text>
         <TouchableOpacity style={styles.contbutton} onPress={props.onPress}>
           <Text style={styles.conttext}>Continue</Text>
         </TouchableOpacity>
       </ImageBackground>
-     
     </View>
   );
 };
@@ -28,23 +31,15 @@ export const OnGoingComponent = props => {
 const styles = StyleSheet.create({
   mainContainer: {
     height: 140,
-    // width:327,
 
     borderRadius: 6,
-    // marginTop:20,
+
     marginBottom: 12,
   },
   image: {
     height: 140,
-    // marginTop:-15
-    // flex: 1,
-    // // width: 350,
-    // marginLeft: -20,
-   
+
     marginBottom: 12,
-    // resizeMode: 'cover',
-  
-               
   },
   contbutton: {
     height: 26,
@@ -52,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 3.4,
     backgroundColor: '#EE5C4D',
     marginTop: 8,
-    marginLeft:15,
+    marginLeft: 15,
   },
   conttext: {
     height: 12,
@@ -88,16 +83,16 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     marginLeft: 15,
   },
-  ongoing:{
+  ongoing: {
     height: 15,
-    
+
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
     marginLeft: 15,
-    fontWeight:"bold",
-    marginTop:5
-  }
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
 });

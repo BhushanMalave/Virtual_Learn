@@ -3,35 +3,35 @@ import {createSlice} from '@reduxjs/toolkit';
 const dataNew = {
   testId: 6,
   chapterNumber: 6,
-  chapterName: "Conclusion",
-  testName: "Final Test",
-  testDuration: "00:04:00",
-  questionsCount:2,
+  chapterName: 'Conclusion',
+  testName: 'Final Test',
+  testDuration: '00:04:00',
+  questionsCount: 2,
   questions: [
     {
       questionId: 7,
-      questionName: "What is your efgh?",
-      option_1: "e",
-      option_2: "f",
-      option_3: "g",
-      option_4: "h",
+      questionName: 'What is your efgh?',
+      option_1: 'e',
+      option_2: 'f',
+      option_3: 'g',
+      option_4: 'h',
       state1: false,
       state2: false,
       state3: false,
-      state4: false
+      state4: false,
     },
     {
       questionId: 15,
-      questionName: "How many letters are there in english alphabets ",
-      option_1: "26",
-      option_2: "25",
-      option_3: "10",
-      option_4: "28",
+      questionName: 'How many letters are there in english alphabets ',
+      option_1: '26',
+      option_2: '25',
+      option_3: '10',
+      option_4: '28',
       state1: false,
       state2: false,
       state3: false,
-      state4: false
-  },
+      state4: false,
+    },
   ],
 };
 
@@ -41,8 +41,8 @@ export const FinalTestSlice = createSlice({
     questionData: null,
     testId: null,
     userAnswers: [],
-    correctAnswers:[],
-    finalresult:null,
+    correctAnswers: [],
+    finalresult: null,
     // resultAnswers:[],
     // testPercentage:null
   },
@@ -106,15 +106,15 @@ export const FinalTestSlice = createSlice({
       });
     },
     removeAll: (state, action) => {
-      state.userAnswers = []
+      state.userAnswers = [];
     },
-    setCorrectAnswers:(state,action)=>{
-      state.correctAnswers=action.payload
-      console.log("++++++",state.correctAnswers)
+    setCorrectAnswers: (state, action) => {
+      state.correctAnswers = action.payload;
+      console.log('++++++', state.correctAnswers);
     },
 
-    setFinalResult:(state,action)=>{
-      state.finalresult = action.payload
+    setFinalResult: (state, action) => {
+      state.finalresult = action.payload;
     },
     // setResultAnswers:(state,action)=>{
     //   // console.log("++++++++",action.payload)
@@ -122,12 +122,11 @@ export const FinalTestSlice = createSlice({
     // },
     removeAnswers: (state, action) => {
       state.resultAnswers = [];
-      state.questionData=[]
+      state.questionData = [];
     },
-    setTestPercentage:(state,action)=>{
-      state.testPercentage=action.payload
+    setTestPercentage: (state, action) => {
+      state.testPercentage = action.payload;
     },
-
   },
 });
 
@@ -144,6 +143,6 @@ export const {
   setFinalResult,
   setResultAnswers,
   removeAnswers,
-  setTestPercentage
+  setTestPercentage,
 } = FinalTestSlice.actions;
 export default FinalTestSlice.reducer;

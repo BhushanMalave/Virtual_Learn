@@ -2,9 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  SafeAreaView,
   Image,
-  ImageBackground,
   Text,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';

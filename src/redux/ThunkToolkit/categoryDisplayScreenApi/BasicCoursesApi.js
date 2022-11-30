@@ -1,17 +1,16 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 export const cdsbasicCourse = createAsyncThunk(
   'basicCourse/cdsbasicCourse',
-  async ({token,id}) => {
+  async ({token, id}) => {
     const options = {
-      headers:{
+      headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-      }
+      },
     };
-  
+
     try {
       const response = await axios.get(
         `https://virtual-learning-app-java.herokuapp.com/user/basicCourses?categoryId=${id}`,
@@ -20,7 +19,7 @@ export const cdsbasicCourse = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('bsccrs', error);
     }
   },
 );
@@ -28,21 +27,21 @@ export const cdsbasicCourse = createAsyncThunk(
 const BasicCourseSlice = createSlice({
   name: 'basicCourse',
   initialState: {
-    data:null,
+    data: null,
     status: null,
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-    .addCase(cdsbasicCourse.pending ,(state, action) => {
-      state.status = 'loading';
-    })
-    .addCase(cdsbasicCourse.fulfilled ,(state, action) => {
-      state.status = 'success';
-      state.data = action.payload;
-    })
-    .addCase(cdsbasicCourse.rejected, (state, action) => {
-      state.status = 'failed';
-    })
+      .addCase(cdsbasicCourse.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(cdsbasicCourse.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.data = action.payload;
+      })
+      .addCase(cdsbasicCourse.rejected, (state, action) => {
+        state.status = 'failed';
+      });
   },
 });
 

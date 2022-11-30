@@ -7,7 +7,6 @@ import {
   Text,
   Platform,
   TouchableOpacity,
-  Pressable,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {ButtonComponent, ButtonComponent2} from '../components/Buttons';
@@ -80,14 +79,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 25,
-
-    // marginBottom:60
   },
 
   Icon: {
     height: 37,
     width: 182,
-    // marginTop: 10,
     marginTop: Platform.OS == 'ios' ? 30 : 0,
   },
   image: {
@@ -97,7 +93,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   imageView: {
-    // marginHorizontal:10
     marginTop: Platform.OS == 'ios' ? 0 : 0,
   },
   welcomeview: {

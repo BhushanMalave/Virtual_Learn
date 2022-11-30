@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { MyProfile } from '../screens/MyProfile';
-import { EditProfile } from '../screens/EditProfile';
-import { ChangeYourPassword } from '../screens/ChangeYourPassword';
+import {MyProfile} from '../screens/MyProfile';
+import {EditProfile} from '../screens/EditProfile';
+import {ChangeYourPassword} from '../screens/ChangeYourPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,9 +24,6 @@ export const ProfileStack = () => {
         component={ChangeYourPassword}
         options={{headerShown: false}}
       />
-    
-     
     </Stack.Navigator>
- 
   );
 };

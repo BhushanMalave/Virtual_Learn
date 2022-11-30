@@ -1,23 +1,21 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from '../screens/HomeScreen';
-import {NavigationContainer} from '@react-navigation/native';
 import {CategoriesScreen} from '../screens/CategoriesScreen';
 import {HomeSearch} from '../screens/HomeSearch';
 import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
-import { SubCategoryDisplayScreen } from '../screens/SubCategoryDisplayScreen';
+import {SubCategoryDisplayScreen} from '../screens/SubCategoryDisplayScreen';
 import {CourseScreen} from '../screens/CourseScreen';
-import {CongratulationScreen} from '../screens/CongratulationScreen';
 import {TestStack} from './TestStack';
 import {VideoPlayer} from '../components/VideoPlayer';
 import {CourseComponent} from '../components/CourseComponent';
-import { OnGoingComponent } from '../components/OnGoingComponent';
+import {OnGoingComponent} from '../components/OnGoingComponent';
 import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
-import { CertificateScreen } from '../screens/CertificateScreen';
-import { ModularTest } from '../components/chaptes/ModuleTest';
-import { FinalTestStack } from './FinalTeststack';
+import {CertificateScreen} from '../screens/CertificateScreen';
+import {ModularTest} from '../components/chaptes/ModuleTest';
+import {FinalTestStack} from './FinalTeststack';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,7 +47,7 @@ export const HomeStack = () => {
         component={CategoryDisplayScreen}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="SubCategoryDisplayScreen"
         component={SubCategoryDisplayScreen}
         options={{headerShown: false}}
@@ -69,7 +67,7 @@ export const HomeStack = () => {
         component={CourseComponent}
         options={{headerShown: false}}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="OnGoingComponent"
         component={OnGoingComponent}
         options={{headerShown: false}}
@@ -90,7 +88,7 @@ export const HomeStack = () => {
         component={TestStack}
         options={{headerShown: false}}
       />
-   <Stack.Screen
+      <Stack.Screen
         name="FinalTestStack"
         component={FinalTestStack}
         options={{headerShown: false}}
@@ -101,7 +99,7 @@ export const HomeStack = () => {
         options={{headerShown: false}}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="ModularTest"
         component={ModularTest}
         options={{headerShown: false}}

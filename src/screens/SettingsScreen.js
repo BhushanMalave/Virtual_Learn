@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
     width: 15.97,
   },
   notificationContainer: {
-    // borderWidth:1,
     marginRight: 24,
     marginLeft: 45,
   },

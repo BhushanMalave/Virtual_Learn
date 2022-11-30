@@ -10,7 +10,10 @@ import {
 export const CompletedComponent = props => {
   return (
     <View style={styles.mainContainer}>
-      <ImageBackground source={props.source} style={styles.image} imageStyle={{borderRadius:6}}>
+      <ImageBackground
+        source={props.source}
+        style={styles.image}
+        imageStyle={{borderRadius: 6}}>
         <Text style={styles.completed}>Completed</Text>
         <Text style={styles.name}>{props.name}</Text>
         <Text style={styles.chapter}>{props.percentage} Approval Rate</Text>
@@ -25,10 +28,6 @@ export const CompletedComponent = props => {
 const styles = StyleSheet.create({
   mainContainer: {
     height: 140,
-    // width:327,
-    
-  
-    // marginTop:20,
     marginBottom: 12,
   },
   image: {
@@ -77,16 +76,16 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     marginLeft: 15,
   },
-  completed:{
+  completed: {
     height: 15,
-    
+
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
     marginLeft: 15,
-    fontWeight:"bold",
-    marginTop:5
-  }
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
 });

@@ -1,13 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { setToken } from '../../ReduxPersist/UserDetails';
-import { refreshToken } from '../../../authorization/Auth';
+
 
 export const hsTopHeaders = createAsyncThunk(
   'topHeader/hsTopHeaders',
   async token => {
-    // const token =useSelector(state=> state.userDetails.token);
     const options = {
       headers:{
         Authorization: `Bearer ${token}`,
@@ -20,15 +17,9 @@ export const hsTopHeaders = createAsyncThunk(
         options,       
         
       );
-      //console.log(response.data)
       return response.data;
     } catch (error) {
-      //console.log(error);
-      // if(error.response.status){
-      //     const res = await refreshToken(token);
-      //     console.log("=========",res.jwt);
-      //     setToken(res.jwt);
-      // }
+      console.log('hstophead',error);
     }
   },
 );

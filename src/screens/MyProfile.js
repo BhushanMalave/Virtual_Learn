@@ -10,12 +10,10 @@ import {
   RefreshControl,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Feather';
 import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
-import Icons from 'react-native-vector-icons/Ionicons'
 import Iconss from 'react-native-vector-icons/MaterialIcons'
 
 export const MyProfile = ({navigation}) => {
@@ -23,11 +21,17 @@ export const MyProfile = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
   const [refreshing, setRefreshing] = useState(false);
+
+  
   const refreshToken = async() => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
 
   };  
+
+  const continueCall = () => {
+    dispatch(mpUserDetails(token));    
+  }
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     continueCall();
@@ -35,8 +39,7 @@ export const MyProfile = ({navigation}) => {
   }, [refreshing]);
   useEffect(() => {
     dispatch(mpUserDetails(token));
-     refreshToken();
-   // console.log(userData);
+     //refreshToken();
   },[]);
   return (
     <ScrollView  refreshControl={

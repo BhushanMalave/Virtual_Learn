@@ -1,7 +1,4 @@
 import React from 'react';
-
-import {Image, ImageBackground} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Dimensions} from 'react-native';
 import {CourseStack} from './CourseStack';
@@ -10,9 +7,8 @@ import {ProfileStack} from './ProfileStack';
 import {SettingStack} from './SettingStack';
 import {NotificationsScreen} from '../screens/NotificationsScreen';
 import {CustomDrawerComponent} from '../components/CustomDrawerComponents';
-import {color} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Feather';
-import Icons from 'react-native-vector-icons/Ionicons'
+import Icons from 'react-native-vector-icons/Ionicons';
 
 export const Drawer = createDrawerNavigator();
 
@@ -71,7 +67,9 @@ export const DrawerNav = () => {
         component={ProfileStack}
         options={{
           headerShown: false,
-          drawerIcon: ({color}) => <Icons name="person-outline" size={18} color={color} />,
+          drawerIcon: ({color}) => (
+            <Icons name="person-outline" size={18} color={color} />
+          ),
           drawerActiveBackgroundColor: null,
           drawerActiveTintColor: '#EA2626',
           drawerInactiveTintColor: '#373737',

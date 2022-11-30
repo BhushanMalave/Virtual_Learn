@@ -16,7 +16,7 @@ export const cdsSubCategories = createAsyncThunk(
             );
             return response.data;
         } catch (error) {
-            console.log(error);
+            console.log("subcat",error);
         }
     },
 );

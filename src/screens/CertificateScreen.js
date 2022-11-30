@@ -3,25 +3,24 @@ import React, {useEffect, useState} from 'react';
 import RNFetchBlob from 'rn-fetch-blob';
 import {
   View,
-  Text,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   Image,
   Platform,
   ScrollView,
-  PermissionsAndroid
+  PermissionsAndroid,
 } from 'react-native';
 import {Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {CertificateDownload} from '../authorization/Auth';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 export const CertificateScreen = ({route, navigation}) => {
   const token = useSelector(state => state.userDetails.token);
-let [url,setUrl] = useState('')
+  let [url, setUrl] = useState('');
   const [portrait, setPortrait] = useState(true);
   const isPortrait = () => {
     const dim = Dimensions.get('screen');
@@ -35,7 +34,7 @@ let [url,setUrl] = useState('')
   }, []);
 
   const checkPremission = async () => {
-    if ( Platform.OS === 'ios') {
+    if (Platform.OS === 'ios') {
       downloadImage();
     } else {
       try {
@@ -58,61 +57,64 @@ let [url,setUrl] = useState('')
     }
   };
 
-const downloadImage = () => {
-  const { config, fs } = RNFetchBlob;
-  const isIOS= Platform.OS === 'ios';
-  let date = new Date();
-  let PictureDir = Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
-  var ext = 'pdf'
-  var file_ex = `certificate_${Math.floor(date.getTime() + date.getSeconds() / 2)}.pdf`
-  const fPath = `${PictureDir}/${file_ex}`
+  const downloadImage = () => {
+    const {config, fs} = RNFetchBlob;
+    const isIOS = Platform.OS === 'ios';
+    let date = new Date();
+    let PictureDir =
+      Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
+    var ext = 'pdf';
+    var file_ex = `certificate_${Math.floor(
+      date.getTime() + date.getSeconds() / 2,
+    )}.pdf`;
+    const fPath = `${PictureDir}/${file_ex}`;
 
-const configOptons = Platform.select({
-  ios:{
-    fileCache: true,
-    path: fPath,
-    appendEXt:ext,
-  },
+    const configOptons = Platform.select({
+      ios: {
+        fileCache: true,
+        path: fPath,
+        appendEXt: ext,
+      },
 
-  android:{
-    fileCache:false,
-    appendEXt:ext,
-    addAndroidDownloads:{
-      useDownloadManager : true, 
-      notification : false,
-      path: PictureDir + "/me_"+Math.floor(date.getTime() + date.getSeconds() / 2)+file_ex,
-      description : 'Downloading File.',
-    }   
-  },
-})  
+      android: {
+        fileCache: false,
+        appendEXt: ext,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          notification: false,
+          path:
+            PictureDir +
+            '/me_' +
+            Math.floor(date.getTime() + date.getSeconds() / 2) +
+            file_ex,
+          description: 'Downloading File.',
+        },
+      },
+    });
 
-if(isIOS){
-  RNFetchBlob.config(configOptons)
-  .fetch('GET',url)
-  .then((res) => {
-    console.log('file ',res)
-    RNFetchBlob.ios.previewDocument('file://'+res.path())
-  });
-  return;
-} else {
-  config(configOptons).
-  fetch('GET',url)
-  .progress((received, total)=> {
-    console.log('progress',received/total);
-  })
-  .then((res)=> {
-    console.log('file_download', res)
-    RNFetchBlob.android.actionViewIntent(res.path())
-  })
-  .catch((errorMessage)=> {
-    console.log('error with downloading file  ', errorMessage)
-  })
-}
-
-}
-
-
-  // console.log(route.params);
+    if (isIOS) {
+      RNFetchBlob.config(configOptons)
+        .fetch('GET', url)
+        .then(res => {
+          console.log('file ', res);
+          RNFetchBlob.ios.previewDocument('file://' + res.path());
+        });
+      return;
+    } else {
+      config(configOptons)
+        .fetch('GET', url)
+        .progress((received, total) => {
+          console.log('progress', received / total);
+        })
+        .then(res => {
+          console.log('file_download', res);
+          RNFetchBlob.android.actionViewIntent(res.path());
+        })
+        .catch(errorMessage => {
+          console.log('error with downloading file  ', errorMessage);
+        });
+    }
+  };
   return (
     <View style={{backgroundColor: '#2B2B2B', flex: 1}}>
       <SafeAreaView style={{flex: 1}}>
@@ -186,7 +188,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   certificateView1: {
-    // marginTop:150,
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,

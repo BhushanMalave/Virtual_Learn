@@ -1,20 +1,18 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 export const CourseDataSlice = createSlice({
   name: 'courseData',
   initialState: {
     data: [],
-    overview:[],
-    continueData:[],
-    popUpState:false,
+    overview: [],
+    continueData: [],
+    popUpState: false,
   },
   reducers: {
-
-    addChapterList:(state , action) => {
+    addChapterList: (state, action) => {
       state.data = null;
-      state.data = action.payload
+      state.data = action.payload;
     },
     changeChapterListStatus: (state, action) => {
       state.data.chapterResponses.map(item => {
@@ -25,24 +23,28 @@ export const CourseDataSlice = createSlice({
       });
     },
 
-    addContinueData:(state,action) => {
-      state.continueData= null;
-      state.continueData = action.payload
+    addContinueData: (state, action) => {
+      state.continueData = null;
+      state.continueData = action.payload;
     },
 
-    setPopUpState:(state , action) => {
+    setPopUpState: (state, action) => {
       state.popUpState = !state.popUpState;
-      console.log(state.popUpState)
+      console.log(state.popUpState);
     },
 
-    addOverView:(state,action)=>{
-      state.overview = action.payload
-    }
-
+    addOverView: (state, action) => {
+      state.overview = action.payload;
+    },
   },
 });
 
-export const {addChapterList,changeChapterListStatus,addContinueData,setPopUpState,addOverView} =
-CourseDataSlice.actions;
+export const {
+  addChapterList,
+  changeChapterListStatus,
+  addContinueData,
+  setPopUpState,
+  addOverView,
+} = CourseDataSlice.actions;
 
-export default  CourseDataSlice.reducer;
+export default CourseDataSlice.reducer;

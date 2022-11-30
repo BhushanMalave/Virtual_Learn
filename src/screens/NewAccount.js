@@ -2,12 +2,9 @@ import React, {useState} from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TextInput,
-  useColorScheme,
   View,
   Image,
   Platform,
@@ -56,6 +53,7 @@ export const NewAccount = ({navigation}) => {
           placeholderTextColor={'grey'}
           style={styles.textInput}
           onChangeText={handleText}
+          keyboardType='number-pad'
         />
       </View>
       <View style={styles.button}>

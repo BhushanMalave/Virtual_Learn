@@ -1,19 +1,13 @@
-import {TabRouter} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Image,
   Text,
-  FlatList,
   ScrollView,
-  ImageBackground,
-  TouchableHighlight,
   TouchableOpacity,
   Pressable,
   Platform,
-  Modal,
 } from 'react-native';
 
 import {TextInput} from 'react-native-gesture-handler';
@@ -52,7 +46,7 @@ export const HomeSearch = ({navigation}) => {
 
   const handleText = async string => {
     setText(string);
-    if (text==='') {
+    if (text === '') {
       dispatch(setComponentRender(1));
       dispatch(setSearchData(null));
     } else {

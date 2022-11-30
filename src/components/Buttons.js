@@ -1,30 +1,19 @@
 import React from 'react';
 
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  TouchableOpacity
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Platform} from 'react-native';
 
-
-export const ButtonComponent = ({text,onPress}) => {
+export const ButtonComponent = ({text, onPress}) => {
   return (
-    <TouchableOpacity onPress ={onPress} style={styles.body}>
+    <TouchableOpacity onPress={onPress} style={styles.body}>
       <View>
         <Text style={styles.text}>{text}</Text>
       </View>
     </TouchableOpacity>
   );
 };
-export const ButtonComponent2 = ({text,onPress}) => {
+export const ButtonComponent2 = ({text, onPress}) => {
   return (
-    <TouchableOpacity onPress ={onPress}style={styles.body1}>
+    <TouchableOpacity onPress={onPress} style={styles.body1}>
       <View>
         <Text style={styles.text1}>{text}</Text>
       </View>
@@ -32,9 +21,9 @@ export const ButtonComponent2 = ({text,onPress}) => {
   );
 };
 
-export const ButtonComponent3 = ({text,onPress}) => {
+export const ButtonComponent3 = ({text, onPress}) => {
   return (
-    <TouchableOpacity onPress ={onPress}style={styles.body2}>
+    <TouchableOpacity onPress={onPress} style={styles.body2}>
       <View>
         <Text style={styles.text2}>{text}</Text>
       </View>
@@ -42,15 +31,15 @@ export const ButtonComponent3 = ({text,onPress}) => {
   );
 };
 
-export const ButtonComponent4 = ({text,onPress}) =>{
+export const ButtonComponent4 = ({text, onPress}) => {
   return (
-    <TouchableOpacity onPress ={onPress}style={styles.body3}>
+    <TouchableOpacity onPress={onPress} style={styles.body3}>
       <View>
         <Text style={styles.text}>{text}</Text>
       </View>
     </TouchableOpacity>
   );
-}
+};
 const styles = StyleSheet.create({
   body: {
     backgroundColor: '#EE5C4D',
@@ -78,17 +67,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     height: 46,
     borderRadius: 6,
-    borderWidth:1,
-    borderColor:'#373737',
+    borderWidth: 1,
+    borderColor: '#373737',
   },
-  body3:{
+  body3: {
     backgroundColor: '#042C5C',
     height: 46,
     borderRadius: 6,
   },
   text1: {
     textAlign: 'center',
-    height: 20,
     fontSize: 16,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:Platform.OS == 'ios'? 'bold': 'bold',
@@ -105,4 +93,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-

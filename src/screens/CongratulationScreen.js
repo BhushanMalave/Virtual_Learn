@@ -1,19 +1,16 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {ResultHeader} from '../authorization/Auth';
-import {ResultAnswer} from '../authorization/Auth'
-import {useSelector,useDispatch} from 'react-redux';
-import {setResultHeader} from '../redux/ReduxPersist/TestSlice'
-import {setResultAnswers} from '../redux/ReduxPersist/TestSlice'
+import {ResultAnswer} from '../authorization/Auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {setResultHeader} from '../redux/ReduxPersist/TestSlice';
+import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
 
 export const CongratulationScreen = ({navigation, route}) => {
-
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.testdata.question);
   const testpercentage = useSelector(state => state.testdata.testPercentage);
- 
-  
 
   testName = 'Module Test';
   return (
@@ -32,24 +29,18 @@ export const CongratulationScreen = ({navigation, route}) => {
         style={styles.image}
       />
       <Text style={styles.congratulation}>Congratulations!</Text>
-      <Text style={styles.coursename}>
-        {testpercentage?.congratulations}
-      </Text>
+      <Text style={styles.coursename}>{testpercentage?.congratulations}</Text>
       <TouchableOpacity
-        onPress={
-      
-        async () => {
-           
-            const res = await ResultHeader(token,data1?.testId);
-           
-            const res2 = await ResultAnswer(token,data1?.testId);
-            console.log(res)
-            dispatch(setResultHeader(res))
-            dispatch(setResultAnswers(res2))
-            
-            navigation.navigate('MockTestResultScreen');
-          }
-        }>
+        onPress={async () => {
+          const res = await ResultHeader(token, data1?.testId);
+
+          const res2 = await ResultAnswer(token, data1?.testId);
+          console.log(res);
+          dispatch(setResultHeader(res));
+          dispatch(setResultAnswers(res2));
+
+          navigation.navigate('MockTestResultScreen');
+        }}>
         <Text style={styles.result}>Result</Text>
       </TouchableOpacity>
     </View>

@@ -17,7 +17,7 @@ export const csChapterResponse = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log('chpscr', error);
     }
   },
 );
@@ -30,7 +30,7 @@ const ChapterResponseSlice = createSlice({
     continueData: null,
     popUpState: false,
     courseId: null,
-    certificate:null,
+    certificate: null,
   },
   reducers: {
     addChapterList: (state, action) => {
@@ -76,7 +76,7 @@ export const {
   changeChapterListStatus,
   addContinueData,
   setPopUpState,
-  addCertificate
+  addCertificate,
 } = ChapterResponseSlice.actions;
 
 export default ChapterResponseSlice.reducer;

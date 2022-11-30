@@ -1,13 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  TextInput,
-  useColorScheme,
   View,
   Image,
   Platform,
@@ -18,8 +13,7 @@ import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
 import {PauseTime} from '../authorization/Auth';
 import {useDispatch} from 'react-redux';
-import { number } from 'yup';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 
 export const LessonVideoPlayer = ({route, navigation}) => {
   const token = useSelector(state => state.userDetails.token);
@@ -30,8 +24,6 @@ export const LessonVideoPlayer = ({route, navigation}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
   const [fullScreen, setFullScreen] = useState(false);
-  // console.log(route.params.item.pauseTime)
-
 
   const FullScreen = () => {
     setFullScreen(!fullScreen);
@@ -58,36 +50,23 @@ export const LessonVideoPlayer = ({route, navigation}) => {
     const hr = digit(Math.floor((timesec / 3000) % 60));
     return `${hr}:${min}:${sec}`;
   };
-  
 
   const focus = useIsFocused();
 
   const timing = () => {
-    if(route.params.item.pauseTime){
+    if (route.params.item.pauseTime) {
       const b = route.params.item.pauseTime.split(':');
       const h = Number(b[0]);
       const m = Number(b[1]);
-      const sec=Number(b[2]);
-      const hrts = h*3600;
-      const mints= m*60;
-      const totalTime= hrts+mints+sec
-     return totalTime;
-     
-      // setStartTime(totalTime)
-      // setStartTime(totalTime)
+      const sec = Number(b[2]);
+      const hrts = h * 3600;
+      const mints = m * 60;
+      const totalTime = hrts + mints + sec;
+      return totalTime;
     }
-  }
+  };
 
-useEffect(() => {
-  // timing();
-const turn = timing();
-if(turn){
-  startTimerr = turn;
-}
-  startTiming();
-},[])
-
-  const startTiming =()=> {
+  const startTiming = () => {
     videoRef.current.seek(startTimerr * time.endingTime);
   };
 
@@ -95,7 +74,14 @@ if(turn){
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
   };
-  let [startTimerr,setStartTime] = useState(0)
+  let [startTimerr, setStartTime] = useState(0);
+  useEffect(() => {
+    const turn = timing();
+    if (turn) {
+      startTimerr = turn;
+    }
+    startTiming();
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <TouchableOpacity
@@ -110,10 +96,6 @@ if(turn){
           console.log(body);
           navigation.goBack();
           PauseTime(token, body);
-          // console.log(res);
-          // if (res.message == 'Updated SuccessFully') {
-          //   navigation.goBack();
-          // }        
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -121,9 +103,9 @@ if(turn){
         />
       </TouchableOpacity>
       <Video
-         controls={false}
-         ref={videoRef}
-         resizeMode='contain'
+        controls={false}
+        ref={videoRef}
+        resizeMode="contain"
         source={{
           uri: url,
         }}
@@ -140,21 +122,18 @@ if(turn){
           const res = await PauseTime(token, body);
           console.log(res);
           if (res.message == 'Updated SuccessFully') {
-            {fullScreen && FullScreen();}
+            {
+              fullScreen && FullScreen();
+            }
             navigation.goBack();
           }
         }}
-        
         onProgress={data => {
           setTime({...time, currentTime: data.currentTime});
         }}
-        onLoad={
-          
-          data => {
+        onLoad={data => {
           setTime({...time, endingTime: data.duration});
         }}
-
-
         style={styles.backgroundVideo}></Video>
       <View style={styles.control}>
         <View style={styles.view1}>
@@ -163,10 +142,10 @@ if(turn){
             <Text style={styles.text2}>{title}</Text>
           </View>
           <Pressable onPress={() => FullScreen()}>
-          <Image source={require('../assets/images/icn_maximise.png')} />
+            <Image source={require('../assets/images/icn_maximise.png')} />
           </Pressable>
         </View>
-      
+
         <View style={styles.view2}>
           {isPlaying ? (
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
@@ -191,7 +170,9 @@ if(turn){
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={(value) => { Platform.OS === 'ios' && handleslide(value)}}
+            onValueChange={value => {
+              Platform.OS === 'ios' && handleslide(value);
+            }}
           />
         </View>
       </View>
@@ -203,7 +184,7 @@ const styles = StyleSheet.create({
   backgroundVideo: {
     flex: 1,
   },
-  imgbackView:{
+  imgbackView: {
     height: 20,
     width: 40,
     marginTop: 48,

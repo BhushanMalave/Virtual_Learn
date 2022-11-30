@@ -11,14 +11,13 @@ import {
   Platform,
   TextInput,
 } from 'react-native';
-
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
-import { setUserData } from '../redux/ReduxPersist/UserDetails';
-import { useDispatch } from 'react-redux';
+import {setUserData} from '../redux/ReduxPersist/UserDetails';
+import {useDispatch} from 'react-redux';
 
 export const PersonalDetails = ({navigation}) => {
   const [info, setInfo] = useState(false);
@@ -44,7 +43,8 @@ export const PersonalDetails = ({navigation}) => {
       .required(''),
   });
   return (
-    <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
+    <SafeAreaView style={{backgroundColor: '#FFFFFF' , flex:1}}>
+      <KeyboardAwareView animated = {true}>
       <ScrollView
         style={{backgroundColor: Platform.OS == 'ios' ? '#FFFFFF' : '#FFFFFF'}}>
         <View style={styles.container}>
@@ -82,18 +82,18 @@ export const PersonalDetails = ({navigation}) => {
                   password: values.password,
                 };
                 const userData = {
-                  profilePhoto:null,
+                  profilePhoto: null,
                   fullName: values.fullname,
-                  userName:values.username,
-                  email:values.email,
-                  mobileNumber:'9591726087',
-                  occupation:null,
-                  gender:null,
-                  dateOfBirth:null,
-                  twitterLink:null,
-                  faceBookLink:null,
-               }
-               dispatch(setUserData(userData));
+                  userName: values.username,
+                  email: values.email,
+                  mobileNumber: '9591726087',
+                  occupation: null,
+                  gender: null,
+                  dateOfBirth: null,
+                  twitterLink: null,
+                  faceBookLink: null,
+                };
+                dispatch(setUserData(userData));
 
                 try {
                   const response = await axios.post(
@@ -271,8 +271,6 @@ export const PersonalDetails = ({navigation}) => {
                             <TextInput
                               name="password"
                               placeholder="Password"
-                              // keyboardType='text'
-                              // placeholderTextColor={'#7A7A7A'}
                               onChangeText={handleChange('password')}
                               onBlur={handleBlur('password')}
                               value={values.password}
@@ -309,7 +307,6 @@ export const PersonalDetails = ({navigation}) => {
                             <TextInput
                               name="confirm password"
                               placeholder="confirm Password"
-                              // keyboardType='text'
                               placeholderTextColor={'#7A7A7A'}
                               onChangeText={handleChange('confirmpassword')}
                               onBlur={handleBlur('confrmpassword')}
@@ -365,6 +362,7 @@ export const PersonalDetails = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+      </KeyboardAwareView>
     </SafeAreaView>
   );
 };

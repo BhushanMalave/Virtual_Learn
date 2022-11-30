@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,10 +8,8 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {TimerComponent} from '../components/TimerComponent';
-import CountDown from 'react-native-countdown-component';
 import {useDispatch, useSelector} from 'react-redux';
-import { SubmitFinalTest } from '../authorization/Auth';
+import {SubmitFinalTest} from '../authorization/Auth';
 import {
   setStatus1,
   setStatus2,
@@ -31,7 +29,6 @@ const data = {
 
 export const FinalTest = ({navigation}) => {
   const data1 = useSelector(state => state.finaltestdata.questionData);
-
 
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
@@ -60,13 +57,9 @@ export const FinalTest = ({navigation}) => {
   const [back, setBack] = useState(false);
   const [submit, setSubmit] = useState(false);
 
-
-
-
-
   const dur = data1?.testDuration;
-  const time = dur.split(":"); 
-  console.log(time)
+  const time = dur.split(':');
+  console.log(time);
 
   const mins = time[1];
   const secs = time[2];
@@ -79,16 +72,13 @@ export const FinalTest = ({navigation}) => {
   const START_SECOND = '10';
   const START_DERATION = 10;
 
-
   const [currentMinutes, setMinutes] = useState(START_MINUTES);
   const [currentSeconds, setSeconds] = useState(START_SECOND);
   const [isStop, setIsStop] = useState(false);
   const [duration, setDuration] = useState(START_DERATION);
   const [isRunning, setIsRunning] = useState(false);
 
-
-  let [submitstop,setSubmitstop]=useState(true);
-
+  let [submitstop, setSubmitstop] = useState(true);
 
   const startHandler = () => {
     setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
@@ -97,7 +87,7 @@ export const FinalTest = ({navigation}) => {
     setIsRunning(true);
   };
 
-   const stopHandler = () => {
+  const stopHandler = () => {
     // stop timer
     setIsStop(true);
     setIsRunning(false);
@@ -119,23 +109,18 @@ export const FinalTest = ({navigation}) => {
     setIsStop(false);
   };
 
-
-
-  useEffect(()=>{
-    startHandler()
-  },[submitstop])
-
-
+  useEffect(() => {
+    startHandler();
+  }, [submitstop]);
 
   useEffect(() => {
-   
     if (isRunning === true) {
       let timer = duration;
       var minutes, seconds;
       const interval = setInterval(function () {
         if (--timer == -1) {
-          stopHandler()
-          timeOver()
+          stopHandler();
+          timeOver();
         } else {
           minutes = parseInt(timer / 60, 10);
           seconds = parseInt(timer % 60, 10);
@@ -151,24 +136,19 @@ export const FinalTest = ({navigation}) => {
     }
   }, [isRunning]);
 
-
-
   const createTwoButtonAlert = () =>
     Alert.alert('', 'Are you sure you want to quit the exam?', [
       {
         text: 'Cancel',
         onPress: () => resumeHandler(),
-                    
-
       },
       {
         text: 'Quit',
         style: {fontWeight: 'bold'},
         onPress: () => {
-
           console.log('hweyyy', userAnswers);
           dispatch(removeAll());
-          navigation.navigate('CourseScreen')
+          navigation.navigate('CourseScreen');
         },
       },
     ]);
@@ -176,33 +156,38 @@ export const FinalTest = ({navigation}) => {
     Alert.alert(
       'Do you want to end the test?\n',
 
-      'You still have '+currentMinutes+':'+currentSeconds+' second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
+      'You still have ' +
+        currentMinutes +
+        ':' +
+        currentSeconds +
+        ' second remaining \n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
 
       [
         {
           text: 'Cancel',
-          onPress: () => {resumeHandler()
-            setSubmitstop(true)},
+          onPress: () => {
+            resumeHandler();
+            setSubmitstop(true);
+          },
         },
         {
           text: 'Submit',
           style: {fontWeight: 'bold'},
           onPress: async () => {
-            const body={
-                testId:data1?.testId,
-                userAnswers:userAnswers
+            const body = {
+              testId: data1?.testId,
+              userAnswers: userAnswers,
+            };
+            console.log('i am body', body);
+            const res = await SubmitFinalTest(token, body);
+            console.log('+++++', res);
+            dispatch(setTestPercentage(res));
+            if (res) {
+              navigation.navigate('FinalCongratulationScreen');
+              dispatch(removeAll());
             }
-            console.log("i am body",body)
-            const res = await SubmitFinalTest(token,body)
-            console.log("+++++",res)
-            dispatch(setTestPercentage(res))
-            if(res){
-              navigation.navigate('FinalCongratulationScreen')
-              dispatch(removeAll())
-            }
-         
+          },
         },
-      },
       ],
     );
 
@@ -217,7 +202,7 @@ export const FinalTest = ({navigation}) => {
           style: {fontWeight: 'bold'},
           onPress: async () => {
             const body = {
-              testId:data1?.testId,
+              testId: data1?.testId,
               userAnswers: userAnswers,
             };
             const res = await SubmitFinalTest(token, body);
@@ -237,7 +222,7 @@ export const FinalTest = ({navigation}) => {
         <View style={styles.container}>
           <TouchableOpacity
             onPress={() => {
-              stopHandler()
+              stopHandler();
               createTwoButtonAlert();
             }}>
             <Image
@@ -251,8 +236,11 @@ export const FinalTest = ({navigation}) => {
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}
             />
-           
-            <Text style={styles.countdown}> {currentMinutes}:{currentSeconds} secs remaining</Text>
+
+            <Text style={styles.countdown}>
+              {' '}
+              {currentMinutes}:{currentSeconds} secs remaining
+            </Text>
           </View>
 
           <View style={styles.middlecontainer}>
@@ -461,10 +449,9 @@ export const FinalTest = ({navigation}) => {
               <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={() => {
-                  submitstop=false,
-                  stopHandler(),
-                 
-                  handleSubmit({navigation});
+                  (submitstop = false),
+                    stopHandler(),
+                    handleSubmit({navigation});
                   // navigation.navigate('CongratulationScreen')
                 }}>
                 <View style={styles.buttonview}>

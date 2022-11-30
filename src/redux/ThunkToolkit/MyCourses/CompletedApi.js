@@ -1,26 +1,23 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 export const Completed = createAsyncThunk(
   'completedcourse/Completed',
   async token => {
- 
     const options = {
-      headers:{
+      headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     };
-  
+
     try {
       const response = await axios.get(
         'https://virtual-learning-app-java.herokuapp.com/user/completedCourses',
         options,
       );
-     // console.log(response.data)
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      console.log('comp', error.response.data);
     }
   },
 );
@@ -28,25 +25,25 @@ export const Completed = createAsyncThunk(
 const CompletedSlice = createSlice({
   name: 'completedcourse',
   initialState: {
-    data:null,
+    data: null,
   },
   reducer: {
-    setCompletedData: (state,action) => {
+    setCompletedData: (state, action) => {
       state.data = action.payload;
-    }
-},
-  extraReducers: (builder) => {
+    },
+  },
+  extraReducers: builder => {
     builder
-    .addCase(Completed.pending ,(state, action) => {
-      state.status = 'loading';
-    })
-    .addCase(Completed.fulfilled ,(state, action) => {
-      state.status = 'success';
-      state.data = action.payload;
-    })
-    .addCase(Completed.rejected, (state, action) => {
-      state.status = 'failed';
-    })
+      .addCase(Completed.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(Completed.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.data = action.payload;
+      })
+      .addCase(Completed.rejected, (state, action) => {
+        state.status = 'failed';
+      });
   },
 });
 

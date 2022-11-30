@@ -6,13 +6,12 @@ import {ButtonComponent} from '../Buttons';
 import {ButtonComponent4} from '../Buttons';
 import {useSelector, useDispatch} from 'react-redux';
 import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import {useIsFocused} from '@react-navigation/native';
 
 export const ContinuePopUp = ({navigation}) => {
   const continueData = useSelector(state => state.chapterResponse.continueData);
   const filterState = useSelector(state => state.chapterResponse.popUpState);
   const [updatedTime, setUpdatedTime] = useState(0);
-  const video = (item) => {
+  const video = item => {
     navigation.navigate('LessonVideoPlayer', {item});
   };
   const dispatch = useDispatch();
@@ -47,7 +46,6 @@ export const ContinuePopUp = ({navigation}) => {
     }
   }, [continueData?.pauseTime]);
 
-  
   return (
     <Modal transparent={true} visible={filterState}>
       <View style={styles.container}>

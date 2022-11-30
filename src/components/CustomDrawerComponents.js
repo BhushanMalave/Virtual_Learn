@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   ImageBackground,
@@ -14,15 +14,13 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import { useSelector ,useDispatch} from 'react-redux';
-import { setToken } from '../redux/ReduxPersist/UserDetails';
-import { drawerData } from '../authorization/Auth';
+import {useSelector, useDispatch} from 'react-redux';
+import {setToken} from '../redux/ReduxPersist/UserDetails';
+import {drawerData} from '../authorization/Auth';
 
 export const CustomDrawerComponent = props => {
-
-  const userData = useSelector(state => state.userData.data);
   const token = useSelector(state => state.userDetails.token);
-  const [data,setData] =useState(null);
+  const [data, setData] = useState(null);
   const dispatch = useDispatch();
   const log = () => {
     Alert.alert('', 'Are you sure want to Logout?', [
@@ -30,24 +28,26 @@ export const CustomDrawerComponent = props => {
         text: 'Cancel',
         onPress: () => {},
       },
-      {text: 'Logout', onPress: () => {
-               // dispatch(setNewUser(true));
-                dispatch(setToken(null));
-      }},
+      {
+        text: 'Logout',
+        onPress: () => {
+          dispatch(setToken(null));
+        },
+      },
     ]);
   };
 
-  const Call = async(token)=> {
-      const res = await drawerData(token);
-      setData(res);
-  }  
+  const Call = async token => {
+    const res = await drawerData(token);
+    setData(res);
+  };
 
   useEffect(() => {
     Call(token);
-  }, [ ]);
+  },[]);
 
   return (
-    <View style={{flex: 1,marginTop:Platform.OS === 'ios'? -52:-4,}}>
+    <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? -52 : -4}}>
       <DrawerContentScrollView {...props}>
         <ImageBackground
           source={{uri: data?.profilePhoto}}
@@ -55,7 +55,7 @@ export const CustomDrawerComponent = props => {
           <View style={styles.backgroundImgBlur}>
             <View style={styles.topinfo}>
               <Image
-              source={{uri: data?.profilePhoto}}
+                source={{uri: data?.profilePhoto}}
                 style={styles.imgprofile}
               />
               <View style={styles.topinfotext}>
@@ -66,18 +66,42 @@ export const CustomDrawerComponent = props => {
           </View>
         </ImageBackground>
         <DrawerItemList {...props} />
-        <View style={styles.notify}>
-          <Text style={styles.notifyText}>{data?.notificationCount}</Text>
-        </View>
-        <Pressable onPress={log}>
-          <View style={styles.ViewText}>
-            <Image
-              source={require('../assets/images/icn_logout_menu.png')}
-              style={{height: 16, width: 15, marginBottom: 0,tintColor:'black'}}
-            />
-            <Text style={styles.textlog}>Logout</Text>
-          </View>
-        </Pressable>
+        {data?.notificationCount > 0 ? (
+          <>
+            <View style={styles.notify}>
+              <Text style={styles.notifyText}>{data?.notificationCount}</Text>
+            </View>
+            <Pressable style={{marginTop: 95}} onPress={log}>
+              <View style={styles.ViewText}>
+                <Image
+                  source={require('../assets/images/icn_logout_menu.png')}
+                  style={{
+                    height: 16,
+                    width: 15,
+                    marginBottom: 0,
+                    tintColor: 'black',
+                  }}
+                />
+                <Text style={styles.textlog}>Logout</Text>
+              </View>
+            </Pressable>
+          </>
+        ) : (
+          <Pressable style={{marginTop: 20}} onPress={log}>
+            <View style={styles.ViewText}>
+              <Image
+                source={require('../assets/images/icn_logout_menu.png')}
+                style={{
+                  height: 16,
+                  width: 15,
+                  marginBottom: 0,
+                  tintColor: 'black',
+                }}
+              />
+              <Text style={styles.textlog}>Logout</Text>
+            </View>
+          </Pressable>
+        )}
       </DrawerContentScrollView>
     </View>
   );
@@ -86,7 +110,7 @@ export const CustomDrawerComponent = props => {
 const styles = StyleSheet.create({
   backgroundimg: {
     height: 188,
-    marginBottom:30,
+    marginBottom: 30,
   },
   backgroundImgBlur: {
     backgroundColor: '#042C5C',
@@ -118,10 +142,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   ViewText: {
-    // marginBottom: 330,
     marginLeft: 20,
     flexDirection: 'row',
-    marginTop: 93,
   },
   textname: {
     color: '#FFFFFF',
@@ -133,39 +155,39 @@ const styles = StyleSheet.create({
   },
   textdesc: {
     color: '#FFFFFF',
-    fontFamily:Platform.OS === 'ios'? 'Proxima Nova': 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight: 'bold',
     fontSize: 12,
     marginTop: 10,
   },
   textlog: {
     color: '#373737',
-    fontFamily:Platform.OS === 'ios'? 'Proxima Nova': 'ProximaNova',
-    fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontWeight: Platform.OS === 'ios' ? 'bold' : 'bold',
     fontSize: 16,
     marginLeft: 21,
     marginTop: Platform.OS === 'ios' ? 1 : -3,
   },
-  notifyText:{
+  notifyText: {
     color: '#FFFFFF',
-    fontFamily:Platform.OS === 'ios'? 'Proxima Nova': 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight: 'bold',
     fontSize: 12,
-    textAlign:'center',
-     marginTop:Platform.OS === 'ios' ? 4:1,
+    textAlign: 'center',
+    marginTop: Platform.OS === 'ios' ? 4 : 1,
   },
-  notify:{
-    height:19,
-    width:28,
-    borderRadius:15,
-    backgroundColor:'#E83F3F',
-    marginLeft:165,
-    marginTop:Platform.OS === 'ios' ? -95: -90,
+  notify: {
+    height: 19,
+    width: 28,
+    borderRadius: 15,
+    backgroundColor: '#E83F3F',
+    marginLeft: 165,
+    marginTop: Platform.OS === 'ios' ? -95 : -95,
   },
-  imgprofile:{
-    height:58,
-    width:58,
-    marginTop:5,
-    borderRadius:6,
-  }
+  imgprofile: {
+    height: 58,
+    width: 58,
+    marginTop: 5,
+    borderRadius: 6,
+  },
 });

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { SettingsScreen } from '../screens/SettingsScreen';
-import { TermServicesScreen } from '../screens/TermServicesScreen';
-import { PrivacyPolicyScreen } from '../screens/PrivacyPolicyScreen';
+import {SettingsScreen} from '../screens/SettingsScreen';
+import {TermServicesScreen} from '../screens/TermServicesScreen';
+import {PrivacyPolicyScreen} from '../screens/PrivacyPolicyScreen';
 const Stack = createNativeStackNavigator();
 
 export const SettingStack = () => {
@@ -13,19 +13,16 @@ export const SettingStack = () => {
         component={SettingsScreen}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="TermsServices"
         component={TermServicesScreen}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="PrivacyPolicy"
         component={PrivacyPolicyScreen}
         options={{headerShown: false}}
       />
-    
-     
     </Stack.Navigator>
- 
   );
 };

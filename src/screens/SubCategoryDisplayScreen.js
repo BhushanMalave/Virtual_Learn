@@ -6,18 +6,12 @@ import {
   Platform,
   Text,
   ScrollView,
-  Pressable,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import {CategoryDisplayCourseComponent} from '../components/CategoryDisplayCourseComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
-import {CategoriesComponents} from '../components/CategoryDisplayCourseComponent';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector,useDispatch} from 'react-redux';
-import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
-import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
-import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 
 export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
