@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import TopTabNav from '../navigation/TopTabNav';
@@ -32,7 +33,7 @@ const dispatch= useDispatch();
               style={styles.image}
             />
           </TouchableOpacity>
-            <View style={{borderWidth:1}}>
+            <View style={{marginTop:20}}>
 
           <Text style={styles.maintext}>
             {coursedata?.courseName}
@@ -69,19 +70,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 35,
+   
   },
   text: {
     marginLeft: 20,
     flexDirection: 'row',
-    borderWidth:1,
-    marginTop:30
+    position:"absolute",
+    marginTop:Platform.OS ==='ios'?175:175
   },
   designview: {
     height: 20,
     width: 60,
     borderRadius: 3,
     backgroundColor: '#FCBE4B',
-    
+    marginTop:8,
   },
   design: {
     height: 12,
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   image: {
-    marginTop: 70,
+    marginTop: Platform.OS ==='ios'?70:50,
     marginLeft: 20,
   },
 });
