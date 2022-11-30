@@ -23,11 +23,17 @@ export const MyProfile = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
   const [refreshing, setRefreshing] = useState(false);
+
+  
   const refreshToken = async() => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
 
   };  
+
+  const continueCall = () => {
+    dispatch(mpUserDetails(token));    
+  }
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     continueCall();

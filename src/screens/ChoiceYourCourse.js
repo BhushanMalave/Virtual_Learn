@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 import {
   View,
@@ -11,123 +11,73 @@ import {
   TextInput,
   ScrollView,
   FlatList,
-  VirtualizedList,Modal, Pressable,
+  VirtualizedList,
+  Modal,
+  Pressable,
 } from 'react-native';
 import {CategoriesComponent} from '../components/CategoriesComponent';
-
-import img_course_all_course1 from '../assets/images/img_course_all_course1.png';
-import { SearchFoundComponent } from '../components/SearchFoundComponent';
-import { BottomPopup } from '../components/BottomPopup';
-import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
+import {SearchFoundComponent} from '../components/SearchFoundComponent';
+import {BottomPopup} from '../components/BottomPopup';
+import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
+import { hsCategories } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
+import { all } from '../authorization/Auth';
+import { setAllData } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
+import { overViewData } from '../authorization/Auth';
+import { addOverView } from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
+import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import { setComponentRender } from '../redux/ReduxPersist/searchDataSlice';
+import { setSearchData } from '../redux/ReduxPersist/searchDataSlice';
+import { searchData } from '../authorization/Auth';
+import { searchDataKeyword } from '../authorization/Auth';
 import {useSelector, useDispatch} from 'react-redux';
 
-const categories = [
-  {
-    id: 1,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Design',
-  },
-  {
-    id: 2,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Finance',
-  },
-  {
-    id: 3,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Development',
-  },
-  {
-    id: 4,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Health & Fitness',
-  },
-  {
-    id: 5,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Business',
-  },
-  {
-    id: 6,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'IT & Software',
-  },
-  {
-    id: 7,
-    source: require('../assets/images/icn_back_header.png'),
-    category: 'Music',
-  },
-];
-
-const course = [
-  {
-    id: 1,
-    courseName: 'fhAdobe Illustrator CC - Essential Training Course',
-    chapters: 30,
-    category: 'Design',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 2,
-    courseName: 'Leadership: Practical Leadership Skills',
-    chapters: 10,
-    category: 'Business',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 3,
-    courseName: '2021 Complete Python Bootcamp From Zero to Hero',
-    chapters: 5,
-    category: 'Development',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 4,
-    courseName: 'The Ultimate Drawing Course - Beginner to Advanced',
-    chapters: 20,
-    category: 'Design',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 5,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 6,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 7,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-  {
-    id: 8,
-    courseName: '[New] Ultimate AWS Certified Cloud Practitioner - 2021',
-    chapters: 30,
-    category: 'IT & Software',
-    source: require('../assets/images/img_course_all_course1.png')
-  },
-];
 export const ChoiceYourCourse = ({navigation}) => {
   const filterState = useSelector(state => state.filterState.state);
-  const [text, setText] = useState('');
-  const dispatch =useDispatch();
+  const token = useSelector(state => state.userDetails.token);
+  const categoriesData = useSelector(state => state.categories.data);
+  const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
+  const data = useSelector(state => state.searchData.data);
+  const [text, setText] = useState(' ');
+  const componentrender = useSelector(
+    state => state.searchData.componentRender,
+  );
+  const dispatch = useDispatch();
+ 
   const handleText = async string => {
     setText(string);
-    console.log(text);
+    if (text==='' ) {
+      dispatch(setComponentRender(1));
+      dispatch(setSearchData(null));
+    } else {
+      const res = await searchData(token, text);
+      if (res) {
+        dispatch(setComponentRender(2));
+        dispatch(setSearchData(res));
+      } else {
+        dispatch(setComponentRender(3));
+      }
+    }
   };
+  const allCourse = async () => {
+    const data1 = await all(token);
+    if (data1) {
+      dispatch(setAllData(data1));
+    }
+  };
+
+  useEffect(() => {
+    dispatch(setComponentRender(1));
+    dispatch(hsCategories(token));
+    allCourse();
+    //refreshToken(token);
+  }, []);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView style={{flex: 1}} >
+      <ScrollView style={{flex: 1}}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
             source={require('../assets/images/icn_back_header.png')}
@@ -153,15 +103,19 @@ export const ChoiceYourCourse = ({navigation}) => {
               onChangeText={handleText}
             />
           </View>
-          <Pressable onPress={() => {dispatch(setFilterState())}}>
-          <Image
-            source={require('../assets/images/icn_filter_search.png')}
-            style={styles.imgfilter}
-          />
+          <Pressable
+            onPress={() => {
+              dispatch(setFilterState());
+            }}>
+            <Image
+              source={require('../assets/images/icn_filter_search.png')}
+              style={styles.imgfilter}
+            />
           </Pressable>
         </View>
+        {componentrender === 1 && (
+          <>
         <Text style={styles.categoryText}>Categories</Text>
-
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View
             style={{
@@ -173,45 +127,110 @@ export const ChoiceYourCourse = ({navigation}) => {
               marginLeft: 20,
               marginTop: 10,
             }}>
+           {categoriesData?.map(item => (
+                <View key={item?.categoryId}>
+                  <CategoriesComponent
+                    id={item?.categoryId}
+                    img={item?.categoryPhoto}
+                    category={item?.categoryName}
+                    onPress={() => {
+                      dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                      dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+                      dispatch(
+                        cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                      );
+                      dispatch(cdsSubCategories({token, id: item?.categoryId}));
+                      navigation.navigate('CategoryDisplayScreen', {item});
+                    }}
+                  />
+                </View>
+              ))}
+          </View>
+        </ScrollView>
+        <View style={styles.CourseView}>
+          <Text style={styles.courseHeader}>All Courses</Text>
+          <View style={{marginTop: 10}}>
+            {choiceYourCourse?.map(item => (
+              <SearchFoundComponent
+                coursePhoto={item?.coursePhoto}
+                courseName={item?.courseName}
+                chapterCount={item?.chapterCount}
+                categoryName={item?.categoryName}
+                key={item?.courseId}
+                id={item?.courseId}
+                onPress={async () => {
+                  const obj = {
+                    courseId: item.courseId,
+                  };
+                  dispatch(csChapterResponse({token, id: item.courseId}));
+                  const res = await overViewData(token, item.courseId);
+                  dispatch(addOverView(res));
+                  navigation.navigate('CourseScreen');
+                }}
+              />
+            ))}
+          </View>
+        </View>
+        </>
+        )}
+         {componentrender == 2 && (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{marginTop: 30,marginLeft:24}}>
+            {data?.map(item => (
+              <SearchFoundComponent
+                coursePhoto={item?.coursePhoto}
+                courseName={item?.courseName}
+                chapterCount={item?.chapterCount}
+                categoryName={item?.categoryName}
+                key={item?.courseId}
+                id={item?.courseId}
+                onPress={async () => {
+                  const obj = {
+                    courseId: item.courseId,
+                  };
+                  const msg = await searchDataKeyword(token, obj);
 
-            {categories.map(item => (
-              <View key={item.id}>
-              <CategoriesComponent img={item.source} category={item.category} />
-              </View>
+                  dispatch(csChapterResponse({token, id: item.courseId}));
+                  const res = await overViewData(token, item.courseId);
+                  dispatch(addOverView(res));
+                  navigation.navigate('CourseScreen');
+                }}
+              />
             ))}
           </View>
         </ScrollView>
-      
+      )}
 
-
-      <View style={styles.CourseView}>
-        <Text style={styles.courseHeader}>All Courses</Text>
-        {/* <FlatList
-          data={course}
-          scrollEnabled={false}
-          renderItem={({item}) => (
-            <SearchFoundComponent
-              name={item.courseName}
-              chapter={item.chapters}
-              category={item.category}
-              source={item.source}
-
-            />
-          )}/> */}
-        {course.map(item => (
-          <View key={item.id}>
-          <SearchFoundComponent
-          name={item.courseName}
-          chapter={item.chapters}
-          category={item.category}
-          source={item.source}
-          key={item.id}
+      {componentrender == 3 && (
+        <View style={{marginTop: 30}}>
+          <Image
+            source={require('../assets/images/img_searchnoresult.png')}
+            style={styles.imgnosearch}
           />
+          <Text style={styles.text1}>No matching course</Text>
+          <Text style={styles.text2}>
+            Try a different search browse categories
+          </Text>
+          <View style={styles.searchCatView1}>
+            <Text style={styles.texttopsearch}>Search From Categories</Text>
+            <View style={styles.viewcatin}>
+              {categoriesData.map(item => (
+                <CategoriesComponent
+                  key={item?.categoryId}
+                  id={item?.categoryId}
+                  img={item?.categoryPhoto}
+                  category={item?.categoryName}
+                  onPress={() => {
+                    // navigation.navigate('CategoryDisplayScreen');
+                  }}
+                />
+              ))}
+            </View>
           </View>
-        ))}
-      </View>
+        </View>
+      )}
       </ScrollView>
-      <BottomPopup show={filterState}/>
+      <BottomPopup show={filterState} />
     </SafeAreaView>
   );
 };
@@ -237,10 +256,20 @@ const styles = StyleSheet.create({
     fontFamily: 'Biko',
     lineHeight: 35,
   },
+  searchCatView1: {
+    marginTop: 60,
+  },
+  viewcatin: {
+    marginTop: 15,
+    flexDirection: 'row',
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginLeft:24,
+  },
   searchview: {
     marginHorizontal: 24,
     height: 40,
-    marginTop: 30,
+    marginTop: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     // borderWidth: 1,
@@ -265,11 +294,40 @@ const styles = StyleSheet.create({
     // borderWidth:1,
     width: '86%',
   },
+  texttopsearch: {
+    fontSize: 18,
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontWeight: 'bold',
+    color: '#2B2B2B',
+    marginLeft:24,
+  },
+  text1: {
+    fontSize: 18,
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontWeight: 'bold',
+    color: '#2B2B2B',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  text2: {
+    fontSize: 14,
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontWeight: 'bold',
+    color: '#7A7A7A',
+    textAlign: 'center',
+    marginTop: 10,
+  },
 
   imgsearch: {
     height: 16,
     width: 16,
     marginHorizontal: 10,
+  },
+  imgnosearch: {
+    height: 228,
+    width: 200,
+    marginTop: 50,
+    marginLeft: 110,
   },
   imgfilter: {
     marginLeft: 15,

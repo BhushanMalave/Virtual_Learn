@@ -70,8 +70,9 @@ export const VideoPlayer = ({navigation, route}) => {
           uri: url,
         }}
         paused={isPlaying}
-        controls={false}
+       
         fullscreen={fullScreen}
+        controls={false}
         onEnd={() => {
           {fullScreen && FullScreen();}
           navigation.goBack();
