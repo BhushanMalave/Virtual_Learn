@@ -1,15 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ImageBackground,
-  StyleSheet,
-  ScrollView,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 
 export const TextInputComp = props => {
   return (
@@ -62,7 +52,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     lineHeight: 20,
     fontWeight: '600',
-    // borderWidth:1,
     width: '95%',
   },
   bottom: {

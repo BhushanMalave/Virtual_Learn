@@ -26,7 +26,7 @@ import {useSelector} from 'react-redux';
 import {continueApi} from '../authorization/Auth';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import { joinCourse } from '../authorization/Auth';
+import {joinCourse} from '../authorization/Auth';
 import {
   setPopUpState,
   addContinueData,
@@ -35,7 +35,6 @@ import {
 import {CertificateDownload} from '../authorization/Auth';
 
 export const ChaptersScreen = ({navigation}) => {
-
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const coursedata = useSelector(state => state.courseData.overview);
@@ -75,7 +74,6 @@ export const ChaptersScreen = ({navigation}) => {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
 
-  
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     continueCall();
@@ -93,10 +91,10 @@ export const ChaptersScreen = ({navigation}) => {
     }
   }, [data?.courseCompletedStatus]);
 
-  let [url,setUrl] = useState('')
+  let [url, setUrl] = useState('');
 
   const checkPremission = async () => {
-    if ( Platform.OS === 'ios') {
+    if (Platform.OS === 'ios') {
       downloadImage();
     } else {
       try {
@@ -119,58 +117,60 @@ export const ChaptersScreen = ({navigation}) => {
     }
   };
 
-const downloadImage = () => {
-  const { config, fs } = RNFetchBlob;
-  const isIOS= Platform.OS === 'ios';
-  let date = new Date();
-  let PictureDir = Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
-  var ext = 'pdf'
-  var file_ex = `certificate_${Math.floor(date.getTime() + date.getSeconds() / 2)}.pdf`
-  const fPath = `${PictureDir}/${file_ex}`
+  const downloadImage = () => {
+    const {config, fs} = RNFetchBlob;
+    const isIOS = Platform.OS === 'ios';
+    let date = new Date();
+    let PictureDir =
+      Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
+    var ext = 'pdf';
+    var file_ex = `certificate_${Math.floor(
+      date.getTime() + date.getSeconds() / 2,
+    )}.pdf`;
+    const fPath = `${PictureDir}/${file_ex}`;
 
-const configOptons = Platform.select({
-  ios:{
-    fileCache: true,
-    path: fPath,
-    appendEXt:ext,
-  },
+    const configOptons = Platform.select({
+      ios: {
+        fileCache: true,
+        path: fPath,
+        appendEXt: ext,
+      },
 
-  android:{
-    fileCache:false,
-    appendEXt:ext,
-    addAndroidDownloads:{
-      useDownloadManager : true, 
-      notification : false,
-      path: PictureDir + "/me_"+Math.floor(date.getTime() + date.getSeconds() / 2)+file_ex,
-      description : 'Downloading File.',
-    }   
-  },
-})  
+      android: {
+        fileCache: false,
+        appendEXt: ext,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          notification: false,
+          path:
+            PictureDir +
+            '/me_' +
+            Math.floor(date.getTime() + date.getSeconds() / 2) +
+            file_ex,
+          description: 'Downloading File.',
+        },
+      },
+    });
 
-if(isIOS){
-  RNFetchBlob.config(configOptons)
-  .fetch('GET',url)
-  .then((res) => {
-    // console.log('file ',res)
-    RNFetchBlob.ios.previewDocument('file://'+res.path())
-  });
-  return;
-} else {
-  config(configOptons).
-  fetch('GET',url)
-  .progress((received, total)=> {
-    // console.log('progress',received/total);
-  })
-  .then((res)=> {
-    // console.log('file_download', res)
-    RNFetchBlob.android.actionViewIntent(res.path())
-  })
-  .catch((errorMessage)=> {
-    console.log('error with downloading file  ', errorMessage)
-  })
-}
-
-}
+    if (isIOS) {
+      RNFetchBlob.config(configOptons)
+        .fetch('GET', url)
+        .then(res => {
+          RNFetchBlob.ios.previewDocument('file://' + res.path());
+        });
+      return;
+    } else {
+      config(configOptons)
+        .fetch('GET', url)
+        .progress((received, total) => {})
+        .then(res => {
+          RNFetchBlob.android.actionViewIntent(res.path());
+        })
+        .catch(errorMessage => {
+          console.log('error with downloading file  ', errorMessage);
+        });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -281,7 +281,7 @@ if(isIOS){
                 <Text style={styles.courseText}>Course Result</Text>
 
                 <Text style={styles.percentText}>
-                {Number((data?.coursePercentage).toFixed(2))}%
+                  {Number((data?.coursePercentage).toFixed(2))}%
                 </Text>
 
                 <Text style={styles.aprrovalText}>approval rate</Text>
@@ -329,9 +329,9 @@ if(isIOS){
                 <View style={styles.certificateTextView}>
                   <Text style={styles.courseText}>Course Certificate</Text>
 
-                  <TouchableOpacity 
-                  style={{width: 26}}
-                  onPress={async () => {
+                  <TouchableOpacity
+                    style={{width: 26}}
+                    onPress={async () => {
                       const response = await CertificateDownload(
                         token,
                         data?.courseId,
@@ -339,9 +339,7 @@ if(isIOS){
                       console.log(response);
                       url = response.certificate;
                       checkPremission();
-                    }
-                  }
-                  >
+                    }}>
                     <Icon name="download" size={24} color="white" />
                   </TouchableOpacity>
                 </View>
@@ -374,7 +372,7 @@ if(isIOS){
             text={'Join Course'}
             onPress={async () => {
               const objBody = {
-                courseId: coursedata?.courseId
+                courseId: coursedata?.courseId,
               };
               const res = await joinCourse(token, objBody);
               console.log(res);
@@ -397,7 +395,6 @@ const styles = StyleSheet.create({
   mainView: {
     flex: 1,
     marginHorizontal: 24,
-    // borderWidth: 1,
   },
   contentText: {
     color: '#2B2B2B',
@@ -419,7 +416,6 @@ const styles = StyleSheet.create({
   },
   chapterListContainer: {
     marginTop: Platform.OS == 'ios' ? 36 : 36,
-    // borderWidth: 1,
     width: '100%',
   },
   courseText: {
@@ -432,7 +428,6 @@ const styles = StyleSheet.create({
   },
   percentText: {
     height: 90,
-    // borderWidth:1,
     color: '#1EAB0D',
     fontFamily: 'Biko',
     fontSize: 74,
@@ -441,7 +436,6 @@ const styles = StyleSheet.create({
   },
   aprrovalText: {
     height: 19,
-    // borderWidth:1,
     color: '#DDDDDD',
     fontFamily: 'Biko',
     fontSize: 16,
@@ -470,7 +464,6 @@ const styles = StyleSheet.create({
   certificate: {
     height: 184,
     width: 327,
-    // marginTop: 16,
   },
   box: {
     backgroundColor: '#FFFFFF',

@@ -1,16 +1,15 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 export const notificationApiCall = createAsyncThunk(
   'notificationData/notificationApiCall ',
   async token => {
     const options = {
-      headers:{
+      headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     };
-  
+
     try {
       const response = await axios.get(
         'https://virtual-learning-app-java.herokuapp.com/user/notifications',
@@ -18,7 +17,7 @@ export const notificationApiCall = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log("===",error);
+      console.log('notify', error);
     }
   },
 );
@@ -26,21 +25,21 @@ export const notificationApiCall = createAsyncThunk(
 const notificationApiCallSlice = createSlice({
   name: 'notificationData',
   initialState: {
-    data:null,
+    data: null,
     status: null,
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-    .addCase(notificationApiCall .pending ,(state, action) => {
-      state.status = 'loading';
-    })
-    .addCase(notificationApiCall .fulfilled ,(state, action) => {
-      state.status = 'success';
-      state.data = action.payload;
-    })
-    .addCase(notificationApiCall .rejected, (state, action) => {
-      state.status = 'failed';
-    })
+      .addCase(notificationApiCall.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(notificationApiCall.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.data = action.payload;
+      })
+      .addCase(notificationApiCall.rejected, (state, action) => {
+        state.status = 'failed';
+      });
   },
 });
 

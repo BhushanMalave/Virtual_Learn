@@ -1,7 +1,4 @@
 import React from 'react';
-
-import {Image, ImageBackground} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Dimensions} from 'react-native';
 import {CourseStack} from './CourseStack';
@@ -118,8 +115,8 @@ export const DrawerNav = () => {
             fontSize: 16,
             fontFamily: 'Proxima Nova',
             marginLeft: -13,
-            // height: Platform.OS === 'ios' ? 18 : 22,
-            // marginTop: Platform.OS === 'ios' ? 5 : 3,
+            height: Platform.OS === 'ios' ? 18 : 22,
+            marginTop: Platform.OS === 'ios' ? 5 : 3,
           },
         }}
       />

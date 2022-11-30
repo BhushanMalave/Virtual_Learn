@@ -1,20 +1,21 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {ResultHeader} from '../authorization/Auth';
-import {ResultAnswer} from '../authorization/Auth'
-import {useSelector,useDispatch} from 'react-redux';
+import {ResultAnswer} from '../authorization/Auth';
+import {useSelector, useDispatch} from 'react-redux';
 
-import { FinalTestResult } from '../authorization/Auth';
-import { setFilterState } from '../redux/ReduxPersist/FilterSlice';
-import { setFinalResult } from '../redux/ReduxPersist/FinalTestSlice';
+import {FinalTestResult} from '../authorization/Auth';
+import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
+import {setFinalResult} from '../redux/ReduxPersist/FinalTestSlice';
 
 export const FinalCongratulationScreen = ({navigation, route}) => {
   console.log(route.params);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.finaltestdata.questionData);
-  const testpercentage = useSelector(state => state.finaltestdata.testPercentage);
-  
+  const testpercentage = useSelector(
+    state => state.finaltestdata.testPercentage,
+  );
 
   testName = 'Module Test';
   return (
@@ -33,23 +34,17 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
         style={styles.image}
       />
       <Text style={styles.congratulation}>Congratulations!</Text>
-      <Text style={styles.coursename}>
-        {testpercentage?.congratulations}
-      </Text>
+      <Text style={styles.coursename}>{testpercentage?.congratulations}</Text>
       <TouchableOpacity
-        onPress={
-      
-        async () => {
-            const res = await FinalTestResult(token,data1.testId);
-            console.log("()())",res)
+        onPress={async () => {
+          const res = await FinalTestResult(token, data1.testId);
+          console.log('()())', res);
 
-            dispatch(setFinalResult(res))
-            if(res){
-              navigation.navigate('CourseCompletedScreen');
-            }
+          dispatch(setFinalResult(res));
+          if (res) {
+            navigation.navigate('CourseCompletedScreen');
           }
-
-        }>
+        }}>
         <Text style={styles.result}>Result</Text>
       </TouchableOpacity>
     </View>

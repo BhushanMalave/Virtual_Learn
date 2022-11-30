@@ -1,4 +1,3 @@
-import {TabRouter} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
@@ -13,9 +12,7 @@ import {
   Pressable,
   Platform,
   RefreshControl,
-  Touchable
 } from 'react-native';
-import {number} from 'yup';
 import {CourseComponent} from '../components/CourseComponent';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {useSelector, useDispatch} from 'react-redux';
@@ -28,23 +25,14 @@ import {
   setAllData,
   setNewestData,
   setPopularData,
-  addContinueData,
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
-import {continueApi} from '../authorization/Auth';
-import OverView from '../redux/ThunkToolkit/CourseJoinApi/OverView';
 import {overViewData} from '../authorization/Auth';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import {chapterListData} from '../authorization/Auth';
-import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
-
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-
-import {VideoPlayer} from '../components/VideoPlayer';
 import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import {OnGoingComponent} from '../components/OnGoingComponent';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
@@ -55,7 +43,6 @@ export const HomeScreen = ({navigation}) => {
   const [clicked2, setClicked2] = useState(false);
   const [clicked3, setClicked3] = useState(false);
   const dispatch = useDispatch();
-
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
   const topHeaderData = useSelector(state => state.topHeader.value);
@@ -65,7 +52,7 @@ export const HomeScreen = ({navigation}) => {
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
   const [refreshing, setRefreshing] = useState(false);
 
-  const refreshToken = async (token) => {
+  const refreshToken = async token => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
   };
@@ -89,8 +76,6 @@ export const HomeScreen = ({navigation}) => {
     allCourse();
     setRefreshing(false);
   }, [refreshing]);
-   
-
 
   useEffect(() => {
     dispatch(hsTopHeaders(token));
@@ -102,12 +87,14 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
-   //refreshToken(token);
+    // refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView  refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={styles.view}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Image source={require('../assets/images/icn_hamburgermenu.png')} />
@@ -332,7 +319,7 @@ export const HomeScreen = ({navigation}) => {
               dispatch(cdsAllCourseOfCategory({token, id: item?.categoryId}));
               dispatch(cdsSubCategories({token, id: item?.categoryId}));
               navigation.navigate('CategoryDisplayScreen', {item});
-            }} 
+            }}
           />
         ))}
       </ScrollView>
@@ -343,8 +330,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 35 : 10,
-
-    // borderWidth:1
   },
   view: {
     flexDirection: 'row',
@@ -393,21 +378,16 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     textAlign: 'center',
-    // lineHeight: 35,
-    // borderWidth:1,
   },
   categoryview: {
-    // height: 104,
     width: '100%',
-    // borderWidth: 1,
-    // marginLeft:25,
-    // marginTop: 30,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   category: {
     height: 22,
-    // width: 167,
+
     color: '#2B2B2B',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 18,
@@ -427,20 +407,15 @@ const styles = StyleSheet.create({
     marginRight: 25,
   },
   categorycontainer: {
-    // backgroundColor:"pink",
     borderRadius: 6,
-    // justifyContent:'space-between',
-    // marginStart:10,
+
     margin: 5,
     borderWidth: 1,
     height: 30,
-    // width:83,
+
     padding: 5,
     borderColor: '#D3D3D3',
     flexDirection: 'row',
-
-    // borderColor:"#7A7A7A",
-    // opacity:0.2,
   },
   categorytext: {
     height: 15,
@@ -454,9 +429,6 @@ const styles = StyleSheet.create({
   choiceview: {
     height: 223,
     width: '100%',
-    // borderWidth:1,
-    // marginLeft:25
-    // paddingLeft:
   },
   buttontabs: {
     flexDirection: 'row',
@@ -470,15 +442,13 @@ const styles = StyleSheet.create({
     width: 50,
     backgroundColor: '#DFE7F5',
     borderRadius: 6,
-    // marginLeft:25,
+
     margin: 10,
   },
   buttonActive: {
     height: 26,
     width: 50,
-    // borderWidth:1,
-    // borderRadius:20,
-    // backgroundColor:"#DFE7F5",
+
     textAlign: 'center',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
@@ -491,15 +461,15 @@ const styles = StyleSheet.create({
   buttonview: {
     height: 26,
     width: 50,
-    // marginLeft:25,
+
     margin: 10,
   },
   button: {
     height: 26,
     width: 50,
-    // borderWidth:1,
+
     borderRadius: 6,
-    // backgroundColor:"#DFE7F5"
+
     textAlign: 'center',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
@@ -514,7 +484,6 @@ const styles = StyleSheet.create({
     width: 142,
     borderRadius: 5,
     flexDirection: 'row',
-    // backgroundColor: 'pink',
 
     flexDirection: 'column',
     marginTop: 25,
@@ -533,9 +502,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
 
     padding: 10,
-    // elevation: 5,
-    // marginLeft: 10,
-    // borderWidth: 1,
+
     shadowColor: '#000',
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 0.1,
@@ -545,12 +512,10 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   btmcourseText: {
-    // height: 25,
     width: 120,
     fontFamily: 'Proxima Nova',
     fontSize: 10,
     color: '#2B2B2B',
-    // borderWidth: 1,
   },
   ChoiseCourseChapterNum: {
     height: 9,
@@ -569,17 +534,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 25,
     padding: 10,
-    // elevation: 5,
-    // marginLeft: 10,
+
     borderWidth: 1,
     marginTop: 20,
   },
   businessview: {
     height: 223,
     width: '100%',
-    // borderWidth:1,
-    // marginLeft:25,
-    // paddingLeft:
+
     marginTop: 25,
   },
   busnesstext: {

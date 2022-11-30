@@ -2,12 +2,9 @@ import React, {useState} from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TextInput,
-  useColorScheme,
   View,
   Image,
   Platform,
@@ -18,7 +15,7 @@ import axios from 'axios';
 
 export const VerifyAccount = ({navigation}) => {
   const [text, setText] = useState('');
-  const [showError,setShowError] =useState(false);
+  const [showError, setShowError] = useState(false);
   const handleText = string => {
     setText(string);
     setShowError(false);
@@ -38,10 +35,10 @@ export const VerifyAccount = ({navigation}) => {
       );
       console.log('=====', response.data.message);
       if (response.data.message === 'Verified') {
-             setShowError(false);
+        setShowError(false);
         navigation.navigate('Personal Details');
-      } else{
-              setShowError(true);
+      } else {
+        setShowError(true);
       }
     } catch (error) {
       console.log(error);
@@ -50,70 +47,74 @@ export const VerifyAccount = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.body}>
-      <View style={{ marginHorizontal: 24,}}>
-      <TouchableOpacity onPress={() => navigation.navigate('New Account')}>
-        <Image
-          source={require('../assets/images/icn_back_header.png')}
-          style={styles.image}
-        />
-      </TouchableOpacity>
-      <View style={styles.textView}>
-        <Text style={styles.text1}>Verify Account</Text>
-        <Text style={styles.text2}>
-          Please fill in the verification code that has been sent to your mobile
-          number.
-        </Text>
-      </View>
-      <View style={styles.textinputView}>
-        <TextInput
-          name="text"
-          style={styles.textInput}
-          onChangeText={handleText}
-        />
-      </View>
-      <View style={styles.textInputBorder}>
-        <View style={styles.textInputBorderin1}></View>
-        <View style={styles.textInputBorderin2}></View>
-        <View style={styles.textInputBorderin3}></View>
-        <View style={styles.textInputBorderin4}></View>
-      </View>
-
-      <View style={styles.textView2}>
-        <Text style={styles.text3}>Didn’t recieve a code?</Text>
-        <TouchableOpacity
-          onPress={async () => {
-              const obj =
-              {
-                "mobileNumber"  :   "+919591726087"
-            }
-            
-
-            try {
-              const response = await axios.put(
-                'https://virtual-learning-app-java.herokuapp.com/newUser/resend',
-                obj,
-              );
-              console.log('=====', response.data.message);
-              if (response.data.message === "OTP Valid For 2 Minutes") {
-                  
-              }
-            } catch (error) {
-              console.log(error);
-            }
-          }}>
-          <Text style={styles.text4}>Resend</Text>
+      <View style={{marginHorizontal: 24}}>
+        <TouchableOpacity onPress={() => navigation.navigate('New Account')}>
+          <Image
+            source={require('../assets/images/icn_back_header.png')}
+            style={styles.image}
+          />
         </TouchableOpacity>
+        <View style={styles.textView}>
+          <Text style={styles.text1}>Verify Account</Text>
+          <Text style={styles.text2}>
+            Please fill in the verification code that has been sent to your
+            mobile number.
+          </Text>
+        </View>
+        <View style={styles.textinputView}>
+          <TextInput
+            name="text"
+            style={styles.textInput}
+            onChangeText={handleText}
+          />
+        </View>
+        <View style={styles.textInputBorder}>
+          <View style={styles.textInputBorderin1}></View>
+          <View style={styles.textInputBorderin2}></View>
+          <View style={styles.textInputBorderin3}></View>
+          <View style={styles.textInputBorderin4}></View>
+        </View>
+
+        <View style={styles.textView2}>
+          <Text style={styles.text3}>Didn’t recieve a code?</Text>
+          <TouchableOpacity
+            onPress={async () => {
+              const obj = {
+                mobileNumber: '+919591726087',
+              };
+
+              try {
+                const response = await axios.put(
+                  'https://virtual-learning-app-java.herokuapp.com/newUser/resend',
+                  obj,
+                );
+                console.log('=====', response.data.message);
+                if (response.data.message === 'OTP Valid For 2 Minutes') {
+                }
+              } catch (error) {
+                console.log(error);
+              }
+            }}>
+            <Text style={styles.text4}>Resend</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.button}>
+          <ButtonComponent text="Verify" onPress={() => handleProcess()} />
+        </View>
       </View>
-      <View style={styles.button}>
-        <ButtonComponent text="Verify" onPress={() => handleProcess()} />
-      </View>
-      </View>
-      {showError && 
-         <View style={styles.componentBody}>
-         <Text style={{fontSize:16 ,fontFamily:Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova', textAlign:'center' ,color:'#FFFFFF' }}>Invalid verification code, please try again</Text>
-          </View>
-      }
-      
+      {showError && (
+        <View style={styles.componentBody}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+              textAlign: 'center',
+              color: '#FFFFFF',
+            }}>
+            Invalid verification code, please try again
+          </Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -121,7 +122,6 @@ export const VerifyAccount = ({navigation}) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-   
   },
   textView: {
     marginTop: 50,
@@ -140,13 +140,11 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   textInput: {
-    // textAlign:'center',
     height: 35,
     width: '80%',
     color: '#042C5C',
     fontSize: 20,
     letterSpacing: 45,
-    // borderWidth:1,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     marginLeft: 10,
   },
@@ -224,10 +222,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     tintColor: '#373737',
   },
-  componentBody:{
-    height:55,
-    marginTop:Platform.OS ==='ios'? 280:225,
-    backgroundColor:'#E92020',
-    justifyContent:'center',
-  }
+  componentBody: {
+    height: 55,
+    marginTop: Platform.OS === 'ios' ? 280 : 225,
+    backgroundColor: '#E92020',
+    justifyContent: 'center',
+  },
 });

@@ -1,24 +1,12 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Platform,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Platform, TouchableOpacity} from 'react-native';
 
-export const TopSearchComponent = ({string,onPress}) => {
+export const TopSearchComponent = ({string, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
-    <View style={styles.combody}>
-      <Text style={styles.comtext}>{string}</Text>
-    </View>
+      <View style={styles.combody}>
+        <Text style={styles.comtext}>{string}</Text>
+      </View>
     </TouchableOpacity>
   );
 };

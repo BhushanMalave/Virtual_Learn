@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   View,
   Text,
-  SafeAreaView,
   StyleSheet,
   Platform,
   TouchableOpacity,
@@ -11,34 +10,26 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import { setPopUpState } from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import { ContinuePopUp } from './ContinuePopUp';
+import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
-export const LessonList = (item) => {
+export const LessonList = item => {
   const video = item => {
     item.nav.navigate('LessonVideoPlayer', {item});
   };
-const [totalMinutes, setTotalMinutes] = useState(0)
+  const [totalMinutes, setTotalMinutes] = useState(0);
 
-useEffect(()=>{
-  if(item?.duration)
-  {
-    const duration = item?.duration;
-    const b = duration.split(':');
-    const h = Number(b[0]*60);
-    const m = Number(b[1]);
-    const mins =h+m;
-    const sec= b[2]/100;
-    const totalmin = (mins+sec).toFixed(2);
-    setTotalMinutes(totalmin);
-  }
-    
-},[item?.duration])
-
-
-
-
-  // const data = useSelector(state => state.courseData.data);
+  useEffect(() => {
+    if (item?.duration) {
+      const duration = item?.duration;
+      const b = duration.split(':');
+      const h = Number(b[0] * 60);
+      const m = Number(b[1]);
+      const mins = h + m;
+      const sec = b[2] / 100;
+      const totalmin = (mins + sec).toFixed(2);
+      setTotalMinutes(totalmin);
+    }
+  }, [item?.duration]);
   const data = useSelector(state => state.chapterResponse.data);
   const continueData = useSelector(state => state.chapterResponse.continueData);
   const dispatch = useDispatch();
@@ -78,7 +69,6 @@ useEffect(()=>{
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={styles.chapterNumber}>0{item?.number}</Text>
             <View style={{width: '75%'}}>
-              {/* <View > */}
               <Text style={styles.chapterText}>{item?.lessonName}</Text>
               <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
             </View>
@@ -94,7 +84,7 @@ useEffect(()=>{
                         'navigate to model page by sendind vedio link, Pause time and lesson id',
                       ),
                       dispatch(setPopUpState()))
-                    : (video(item));
+                    : video(item);
                 }
               }}>
               <View style={{marginLeft: -5}}>
@@ -158,7 +148,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     lineHeight: 38,
-    // borderWidth:1,
     width: 40,
   },
   chapterText: {
@@ -167,8 +156,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 20,
-    // width:'70%',
-    // borderWidth:1,
   },
   chapterTime: {
     height: 15,

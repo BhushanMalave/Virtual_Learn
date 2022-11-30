@@ -11,20 +11,18 @@ import topCoursesReducer from '../ThunkToolkit/HomeScreenApiCalls/homeScreenTopC
 import CourseDataReducer from '../ThunkToolkit/ChaptersApi/CourseDataRedux';
 import mpUserDetailsReducer from '../ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import notificationApiCallReducer from '../ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
-import overViewReducer from '../ThunkToolkit/CourseJoinApi/OverView';
 import searchDataReducer from '../ReduxPersist/searchDataSlice';
 import myCoursesReducer from '../ThunkToolkit/MyCourses/MyCourseApi';
 import OnGoingReducer from '../ThunkToolkit/MyCourses/OnGoingApi';
 import CompletedReducer from '../ThunkToolkit/MyCourses/CompletedApi';
-
 import BasicCoursesReducer from '../ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
 import AdvanceCourseReducer from '../ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import SubCategoriesReducer from '../ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 import AllCourseOfCategoryReducer from '../ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 import testdataReducer from '../ReduxPersist/TestSlice';
-import  joinCourseReducer  from '../ReduxPersist/JoinCourseRedux';
+import joinCourseReducer from '../ReduxPersist/JoinCourseRedux';
 import ChapterScreenReducer from '../ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import finaltestdataReducer from '../ReduxPersist/FinalTestSlice'
+import finaltestdataReducer from '../ReduxPersist/FinalTestSlice';
 
 const persistConfig = {
   key: 'root',
@@ -42,23 +40,18 @@ const reducer = combineReducers({
   courseData: CourseDataReducer,
   userData: mpUserDetailsReducer,
   notificationData: notificationApiCallReducer,
-
   searchData: searchDataReducer,
-
   courses: myCoursesReducer,
-
   ongoingcourse: OnGoingReducer,
   completedcourse: CompletedReducer,
-
   basicCourse: BasicCoursesReducer,
   advanceCourse: AdvanceCourseReducer,
   subCategories: SubCategoriesReducer,
   allCourseOfCategory: AllCourseOfCategoryReducer,
-  joinCourse:joinCourseReducer,
-  testdata:testdataReducer,
+  joinCourse: joinCourseReducer,
+  testdata: testdataReducer,
   chapterResponse: ChapterScreenReducer,
-  finaltestdata:finaltestdataReducer
-
+  finaltestdata: finaltestdataReducer,
 });
 
 const persistRed = persistReducer(persistConfig, reducer);

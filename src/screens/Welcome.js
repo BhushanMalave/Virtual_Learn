@@ -7,7 +7,6 @@ import {
   Text,
   Platform,
   TouchableOpacity,
-  Pressable,
 } from 'react-native';
 import {ButtonComponent, ButtonComponent2} from '../components/Buttons';
 export const WelcomeScreen = ({navigation}) => {
@@ -33,7 +32,7 @@ export const WelcomeScreen = ({navigation}) => {
           style={styles.image}
           resizeMode="contain"></Image>
       </View>
-      <View style={{   marginTop: Platform.OS == 'ios' ? 0 : 45,}}>
+      <View style={{marginTop: Platform.OS == 'ios' ? 0 : 45}}>
         <Text style={styles.text1}>Welcome,</Text>
         <Text style={styles.text2}>
           Are you ready to study easily in a virtual way?
@@ -80,14 +79,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 25,
-
-    // marginBottom:60
   },
 
   Icon: {
     height: 37,
     width: 182,
-    // marginTop: 10,
     marginTop: Platform.OS == 'ios' ? 20 : 0,
     marginLeft: 10,
   },
@@ -98,7 +94,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   imageView: {
-    // marginHorizontal:10
     marginTop: Platform.OS == 'ios' ? 0 : 0,
   },
   text1: {

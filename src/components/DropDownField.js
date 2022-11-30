@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import { SelectList } from 'react-native-dropdown-select-list';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {SelectList} from 'react-native-dropdown-select-list';
 
-const DropDownField = (props) => {
-
+const DropDownField = props => {
   return (
-    <View style={{margin:5}}>
-      {/* <Text style={styles.text}>Select/Folder</Text> */}
+    <View style={{margin: 5}}>
       <SelectList
         text={props.text}
         name={props.name}
@@ -15,14 +13,12 @@ const DropDownField = (props) => {
         value={props.value}
         data={props.data}
         setSelected={props.setSelected}
-
         placeholder={props.name}
         boxStyles={{
           width: '100%',
           alignItems: 'center',
           alignSelf: 'center',
           borderWidth: 0.5,
-        //   borderColor:'#FFFFFF',
           borderRadius: 5,
           fontSize: 18,
         }}
@@ -44,7 +40,6 @@ const DropDownField = (props) => {
 
 const styles = StyleSheet.create({
   text: {
-    // marginHorizontal: 30,
     color: '#949CA5',
     fontSize: 18,
     marginTop: 10,

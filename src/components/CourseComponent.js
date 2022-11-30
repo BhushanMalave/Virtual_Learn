@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
 export const CourseComponent = (props)=> {
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
   category: {
     height: 22,
     color: '#2B2B2B',
-    fontFamily: 'Proxima Nova',
+    fontFamily:Platform.OS === 'ios' ? 'Proxima Nova': 'ProximaNova',
     fontSize: 18,
     fontWeight: '600',
     letterSpacing: 0,
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     height: 15,
     width: 37,
     color: '#7A7A7A',
-    fontFamily: 'Proxima Nova',
+    fontFamily:Platform.OS === 'ios' ? 'Proxima Nova': 'ProximaNova',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
@@ -106,7 +105,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 25,
     marginTop: 20,
-    // borderWidth:1,
   },
   businessview: {
     height: 223,

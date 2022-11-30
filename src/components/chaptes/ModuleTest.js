@@ -13,14 +13,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {FinalTest, ModuleTest} from '../../authorization/Auth';
 import {addQuestionData} from '../../redux/ReduxPersist/TestSlice';
 import {addFinalQuestionData} from '../../redux/ReduxPersist/FinalTestSlice';
-import {TestStack} from '../../navigation/TestStack';
-import {Test} from '../../screens/Test';
 const completed = false;
 const START_MINUTES = '00';
 const START_SECOND = '15';
 const START_DERATION = 10;
 export const ModularTest = item => {
-  // const data = useSelector(state => state.courseData.data);
   const data = useSelector(state => state.chapterResponse.data);
   const token = useSelector(state => state.userDetails.token);
   const dispatch = useDispatch();
@@ -133,7 +130,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // borderWidth:1,
     borderRadius: 6,
     width: '91%',
     height: 72,
@@ -161,8 +157,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 20,
-    // width:'70%',
-    // borderWidth:1,
   },
   chapterTime: {
     height: 15,
@@ -185,7 +179,6 @@ const styles = StyleSheet.create({
     color: '#1EAB0D',
     fontFamily: 'Biko',
     fontSize: 38,
-    // lineHeight: 47,
   },
   ratePercent: {
     marginTop: Platform.OS === 'ios' ? 5 : 15,
@@ -197,6 +190,5 @@ const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontFamily: 'Biko',
     fontSize: 8,
-    // lineHeight: 10,
   },
 });

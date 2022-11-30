@@ -5,7 +5,6 @@ import {
   Text,
   SafeAreaView,
   Image,
-  ScrollView,
   TouchableOpacity,
   Platform,
 } from 'react-native';
@@ -58,14 +57,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 25,
-
-    // marginBottom:60
   },
 
   Icon: {
     height: 37,
     width: 182,
-    // marginTop: 10,
     marginTop: Platform.OS == 'ios' ? 20 : 0,
     marginLeft: 10,
   },
@@ -75,9 +71,7 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == 'ios' ? 75 : 10,
     alignSelf: 'center',
   },
-  imageView: {
-    // marginHorizontal:10
-  },
+  imageView: {},
   textView: {
     height: 70,
     width: '100%',
@@ -93,7 +87,6 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   descriptionview: {
-    // borderWidth:1,
     width: '87%',
     marginTop: 25,
   },
@@ -108,7 +101,7 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     flexDirection: 'row',
-    marginTop:Platform.OS === 'ios' ? 35: 70,
+    marginTop: Platform.OS === 'ios' ? 35 : 70,
     justifyContent: 'space-between',
     marginLeft: 100,
     alignItems: 'center',
@@ -116,7 +109,6 @@ const styles = StyleSheet.create({
   bottomLineView: {
     height: 6,
     width: 58,
-    // borderWidth:1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 15,

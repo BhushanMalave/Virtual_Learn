@@ -1,24 +1,10 @@
 import React, {useState, useRef} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Platform,
-  TouchableOpacity,
-  Pressable,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, Platform, Pressable} from 'react-native';
 import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
 import Orientation from 'react-native-orientation-locker';
 
 export const VideoPlayer = ({navigation, route}) => {
-  //   console.log('==-=-=-=-', route.params);
   const url = route.params.item.previewVideo;
   const title = route.params.item.courseName;
   const [isPlaying, setIsPlaying] = useState(false);
@@ -51,10 +37,10 @@ export const VideoPlayer = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <Pressable
         onPress={() => {
-          //console.log('====', time.currentTime);
-          {fullScreen && FullScreen();}
+          {
+            fullScreen && FullScreen();
+          }
           navigation.goBack();
-        
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -70,11 +56,12 @@ export const VideoPlayer = ({navigation, route}) => {
           uri: url,
         }}
         paused={isPlaying}
-       
         fullscreen={fullScreen}
         controls={false}
         onEnd={() => {
-          {fullScreen && FullScreen();}
+          {
+            fullScreen && FullScreen();
+          }
           navigation.goBack();
         }}
         onProgress={data => {
@@ -119,8 +106,9 @@ export const VideoPlayer = ({navigation, route}) => {
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
             value={time.currentTime / time.endingTime}
-            onValueChange={(value) => { Platform.OS === 'ios' && handleslide(value)}}
-          
+            onValueChange={value => {
+              Platform.OS === 'ios' && handleslide(value);
+            }}
           />
         </View>
       </View>

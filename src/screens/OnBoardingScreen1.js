@@ -5,21 +5,10 @@ import {
   Text,
   SafeAreaView,
   Image,
-  ScrollView,
-  Pressable,
   TouchableOpacity,
   Platform,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {hsTopHeaders} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopHeaders';
-import {hsCategories} from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenCategories';
-import { hsTopCourses } from '../redux/ThunkToolkit/HomeScreenApiCalls/homeScreenTopCourses';
-import { all } from '../authorization/Auth';
-import { newest } from '../authorization/Auth';
-import { popular } from '../authorization/Auth';
-import { setAllData } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
-
-
 
 export const OnBoardingScreen1 = ({navigation}) => {
   const dispatch = useDispatch();
@@ -55,8 +44,7 @@ export const OnBoardingScreen1 = ({navigation}) => {
           <View>
             <TouchableOpacity
               onPress={() => {
-                   navigation.navigate('WelcomeStack');
-               // navigation.navigate('Drawer'); 
+                navigation.navigate('WelcomeStack');
               }}>
               <Text style={styles.skiptext}>SKIP</Text>
             </TouchableOpacity>
@@ -86,8 +74,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 24,
-    // borderWidth:1,
-    // marginBottom:60
   },
 
   Icon: {
@@ -100,15 +86,13 @@ const styles = StyleSheet.create({
     height: 281.19,
     width: '94%',
     alignSelf: 'center',
-    marginTop:Platform.OS=='ios'?85:10,
+    marginTop: Platform.OS == 'ios' ? 85 : 10,
   },
-  imageView: {
-    // marginHorizontal:10
-  },
+  imageView: {},
   textView: {
     height: Platform.OS === 'ios' ? 70 : 110,
     width: '100%',
-    marginTop:Platform.OS === 'ios' ?  85 : 120,
+    marginTop: Platform.OS === 'ios' ? 85 : 120,
   },
   text: {
     color: '#2B2B2B',
@@ -119,9 +103,8 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   descriptionview: {
-    // borderWidth:1,
     width: '100%',
-    marginTop:Platform.OS == 'ios' ? 25 :-20,
+    marginTop: Platform.OS == 'ios' ? 25 : -20,
   },
   description: {
     height: 85,
@@ -139,7 +122,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     letterSpacing: 0,
     lineHeight: 35,
-    // marginTop:30
   },
   bottomView: {
     flexDirection: 'row',
@@ -149,7 +131,6 @@ const styles = StyleSheet.create({
   bottomLineView: {
     height: 6,
     width: 58,
-    // borderWidth:1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 15,

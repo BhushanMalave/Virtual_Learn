@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
@@ -7,8 +7,7 @@ import {WelcomeStack} from './WelcomeStack';
 import {DrawerNav} from './DrawerNav';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
-import RNBootSplash from "react-native-bootsplash";
-
+import RNBootSplash from 'react-native-bootsplash';
 
 const Stack = createNativeStackNavigator();
 export const Router = () => {
@@ -43,9 +42,8 @@ export const Router = () => {
             component={OnboardingStack}
             options={{headerShown: false}}
           />
-        ) }
-        {
-        token === null ? (
+        )}
+        {token === null ? (
           <Stack.Screen
             name="WelcomeStack"
             component={WelcomeStack}

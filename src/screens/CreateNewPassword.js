@@ -3,15 +3,11 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TextInput,
-  useColorScheme,
   View,
-  Image,
   Platform,
-  TouchableOpacity,
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
@@ -56,27 +52,26 @@ export const CreateNewPassword = ({navigation}) => {
               onSubmit={async values => {
                 console.log(values);
 
-                const obj={
-                  "mobileNumber"  :  "+917795287943",
-                  "oneTimePassword"   : values.newpassword
-              }
-              console.log(obj)
+                const obj = {
+                  mobileNumber: '+917795287943',
+                  oneTimePassword: values.newpassword,
+                };
+                console.log(obj);
 
                 try {
                   const response = await axios.post(
                     'https://virtual-learning-app-java.herokuapp.com/resetPassword',
-                     obj,
+                    obj,
                   );
-                  console.log("=====",response.data.message);
-                  if(response.data.message ===  "Password Changed Successfully")
-                  {
-                      navigation.navigate('Password Changed Successfully');
+                  console.log('=====', response.data.message);
+                  if (
+                    response.data.message === 'Password Changed Successfully'
+                  ) {
+                    navigation.navigate('Password Changed Successfully');
                   }
-                 
                 } catch (error) {
                   console.log(error);
                 }
-             
               }}>
               {({
                 handleChange,
@@ -196,8 +191,6 @@ export const CreateNewPassword = ({navigation}) => {
   );
 };
 
-
-
 const styles = StyleSheet.create({
   body: {
     flex: 1,
@@ -291,7 +284,6 @@ const styles = StyleSheet.create({
   },
   infoText1: {
     height: 15,
-    // width: 135,
     color: '#042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
@@ -299,11 +291,9 @@ const styles = StyleSheet.create({
   },
   infoText2: {
     height: 30,
-    // width: 306,
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 10,
-    // lineHight: 15,
   },
   infobottom: {
     marginTop: 15,

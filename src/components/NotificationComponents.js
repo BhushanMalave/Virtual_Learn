@@ -1,12 +1,7 @@
 import React, {useEffect} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  TextInput,
-  useColorScheme,
   View,
   Image,
   Platform,

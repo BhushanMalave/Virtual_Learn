@@ -7,33 +7,27 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  ImageBackground,
+  FlatList,
   Platform,
 } from 'react-native';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {CompletedComponent} from '../components/CompletedComponent';
 import {OnGoingComponent} from '../components/OnGoingComponent';
-import {SearchComponent} from '../components/SearchFoundComponent';
 import {MyCourseEmptyScreen} from './MyCourseEmptyScreen';
 import {useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {MyCourseData, overViewData} from '../authorization/Auth';
+import {overViewData} from '../authorization/Auth';
 import {myCourses} from '../redux/ThunkToolkit/MyCourses/MyCourseApi';
 import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import {Completed} from '../redux/ThunkToolkit/MyCourses/CompletedApi';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import {chapterListData} from '../authorization/Auth';
-import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
-import { csChapterResponse } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
-
   const [initial, setInitial] = useState(1);
   const token = useSelector(state => state.userDetails.token);
-
   const mycoursestatus = useSelector(state => state.courses.status);
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
   const completeddata = useSelector(state => state.completedcourse.data);
@@ -67,7 +61,7 @@ export const MyCourse = ({navigation}) => {
       </View>
       <Text style={styles.header}>My Course</Text>
 
-      {mycoursestatus? (
+      {mycoursestatus ? (
         <>
           <View style={styles.buttontabs}>
             <TouchableOpacity
@@ -146,7 +140,7 @@ export const MyCourse = ({navigation}) => {
         </>
       ) : (
         <>
-          <MyCourseEmptyScreen navigation={navigation}/>
+          <MyCourseEmptyScreen navigation={navigation} />
         </>
       )}
     </SafeAreaView>
@@ -157,14 +151,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 25 : 15,
-    // borderWidth: 1,
     marginHorizontal: 24,
   },
   view: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 25,
-    // marginLeft: 25,
   },
   search: {
     height: 16.5,
@@ -195,7 +187,6 @@ const styles = StyleSheet.create({
     width: 75,
     backgroundColor: '#042C5C',
     borderRadius: 6,
-    // marginLeft:25,
   },
   buttonActive: {
     height: 15,
@@ -210,22 +201,17 @@ const styles = StyleSheet.create({
   },
   buttonview: {
     height: 26,
-
-    // marginLeft:25,
     margin: 5,
   },
   button: {
     height: 26,
-    // borderWidth:1,
     borderRadius: 6,
-    // backgroundColor:"#DFE7F5"
     textAlign: 'center',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 15,
-
     color: '#7A7A7A',
   },
 });

@@ -8,8 +8,8 @@ export const searchDataSlice = createSlice({
     chaSC: [],
     chaEC: [],
     catData: null,
-    topSearchData:null,
-    componentRender:1,
+    topSearchData: null,
+    componentRender: 1,
   },
   reducers: {
     setSearchData: (state, action) => {
@@ -54,7 +54,7 @@ export const searchDataSlice = createSlice({
         }
       });
     },
-    setComponentRender : (state, action) => {
+    setComponentRender: (state, action) => {
       state.componentRender = action.payload;
     },
   },

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {TimerComponent} from '../components/TimerComponent';
-import CountDown from 'react-native-countdown-component';
 import {useDispatch, useSelector} from 'react-redux';
 import {SubmitTest} from '../authorization/Auth';
 import {
@@ -22,7 +20,6 @@ import {
   removeAll,
   setTestPercentage,
 } from '../redux/ReduxPersist/TestSlice';
-import {timing} from 'react-native-reanimated';
 const data = {
   courseName: 'bcbd',
   chapterNumber: 2,
@@ -32,7 +29,6 @@ const data = {
 
 export const Test = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
-  // console.log(data1)
 
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
@@ -60,11 +56,9 @@ export const Test = ({navigation}) => {
   const PreviousQuestion = currentQuestion - 1;
   const [back, setBack] = useState(false);
 
-
-
   const dur = data1?.testDuration;
-  const time = dur.split(":"); 
- 
+  const time = dur.split(':');
+
   const mins = time[1];
   const secs = time[2];
 
@@ -76,17 +70,13 @@ export const Test = ({navigation}) => {
   const START_SECOND = secs;
   const START_DERATION = 10;
 
-
   const [currentMinutes, setMinutes] = useState(START_MINUTES);
   const [currentSeconds, setSeconds] = useState(START_SECOND);
   const [isStop, setIsStop] = useState(false);
   const [duration, setDuration] = useState(START_DERATION);
   const [isRunning, setIsRunning] = useState(false);
-  
 
-
-  let [submit,setSubmit]=useState(true);
-
+  let [submit, setSubmit] = useState(true);
 
   const startHandler = () => {
     setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
@@ -95,7 +85,7 @@ export const Test = ({navigation}) => {
     setIsRunning(true);
   };
 
-   const stopHandler = () => {
+  const stopHandler = () => {
     // stop timer
     setIsStop(true);
     setIsRunning(false);
@@ -117,23 +107,18 @@ export const Test = ({navigation}) => {
     setIsStop(false);
   };
 
-
-
-  useEffect(()=>{
-    startHandler()
-  },[submit])
-
-
+  useEffect(() => {
+    startHandler();
+  }, [submit]);
 
   useEffect(() => {
-   
     if (isRunning === true) {
       let timer = duration;
       var minutes, seconds;
       const interval = setInterval(function () {
         if (--timer == -1) {
-          stopHandler()
-          timeOver()
+          stopHandler();
+          timeOver();
         } else {
           minutes = parseInt(timer / 60, 10);
           seconds = parseInt(timer % 60, 10);
@@ -149,16 +134,13 @@ export const Test = ({navigation}) => {
     }
   }, [isRunning]);
 
-
-
-
-
-
   const createTwoButtonAlert = () =>
     Alert.alert('', 'Are you sure you want to quit the exam?', [
       {
         text: 'Cancel',
-        onPress: () => {resumeHandler()},
+        onPress: () => {
+          resumeHandler();
+        },
       },
       {
         text: 'Quit',
@@ -166,7 +148,7 @@ export const Test = ({navigation}) => {
         onPress: () => {
           dispatch(removeAll());
           // console.log('hweyyy', userAnswers);
-          navigation.navigate('CourseScreen')
+          navigation.navigate('CourseScreen');
         },
       },
     ]);
@@ -174,13 +156,19 @@ export const Test = ({navigation}) => {
     Alert.alert(
       'Do you want to end the test?\n',
 
-      'You still have '+currentMinutes+':'+currentSeconds+' seconds remaining\n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
+      'You still have ' +
+        currentMinutes +
+        ':' +
+        currentSeconds +
+        ' seconds remaining\n\n If you want to check your answer again, press cancel button. If you want to end the test and submit your answers you can press submit \n button',
 
       [
         {
           text: 'Cancel',
-          onPress: () => {resumeHandler()
-          setSubmit(true)},
+          onPress: () => {
+            resumeHandler();
+            setSubmit(true);
+          },
         },
         {
           text: 'Submit',
@@ -226,14 +214,13 @@ export const Test = ({navigation}) => {
       ],
     );
 
-
   return (
     <View style={styles.maincontainer}>
       <ScrollView>
         <View style={styles.container}>
           <TouchableOpacity
             onPress={() => {
-              stopHandler()
+              stopHandler();
               createTwoButtonAlert();
             }}>
             <Image
@@ -247,8 +234,11 @@ export const Test = ({navigation}) => {
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}
             />
-          
-            <Text style={styles.countdown}> {currentMinutes}:{currentSeconds} secs remaining</Text>
+
+            <Text style={styles.countdown}>
+              {' '}
+              {currentMinutes}:{currentSeconds} secs remaining
+            </Text>
           </View>
 
           <View style={styles.middlecontainer}>
@@ -457,13 +447,10 @@ export const Test = ({navigation}) => {
               <TouchableOpacity
                 style={styles.buttonContainer}
                 onPress={() => {
-                  submit=false,
-                  stopHandler(),
-                  handleSubmit({navigation})
+                  (submit = false), stopHandler(), handleSubmit({navigation});
                   // console.log(submit)
                   // navigation.navigate('CongratulationScreen')
                 }}>
-              
                 <View style={styles.buttonview}>
                   <Text style={styles.button}>Submit</Text>
                 </View>

@@ -1,24 +1,8 @@
 import React from 'react';
 
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import {useSelector} from 'react-redux';
-import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 
 export const QuestionListComponent = props => {
-  // const resultanswers = useSelector(state => state.testdata.resultAnswers);
-  // const correctanswer = useSelector(state => state.testdata.correctAnswers);
-
   return (
     <View style={{marginTop: 15, flex: 1}}>
       <TouchableOpacity onPress={props.onPress}>
