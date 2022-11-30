@@ -68,6 +68,7 @@ export const Verification = ({navigation}) => {
                 name="text"
                 style={styles.textInput}
                 onChangeText={handleText}
+                keyboardType='numeric'
               />   
              
         </View>

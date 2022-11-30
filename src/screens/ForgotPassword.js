@@ -77,7 +77,7 @@ export const ForgotPassword = ({navigation}) => {
                 placeholderTextColor={'#7A7A7A'}
                 style={styles.textInput}
                 onChangeText={handleText}
-               
+               keyboardType='numeric'
               />    
         </View>
         <View style={styles.button}>

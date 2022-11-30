@@ -13,6 +13,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -42,6 +43,7 @@ export const Login = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+        <KeyboardAwareView >
       <View style={styles.body}>
         <ScrollView>
           <View style={styles.textView}>
@@ -191,6 +193,7 @@ export const Login = ({navigation}) => {
             </View>
           </View>
         </ScrollView>
+       
       </View>
       {warning ? (
         <View style={styles.warningView}>
@@ -202,6 +205,7 @@ export const Login = ({navigation}) => {
       ) : (
         <></>
       )}
+       </KeyboardAwareView>
     </SafeAreaView>
   );
 };

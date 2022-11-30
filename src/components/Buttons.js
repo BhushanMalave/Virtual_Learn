@@ -9,7 +9,8 @@ import {
   Text,
   useColorScheme,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 
@@ -88,7 +89,6 @@ const styles = StyleSheet.create({
   },
   text1: {
     textAlign: 'center',
-    height: 20,
     fontSize: 16,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:Platform.OS == 'ios'? 'bold': 'bold',
