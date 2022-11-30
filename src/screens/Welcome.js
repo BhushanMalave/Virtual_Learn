@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import {ButtonComponent, ButtonComponent2} from '../components/Buttons';
 export const WelcomeScreen = ({navigation}) => {
   const nav = () => {
@@ -21,7 +22,9 @@ export const WelcomeScreen = ({navigation}) => {
     navigation.navigate('LoginStack');
   };
   return (
-    <SafeAreaView style={styles.container}>    
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
       <View>
         <Image
           source={require('../assets/images/virtualLearnIcon.png')}
@@ -33,7 +36,7 @@ export const WelcomeScreen = ({navigation}) => {
           style={styles.image}
           resizeMode="contain"></Image>
       </View>
-      <View style={{   marginTop: Platform.OS == 'ios' ? 0 : 45,}}>
+      <View style={styles.welcomeview}>
         <Text style={styles.text1}>Welcome,</Text>
         <Text style={styles.text2}>
           Are you ready to study easily in a virtual way?
@@ -56,11 +59,7 @@ export const WelcomeScreen = ({navigation}) => {
           </TouchableOpacity>
 
           <Text
-            style={{
-              color: 'black',
-              fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-              fontSize: 14,
-            }}>
+            style={styles.lastline}>
             {' '}
             &{' '}
           </Text>
@@ -72,7 +71,8 @@ export const WelcomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -88,8 +88,7 @@ const styles = StyleSheet.create({
     height: 37,
     width: 182,
     // marginTop: 10,
-    marginTop: Platform.OS == 'ios' ? 20 : 0,
-    marginLeft: 10,
+    marginTop: Platform.OS == 'ios' ? 30 : 0,
   },
   image: {
     height: 281.19,
@@ -101,6 +100,10 @@ const styles = StyleSheet.create({
     // marginHorizontal:10
     marginTop: Platform.OS == 'ios' ? 0 : 0,
   },
+  welcomeview: {
+    marginTop: Platform.OS == 'ios' ? 0 : 8,
+    marginBottom:Platform.OS == 'ios' ? 0 : 33,
+  },
   text1: {
     height: 35,
     color: '#2B2B2B',
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 35,
-    marginTop: Platform.OS == 'ios' ? 30 : 10,
+    marginTop: Platform.OS == 'ios' ? 30 : 8,
   },
   text2: {
     height: 20,
@@ -141,6 +144,11 @@ const styles = StyleSheet.create({
   bottomline: {
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  lastline:{
+    color: 'black',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontSize: 14,
   },
   bottomlinetext: {
     height: 78,

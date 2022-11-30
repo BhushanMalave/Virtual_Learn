@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:'bold',
     color: '#FFFFFF',
-    marginTop: 13,
+    marginTop: Platform.OS == 'ios' ? 14 : 10,
   },
   body1: {
     backgroundColor: '#FFFFFF',
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:Platform.OS == 'ios'? 'bold': 'bold',
     color: '#EE5C4D',
+    marginTop: Platform.OS == 'ios' ? 4 :0,
   },
   text2: {
     textAlign: 'center',
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontWeight:'bold',
     color: '#373737',
-    marginTop: 13,
+    marginTop: 10,
   },
 });
 
