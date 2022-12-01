@@ -21,16 +21,9 @@ import {
   removeAll,
   setTestPercentage,
 } from '../redux/ReduxPersist/TestSlice';
-const data = {
-  courseName: 'bcbd',
-  chapterNumber: 2,
-  chapterName: 'bdjhbh',
-  testId: 1,
-};
 
 export const Test = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
-  console.log(data1)
 
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
@@ -58,18 +51,24 @@ export const Test = ({navigation}) => {
   const PreviousQuestion = currentQuestion - 1;
   const [back, setBack] = useState(false);
 
+let [ START_MINUTES , setStartMinutes] = useState(0);
+let [ START_SECOND, setStartSeconds] = useState(0);
+
+
+useEffect(()=>{
+if(data1?.testDuration)
+{
   const dur = data1?.testDuration;
   const time = dur.split(':');
 
   const mins = time[1];
   const secs = time[2];
+setStartMinutes(mins)
+setStartSeconds(secs)
+}
+},[data1?.testDuration])
 
-  // const mins = m / 60;
 
-  // const total_hours = ,ins + mins;
-
-  const START_MINUTES = mins;
-  const START_SECOND = secs;
   const START_DERATION = 10;
 
   const [currentMinutes, setMinutes] = useState(START_MINUTES);
@@ -82,8 +81,6 @@ export const Test = ({navigation}) => {
 
   const startHandler = () => {
     setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
-    // setMinutes(60 * 5);
-    // setSeconds(0);
     setIsRunning(true);
   };
 
@@ -149,7 +146,6 @@ export const Test = ({navigation}) => {
         style: {fontWeight: 'bold'},
         onPress: () => {
           dispatch(removeAll());
-          // console.log('hweyyy', userAnswers);
           navigation.navigate('CourseScreen');
         },
       },
@@ -206,7 +202,6 @@ export const Test = ({navigation}) => {
               userAnswers: userAnswers,
             };
             const res = await SubmitTest(token, body);
-            // console.log(res);
             if (res) {
               navigation.navigate('CongratulationScreen', data);
               dispatch(removeAll());

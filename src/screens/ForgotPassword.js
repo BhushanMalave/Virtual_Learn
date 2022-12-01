@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#042C5C',
     fontSize: 16,
     letterSpacing: 0.4,
-    fontFamily: Platform.OS == 'ios' ? 'Avenir' : 'Avenir',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
   },
   textno: {
     height: 20,
