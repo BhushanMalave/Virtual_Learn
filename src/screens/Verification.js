@@ -60,9 +60,14 @@ export const Verification = ({navigation}) => {
               />   
              
         </View>
-
+        <View style={styles.textInputBorder}>
+        <View style={styles.textInputBorderin1}></View>
+        <View style={styles.textInputBorderin2}></View>
+        <View style={styles.textInputBorderin3}></View>
+        <View style={styles.textInputBorderin4}></View>
+      </View>
         <View style={styles.textView2}>
-          <Text style={styles.text3}>Didn’t recieve a code?</Text>
+          <Text style={styles.text3}>Didn't recieve a code?</Text>
           <TouchableOpacity
             onPress={async () => {
               const obj = {
@@ -71,7 +76,7 @@ export const Verification = ({navigation}) => {
 
               try {
                 const response = await axios.put(
-                  'https://virtual-learning-app-java.herokuapp.com/user/resend',
+                  'https://virtual-learning-app-java.herokuapp.com/newUser/resend',
                   obj,
                 );
                 console.log('=====', response.data.message);
@@ -113,11 +118,12 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   textinputView: {
-    height: 35,
+    // height: 35,
     marginTop: 60,
     fontSize: 16,
     alignItems: 'center',
     marginLeft: 50,
+
   },
   textView2: {
     marginTop: 40,
@@ -126,45 +132,51 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   textInput: {
-    height: 35,
-    width: '80%',
+  
+    width: Platform.OS == 'ios' ? "80%" : "70%",
     color: '#042C5C',
     fontSize: 20,
-    letterSpacing: 45,
+    letterSpacing: Platform.OS == 'ios' ? 45 : 35,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    marginLeft: 10,
+    marginLeft: Platform.OS == 'ios' ? 0 : -50,
+  
+    height:40,
+
+   
   },
   textInputBorder: {
     flexDirection: 'row',
     marginLeft: 70,
+    marginTop:Platform.OS == 'ios' ? -5: -5
+    
   },
   textInputBorderin1: {
     height: 0.5,
-    width: 35,
+    width: 40,
     opacity: 0.6,
     backgroundColor: '#7A7A7A',
-    marginRight: 17,
+    marginRight: Platform.OS == 'ios' ? 17: 16,
   },
   textInputBorderin2: {
     height: 0.5,
     width: 35,
     opacity: 0.6,
     backgroundColor: '#7A7A7A',
-    marginRight: 25,
+    marginRight: Platform.OS == 'ios' ? 17: 13,
   },
   textInputBorderin3: {
     height: 0.5,
     width: 35,
     opacity: 0.6,
     backgroundColor: '#7A7A7A',
-    marginRight: 10,
+    marginRight: Platform.OS == 'ios' ? 17: 13,
   },
   textInputBorderin4: {
     height: 0.5,
     width: 35,
     opacity: 0.6,
     backgroundColor: '#7A7A7A',
-    marginLeft: 10,
+    marginLeft: Platform.OS == 'ios' ? 10 : 0,
   },
   textno: {
     height: 20,
@@ -172,6 +184,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 10,
+    
   },
   text1: {
     height: 35,
