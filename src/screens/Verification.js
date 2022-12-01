@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   textInput: {
-  
     width: Platform.OS == 'ios' ? "80%" : "70%",
     color: '#042C5C',
     fontSize: 20,
