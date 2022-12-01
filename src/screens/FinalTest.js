@@ -472,15 +472,14 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 25,
-
     height: 700,
   },
   testname: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 25,
     marginTop: 50,

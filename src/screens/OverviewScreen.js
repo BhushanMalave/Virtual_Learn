@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
   header: {
     height: 22,
     color: '#2B2B2B',
-
     fontSize: 18,
     fontWeight: '400',
     letterSpacing: 0,

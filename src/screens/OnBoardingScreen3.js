@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 
 export const OnBoardingScreen3 = ({navigation}) => {
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     fontSize: 26,
     letterSpacing: 0,
     lineHeight: 35,
-    fontFamily: 'Biko',
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     paddingBottom: 4,
   },
   descriptionview: {

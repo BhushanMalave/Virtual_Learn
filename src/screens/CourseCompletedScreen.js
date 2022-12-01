@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
   congratulationText: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 32,
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios'? 'bold': 'normal',
     lineHeight: 35,
     textAlign: 'center',
     marginTop: 54,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   percentText: {
     height: 90,
     color: '#1EAB0D',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     fontSize: 74,
     lineHeight: 90,
     marginTop: 30,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   approvalText: {
     height: 19,
     color: '#7A7A7A',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     fontSize: 16,
     marginTop: -10,
     marginBottom: 74,

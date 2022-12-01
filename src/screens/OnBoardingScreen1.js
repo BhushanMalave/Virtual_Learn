@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
     fontSize: 26,
     letterSpacing: 0,
     lineHeight: 35,
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     paddingBottom: 4,
-    fontWeight:"bold"
   },
   descriptionview: {
     width: '100%',

@@ -10,6 +10,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
 
+
 let persistor = persistStore(store);
  LogBox.ignoreAllLogs();
  LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified.'])
@@ -17,7 +18,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-      <Router />
+     <Router/>
       </PersistGate>
     </Provider>
   );

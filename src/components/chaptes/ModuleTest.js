@@ -45,7 +45,7 @@ export const ModularTest = item => {
             alignItems: 'center',
             marginBottom: 30,
           }}>
-          {data?.enrolled ? (
+          {data?.enrolled ? (<>
             <View style={{marginRight: 10}}>
               {item?.completed ? (
                 <Image
@@ -57,11 +57,7 @@ export const ModularTest = item => {
                 />
               )}
             </View>
-          ) : (
-            <></>
-          )}
-
-          <View style={styles.container}>
+            <View style={styles.container}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={{width: 40, marginLeft: 5}}>
                 <Image
@@ -70,8 +66,7 @@ export const ModularTest = item => {
                 />
               </View>
 
-              <View style={{width: '70%'}}>
-                {/* <View > */}
+              <View style={styles.testNameContainer}>
                 <TouchableOpacity
                   disabled={!!item?.disable}
                   onPress={async () => {
@@ -103,7 +98,7 @@ export const ModularTest = item => {
                   <View style={styles.rateView}>
                     <View style={styles.rateNumView}>
                       <Text style={styles.rateNum}>
-                        {Number((item?.rate).toFixed(2))}
+                        {Number((item?.rate).toFixed(1))}
                       </Text>
                       <Text style={styles.ratePercent}>%</Text>
                     </View>
@@ -116,6 +111,36 @@ export const ModularTest = item => {
               </>
             )}
           </View>
+            </>
+          ) : (
+            <>
+             <View style={styles.container2}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{width: 40, marginLeft: 5}}>
+                <Image
+                  source={require('../../assets/images/icn_moduletest.png')}
+                  style={styles.image}
+                />
+              </View>
+
+              <View style={styles.testNameContainer2}>
+                {/* <View > */}
+                <TouchableOpacity>
+                  <Text style={styles.chapterText}>{item?.test}</Text>
+                  <Text style={styles.chapterTime}>
+                    {totalMinutes} mins | {item?.questions} Questions
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+            
+            
+            </>
+          )}
+
+
+         
         </View>
       </View>
     </>
@@ -129,27 +154,19 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     borderRadius: 6,
     width: '91%',
     height: 72,
-  },
-  chapterList: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginBottom: Platform.OS == 'ios' ? 18 : 14,
-  },
-  chapterName: {
-    color: '#373737',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontSize: 12,
-    fontWeight: '500',
-    lineHeight: 15,
+    justifyContent:'space-between'
   },
   image: {
     marginRight: 6,
     height: 34,
     width: 24,
+  },
+  testNameContainer:{
+    width: '70%',
+    marginRight:-30
   },
   chapterText: {
     color: '#042C5C',
@@ -169,26 +186,44 @@ const styles = StyleSheet.create({
   rateView: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: -5,
   },
   rateNumView: {
     flexDirection: 'row',
     alignItems: 'flex-start',
+    marginBottom: Platform.OS === 'ios' ? 0 : -5
+    
   },
   rateNum: {
     color: '#1EAB0D',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     fontSize: 38,
   },
   ratePercent: {
     marginTop: Platform.OS === 'ios' ? 5 : 15,
     fontSize: 8,
     color: '#1EAB0D',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
+
   },
   rateText: {
     color: '#7A7A7A',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
+
     fontSize: 8,
+    marginTop: Platform.OS === 'ios' ? -3 : 5
+   
+  },
+  container2: {
+    backgroundColor: Platform.OS === 'ios' ? '#F9F9F9' : '#F9F9F9',
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    paddingTop: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width:'100%',
+    borderRadius: 6,
+  },
+  testNameContainer2:{
+    width: '80%'
   },
 });

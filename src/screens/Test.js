@@ -477,9 +477,9 @@ const styles = StyleSheet.create({
   testname: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 25,
     marginTop: Platform.OS==='ios'?50:35,
@@ -573,7 +573,6 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: 'white',
-
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
@@ -587,7 +586,6 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: 'pink',
-
     marginRight: 10,
   },
   optionUncheck: {
