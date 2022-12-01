@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Platform,
+  ScrollView
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 

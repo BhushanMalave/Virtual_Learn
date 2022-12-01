@@ -9,12 +9,13 @@ import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import {CertificateScreen} from '../screens/CertificateScreen';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
+import { CompletedComponent } from '../components/CompletedComponent';
 
 const Stack = createNativeStackNavigator();
 
 export const CourseStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='MyCourse'>
       <Stack.Screen
         name="MyCourse"
         component={MyCourse}
@@ -33,6 +34,11 @@ export const CourseStack = () => {
       <Stack.Screen
         name="OnGoingComponent"
         component={OnGoingComponent}
+        options={{headerShown: false}}
+      />
+          <Stack.Screen
+        name="CompletedComponent"
+        component={CompletedComponent}
         options={{headerShown: false}}
       />
       <Stack.Screen

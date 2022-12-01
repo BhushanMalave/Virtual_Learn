@@ -34,7 +34,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
         style={styles.image}
       />
       <Text style={styles.congratulation}>Congratulations!</Text>
-      <Text style={styles.coursename}>{testpercentage?.congratulations}</Text>
+      <Text style={styles.coursename}>You have completed Chapter <Text style={{color:"#5A5A5A",fontWeight:"bold"}}>{testpercentage?.chapterNumber}<Text> - </Text>{testpercentage?.chapterName}</Text> from Course <Text style={{color:"#5A5A5A",fontWeight:"bold"}}>{testpercentage?.courseName}</Text></Text>
       <TouchableOpacity
         onPress={async () => {
           const res = await FinalTestResult(token, data1.testId);
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
   },
   backImg: {
-    marginTop: 70,
+    marginTop: Platform.OS === 'ios'?70:30,
     height: 14.5,
     width: 14.5,
   },

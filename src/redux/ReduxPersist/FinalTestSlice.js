@@ -44,7 +44,7 @@ export const FinalTestSlice = createSlice({
     correctAnswers: [],
     finalresult: null,
     // resultAnswers:[],
-    // testPercentage:null
+    testPercentage:null
   },
   reducers: {
     addFinalQuestionData: (state, action) => {

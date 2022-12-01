@@ -73,7 +73,7 @@ export const ModularTest = item => {
               <View style={{width: '70%'}}>
                 {/* <View > */}
                 <TouchableOpacity
-                  disabled={!item?.disable}
+                  disabled={!!item?.disable}
                   onPress={async () => {
                     {
                       if (item?.test === 'Final Test') {

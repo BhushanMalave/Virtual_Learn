@@ -68,8 +68,8 @@ export const FinalTest = ({navigation}) => {
 
   // const total_hours = ,ins + mins;
 
-  const START_MINUTES = '10';
-  const START_SECOND = '10';
+  const START_MINUTES = mins;
+  const START_SECOND = secs;
   const START_DERATION = 10;
 
   const [currentMinutes, setMinutes] = useState(START_MINUTES);
@@ -492,7 +492,7 @@ const styles = StyleSheet.create({
   bottomview: {
     height: 95,
     flexDirection: 'row',
-
+     marginTop:Platform.OS === 'ios'?0:-80,
     backgroundColor: '#2BB5F4',
   },
   innerbtm: {
@@ -645,6 +645,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   back: {
-    marginTop: 40,
+    marginTop:Platform.OS === 'ios'?40:0,
   },
 });

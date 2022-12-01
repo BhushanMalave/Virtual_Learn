@@ -24,7 +24,10 @@ export const CourseScreen = ({navigation}) => {
           style={styles.header}>
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());
-            navigation.navigate('HomeScreen')}}>
+            // navigation.navigate('HomeScreen')
+            navigation.goBack()
+          }}
+            >
             <Image
               source={require('../assets/images/icn_close_white.png')}
               style={styles.image}
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
   },
   designview: {
     height: 20,
-    width: 60,
+    width: 62,
     borderRadius: 3,
     backgroundColor: '#FCBE4B',
     marginTop:8,
