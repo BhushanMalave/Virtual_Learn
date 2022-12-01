@@ -92,6 +92,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
         )}
 
         <View>
+          {subCategories?(
+              <>
           <Text style={styles.text2}>Subcategories</Text>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -113,6 +115,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
               ))}
             </View>
           </ScrollView>
+              </>
+          ):(<></>)}
         </View>
         <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
