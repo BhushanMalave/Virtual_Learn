@@ -9,21 +9,18 @@ import {LessonVideoPlayer} from '../components/LessonVideoPlayer';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
 import {CertificateScreen} from '../screens/CertificateScreen';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
-import { CompletedComponent } from '../components/CompletedComponent';
+import {CompletedComponent} from '../components/CompletedComponent'; 
+import { FinalTestStack } from './FinalTeststack';
+import { ModularTest } from '../components/chaptes/ModuleTest';
 
 const Stack = createNativeStackNavigator();
 
 export const CourseStack = () => {
   return (
-    <Stack.Navigator initialRouteName='MyCourse'>
+    <Stack.Navigator initialRouteName="MyCourse">
       <Stack.Screen
         name="MyCourse"
         component={MyCourse}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="CourseScreen"
-        component={CourseScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -36,7 +33,7 @@ export const CourseStack = () => {
         component={OnGoingComponent}
         options={{headerShown: false}}
       />
-          <Stack.Screen
+      <Stack.Screen
         name="CompletedComponent"
         component={CompletedComponent}
         options={{headerShown: false}}
@@ -57,6 +54,11 @@ export const CourseStack = () => {
         component={TestStack}
         options={{headerShown: false}}
       />
+          <Stack.Screen
+        name="FinalTestStack"
+        component={FinalTestStack}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="CertificateScreen"
         component={CertificateScreen}
@@ -67,6 +69,17 @@ export const CourseStack = () => {
         component={CategoryDisplayScreen}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="CourseScreen"
+        component={CourseScreen}
+        options={{headerShown: false}}
+      />
+          <Stack.Screen
+        name="ModularTest"
+        component={ModularTest}
+        options={{headerShown: false}}
+      />
+      
     </Stack.Navigator>
   );
 };

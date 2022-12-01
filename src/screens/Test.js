@@ -9,6 +9,7 @@ import {
   Alert,
   Platform,
 } from 'react-native';
+import { min } from 'react-native-reanimated';
 import {useDispatch, useSelector} from 'react-redux';
 import {SubmitTest} from '../authorization/Auth';
 import {
@@ -63,8 +64,8 @@ if(data1?.testDuration)
 
   const mins = time[1];
   const secs = time[2];
-setStartMinutes(mins)
-setStartSeconds(secs)
+  START_MINUTES = mins;
+  START_SECOND = secs;
 }
 },[data1?.testDuration])
 
@@ -146,7 +147,8 @@ setStartSeconds(secs)
         style: {fontWeight: 'bold'},
         onPress: () => {
           dispatch(removeAll());
-          navigation.navigate('CourseScreen');
+          navigation.goBack();
+
         },
       },
     ]);

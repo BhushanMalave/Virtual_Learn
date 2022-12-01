@@ -7,6 +7,8 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
+import { FinalTest } from './src/screens/FinalTest';
+import { Test } from './src/screens/Test';
 
 let persistor = persistStore(store);
 LogBox.ignoreAllLogs();
@@ -16,6 +18,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
        <Router/>
+       {/* <Test/> */}
       </PersistGate>
     </Provider>
   );
