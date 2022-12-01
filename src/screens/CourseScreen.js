@@ -25,7 +25,7 @@ export const CourseScreen = ({navigation}) => {
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());
             // navigation.navigate('HomeScreen')
-            navigation.goBack()
+            navigation.goBack('HomeScreen')
           }}
             >
             <Image

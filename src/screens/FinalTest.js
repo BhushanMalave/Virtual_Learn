@@ -57,19 +57,23 @@ export const FinalTest = ({navigation}) => {
   const [back, setBack] = useState(false);
   const [submit, setSubmit] = useState(false);
 
-  const dur = data1?.testDuration;
-  const time = dur.split(':');
-  console.log(time);
 
-  const mins = time[1];
-  const secs = time[2];
-
-  // const mins = m / 60;
-
-  // const total_hours = ,ins + mins;
-
-  const START_MINUTES = mins;
-  const START_SECOND = secs;
+  let [ START_MINUTES , setStartMinutes] = useState(0);
+  let [ START_SECOND, setStartSeconds] = useState(0);
+  
+  
+  useEffect(()=>{
+  if(data1?.testDuration)
+  {
+    const dur = data1?.testDuration;
+    const time = dur.split(':');
+  
+    const mins = time[1];
+    const secs = time[2];
+    START_MINUTES = mins;
+    START_SECOND = secs;
+  }
+  },[data1?.testDuration])
   const START_DERATION = 10;
 
   const [currentMinutes, setMinutes] = useState(START_MINUTES);

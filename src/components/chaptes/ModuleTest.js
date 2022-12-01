@@ -68,17 +68,22 @@ export const ModularTest = item => {
 
               <View style={styles.testNameContainer}>
                 <TouchableOpacity
-                  disabled={!item?.disable}
+                  disabled={!!item?.disable}
                   onPress={async () => {
                     {
                       if (item?.test === 'Final Test') {
                         const res = await FinalTest(token, item?.id);
                         dispatch(addFinalQuestionData(res));
-                        item.navigation.navigate('FinalTestStack');
+                        if(res){
+
+                          item.navigation.navigate('FinalTestStack');
+                        }
                       } else {
                         const res = await ModuleTest(token, item?.id);
                         dispatch(addQuestionData(res));
-                        item.navigation.navigate('TestStack');
+                        if(res){
+                          item.navigation.navigate('TestStack');
+                        }
                       }
                     }
                   }}>
