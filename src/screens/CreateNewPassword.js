@@ -52,10 +52,10 @@ export const CreateNewPassword = ({navigation}) => {
                 confirmnewpassword: '',
               }}
               onSubmit={async values => {
-                console.log(values);
+
 
                 const obj = {
-                  mobileNumber: '+917795287943',
+                  mobileNumber: '+919591726087',
                   oneTimePassword: values.newpassword,
                 };
                 console.log(obj);
@@ -72,7 +72,7 @@ export const CreateNewPassword = ({navigation}) => {
                     navigation.navigate('Password Changed Successfully');
                   }
                 } catch (error) {
-                  console.log(error);
+                  console.log(error.response.data);
                 }
               }}>
               {({

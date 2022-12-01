@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Platform,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SubmitTest} from '../authorization/Auth';
@@ -29,6 +30,7 @@ const data = {
 
 export const Test = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
+  console.log(data1)
 
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
@@ -228,8 +230,8 @@ export const Test = ({navigation}) => {
               style={styles.back}
             />
           </TouchableOpacity>
-          <Text style={styles.testname}>Model Test {data1?.testId}</Text>
-          <View style={{flexDirection: 'row', marginLeft: 185, marginTop: 20}}>
+          <Text style={styles.testname}>{data1?.testName}</Text>
+          <View style={{flexDirection: 'row', marginLeft: 185, marginTop: Platform.OS==='ios'?20:0}}>
             <Image
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}
@@ -480,7 +482,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     letterSpacing: 0,
     lineHeight: 25,
-    marginTop: 50,
+    marginTop: Platform.OS==='ios'?50:35,
   },
   middlecontainer: {
     marginLeft: 20,
@@ -491,6 +493,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     backgroundColor: '#2BB5F4',
+    marginTop:Platform.OS==='ios'?0:-90
   },
   innerbtm: {
     flexDirection: 'column',
@@ -640,6 +643,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   back: {
-    marginTop: 40,
+    marginTop:Platform.OS==='ios'?40:0,
   },
 });
