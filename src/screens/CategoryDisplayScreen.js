@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   FlatList,
+  ActivityIndicator
 } from 'react-native';
 import {CategoryDisplayCourseComponent} from '../components/CategoryDisplayCourseComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
@@ -45,6 +46,19 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
             />
           </TouchableOpacity>
         </View>
+        <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          marginTop: 0,
+          justifyContent: 'center',
+        }}>
+        <ActivityIndicator
+          animating={!basicCourse && !allcourse && !featuredCourse && !subCategories}
+          size="small"
+          color="#373737"
+        />
+      </View>
         <Text style={styles.text1}>{route.params.item.categoryName}</Text>
         <Text style={styles.text2}> Courses to get you started</Text>
         <View style={styles.view1}>

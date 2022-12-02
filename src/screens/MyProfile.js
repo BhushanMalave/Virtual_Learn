@@ -1,4 +1,4 @@
-import React, {useEffect,useState,useCallback} from 'react';
+import React, {useEffect,useState,useCallback,useLayoutEffect} from 'react';
 import {
   ImageBackground,
   Text,
@@ -14,6 +14,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
+import { useIsFocused } from '@react-navigation/native';
 import Iconss from 'react-native-vector-icons/MaterialIcons'
 
 export const MyProfile = ({navigation}) => {
@@ -37,10 +38,13 @@ export const MyProfile = ({navigation}) => {
     continueCall();
     setRefreshing(false);
   }, [refreshing]);
-  useEffect(() => {
+
+  const focus =useIsFocused();
+  useLayoutEffect(() => {
     dispatch(mpUserDetails(token));
-     //refreshToken();
-  },[]);
+    refreshToken(); 
+  },[focus])
+ 
   return (
     <ScrollView  refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

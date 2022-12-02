@@ -29,10 +29,16 @@ const SubCategoriesSlice = createSlice({
         data:null,
         status:null,
     },
+    reducer: {
+        setSubCategoryData: (state, action) => {
+          state.data = action.payload;
+        },
+      },
     extraReducers: (builder) => {
         builder
         .addCase(cdsSubCategories.pending ,(state, action) => {
           state.status = 'loading';
+          state.data=null;
         })
         .addCase(cdsSubCategories.fulfilled ,(state, action) => {
           state.status = 'success';
@@ -44,4 +50,6 @@ const SubCategoriesSlice = createSlice({
       },
 })
 
+
+export const {setSubCategoryData} = SubCategoriesSlice.actions;
 export default SubCategoriesSlice.reducer;
