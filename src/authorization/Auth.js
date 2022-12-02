@@ -172,7 +172,6 @@ export const mpChangeUserData = async (token, formBody) => {
       },
     );
     const jsonResponse = res;
-    console.log(jsonResponse.message);
     return res.status;
   } catch (err) {
     // console.log('-----', err);
@@ -348,7 +347,6 @@ export const searchDataKeyword = async (token, obj) => {
       body,
       options,
     );
-    console.log(response.data);
     if (response.data) {
       return response.data;
     }
@@ -371,7 +369,6 @@ export const searchByKeyword = async (token, string) => {
       `https://virtual-learning-app-java.herokuapp.com/user/searchByKeyword?keyword=${string}`,
       options,
     );
-    // console.log(response.data);
     if (response.data) {
       return response.data;
     }
@@ -548,7 +545,7 @@ export const ModuleTest = async (token, id) => {
   }
 };
 
-//no added url below this
+
 export const FinalTest = async (token, id) => {
   const options = {
     headers: {
