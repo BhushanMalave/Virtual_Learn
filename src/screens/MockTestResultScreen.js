@@ -32,7 +32,7 @@ export const MockTestResultScreen = ({navigation}) => {
         <TouchableOpacity
           onPress={() => {
             res = dispatch(removeAnswers());
-            navigation.navigate('MyCourse');
+            navigation.navigate('Chapters');
           }}>
           <Image
             source={require('../assets/images/icn_close_white.png')}
