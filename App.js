@@ -18,7 +18,6 @@ const App = () => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
        <Router/>
-       {/* <Test/> */}
       </PersistGate>
     </Provider>
   );

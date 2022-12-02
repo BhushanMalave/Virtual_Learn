@@ -20,6 +20,7 @@ import {
   removeAll,
   setTestPercentage,
 } from '../redux/ReduxPersist/FinalTestSlice';
+import Toast from 'react-native-simple-toast'
 const data = {
   courseName: 'bcbd',
   chapterNumber: 2,
@@ -235,7 +236,7 @@ export const FinalTest = ({navigation}) => {
             />
           </TouchableOpacity>
           <Text style={styles.testname}>{data1?.testName}</Text>
-          <View style={{flexDirection: 'row', marginLeft: 160, marginTop: 20}}>
+          <View style={{flexDirection: 'row', marginLeft: 190, marginTop: 20}}>
             <Image
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}

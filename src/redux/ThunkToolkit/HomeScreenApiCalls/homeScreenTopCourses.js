@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const hsTopCourses = createAsyncThunk(
   'categories/hsTopCourses',
@@ -18,6 +19,7 @@ export const hsTopCourses = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('hstopcrs', error);
+      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );

@@ -23,7 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {setNewUser} from '../redux/ReduxPersist/UserDetails';
-
+import Toast from 'react-native-simple-toast'
 
 export const Login = ({navigation}) => {
   const [warning, setWarning] = useState(false);
@@ -90,8 +90,10 @@ export const Login = ({navigation}) => {
                     setWarning(true);
                   }
                 } catch (error) {
-                  console.log(error);
+                  // console.log(error);
                   setWarning(true);
+        
+                  
                 }
               }}>
               {({
