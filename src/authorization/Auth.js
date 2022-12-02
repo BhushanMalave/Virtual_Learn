@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const refreshToken = async token => {
   const options = {
@@ -16,7 +17,8 @@ export const refreshToken = async token => {
       return response.data.jwtToken;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 export const drawerData = async token => {
@@ -35,7 +37,9 @@ export const drawerData = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
+  
   }
 };
 
@@ -49,7 +53,7 @@ export const termsAndConditions = async () => {
       return response.data.message;
     }
   } catch (error) {
-    console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -63,7 +67,7 @@ export const privacyPolicy = async () => {
       return response.data.message;
     }
   } catch (error) {
-    console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -82,7 +86,7 @@ export const all = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -103,7 +107,8 @@ export const newest = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -123,7 +128,8 @@ export const popular = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -147,7 +153,8 @@ export const mpChangePassword = async (token, objBody) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -168,7 +175,8 @@ export const mpChangeUserData = async (token, formBody) => {
     console.log(jsonResponse.message);
     return res.status;
   } catch (err) {
-    console.log('-----', err);
+    // console.log('-----', err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -190,7 +198,8 @@ export const changeUserData = async (token, formBody) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -211,7 +220,8 @@ export const overViewData = async (token, id) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -232,7 +242,8 @@ export const continueApi = async (token, id) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -255,6 +266,7 @@ export const searchData = async (token, string) => {
     }
   } catch (error) {
     //console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -274,7 +286,8 @@ export const searchCategoriesdata = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -294,7 +307,8 @@ export const getOccupationData = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -314,7 +328,8 @@ export const topSearchData = async token => {
       return response.data;
     }
   } catch (error) {
-    console.log('=======', error);
+    // console.log('=======', error);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -338,7 +353,8 @@ export const searchDataKeyword = async (token, obj) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.status);
+    // console.log(error.response.status);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -361,6 +377,7 @@ export const searchByKeyword = async (token, string) => {
     }
   } catch (error) {
     //console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -383,7 +400,8 @@ export const applySearchFilter = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -408,7 +426,8 @@ export const joinCourse = async (token, objBody) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -433,7 +452,8 @@ export const SubmitTest = async (token, Body) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -457,7 +477,8 @@ export const PauseTime = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -478,7 +499,8 @@ export const ResultHeader = async (token, id) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -500,7 +522,8 @@ export const ResultAnswer = async (token, id) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -521,7 +544,8 @@ export const ModuleTest = async (token, id) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err.response.data);
+    // console.log(err.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -544,7 +568,8 @@ export const FinalTest = async (token, id) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -569,7 +594,8 @@ export const SubmitFinalTest = async (token, Body) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error.response.data);
+    // console.log(error.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -591,7 +617,8 @@ export const FinalTestResult = async (token, id) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err.response.data);
+    // console.log(err.response.data);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -612,6 +639,7 @@ export const CertificateDownload = async (token, id) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
