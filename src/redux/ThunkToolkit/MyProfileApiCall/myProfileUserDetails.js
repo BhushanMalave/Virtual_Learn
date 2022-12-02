@@ -1,6 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import Toast from 'react-native-simple-toast'
 
 export const mpUserDetails = createAsyncThunk(
   'userData/mpUserDetails',
@@ -19,7 +18,6 @@ export const mpUserDetails = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('myprof', error.response.data);
-      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );

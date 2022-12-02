@@ -17,6 +17,7 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {drawerData} from '../authorization/Auth';
+import { useIsFocused } from '@react-navigation/native';
 
 export const CustomDrawerComponent = props => {
   const token = useSelector(state => state.userDetails.token);
@@ -41,10 +42,11 @@ export const CustomDrawerComponent = props => {
     const res = await drawerData(token);
     setData(res);
   };
-
+  const focus = useIsFocused();
   useEffect(() => {
-    Call(token);
-  },[]);
+    Call(token); 
+
+  },[focus]);
 
   return (
     <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? -52 : -4}}>
