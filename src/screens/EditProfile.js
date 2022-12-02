@@ -164,16 +164,14 @@ export const EditProfile = ({navigation}) => {
                   }
                   const formBody = createFromData({
                     profilePhoto: profilePhoto,
-                    userName: userData?.userName,
                     occupation: valueOccupation,
                     gender: valueGender,
                     dateOfBirth: values?.dateofbirth,
-                    twtterLink: values?.twitterlink,
+                    twitterLink: values?.twitterlink,
                     faceBookLink: values?.facebooklink,
                   });
                   console.log(formBody);
                   const res = await mpChangeUserData(token, formBody);
-                  console.log(res);
                   if (res == 200) {
                     navigation.navigate('Profile');
                   }

@@ -81,13 +81,13 @@ export const HomeScreen = ({navigation}) => {
     dispatch(hsTopHeaders(token));
     dispatch(hsCategories(token));
     dispatch(hsTopCourses(token));
-    dispatch(mpUserDetails(token));
     dispatch(OnGoing(token));
+    dispatch(mpUserDetails(token));
     setClicked1(true);
     setClicked2(false);
     setClicked3(false);
     allCourse();
-    // refreshToken(token);
+    refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
