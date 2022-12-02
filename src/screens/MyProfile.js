@@ -1,4 +1,4 @@
-import React, {useEffect,useState,useCallback,useLayoutEffect} from 'react';
+import React, {useEffect,useState,useCallback, useLayoutEffect} from 'react';
 import {
   ImageBackground,
   Text,
@@ -17,10 +17,12 @@ import { getVerifiedKeys } from '../authorization/RefreshToken';
 import { useIsFocused } from '@react-navigation/native';
 import Iconss from 'react-native-vector-icons/MaterialIcons'
 
+
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  console.log(userData?.profilePhoto)
   const [refreshing, setRefreshing] = useState(false);
 
   
@@ -39,12 +41,11 @@ export const MyProfile = ({navigation}) => {
     setRefreshing(false);
   }, [refreshing]);
 
-  const focus =useIsFocused();
-  useLayoutEffect(() => {
+  const focus = useIsFocused();
+  useLayoutEffect(()=>{
     dispatch(mpUserDetails(token));
-    refreshToken(); 
+
   },[focus])
- 
   return (
     <ScrollView  refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

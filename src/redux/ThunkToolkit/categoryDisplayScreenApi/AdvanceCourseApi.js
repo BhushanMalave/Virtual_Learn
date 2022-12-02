@@ -19,6 +19,7 @@ export const cdsAdvanceCourse = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('advcourse', error);
+  
     }
   },
 );
