@@ -14,7 +14,6 @@ export const TermServicesScreen = ({navigation}) => {
 
   const call = async () => {
     const res = await termsAndConditions();
-    console.log(res);
     setData(res);
   };
   useEffect(() => {
