@@ -37,6 +37,7 @@ import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import {OnGoingComponent} from '../components/OnGoingComponent';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
+import { ActivityIndicator } from 'react-native';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -167,6 +168,15 @@ export const HomeScreen = ({navigation}) => {
             )}></FlatList>
         </View>
 
+
+{categoriesData && choiceYourCourse && topCoursesData ?(
+  <></>
+):(
+<View style={{  flex: 1,alignItems:"center",marginTop:50,
+    justifyContent: "center"}}>
+            <ActivityIndicator animating={!categoriesData && !choiceYourCourse && !topCoursesData} size="small" color="#373737"/>
+            </View>
+)}
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
             <Text style={styles.category}>Categories</Text>

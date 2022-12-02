@@ -45,7 +45,7 @@ export function SettingsScreen({navigation}) {
         {view ? (
           <View style={styles.notificationContainer}>
             <View style={styles.notificationView}>
-              <Text>Push Notification</Text>
+              <Text style={{color:"#373737"}}>Push Notification</Text>
               <ToggleSwitch
                 isOn={state}
                 onColor="green"
@@ -56,7 +56,7 @@ export function SettingsScreen({navigation}) {
             </View>
 
             <View style={styles.notificationView}>
-              <Text>Notification Sound</Text>
+              <Text style={{color:"#373737"}}>Notification Sound</Text>
               <ToggleSwitch
                 isOn={state1}
                 onColor="green"
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     height: 14,
     width: 22,
     marginLeft: 4,
+    tintColor:"black"
   },
   settingText: {
     marginTop: 20,
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
   notificationSettingIcon: {
     height: 15.97,
     width: 15.97,
+    tintColor:"black"
   },
   notificationContainer: {
     marginRight: 24,
@@ -132,10 +134,12 @@ const styles = StyleSheet.create({
   privacyIcon: {
     height: 16,
     width: 14.67,
+    tintColor:"black"
   },
   serviceIcon: {
     height: 16,
     width: 13.33,
+    tintColor:"black"
   },
   text: {
     marginLeft: 16.03,
@@ -145,6 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 20,
+  
   },
 
   textView: {
