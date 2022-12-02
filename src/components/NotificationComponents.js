@@ -73,8 +73,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   imageinc: {
-    height: 24,
-    width: 24,
+    height: 28,
+    width: 28,
+    borderRadius:20
   },
   text2: {
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
