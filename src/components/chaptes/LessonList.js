@@ -13,6 +13,7 @@ import {useDispatch} from 'react-redux';
 import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 export const LessonList = item => {
+  // console.log(item)
   const video = item => {
     item.nav.navigate('LessonVideoPlayer', {item});
   };
@@ -80,12 +81,18 @@ export const LessonList = item => {
                   disabled={!item?.status}
                   onPress={() => {
                     {
-                      continueData
-                        ? (console.log(
-                            'navigate to model page by sendind vedio link, Pause time and lesson id',
-                          ),
-                          dispatch(setPopUpState()))
-                        : video(item);
+                      item?.completed ? (
+                        video(item)
+                      ) : (
+                        <>
+                          {continueData
+                            ? (console.log(
+                                'navigate to model page by sendind vedio link, Pause time and lesson id',
+                              ),
+                              dispatch(setPopUpState()))
+                            : video(item)}
+                        </>
+                      );
                     }
                   }}>
                   <View style={{marginLeft: -30}}>
@@ -99,10 +106,7 @@ export const LessonList = item => {
                 <TouchableOpacity
                   disabled={!item?.status}
                   onPress={() => {
-                    console.log(
-                      ' set/dispatch status as true in lessons:status  and pressed play',
-                      item?.videoLink,
-                    );
+                    video(item);
                   }}>
                   <View style={{marginLeft: -30}}>
                     <Image
@@ -201,7 +205,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
     height: 38,
     color: '#373737',
-    fontWeight:  Platform.OS == 'ios' ? 'bold': 'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 32,
     lineHeight: 38,

@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {notificationApiCall} from '../redux/ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 export const NotificationsScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
@@ -74,7 +75,8 @@ export const NotificationsScreen = ({navigation}) => {
                     return response.data;
                   }
                 } catch (error) {
-                  console.log(error);
+                  // console.log(error);
+                  Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
                 }
               }}
             />
