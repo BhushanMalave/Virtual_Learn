@@ -6,7 +6,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setResultHeader} from '../redux/ReduxPersist/TestSlice';
 import {setResultAnswers} from '../redux/ReduxPersist/TestSlice';
 
-export const CongratulationScreen = ({navigation, route}) => {
+export const CongratulationScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.testdata.question);

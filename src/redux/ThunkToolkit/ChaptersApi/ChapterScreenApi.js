@@ -79,6 +79,7 @@ export const {
   addContinueData,
   setPopUpState,
   addCertificate,
+  addDisabilityStatusTrue,addDisabilityStatusFalse
 } = ChapterResponseSlice.actions;
 
 export default ChapterResponseSlice.reducer;

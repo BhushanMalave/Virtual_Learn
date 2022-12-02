@@ -27,13 +27,17 @@ import {useSelector} from 'react-redux';
 
 import {continueApi} from '../authorization/Auth';
 import {ContinuePopUp} from '../components/chaptes/ContinuePopUp';
-import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {
+  addDisabilityStatusFalse,
+  addDisabilityStatusTrue,
+  csChapterResponse,
+} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import {joinCourse} from '../authorization/Auth';
 import {
   setPopUpState,
   addContinueData,
 } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
-import { ActivityIndicator } from 'react-native';
+import {ActivityIndicator} from 'react-native';
 
 import {CertificateDownload} from '../authorization/Auth';
 
@@ -46,29 +50,22 @@ export const ChaptersScreen = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const continueData = useSelector(state => state.chapterResponse.continueData);
 
+  let disableTest = false;
   const continueCall = async () => {
     const cont = await continueApi(token, coursedata?.courseId);
     dispatch(addContinueData(cont));
   };
 
   const focus = useIsFocused();
-  // useEffect(() => {
-  //   if (focus == true) {
-  //     dispatch(csChapterResponse({token, id: coursedata?.courseId}));
-  //     continueCall();
-  //     time();
-  //     continueCall();
-  //   }
-  // }, [focus]);
 
-useLayoutEffect(() => {
-  if (focus == true) {
-        dispatch(csChapterResponse({token, id: coursedata?.courseId}));
-        continueCall();
-        time();
-        continueCall();
-      }
-},[focus])
+  useLayoutEffect(() => {
+    if (focus == true) {
+      dispatch(csChapterResponse({token, id: coursedata?.courseId}));
+      continueCall();
+      time();
+      continueCall();
+    }
+  }, [focus]);
   const [totalHours, setTotalHours] = useState(0);
   const time = () => {
     if (coursedata?.courseDuration) {
@@ -216,13 +213,21 @@ useLayoutEffect(() => {
               {data?.testCount} Assignment Test | {totalHours} h total length
             </Text>
           </View>
-          {data?(
-<></>
-          ):(
-
-            <View style={{  flex: 1,alignItems:"center",marginTop:50,
-    justifyContent: "center"}}>
-            <ActivityIndicator animating={!data} size="small" color="#373737"/>
+          {data ? (
+            <></>
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                marginTop: 50,
+                justifyContent: 'center',
+              }}>
+              <ActivityIndicator
+                animating={!data}
+                size="small"
+                color="#373737"
+              />
             </View>
           )}
 
@@ -263,10 +268,10 @@ useLayoutEffect(() => {
                 </View>
 
                 {item1?.lessonResponses.map(temp => {
-                  if (temp?.completed == true) {
-                    item1.disableStatus = true;
+                  if (temp?.lessonCompletedStatus === true) {
+                    disableTest = true;
                   } else {
-                    item1.disableStatus = false;
+                    disableTest = false;
                   }
                 })}
 
@@ -279,7 +284,7 @@ useLayoutEffect(() => {
                         questions={item1?.questionCount}
                         rate={item1?.chapterTestPercentage}
                         id={item1?.testId}
-                        disable={item1?.disableStatus}
+                        disable={disableTest}
                         completed={item1?.chapterCompletedStatus}
                         navigation={navigation}
                       />
@@ -377,10 +382,7 @@ useLayoutEffect(() => {
                 courseId: coursedata?.courseId,
               };
               const res = await joinCourse(token, objBody);
-              const response = await overViewData(
-                token,
-                coursedata?.courseId,
-              );
+              const response = await overViewData(token, coursedata?.courseId);
               dispatch(addOverView(response));
             }}
           />
@@ -457,7 +459,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     fontSize: 16,
     lineHeight: 19,
-    marginTop:Platform.OS == 'ios' ? -15 : -10,
+    marginTop: Platform.OS == 'ios' ? -15 : -10,
   },
   certificateTextView: {
     marginTop: 40,
@@ -484,7 +486,7 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: '#FFFFFF',
-    height: Platform.OS === 'ios' ? 80:83,
+    height: Platform.OS === 'ios' ? 80 : 83,
     borderRadius: 6,
     marginTop: Platform.OS === 'ios' ? 50 : 50,
     flexDirection: 'row',
