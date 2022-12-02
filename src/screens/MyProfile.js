@@ -1,4 +1,8 @@
+<<<<<<<<< Temporary merge branch 1
+import React, {useEffect,useState,useCallback,useLayoutEffect} from 'react';
+=========
 import React, {useEffect,useState,useCallback, useLayoutEffect} from 'react';
+>>>>>>>>> Temporary merge branch 2
 import {
   ImageBackground,
   Text,
@@ -41,11 +45,24 @@ export const MyProfile = ({navigation}) => {
     setRefreshing(false);
   }, [refreshing]);
 
+<<<<<<<<< Temporary merge branch 1
+  const focus =useIsFocused();
+  useLayoutEffect(() => {
+    dispatch(mpUserDetails(token));
+    refreshToken(); 
+  },[focus])
+ 
+=========
   const focus = useIsFocused();
   useLayoutEffect(()=>{
     dispatch(mpUserDetails(token));
 
   },[focus])
+  // useEffect(() => {
+  //   dispatch(mpUserDetails(token));
+  //    //refreshToken();
+  // },[]);
+>>>>>>>>> Temporary merge branch 2
   return (
     <ScrollView  refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
