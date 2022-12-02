@@ -1,8 +1,5 @@
-<<<<<<<<< Temporary merge branch 1
-import React, {useEffect,useState,useCallback,useLayoutEffect} from 'react';
-=========
-import React, {useEffect,useState,useCallback, useLayoutEffect} from 'react';
->>>>>>>>> Temporary merge branch 2
+import React, {useEffect, useState, useCallback, useLayoutEffect} from 'react';
+
 import {
   ImageBackground,
   Text,
@@ -16,57 +13,46 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-import { setToken } from '../redux/ReduxPersist/UserDetails';
-import { getVerifiedKeys } from '../authorization/RefreshToken';
-import { useIsFocused } from '@react-navigation/native';
-import Iconss from 'react-native-vector-icons/MaterialIcons'
-
+import {setToken} from '../redux/ReduxPersist/UserDetails';
+import {getVerifiedKeys} from '../authorization/RefreshToken';
+import {useIsFocused} from '@react-navigation/native';
+import Iconss from 'react-native-vector-icons/MaterialIcons';
 
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  console.log(userData?.profilePhoto)
+  console.log(userData?.profilePhoto);
   const [refreshing, setRefreshing] = useState(false);
 
-  
-  const refreshToken = async() => {
+  const refreshToken = async () => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
-
-  };  
+  };
 
   const continueCall = () => {
-    dispatch(mpUserDetails(token));    
-  }
+    dispatch(mpUserDetails(token));
+  };
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     continueCall();
     setRefreshing(false);
   }, [refreshing]);
 
-<<<<<<<<< Temporary merge branch 1
-  const focus =useIsFocused();
+  const focus = useIsFocused();
   useLayoutEffect(() => {
     dispatch(mpUserDetails(token));
-    refreshToken(); 
-  },[focus])
- 
-=========
-  const focus = useIsFocused();
-  useLayoutEffect(()=>{
-    dispatch(mpUserDetails(token));
-
-  },[focus])
+  }, [focus]);
   // useEffect(() => {
   //   dispatch(mpUserDetails(token));
   //    //refreshToken();
   // },[]);
->>>>>>>>> Temporary merge branch 2
+
   return (
-    <ScrollView  refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-    }>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       <View>
         <ImageBackground
           source={{uri: userData?.profilePhoto}}
@@ -115,7 +101,7 @@ export const MyProfile = ({navigation}) => {
           <View style={styles.viewcourseinfoin}>
             <Text style={styles.textno}>{userData?.testsCompleted}</Text>
             <Text style={styles.textcourse}>Test</Text>
-          </View> 
+          </View>
         </View>
         <Text style={styles.textdetails}>Personal Details</Text>
         <View style={styles.viewinfo}>
@@ -140,12 +126,11 @@ export const MyProfile = ({navigation}) => {
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Date of Birth</Text>
-          <Text style={styles.texttitle}>{userData?.dateOfBirth}</Text> 
+          <Text style={styles.texttitle}>{userData?.dateOfBirth}</Text>
         </View>
         <TouchableOpacity
-
           onPress={() => {
-            navigation.navigate('ChangeYourPassword');  
+            navigation.navigate('ChangeYourPassword');
           }}>
           <View style={styles.viewpass}>
             <Image
@@ -235,14 +220,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
     color: '#FFFFFF',
   },
   textname: {
     color: '#FFFFFF',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 20,
     marginTop: 10,
@@ -264,7 +249,7 @@ const styles = StyleSheet.create({
   },
   textno: {
     color: '#2BB5F4',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 32,
     marginTop: 20,
@@ -326,6 +311,6 @@ const styles = StyleSheet.create({
   imgProfile: {
     height: 58,
     width: 58,
-    borderRadius:6,
+    borderRadius: 6,
   },
 });
