@@ -18,7 +18,6 @@ export const cdsSubCategories = createAsyncThunk(
             return response.data;
         } catch (error) {
             console.log("subcat",error);
-            Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
         }
     },
 );

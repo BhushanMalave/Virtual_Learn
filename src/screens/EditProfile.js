@@ -23,6 +23,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {mpChangeUserData} from '../authorization/Auth';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {getOccupationData} from '../authorization/Auth';
+import { setRemoveData } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 
 export const EditProfile = ({navigation}) => {
   const genderData = [
@@ -36,7 +37,6 @@ export const EditProfile = ({navigation}) => {
   const [occupationState, setOccupationState] = useState(false);
   const [text, setText] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
-  const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
   const [image, setImage] = useState(userData?.profilePhoto);
@@ -62,7 +62,7 @@ export const EditProfile = ({navigation}) => {
       setProfilePhoto({filename, mime, path});
     });
   };
-
+  
   const createFromData = obj => {
     let formData = new FormData();
     for (let key in obj) {
@@ -73,27 +73,28 @@ export const EditProfile = ({navigation}) => {
           type: imageData.mime,
           name: `${imageData.filename}.${imageData.mime.substr(
             imageData.mime.indexOf('/') + 1,
-          )}`,
-        });
-      } else {
-        formData.append(`${key}`, `${obj[key]}`);
+            )}`,
+          });
+        } else {
+          formData.append(`${key}`, `${obj[key]}`);
+        }
       }
-    }
-    return formData;
-  };
-
-  const occupation = async () => {
-    const res = await getOccupationData(token);
-    setOccupationData(res);
-  };
-
-  useEffect(() => {
-    dispatch(mpUserDetails(token));
-    occupation();
-    // console.log(userData);
-  }, []);
-  return (
-    <View style={{flex: 1}}>
+      return formData;
+    };
+    
+    const occupation = async () => {
+      const res = await getOccupationData(token);
+      setOccupationData(res);
+    };
+    
+    const dispatch = useDispatch()
+    useEffect(() => {
+      dispatch(mpUserDetails(token));
+      occupation();
+      // console.log(userData);
+    }, []);
+    return (
+      <View style={{flex: 1}}>
       <KeyboardAwareView>
         <ScrollView>
           <ImageBackground
@@ -172,8 +173,11 @@ export const EditProfile = ({navigation}) => {
                   });
                   console.log(formBody);
                   const res = await mpChangeUserData(token, formBody);
-                  if (res == 200) {
+                  // dispatch(setRemoveData());
+                  if (res == 200) {   
+                    console.log(res)
                     navigation.navigate('Profile');
+                    // console.log(userData)
                   }
                 }}>
                 {({handleChange, handleSubmit, values}) => (
