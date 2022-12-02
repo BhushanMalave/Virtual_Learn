@@ -265,7 +265,7 @@ export const searchData = async (token, string) => {
     }
   } catch (error) {
     //console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
+   
   }
 };
 

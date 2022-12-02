@@ -19,7 +19,9 @@ export const cdsbasicCourse = createAsyncThunk(
 
       return response.data;
     } catch (error) {
+
       console.log('bsccrs', error)
+
     }
   },
 );

@@ -17,7 +17,7 @@ export const cdsAllCourseOfCategory = createAsyncThunk(
             return response.data;
         } catch (error) {
             console.log("allcrsofcat",error);
-         
+
         }
     },
 );

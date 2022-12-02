@@ -55,11 +55,17 @@ export const Login = ({navigation}) => {
             </Text>
           </View>
           <View style={styles.imageView}>
+            <TouchableOpacity>
             <Image
               source={require('../assets/images/btn_SM_facebook.png')}
               style={styles.images}
             />
+            </TouchableOpacity>
+            <TouchableOpacity 
+            onPress={()=>{}}>
+
             <Image source={require('../assets/images/btn_SM_google.png')} />
+            </TouchableOpacity>
           </View>
           <View />
           <View style={styles.textInputBody}>

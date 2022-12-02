@@ -32,10 +32,14 @@ const MPUserDetailsSlice = createSlice({
     setUserData: (state, action) => {
       state.data = action.payload;
     },
+    setRemoveData:(state,action)=>{
+      console.log(state.data)
+    },
   },
   extraReducers: builder => {
     builder
-      .addCase(mpUserDetails.pending, (state, action) => {
+    .addCase(mpUserDetails.pending, (state, action) => {
+      state.data = null;
         state.status = 'loading';
       })
       .addCase(mpUserDetails.fulfilled, (state, action) => {
@@ -47,5 +51,5 @@ const MPUserDetailsSlice = createSlice({
       });
   },
 });
-export const {setUserData} = MPUserDetailsSlice.actions;
+export const {setUserData,setRemoveData} = MPUserDetailsSlice.actions;
 export default MPUserDetailsSlice.reducer;
