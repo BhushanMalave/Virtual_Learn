@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {termsAndConditions} from '../authorization/Auth';
+import { ActivityIndicator } from 'react-native';
 export const TermServicesScreen = ({navigation}) => {
   const [data, setData] = useState('');
 
@@ -31,6 +32,12 @@ export const TermServicesScreen = ({navigation}) => {
         />
       </TouchableOpacity>
       <Text style={styles.text}>Terms of Services</Text>
+      {data?(<></>):(
+        <View style={{  flex: 1,alignItems:"center",marginTop:50,
+        justifyContent: "center"}}>
+                <ActivityIndicator animating={!data} size="small" color="#373737"/>
+                </View>
+      )}
       <View style={styles.description}>
         <Text style={styles.text1}>{data}</Text>
       </View>
