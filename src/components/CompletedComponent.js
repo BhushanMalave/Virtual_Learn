@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   },
   conttext: {
     height: 12,
-    width: 85,
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
