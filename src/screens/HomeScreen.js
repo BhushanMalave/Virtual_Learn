@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
   name: {
     height: 35,
     color: '#042C5C',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 20,
     letterSpacing: 0,
@@ -492,6 +492,9 @@ const styles = StyleSheet.create({
   imgview: {
     width: 142,
     height: 82,
+    borderTopStartRadius:5,
+    borderTopEndRadius:5,
+    overflow: 'hidden',
   },
   btmitemContainer: {
     backgroundColor: '#FFFFFF',

@@ -242,7 +242,7 @@ export const continueApi = async (token, id) => {
     }
   } catch (error) {
     // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
+    // Toast.show('Continue Api : Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -419,7 +419,6 @@ export const joinCourse = async (token, objBody) => {
     );
 
     if (response.data) {
-      console.log('tatatatatta', response.data);
       return response.data;
     }
   } catch (error) {

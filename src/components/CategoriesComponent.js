@@ -38,7 +38,9 @@ const styles = StyleSheet.create({
         height:15,
         width:15,
         marginVertical:3,
-        marginHorizontal:3
+        marginHorizontal:3,
+        // borderRadius: 5,
+        // overflow: 'hidden',
       },
 
 })

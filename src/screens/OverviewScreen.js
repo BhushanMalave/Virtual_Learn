@@ -14,6 +14,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {joinCourse} from '../authorization/Auth';
 import {useState, useEffect } from 'react';
 import Toast from 'react-native-simple-toast'
+import {overViewData} from '../authorization/Auth';
+import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
 const details = [
   {
@@ -35,7 +37,8 @@ const details = [
 
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
-  console.log(coursedata)
+  const dispatch = useDispatch();
+  // console.log(coursedata)
   const token = useSelector(state => state.userDetails.token);
   renderTruncatedFooter = handlePress => {
     return (
@@ -243,9 +246,12 @@ export const OverviewScreen = ({navigation}) => {
                 const objBody = {
                   courseId: coursedata?.courseId,
                 };
-                console.log('hvhc', coursedata.courseId);
-          
                 const res = await joinCourse(token, objBody);
+                const response = await overViewData(
+                  token,
+                  coursedata?.courseId,
+                );
+                dispatch(addOverView(response));
                 console.log(res);
                 if(res){
                   navigation.navigate('Chapters');
