@@ -57,19 +57,23 @@ export const FinalTest = ({navigation}) => {
   const [back, setBack] = useState(false);
   const [submit, setSubmit] = useState(false);
 
-  const dur = data1?.testDuration;
-  const time = dur.split(':');
-  console.log(time);
 
-  const mins = time[1];
-  const secs = time[2];
-
-  // const mins = m / 60;
-
-  // const total_hours = ,ins + mins;
-
-  const START_MINUTES = '10';
-  const START_SECOND = '10';
+  let [ START_MINUTES , setStartMinutes] = useState(0);
+  let [ START_SECOND, setStartSeconds] = useState(0);
+  
+  
+  useEffect(()=>{
+  if(data1?.testDuration)
+  {
+    const dur = data1?.testDuration;
+    const time = dur.split(':');
+  
+    const mins = time[1];
+    const secs = time[2];
+    START_MINUTES = mins;
+    START_SECOND = secs;
+  }
+  },[data1?.testDuration])
   const START_DERATION = 10;
 
   const [currentMinutes, setMinutes] = useState(START_MINUTES);
@@ -472,15 +476,14 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 25,
-
     height: 700,
   },
   testname: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 25,
     marginTop: 50,
@@ -492,7 +495,7 @@ const styles = StyleSheet.create({
   bottomview: {
     height: 95,
     flexDirection: 'row',
-
+     marginTop:Platform.OS === 'ios'?0:-80,
     backgroundColor: '#2BB5F4',
   },
   innerbtm: {
@@ -645,6 +648,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   back: {
-    marginTop: 40,
+    marginTop:Platform.OS === 'ios'?40:0,
   },
 });

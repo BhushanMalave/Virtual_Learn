@@ -7,7 +7,9 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Platform,
 } from 'react-native';
+import { min } from 'react-native-reanimated';
 import {useDispatch, useSelector} from 'react-redux';
 import {SubmitTest} from '../authorization/Auth';
 import {
@@ -20,12 +22,6 @@ import {
   removeAll,
   setTestPercentage,
 } from '../redux/ReduxPersist/TestSlice';
-const data = {
-  courseName: 'bcbd',
-  chapterNumber: 2,
-  chapterName: 'bdjhbh',
-  testId: 1,
-};
 
 export const Test = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
@@ -56,18 +52,24 @@ export const Test = ({navigation}) => {
   const PreviousQuestion = currentQuestion - 1;
   const [back, setBack] = useState(false);
 
+let [ START_MINUTES , setStartMinutes] = useState(0);
+let [ START_SECOND, setStartSeconds] = useState(0);
+
+
+useEffect(()=>{
+if(data1?.testDuration)
+{
   const dur = data1?.testDuration;
   const time = dur.split(':');
 
   const mins = time[1];
   const secs = time[2];
+  START_MINUTES = mins;
+  START_SECOND = secs;
+}
+},[data1?.testDuration])
 
-  // const mins = m / 60;
 
-  // const total_hours = ,ins + mins;
-
-  const START_MINUTES = mins;
-  const START_SECOND = secs;
   const START_DERATION = 10;
 
   const [currentMinutes, setMinutes] = useState(START_MINUTES);
@@ -80,8 +82,6 @@ export const Test = ({navigation}) => {
 
   const startHandler = () => {
     setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
-    // setMinutes(60 * 5);
-    // setSeconds(0);
     setIsRunning(true);
   };
 
@@ -147,8 +147,8 @@ export const Test = ({navigation}) => {
         style: {fontWeight: 'bold'},
         onPress: () => {
           dispatch(removeAll());
-          // console.log('hweyyy', userAnswers);
-          navigation.navigate('CourseScreen');
+          navigation.goBack();
+
         },
       },
     ]);
@@ -204,7 +204,6 @@ export const Test = ({navigation}) => {
               userAnswers: userAnswers,
             };
             const res = await SubmitTest(token, body);
-            // console.log(res);
             if (res) {
               navigation.navigate('CongratulationScreen', data);
               dispatch(removeAll());
@@ -228,8 +227,8 @@ export const Test = ({navigation}) => {
               style={styles.back}
             />
           </TouchableOpacity>
-          <Text style={styles.testname}>Model Test {data1?.testId}</Text>
-          <View style={{flexDirection: 'row', marginLeft: 185, marginTop: 20}}>
+          <Text style={styles.testname}>{data1?.testName}</Text>
+          <View style={{flexDirection: 'row', marginLeft: 185, marginTop: Platform.OS==='ios'?20:0}}>
             <Image
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}
@@ -475,12 +474,12 @@ const styles = StyleSheet.create({
   testname: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 25,
-    marginTop: 50,
+    marginTop: Platform.OS==='ios'?50:35,
   },
   middlecontainer: {
     marginLeft: 20,
@@ -491,6 +490,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     backgroundColor: '#2BB5F4',
+    marginTop:Platform.OS==='ios'?0:-90
   },
   innerbtm: {
     flexDirection: 'column',
@@ -570,7 +570,6 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: 'white',
-
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
@@ -584,7 +583,6 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 6,
     backgroundColor: 'pink',
-
     marginRight: 10,
   },
   optionUncheck: {
@@ -642,6 +640,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   back: {
-    marginTop: 40,
+    marginTop:Platform.OS==='ios'?40:0,
   },
 });

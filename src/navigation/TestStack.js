@@ -8,6 +8,7 @@ import {CourseCompletedScreen} from '../screens/CourseCompletedScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {ModularTest} from '../components/chaptes/ModuleTest';
 import {HomeScreen} from '../screens/HomeScreen';
+import { HomeStack } from './HomeStack';
 const Stack = createNativeStackNavigator();
 export const TestStack = () => {
   return (
@@ -49,6 +50,8 @@ export const TestStack = () => {
         component={HomeScreen}
         options={{headerShown: false}}
       />
+
+
     </Stack.Navigator>
   );
 };

@@ -110,9 +110,11 @@ const styles = StyleSheet.create({
     height: 40,
     marginLeft: 15,
     width: '80%',
-    color: '#7A7A7A',
+    color: '#042C5C',
     fontSize: 16,
     letterSpacing: 0.4,
+    lineHeight: 20,
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
   },
   textno: {
     height: 20,
@@ -125,8 +127,8 @@ const styles = StyleSheet.create({
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: 'bold',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {
     height: 40,
@@ -155,4 +157,5 @@ const styles = StyleSheet.create({
     height: 43,
     width: 165,
   },
+
 });

@@ -92,6 +92,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
         )}
 
         <View>
+          {subCategories?(
+              <>
           <Text style={styles.text2}>Subcategories</Text>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -113,6 +115,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
               ))}
             </View>
           </ScrollView>
+              </>
+          ):(<></>)}
         </View>
         <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
@@ -168,8 +172,8 @@ const styles = StyleSheet.create({
 
   text1: {
     fontSize: 26,
-    fontFamily: 'Biko',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
+    ffontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     textAlign: 'left',
     color: '#2B2B2B',
     marginTop: 30,

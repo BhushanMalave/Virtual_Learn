@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: '#042C5C',
     fontSize: 16,
     letterSpacing: 0.4,
-    fontFamily: Platform.OS == 'ios' ? 'Avenir' : 'Avenir',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
   },
   textno: {
     height: 20,
@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: 'bold',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {
     height: 40,

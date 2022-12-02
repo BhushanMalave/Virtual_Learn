@@ -185,7 +185,7 @@ export const ChaptersScreen = ({navigation}) => {
         <View style={styles.mainView}>
           {continueData ? (
             <>
-              <View style={{marginTop: 29, marginBottom: 30}}>
+              <View style={styles.continueButton}>
                 <ButtonComponent
                   text={`Continue Chapter ${continueData?.chapterNumber} Lesson ${continueData?.lessonNumber}`}
                   onPress={() => {
@@ -278,8 +278,8 @@ export const ChaptersScreen = ({navigation}) => {
         </View>
         {data?.courseCompletedStatus ? (
           <>
-            <View style={{backgroundColor: '#042C5C'}}>
-              <View style={{margin: 24, marginTop: 30}}>
+            <View style={styles.completedView}>
+              <View style={styles.completedView2}>
                 <Text style={styles.courseText}>Course Result</Text>
 
                 <Text style={styles.percentText}>
@@ -294,31 +294,13 @@ export const ChaptersScreen = ({navigation}) => {
                       <Text style={styles.text1}>Joined</Text>
                       <Text style={styles.text2}>{data?.joinedDate}</Text>
                     </View>
-                    <View
-                      style={{
-                        height: 34,
-                        backgroundColor: '#7A7A7A',
-                        width: 1,
-                        borderWidth: 1,
-                        opacity: 0.2,
-                        alignSelf: 'center',
-                      }}
-                    />
+                    <View style={styles.lineView} />
 
                     <View style={styles.boxin}>
                       <Text style={styles.text1}>Completed</Text>
                       <Text style={styles.text2}>{data?.completedDate}</Text>
                     </View>
-                    <View
-                      style={{
-                        height: 34,
-                        backgroundColor: '#7A7A7A',
-                        width: 1,
-                        borderWidth: 1,
-                        opacity: 0.2,
-                        alignSelf: 'center',
-                      }}
-                    />
+                    <View style={styles.lineView} />
                     <View style={[styles.boxin]}>
                       <Text style={styles.text1}>Duration</Text>
                       <Text style={styles.text2}>
@@ -378,8 +360,11 @@ export const ChaptersScreen = ({navigation}) => {
               };
               const res = await joinCourse(token, objBody);
               console.log(res);
-              if(res){
-                const response = await overViewData(token, coursedata?.courseId);
+              if (res) {
+                const response = await overViewData(
+                  token,
+                  coursedata?.courseId,
+                );
                 dispatch(addOverView(response));
               }
             }}
@@ -401,6 +386,10 @@ const styles = StyleSheet.create({
   mainView: {
     flex: 1,
     marginHorizontal: 24,
+  },
+  continueButton: {
+    marginTop: 29,
+    marginBottom: 30,
   },
   contentText: {
     color: '#2B2B2B',
@@ -424,6 +413,13 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == 'ios' ? 36 : 36,
     width: '100%',
   },
+  completedView: {
+    backgroundColor: '#042C5C',
+  },
+  completedView2: {
+    margin: 24,
+    marginTop: Platform.OS == 'ios' ? 30 : 30,
+  },
   courseText: {
     height: 22,
     color: '#FFFFFF',
@@ -435,7 +431,7 @@ const styles = StyleSheet.create({
   percentText: {
     height: 90,
     color: '#1EAB0D',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     fontSize: 74,
     lineHeight: 90,
     marginTop: 10,
@@ -443,10 +439,10 @@ const styles = StyleSheet.create({
   aprrovalText: {
     height: 19,
     color: '#DDDDDD',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     fontSize: 16,
     lineHeight: 19,
-    marginTop: -15,
+    marginTop:Platform.OS == 'ios' ? -15 : -10,
   },
   certificateTextView: {
     marginTop: 40,
@@ -473,9 +469,9 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: '#FFFFFF',
-    height: 80,
+    height: Platform.OS === 'ios' ? 80:83,
     borderRadius: 6,
-    marginTop: Platform.OS === 'ios' ? 50 : 70,
+    marginTop: Platform.OS === 'ios' ? 50 : 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -499,5 +495,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginTop: 8,
     lineHeight: 20,
+  },
+  lineView: {
+    height: 34,
+    backgroundColor: '#7A7A7A',
+    width: 1,
+    borderWidth: 1,
+    opacity: 0.2,
+    alignSelf: 'center',
   },
 });

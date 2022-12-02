@@ -23,6 +23,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {setNewUser} from '../redux/ReduxPersist/UserDetails';
+
+
 export const Login = ({navigation}) => {
   const [warning, setWarning] = useState(false);
   const dispatch = useDispatch();
@@ -263,8 +265,8 @@ const styles = StyleSheet.create({
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: 'bold',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {
     height: 40,

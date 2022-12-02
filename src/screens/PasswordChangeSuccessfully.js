@@ -39,13 +39,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     marginTop: '50%',
+    
   },
   text: {
     height: 35,
     color: '#2B2B2B',
-    fontFamily: 'Biko',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 32,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 35,
     textAlign: 'center',
@@ -71,6 +72,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     lineHeight: 20,
     textAlign: 'center',
-    marginTop: '45%',
+    marginTop: Platform.OS == 'ios' ? "40%" : "25%",
   },
 });

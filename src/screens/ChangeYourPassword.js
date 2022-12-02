@@ -13,6 +13,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
+import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -45,7 +46,8 @@ export const ChangeYourPassword = ({navigation}) => {
   });
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareView animate={true}>
       <View style={styles.body}>
         <ScrollView>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -211,12 +213,7 @@ export const ChangeYourPassword = ({navigation}) => {
                     ) : (
                       <>
                         <View
-                          style={{
-                            marginTop: 20,
-                            borderWidth: 1,
-                            borderRadius: 10,
-                            padding: 10,
-                          }}>
+                          style={styles.infoBoxView}>
                           <Text style={styles.infoText1}>
                             Our minimum Reqiurement
                           </Text>
@@ -227,7 +224,6 @@ export const ChangeYourPassword = ({navigation}) => {
                             </Text>
                           </View>
                         </View>
-                        <View style={styles.infobottom}></View>
                       </>
                     )}
                   </>
@@ -243,11 +239,15 @@ export const ChangeYourPassword = ({navigation}) => {
           </View>
         </ScrollView>
       </View>
+      </KeyboardAwareView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container:{
+    flex:1,
+  },
   image: {
     height: 16,
     width: 26,
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   textno: {
     height: 20,
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova-Regular',
     textAlign: 'center',
     marginTop: 10,
   },
@@ -312,8 +312,8 @@ const styles = StyleSheet.create({
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: 'bold',
-    fontFamily: 'Biko',
+    fontWeight:  Platform.OS == 'ios' ? 'bold': 'normal',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {
     height: 40,
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#7A7A7A',
     fontSize: 16,
-    fontFamily: 'ProximaNova-Regular',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' :'ProximaNova-Regular',
     textAlign: 'center',
   },
   form: {
@@ -344,10 +344,22 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS == 'ios' ? 10 : -3,
     borderBottomWidth: 1,
     borderBottomColor: '#7A7A7A',
-    opacity: 0.6,
+    opacity: 0.3,
   },
   formikView: {
     marginTop: 23,
+  },
+  infoBoxView: {
+    marginTop: 2,
+    paddingLeft: 20,
+    paddingVertical: 12,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#25334b',
+    shadowOffset: {width: 1, height: 3},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 5,
+    borderRadius: 12.5,
   },
   infoText1: {
     height: 15,
@@ -361,12 +373,6 @@ const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 10,
-  },
-  infobottom: {
-    marginTop: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#7A7A7A',
-    opacity: 0.6,
-    marginBottom: 8,
+    lineHeight: 15,
   },
 });

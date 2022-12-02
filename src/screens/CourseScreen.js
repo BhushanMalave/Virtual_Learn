@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import TopTabNav from '../navigation/TopTabNav';
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,13 +24,16 @@ export const CourseScreen = ({navigation}) => {
           style={styles.header}>
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());
-            navigation.navigate('HomeScreen')}}>
+            // navigation.navigate('HomeScreen')
+            navigation.goBack('HomeScreen')
+          }}
+            >
             <Image
               source={require('../assets/images/icn_close_white.png')}
               style={styles.image}
             />
           </TouchableOpacity>
-            <View style={{borderWidth:1}}>
+            <View style={{marginTop:20}}>
 
           <Text style={styles.maintext}>
             {coursedata?.courseName}
@@ -63,24 +67,25 @@ const styles = StyleSheet.create({
   maintext: {
     marginLeft: 20,
     color: '#FFFFFF',
-    fontFamily: 'Biko',
+    fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     letterSpacing: 0,
     lineHeight: 35,
+   
   },
   text: {
     marginLeft: 20,
     flexDirection: 'row',
-    borderWidth:1,
-    marginTop:30
+    position:"absolute",
+    marginTop:Platform.OS ==='ios'?175:175
   },
   designview: {
     height: 20,
-    width: 60,
+    width: 62,
     borderRadius: 3,
     backgroundColor: '#FCBE4B',
-    
+    marginTop:8,
   },
   design: {
     height: 12,
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   image: {
-    marginTop: 70,
+    marginTop: Platform.OS ==='ios'?70:50,
     marginLeft: 20,
   },
 });

@@ -109,7 +109,6 @@ export const TestSlice = createSlice({
       } else {
         state.userAnswers.push(action.payload);
       }
-      console.log(state.userAnswers);
     },
 
     setStatus1: (state, action) => {
@@ -157,7 +156,6 @@ export const TestSlice = createSlice({
     },
     setCorrectAnswers: (state, action) => {
       state.correctAnswers = action.payload;
-      console.log('++++++', state.correctAnswers);
     },
 
     setResultHeader: (state, action) => {
