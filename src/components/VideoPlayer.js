@@ -94,7 +94,7 @@ export const VideoPlayer = ({navigation, route}) => {
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_pausevideo.png')}
-                style={{height: 16, width: 14, transform: [{rotate: '90 deg'}]}}
+                style={{tintColor:'white' ,height: 16, width: 14, transform: [{rotate: '90 deg'}]}}
               />
             </Pressable>
           )}

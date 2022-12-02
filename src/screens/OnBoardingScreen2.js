@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Platform,
+  ScrollView
 } from 'react-native';
 
 export const OnBoardingScreen2 = ({navigation}) => {
