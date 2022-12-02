@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const ForgotPassword = ({navigation}) => {
   const [text, setText] = useState('');
@@ -39,6 +40,7 @@ export const ForgotPassword = ({navigation}) => {
     } catch (error) {
       console.log(error);
       setShowError(true);
+      
     }
 
     navigation.navigate('Verification');

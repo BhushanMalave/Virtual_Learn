@@ -15,6 +15,7 @@ import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const CreateNewPassword = ({navigation}) => {
   const [info, setInfo] = useState(false);
@@ -72,7 +73,8 @@ export const CreateNewPassword = ({navigation}) => {
                     navigation.navigate('Password Changed Successfully');
                   }
                 } catch (error) {
-                  console.log(error.response.data);
+                  // console.log(error.response.data);
+                  Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
                 }
               }}>
               {({

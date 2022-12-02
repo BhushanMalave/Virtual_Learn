@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const Completed = createAsyncThunk(
   'completedcourse/Completed',
@@ -18,6 +19,7 @@ export const Completed = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('comp', error.response.data);
+      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );

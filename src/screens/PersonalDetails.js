@@ -18,6 +18,7 @@ import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
 import {setUserData} from '../redux/ReduxPersist/UserDetails';
 import {useDispatch} from 'react-redux';
+import Toast from 'react-native-simple-toast'
 
 export const PersonalDetails = ({navigation}) => {
   const [info, setInfo] = useState(false);
@@ -107,7 +108,8 @@ export const PersonalDetails = ({navigation}) => {
                       navigation.navigate('Registration Successfull');
                     }
                   } catch (error) {
-                    console.log(error.response.data);
+                    // console.log(error.response.data);
+                    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
                   }
                 }}>
                 {({

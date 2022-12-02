@@ -142,7 +142,7 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             <Text style={styles.text2}>{title}</Text>
           </View>
           <Pressable onPress={() => FullScreen()}>
-            <Image source={require('../assets/images/icn_maximise.png')} />
+            <Image source={require('../assets/images/icn_maximise.png')} style={{tintColor:"white"}} />
           </Pressable>
         </View>
 
@@ -151,14 +151,14 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_playvideo-Play.png')}
-                style={{height: 16, width: 14}}
+                style={{height: 16, width: 14,tintColor:"white"}}
               />
             </Pressable>
           ) : (
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_pausevideo.png')}
-                style={{height: 16, width: 14, transform: [{rotate: '90 deg'}]}}
+                style={{height: 16, width: 14, transform: [{rotate: '90 deg'}],tintColor:"white"}}
               />
             </Pressable>
           )}

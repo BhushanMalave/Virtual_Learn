@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const OnGoing = createAsyncThunk(
   'ongoingcourse/OnGoing',
@@ -19,6 +20,7 @@ export const OnGoing = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('ongoing', error.response.data);
+      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );

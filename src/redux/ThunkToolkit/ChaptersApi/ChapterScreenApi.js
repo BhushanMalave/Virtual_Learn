@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const csChapterResponse = createAsyncThunk(
   'chapterResponse/csChapterResponse',
@@ -18,6 +19,7 @@ export const csChapterResponse = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('chpscr', error);
+      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );

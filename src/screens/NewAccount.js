@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const NewAccount = ({navigation}) => {
   const [text, setText] = useState('');
@@ -32,7 +33,8 @@ export const NewAccount = ({navigation}) => {
         navigation.navigate('VerifyAccount');
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   };
 

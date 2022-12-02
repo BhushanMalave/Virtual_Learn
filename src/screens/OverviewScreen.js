@@ -13,6 +13,7 @@ import ReadMore from 'react-native-read-more-text';
 import {useDispatch, useSelector} from 'react-redux';
 import {joinCourse} from '../authorization/Auth';
 import {useState, useEffect } from 'react';
+import Toast from 'react-native-simple-toast'
 
 const details = [
   {
@@ -85,6 +86,26 @@ export const OverviewScreen = ({navigation}) => {
     navigation.navigate('VideoPlayer', {item});
   };
 
+
+  const [totalMinutes, setTotalMinutes] = useState(0);
+
+  useEffect(() => {
+    if (coursedata?.previewVideoDuration) {
+      const duration = coursedata?.previewVideoDuration;
+      const b = duration.split(':');
+      const h = Number(b[0] * 60);
+      const m = Number(b[1]);
+      const mins = h + m;
+      const sec = b[2] / 100;
+      const totalmin = (mins + sec).toFixed(2);
+      setTotalMinutes(totalmin);
+    }
+  }, [coursedata?.previewVideoDuration]);
+
+
+
+
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -115,7 +136,7 @@ export const OverviewScreen = ({navigation}) => {
                   />
                   <View style={styles.introview}>
                     <Text style={styles.introtext}>Introduction</Text>
-                    <Text style={styles.introtext2}>3 mins</Text>
+                    <Text style={styles.introtext2}>{totalMinutes} mins</Text>
                   </View>
                 </ImageBackground>
               </TouchableOpacity>

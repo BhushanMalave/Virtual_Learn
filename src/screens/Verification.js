@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast'
 
 export const Verification = ({navigation}) => {
   const [text, setText] = useState('');
@@ -37,7 +38,8 @@ export const Verification = ({navigation}) => {
         setShowError(true);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   };
 
@@ -83,7 +85,8 @@ export const Verification = ({navigation}) => {
                 if (response.data.message === 'OTP Valid For 2 Minutes') {
                 }
               } catch (error) {
-                console.log(error);
+                // console.log(error);
+                Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
               }
             }}>
             <Text style={styles.text4}>Resend</Text>
