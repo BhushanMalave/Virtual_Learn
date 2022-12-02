@@ -1,6 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import Toast from 'react-native-simple-toast'
 
 export const cdsbasicCourse = createAsyncThunk(
   'basicCourse/cdsbasicCourse',
@@ -20,7 +19,8 @@ export const cdsbasicCourse = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log('bsccrs', error);
+
+      console.log('bsccrs', error)
 
     }
   },
@@ -32,10 +32,16 @@ const BasicCourseSlice = createSlice({
     data: null,
     status: null,
   },
+  reducer: {
+    setBasicCourseData: (state, action) => {
+      state.data = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(cdsbasicCourse.pending, (state, action) => {
         state.status = 'loading';
+        state.data=null;
       })
       .addCase(cdsbasicCourse.fulfilled, (state, action) => {
         state.status = 'success';
@@ -47,4 +53,5 @@ const BasicCourseSlice = createSlice({
   },
 });
 
+export const {setBasicCourseData} = BasicCourseSlice.actions;
 export default BasicCourseSlice.reducer;

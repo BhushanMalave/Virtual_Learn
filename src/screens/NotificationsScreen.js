@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useCallback} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,41 +7,69 @@ import {
   Image,
   Platform,
   TouchableOpacity,
+  ActivityIndicator,
+  View,
+  RefreshControl,
 } from 'react-native';
+import { useState } from 'react';
 import {NotificationsComponentUnseen} from '../components/NotificationComponents';
 import {NotificationsComponentSeen} from '../components/NotificationComponents';
 import {useDispatch, useSelector} from 'react-redux';
 import {notificationApiCall} from '../redux/ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
+import {getVerifiedKeys} from '../authorization/RefreshToken';
 import axios from 'axios';
-import Toast from 'react-native-simple-toast'
+import {setNotificationData} from '../redux/ThunkToolkit/NotificationApiCall/NotificationDataApiCall';
+
 export const NotificationsScreen = ({navigation}) => {
   const dispatch = useDispatch();
-
   const notificationData = useSelector(state => state.notificationData.data);
   const token = useSelector(state => state.userDetails.token);
+  const [refreshing, setRefreshing] = useState(false);
   const refreshToken = async () => {
     const key = await getVerifiedKeys(token);
     dispatch(setToken(key));
   };
-
+  const continueCall = () => {
+    dispatch(dispatch(notificationApiCall(token)));    
+  }
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    continueCall();
+    setRefreshing(false);
+  }, [refreshing]);
   useEffect(() => {
     dispatch(notificationApiCall(token));
     refreshToken();
   }, []);
   return (
     <SafeAreaView style={styles.body}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.goBack();
-        }}>
+      <TouchableOpacity onPress={() => {
+        //  dispatch(setNotificationData());
+          navigation.goBack()
+        }}
+        >
         <Image
           source={require('../assets/images/icn_back_header.png')}
           style={styles.image}
         />
       </TouchableOpacity>
       <Text style={styles.text}>Notifications</Text>
-      <ScrollView>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          marginTop: 0,
+          justifyContent: 'center',
+        }}>
+        <ActivityIndicator
+          animating={!notificationData}
+          size="small"
+          color="#373737"
+        />
+      </View>
+      <ScrollView  refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         {notificationData?.map(items => {
           return items.readStatus === true ? (
             <NotificationsComponentSeen
@@ -76,7 +104,6 @@ export const NotificationsScreen = ({navigation}) => {
                   }
                 } catch (error) {
                   // console.log(error);
-                  Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
                 }
               }}
             />
@@ -97,7 +124,7 @@ const styles = StyleSheet.create({
     tintColor: '#373737',
   },
   text: {
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
     height: 35,
