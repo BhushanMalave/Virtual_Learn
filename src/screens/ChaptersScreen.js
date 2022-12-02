@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import RNFetchBlob from 'rn-fetch-blob';
 import {
@@ -51,15 +51,23 @@ export const ChaptersScreen = ({navigation}) => {
   };
 
   const focus = useIsFocused();
-  useEffect(() => {
-    if (focus == true) {
-      dispatch(csChapterResponse({token, id: coursedata?.courseId}));
-      continueCall();
-      time();
-      continueCall();
-    }
-  }, [focus]);
+  // useEffect(() => {
+  //   if (focus == true) {
+  //     dispatch(csChapterResponse({token, id: coursedata?.courseId}));
+  //     continueCall();
+  //     time();
+  //     continueCall();
+  //   }
+  // }, [focus]);
 
+useLayoutEffect(() => {
+  if (focus == true) {
+        dispatch(csChapterResponse({token, id: coursedata?.courseId}));
+        continueCall();
+        time();
+        continueCall();
+      }
+},[focus])
   const [totalHours, setTotalHours] = useState(0);
   const time = () => {
     if (coursedata?.courseDuration) {
@@ -359,14 +367,11 @@ export const ChaptersScreen = ({navigation}) => {
                 courseId: coursedata?.courseId,
               };
               const res = await joinCourse(token, objBody);
-              console.log(res);
-              if (res) {
-                const response = await overViewData(
-                  token,
-                  coursedata?.courseId,
-                );
-                dispatch(addOverView(response));
-              }
+              const response = await overViewData(
+                token,
+                coursedata?.courseId,
+              );
+              dispatch(addOverView(response));
             }}
           />
         </View>
