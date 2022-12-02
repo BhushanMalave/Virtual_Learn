@@ -18,7 +18,6 @@ import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
 import { useIsFocused } from '@react-navigation/native';
 import Iconss from 'react-native-vector-icons/MaterialIcons'
-import { useIsFocused } from '@react-navigation/native';
 
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
