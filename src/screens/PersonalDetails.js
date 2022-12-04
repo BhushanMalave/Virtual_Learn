@@ -100,7 +100,7 @@ export const PersonalDetails = ({navigation}) => {
 
                   try {
                     const response = await axios.post(
-                      'https://virtual-learning-app-java.herokuapp.com/newUser/register',
+                      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/register',
                       obj,
                     );
                     console.log('=====', response.data.message);
