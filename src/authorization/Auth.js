@@ -10,7 +10,7 @@ export const refreshToken = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/refreshToken',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/refreshToken',
       options,
     );
     if (response.data.jwtToken) {
@@ -30,7 +30,7 @@ export const drawerData = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/menu',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/menu',
       options,
     );
     if (response.data) {
@@ -46,9 +46,8 @@ export const drawerData = async token => {
 export const termsAndConditions = async () => {
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/termsAndConditions',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/termsAndConditions',
     );
-    console.log('=====', response.data);
     if (response.data.message) {
       return response.data.message;
     }
@@ -60,9 +59,8 @@ export const termsAndConditions = async () => {
 export const privacyPolicy = async () => {
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/privacyPolicy',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/privacyPolicy',
     );
-    // console.log("=====",response.data.message);
     if (response.data.message) {
       return response.data.message;
     }
@@ -79,7 +77,7 @@ export const all = async token => {
   };
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/home/course/all',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course/all',
       options,
     );
     if (response.data) {
@@ -99,7 +97,7 @@ export const newest = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/home/course/newest',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course/newest',
       options,
     );
     //console.log("=====",response.data);
@@ -121,7 +119,7 @@ export const popular = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/home/course/popular',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course/popular',
       options,
     );
     if (response.data) {
@@ -144,7 +142,7 @@ export const mpChangePassword = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learning-app-java.herokuapp.com/user/changePassword',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/changePassword',
       body,
       options,
     );
@@ -161,7 +159,7 @@ export const mpChangePassword = async (token, objBody) => {
 export const mpChangeUserData = async (token, formBody) => {
   try {
     let res = await fetch(
-      'https://virtual-learning-app-java.herokuapp.com/user/save',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/save',
       {
         method: 'put',
         body: formBody,
@@ -189,7 +187,7 @@ export const changeUserData = async (token, formBody) => {
 
   try {
     const response = await axios.put(
-      'https://virtual-learning-app-java.herokuapp.com/save',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/save',
       formBody,
       options,
     );
@@ -212,7 +210,7 @@ export const overViewData = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/courseOverView?courseId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -234,7 +232,7 @@ export const continueApi = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/continue?courseId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/continue?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -256,7 +254,7 @@ export const searchData = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/search?searchKey=${string}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${string}`,
       options,
     );
     // console.log(response.data);
@@ -278,7 +276,7 @@ export const searchCategoriesdata = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/categoriesWP',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/categoriesWP',
       options,
     );
     if (response.data) {
@@ -299,7 +297,7 @@ export const getOccupationData = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/allSubCategoriesWP',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/allSubCategoriesWP',
       options,
     );
     if (response.data) {
@@ -320,7 +318,7 @@ export const topSearchData = async token => {
 
   try {
     const response = await axios.get(
-      'https://virtual-learning-app-java.herokuapp.com/user/topSearches',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/topSearches',
       options,
     );
     if (response.data) {
@@ -343,7 +341,7 @@ export const searchDataKeyword = async (token, obj) => {
 
   try {
     const response = await axios.put(
-      'https://virtual-learning-app-java.herokuapp.com/user/keywords',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/keywords',
       body,
       options,
     );
@@ -366,7 +364,7 @@ export const searchByKeyword = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/searchByKeyword?keyword=${string}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${string}`,
       options,
     );
     if (response.data) {
@@ -389,7 +387,7 @@ export const applySearchFilter = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learning-app-java.herokuapp.com/user/applyFilter',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/applyFilter',
       body,
       options,
     );
@@ -413,7 +411,7 @@ export const joinCourse = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learning-app-java.herokuapp.com/user/enroll',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/enroll',
       body,
       options,
     );
@@ -438,7 +436,7 @@ export const SubmitTest = async (token, Body) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learning-app-java.herokuapp.com/user/submit',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/submit',
       body,
       options,
     );
@@ -464,7 +462,7 @@ export const PauseTime = async (token, objBody) => {
 
   try {
     const response = await axios.put(
-      'https://virtual-learning-app-java.herokuapp.com/user/pauseTime',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/pauseTime',
       body,
       options,
     );
@@ -487,7 +485,7 @@ export const ResultHeader = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/resultHeader?testId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/resultHeader?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -510,7 +508,7 @@ export const ResultAnswer = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/resultAnswers?testId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/resultAnswers?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -533,7 +531,7 @@ export const ModuleTest = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/moduleTest?testId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/moduleTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -556,7 +554,7 @@ export const FinalTest = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/finalTest?testId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/finalTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -580,7 +578,7 @@ export const SubmitFinalTest = async (token, Body) => {
 
   try {
     const response = await axios.post(
-      'https://virtual-learning-app-java.herokuapp.com/user/finalSubmit',
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/finalSubmit',
       body,
       options,
     );
@@ -605,7 +603,7 @@ export const FinalTestResult = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/result?testId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/result?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -628,7 +626,7 @@ export const CertificateDownload = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `https://virtual-learning-app-java.herokuapp.com/user/pdf?courseId=${id}`,
+      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${id}`,
       options,
     );
     if (response.data) {

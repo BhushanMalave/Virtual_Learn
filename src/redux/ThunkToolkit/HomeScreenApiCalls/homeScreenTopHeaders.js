@@ -14,7 +14,7 @@ export const hsTopHeaders = createAsyncThunk(
   
     try {
       const response = await axios.get(
-        'https://virtual-learning-app-java.herokuapp.com/user/home/course',
+        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course',
         options,       
         
       );

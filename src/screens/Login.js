@@ -83,21 +83,18 @@ export const Login = ({navigation}) => {
 
                 try {
                   const response = await axios.put(
-                    'https://virtual-learning-app-java.herokuapp.com/login',
+                    'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/login',
                     obj,
                   );
-
-                  dispatch(mpUserDetails(token));
-                  console.log('token:', token);
+                  console.log("Token : ",response.data.jwtToken);
                   if (response.data.jwtToken) {
                     dispatch(setToken(response.data.jwtToken));
                     dispatch(setNewUser(false));
-                  } else {
-                    setWarning(true);
+                    dispatch(mpUserDetails(token));
                   }
                 } catch (error) {
-                  // console.log(error);
-                  setWarning(true);
+                  console.log("err Token",error);
+                  
         
                   
                 }

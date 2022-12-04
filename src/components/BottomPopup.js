@@ -235,7 +235,7 @@ export const BottomPopup = () => {
             </View>
           </View>
 
-          <View style={{marginTop: Platform.OS === 'ios' ? 15 : 5}}>
+          <View style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}>
             <ButtonComponent
               text="Apply Filter"
               onPress={() => {
@@ -244,7 +244,7 @@ export const BottomPopup = () => {
             />
           </View>
 
-          <View style={{marginTop: Platform.OS === 'ios' ? 15 : 5}}>
+          <View style={{marginTop: Platform.OS === 'ios' ? 15 : 15}}>
             <ButtonComponent3
               text="Clear All"
               onPress={() => {
@@ -265,8 +265,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000AA',
   },
   modalView: {
-    marginTop: Platform.OS == 'ios' ? 300 : 230,
-    height: 600,
+    marginTop: Platform.OS == 'ios' ? 300 : 400,
+    height: Platform.OS == 'ios' ?  600 : 500,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
   },
   img: {
     marginTop: 5,
-    marginLeft: 95,
+    marginLeft:  Platform.OS === 'ios' ? 95:120,
   },
   searchCatView: {
     marginTop: 30,
@@ -336,5 +336,6 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 6,
+    color:'black',
   },
 });

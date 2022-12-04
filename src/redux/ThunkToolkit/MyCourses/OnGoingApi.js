@@ -13,7 +13,7 @@ export const OnGoing = createAsyncThunk(
 
     try {
       const response = await axios.get(
-        'https://virtual-learning-app-java.herokuapp.com/user/ongoingCourses',
+        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/ongoingCourses',
         options,
       );
 
