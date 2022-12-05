@@ -13,15 +13,15 @@ import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast'
 
-export const Verification = ({navigation}) => {
+export const Verification = ({navigation,route}) => {
   const [text, setText] = useState('');
+  const mobileNumber = route.params.text;
   const [showError, setShowError] = useState(false);
-
   const handleText = async string => {
     setText(string);
     setShowError(false);
     const obj = {
-      mobileNumber: '+919591726087',
+      mobileNumber: `+91${mobileNumber}`,
       oneTimePassword: text,
     };
 
@@ -32,7 +32,7 @@ export const Verification = ({navigation}) => {
       );
       console.log('=====', response.data.message);
       if (response.data.message === 'Verified') {
-        navigation.navigate('CreateNewPassword');
+        navigation.navigate('CreateNewPassword',{mobileNumber});
         setShowError(false);
       } else {
         setShowError(true);

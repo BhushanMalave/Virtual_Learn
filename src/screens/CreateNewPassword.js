@@ -17,8 +17,9 @@ import * as yup from 'yup';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast'
 
-export const CreateNewPassword = ({navigation}) => {
+export const CreateNewPassword = ({navigation,route}) => {
   const [info, setInfo] = useState(false);
+  const mobileNumber = route.params;
 
   const registerValidationScheme = yup.object().shape({
     newpassword: yup
@@ -56,7 +57,7 @@ export const CreateNewPassword = ({navigation}) => {
 
 
                 const obj = {
-                  mobileNumber: '+919591726087',
+                  mobileNumber: `+91${mobileNumber}`,
                   oneTimePassword: values.newpassword,
                 };
                 console.log(obj);

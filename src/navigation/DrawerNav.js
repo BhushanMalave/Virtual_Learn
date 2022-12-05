@@ -12,7 +12,7 @@ import Icons from 'react-native-vector-icons/Ionicons';
 
 export const Drawer = createDrawerNavigator();
 
-export const DrawerNav = () => {
+export const DrawerNav = ({navigation}) => {
   return (
     <Drawer.Navigator
       screenOptions={{

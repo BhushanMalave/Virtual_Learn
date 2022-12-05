@@ -87,7 +87,6 @@ export const Login = ({navigation}) => {
                   );
 
                   dispatch(mpUserDetails(token));
-                  console.log('token:', token);
                   if (response.data.jwtToken) {
                     dispatch(setToken(response.data.jwtToken));
                     dispatch(setNewUser(false));
@@ -96,9 +95,7 @@ export const Login = ({navigation}) => {
                   }
                 } catch (error) {
                   console.log(error);
-                  setWarning(true);
-        
-                  
+                  setWarning(true);  
                 }
               }}>
               {({
