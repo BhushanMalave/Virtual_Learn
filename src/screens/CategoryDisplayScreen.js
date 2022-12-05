@@ -7,7 +7,7 @@ import {
   Text,
   ScrollView,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import {CategoryDisplayCourseComponent} from '../components/CategoryDisplayCourseComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
@@ -27,6 +27,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
   const subCategories = useSelector(state => state.subCategories.data);
   const allcourse = useSelector(state => state.allCourseOfCategory.data);
   const token = useSelector(state => state.userDetails.token);
+  const itemCategory = route.params.item;
   const dispatch = useDispatch();
 
   return (
@@ -47,18 +48,20 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
         <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          marginTop: 0,
-          justifyContent: 'center',
-        }}>
-        <ActivityIndicator
-          animating={!basicCourse && !allcourse && !featuredCourse && !subCategories}
-          size="small"
-          color="#373737"
-        />
-      </View>
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            marginTop: 0,
+            justifyContent: 'center',
+          }}>
+          <ActivityIndicator
+            animating={
+              !basicCourse && !allcourse && !featuredCourse && !subCategories
+            }
+            size="small"
+            color="#373737"
+          />
+        </View>
         <Text style={styles.text1}>{route.params.item.categoryName}</Text>
         <Text style={styles.text2}> Courses to get you started</Text>
         <View style={styles.view1}>
@@ -106,31 +109,43 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
         )}
 
         <View>
-          {subCategories?(
-              <>
-          <Text style={styles.text2}>Subcategories</Text>
+          {subCategories ? (
+            <>
+              <Text style={styles.text2}>Subcategories</Text>
 
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={styles.viewcatin}>
-              {subCategories?.map(item => (
-                <CategoriesComponents
-                  category={item?.subCategoryName}
-                  onPress={() => {
-                    navigation.navigate('SubCategoryDisplayScreen', {item});
-                    dispatch(cdsbasicCourse({token, id: item?.subCategoryId}));
-                    dispatch(
-                      cdsAdvanceCourse({token, id: item?.subCategoryId}),
-                    );
-                    dispatch(
-                      cdsAllCourseOfCategory({token, id: item?.subCategoryId}),
-                    );
-                  }}
-                />
-              ))}
-            </View>
-          </ScrollView>
-              </>
-          ):(<></>)}
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}>
+                <View style={styles.viewcatin}>
+                  {subCategories?.map(item => (
+                    <CategoriesComponents
+                      category={item?.subCategoryName}
+                      onPress={() => {
+                        dispatch(
+                          cdsbasicCourse({token, id: item?.subCategoryId}),
+                        );
+                        dispatch(
+                          cdsAdvanceCourse({token, id: item?.subCategoryId}),
+                        );
+                        dispatch(
+                          cdsAllCourseOfCategory({
+                            token,
+                            id: item?.subCategoryId,
+                          }),
+                        );
+                        navigation.navigate('SubCategoryDisplayScreen', {
+                          item,
+                          itemCategory,
+                        });
+                      }}
+                    />
+                  ))}
+                </View>
+              </ScrollView>
+            </>
+          ) : (
+            <></>
+          )}
         </View>
         <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>

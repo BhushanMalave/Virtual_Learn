@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000AA',
   },
   modalView: {
-    marginTop: Platform.OS == 'ios' ? 300 : 400,
+    marginTop: Platform.OS == 'ios' ? 300 : 250,
     height: Platform.OS == 'ios' ?  600 : 500,
     backgroundColor: 'white',
     borderRadius: 20,
