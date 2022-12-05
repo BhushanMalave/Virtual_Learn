@@ -199,14 +199,20 @@ export const HomeSearch = ({navigation}) => {
           <View style={styles.searchCatView1}>
             <Text style={styles.texttopsearch}>Search From Categories</Text>
             <View style={styles.viewcatin}>
-              {categoriesData.map(item => (
+            {categoriesData?.map(item => (
                 <CategoriesComponent
                   key={item?.categoryId}
                   id={item?.categoryId}
                   img={item?.categoryPhoto}
                   category={item?.categoryName}
                   onPress={() => {
-                    // navigation.navigate('CategoryDisplayScreen');
+                    dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+                    dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
+                    dispatch(
+                      cdsAllCourseOfCategory({token, id: item?.categoryId}),
+                    );
+                    dispatch(cdsSubCategories({token, id: item?.categoryId}));
+                    navigation.navigate('CategoryDisplayScreen', {item});
                   }}
                 />
               ))}

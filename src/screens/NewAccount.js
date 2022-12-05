@@ -30,7 +30,8 @@ export const NewAccount = ({navigation}) => {
       );
       console.log('=====', response.data.message);
       if (response.data.message === 'OTP Valid For 2 Minutes') {
-        navigation.navigate('VerifyAccount');
+        navigation.navigate('VerifyAccount',{text});
+        setText('');
       }
     } catch (error) {
       // console.log(error);
