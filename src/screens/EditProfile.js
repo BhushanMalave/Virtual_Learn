@@ -23,7 +23,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {mpChangeUserData} from '../authorization/Auth';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
 import {getOccupationData} from '../authorization/Auth';
-import { setRemoveData } from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+
 
 export const EditProfile = ({navigation}) => {
   const genderData = [
