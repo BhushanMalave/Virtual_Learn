@@ -19,7 +19,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
 
   testName = 'Module Test';
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('Chapters');
@@ -47,7 +47,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
         }}>
         <Text style={styles.result}>Result</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

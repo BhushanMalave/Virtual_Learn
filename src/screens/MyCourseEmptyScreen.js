@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet, Text, Platform} from 'react-native';
+import {View, Image, StyleSheet, Text, Platform,ScrollView} from 'react-native';
 import {CategoriesComponent} from '../components/CategoriesComponent';
 import {useDispatch, useSelector} from 'react-redux';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
@@ -14,7 +14,7 @@ export const MyCourseEmptyScreen = ({navigation}) => {
   console.log(token);
   const categoriesData = useSelector(state => state.categories.data);
   return (
-    <View>
+    <ScrollView>
       <View>
         <Image
           source={require('../assets/images/img_mycourse_empty.png')}
@@ -51,7 +51,7 @@ export const MyCourseEmptyScreen = ({navigation}) => {
           </View>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

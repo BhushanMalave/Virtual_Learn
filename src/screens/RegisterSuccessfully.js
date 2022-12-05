@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-
 export const RegisterSuccessfully = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
