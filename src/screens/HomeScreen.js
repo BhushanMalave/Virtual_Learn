@@ -63,6 +63,7 @@ export const HomeScreen = ({navigation}) => {
       dispatch(setAllData(data1));
     }
   };
+ 
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
