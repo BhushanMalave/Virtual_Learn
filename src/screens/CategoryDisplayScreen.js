@@ -201,17 +201,18 @@ const styles = StyleSheet.create({
 
   text1: {
     fontSize: 26,
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
-    ffontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     textAlign: 'left',
     color: '#2B2B2B',
-    marginTop: 30,
+    marginTop: Platform.OS == 'ios' ? 5 : 0,
     marginHorizontal: 24,
+  
   },
   text2: {
     fontSize: 18,
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'PromimaNova',
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     textAlign: 'left',
     color: '#2B2B2B',
     marginTop: 30,
