@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
   },
   textlog: {
     color: '#373737',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova-Regular',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'500',
     fontSize: 16,
     marginLeft: 21,
     marginTop: Platform.OS === 'ios' ? 1 : -3,

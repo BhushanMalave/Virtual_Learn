@@ -19,7 +19,7 @@ import Toast from 'react-native-simple-toast'
 
 export const CreateNewPassword = ({navigation,route}) => {
   const [info, setInfo] = useState(false);
-  const mobileNumber = route.params;
+  const mobileNumber = route.params.mobileNumber;
 
   const registerValidationScheme = yup.object().shape({
     newpassword: yup
@@ -74,7 +74,7 @@ export const CreateNewPassword = ({navigation,route}) => {
                     navigation.navigate('Password Changed Successfully');
                   }
                 } catch (error) {
-                  // console.log(error.response.data);
+                   console.log(error.response.data);
                   Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
                 }
               }}>

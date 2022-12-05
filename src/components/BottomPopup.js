@@ -54,6 +54,7 @@ export const BottomPopup = () => {
     };
     console.log(body);
     const res = await applySearchFilter(token, body);
+    console.log(res)
     if (res) {
       dispatch(setSearchData(res));
       dispatch(setFilterState());
