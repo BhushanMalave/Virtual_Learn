@@ -18,7 +18,6 @@ export const myCourses = createAsyncThunk('courses/myCourses', async token => {
     return response.data;
   } catch (error) {
     console.log('mycrs', error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 });
 

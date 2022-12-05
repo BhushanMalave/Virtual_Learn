@@ -153,7 +153,7 @@ export const FinalTest = ({navigation}) => {
         onPress: () => {
           console.log('hweyyy', userAnswers);
           dispatch(removeAll());
-          navigation.navigate('CourseScreen');
+          navigation.goBack();
         },
       },
     ]);

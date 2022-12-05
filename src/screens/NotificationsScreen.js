@@ -42,6 +42,7 @@ export const NotificationsScreen = ({navigation}) => {
     dispatch(notificationApiCall(token));
     refreshToken();
   }, []);
+  console.log(notificationData)
   return (
     <SafeAreaView style={styles.body}>
       <TouchableOpacity onPress={() => {
@@ -68,23 +69,25 @@ export const NotificationsScreen = ({navigation}) => {
           color="#373737"
         />
       </View>
-      <ScrollView  refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+      <ScrollView  
+       refreshControl={
+       <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+      >
         {notificationData?.map(items => {
-          return items.readStatus === true ? (
+          return items?.readStatus === true ? (
             <NotificationsComponentSeen
-              desc={items.description}
-              img={items.notificationUrl}
-              time={items.timeStamp}
+              desc={items?.description}
+              img={items?.notificationUrl}
+              time={items?.timeStamp}
             />
           ) : (
             <NotificationsComponentUnseen
-              desc={items.description}
-              img={items.notificationUrl}
-              time={items.timeStamp}
+              desc={items?.description}
+              img={items?.notificationUrl}
+              time={items?.timeStamp}
               notify={async () => {
                 const body = {
-                  notificationId: items.notificationId,
+                  notificationId: items?.notificationId,
                 };
                 const options = {
                   headers: {

@@ -34,7 +34,7 @@ export const NewAccount = ({navigation}) => {
         setText('');
       }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   };

@@ -62,7 +62,7 @@ export const PersonalDetails = ({navigation,route}) => {
 
             <View style={styles.numView}>
               <Text style={styles.text}>Moblie number</Text>
-              <Text style={styles.number}>`+91${mobileNumber}`</Text>
+              <Text style={styles.number}>+91{mobileNumber}</Text>
             </View>
 
             <View>

@@ -16,7 +16,13 @@ export const notificationApiCall = createAsyncThunk(
         'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/notifications',
         options,
       );
-      return response.data;
+      if(response.data.message !== "No notifications")
+      {
+        return response.data;
+      }else{
+        return null;
+      }
+      
     } catch (error) {
       console.log('notify', error);
     }

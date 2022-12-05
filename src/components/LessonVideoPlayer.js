@@ -118,7 +118,8 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             chapterId: route.params.item.chapterId,
             courseId: data?.courseId,
           };
-          console.log(body);
+          // console.log(body);
+         
           const res = await PauseTime(token, body);
           console.log(res);
           if (res.message == 'Updated SuccessFully') {
