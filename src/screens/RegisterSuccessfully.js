@@ -8,7 +8,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import image_Register_sucess_illustrations from '../assets/images/04.8_VirtualLearn_Register_success/img_Register_sucess_illustration.png';
 
 export const RegisterSuccessfully = ({navigation}) => {
   return (
