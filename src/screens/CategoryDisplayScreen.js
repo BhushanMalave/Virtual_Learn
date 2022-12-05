@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     ffontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     textAlign: 'left',
     color: '#2B2B2B',
-    marginTop: 30,
+    marginTop: Platform.OS == 'ios' ? 30 : 0,
     marginHorizontal: 24,
   },
   text2: {
