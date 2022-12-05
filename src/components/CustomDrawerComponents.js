@@ -24,6 +24,7 @@ export const CustomDrawerComponent = props => {
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
   const log = () => {
+    props.navigation.goBack();
     Alert.alert('', 'Are you sure want to Logout?', [
       {
         text: 'Cancel',
@@ -32,6 +33,7 @@ export const CustomDrawerComponent = props => {
       {
         text: 'Logout',
         onPress: () => {
+         
           dispatch(setToken(null));
         },
       },

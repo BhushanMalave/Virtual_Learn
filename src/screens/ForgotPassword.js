@@ -30,20 +30,18 @@ export const ForgotPassword = ({navigation}) => {
         'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/resend',
         obj,
       );
-      console.log('=====', response.data.message);
-      if (response.data.message === 'Verified') {
-        navigation.navigate('Personal Details');
+      console.log('===-----==', response.data.message);
+      if (response.data.message === 'OTP Valid For 2 Minutes') {
+        navigation.navigate('Verification',{text});
         setShowError(false);
+        setText('');
       } else {
         setShowError(true);
       }
     } catch (error) {
       console.log(error);
       setShowError(true);
-      
     }
-
-    navigation.navigate('Verification');
   };
 
   return (

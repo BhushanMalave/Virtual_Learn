@@ -20,8 +20,9 @@ import {setUserData} from '../redux/ReduxPersist/UserDetails';
 import {useDispatch} from 'react-redux';
 import Toast from 'react-native-simple-toast'
 
-export const PersonalDetails = ({navigation}) => {
+export const PersonalDetails = ({navigation,route}) => {
   const [info, setInfo] = useState(false);
+  const mobileNumber = route.params.mobileNumber;
   const dispatch = useDispatch();
 
   const registerValidationScheme = yup.object().shape({
@@ -61,7 +62,7 @@ export const PersonalDetails = ({navigation}) => {
 
             <View style={styles.numView}>
               <Text style={styles.text}>Moblie number</Text>
-              <Text style={styles.number}>+919591726087</Text>
+              <Text style={styles.number}>`+91${mobileNumber}`</Text>
             </View>
 
             <View>
@@ -78,7 +79,7 @@ export const PersonalDetails = ({navigation}) => {
                   console.log(values);
 
                   const obj = {
-                    mobileNumber: '+919591726087',
+                    mobileNumber: `+91${mobileNumber}`,
                     fullName: values.fullname,
                     userName: values.username,
                     email: values.email,
@@ -89,7 +90,7 @@ export const PersonalDetails = ({navigation}) => {
                     fullName: values.fullname,
                     userName: values.username,
                     email: values.email,
-                    mobileNumber: '9591726087',
+                    mobileNumber: {mobileNumber},
                     occupation: null,
                     gender: null,
                     dateOfBirth: null,
