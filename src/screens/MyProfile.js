@@ -13,10 +13,10 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
-import {setToken} from '../redux/ReduxPersist/UserDetails';
-import {getVerifiedKeys} from '../authorization/RefreshToken';
-import {useIsFocused} from '@react-navigation/native';
-import Iconss from 'react-native-vector-icons/MaterialIcons';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
+import { useIsFocused } from '@react-navigation/native';
+import Iconss from 'react-native-vector-icons/MaterialIcons'
 
 export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();

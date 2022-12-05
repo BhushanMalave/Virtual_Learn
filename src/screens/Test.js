@@ -181,7 +181,7 @@ if(data1?.testDuration)
             const res = await SubmitTest(token, body);
             dispatch(setTestPercentage(res));
             if (res) {
-              navigation.navigate('CongratulationScreen', data);
+              navigation.navigate('CongratulationScreen');
               dispatch(removeAll());
             }
           },
@@ -205,7 +205,7 @@ if(data1?.testDuration)
             };
             const res = await SubmitTest(token, body);
             if (res) {
-              navigation.navigate('CongratulationScreen', data);
+              navigation.navigate('CongratulationScreen');
               dispatch(removeAll());
             }
           },
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     height: 700,
   },
   testname: {
-    height: 35,
+    // height: 35,
     color: '#2B2B2B',
     fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',

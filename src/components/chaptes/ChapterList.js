@@ -34,14 +34,18 @@ export const ChapterList = item => {
           <>
             <TouchableOpacity
               onPress={() => {
-                console.log(
-                  'set/disaptch status as false in chapterlist:status and close',
-                );
+                // console.log(
+                //   'set/disaptch status as false in chapterlist:status and close',
+                // );
                 dispatch(changeChapterListStatus({id: item.chapterId}));
               }}
-              style={{padding: 3}}>
+              style={{padding: 3,
+              }}>
               <Image
                 source={require('../../assets/images/icn_chapter_minimise.png')}
+                style={{
+                width:10
+                }}
               />
             </TouchableOpacity>
           </>
@@ -49,16 +53,17 @@ export const ChapterList = item => {
           <>
             <TouchableOpacity
               onPress={() => {
-                console.log(
-                  'set/disaptch status as true in chapterlist:status and expanded',
-                );
+                // console.log(
+                //   'set/disaptch status as true in chapterlist:status and expanded',
+                // );
                 dispatch(changeChapterListStatus({id: item.chapterId}));
               }}
-              style={{padding: 2}}>
+              style={{padding: 2,}}>
               <Image
                 source={require('../../assets/images/icn_chapter_maximise.png')}
                 style={{
                   tintColor: '#EE5C4D',
+                width:10
                 }}
               />
             </TouchableOpacity>
