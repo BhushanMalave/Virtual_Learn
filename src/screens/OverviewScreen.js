@@ -275,9 +275,9 @@ const styles = StyleSheet.create({
   text: {
     height: 40,
     color: '#2BB5F4',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     letterSpacing: 0,
     lineHeight: 20,
   },
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
   coursedescription: {
     height: 17,
     color: '#7A7A7A',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 14,
     fontWeight: '500',
     letterSpacing: 0,
@@ -424,11 +424,11 @@ const styles = StyleSheet.create({
   },
   introtext: {
     color: '#FFFFFF',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 18,
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
   },
   introview: {
     marginTop: 22,

@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
     width: 34,
   },
   text2: {
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     marginLeft: 10,
     marginRight: 30,
   },

@@ -234,8 +234,8 @@ const styles = StyleSheet.create({
   },
   textdesc: {
     color: '#FFFFFF',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 14,
     marginTop: 10,
   },
@@ -264,8 +264,8 @@ const styles = StyleSheet.create({
   },
   textdetails: {
     color: '#2B2B2B',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 18,
     marginTop: 30,
     marginLeft: 24,
@@ -277,15 +277,15 @@ const styles = StyleSheet.create({
   },
   texttitle: {
     color: '#373737',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 16,
     textAlign: 'right',
   },
   textpvy: {
     color: '#042C5C',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 16,
   },
   textpvy1: {

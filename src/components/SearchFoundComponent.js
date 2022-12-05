@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
   },
   name: {
     color: '#373737',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 14,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 16,
  
@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     height: 12,
 
     color: '#7A7A7A',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 10,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 12,
     marginTop: 3,
@@ -73,9 +73,9 @@ const styles = StyleSheet.create({
   category: {
     height: 9,
     color: '#373737',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 8,
-    fontWeight: 'bold',
     letterSpacing: 0,
     lineHeight: 9,
     alignSelf: 'center',

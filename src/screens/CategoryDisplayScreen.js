@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontSize: 18,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'PromimaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     textAlign: 'left',
     color: '#2B2B2B',

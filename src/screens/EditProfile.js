@@ -485,9 +485,9 @@ const styles = StyleSheet.create({
   changeText: {
     height: 17,
     color: '#EE5C4D',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 14,
-    fontWeight: 'bold',
     letterSpacing: 0.35,
     lineHeight: 17,
     textAlign: 'center',
@@ -508,11 +508,11 @@ const styles = StyleSheet.create({
   },
   textinput: {
     color: Platform.OS == 'ios' ? '#042C5C' : '#042C5C',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '600':'normal',
     fontSize: 16,
     letterSpacing: 0.4,
     lineHeight: 20,
-    fontWeight: '600',
     width: '95%',
   },
   bottom: {

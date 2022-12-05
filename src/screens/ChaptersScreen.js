@@ -410,9 +410,9 @@ const styles = StyleSheet.create({
   },
   contentText: {
     color: '#2B2B2B',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '600':'normal',
     fontSize: 18,
-    fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 22,
   },
   contentDetailsView: {
@@ -422,8 +422,8 @@ const styles = StyleSheet.create({
   contentDetailsText: {
     color: '#2B2B2B',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontSize: 12,
     fontWeight: Platform.OS === 'ios' ? '400' : '500',
+    fontSize: 12,
     lineHeight: 15,
   },
   chapterListContainer: {
@@ -440,9 +440,9 @@ const styles = StyleSheet.create({
   courseText: {
     height: 22,
     color: '#FFFFFF',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '600':'normal',
     fontSize: 18,
-    fontWeight: '600',
     lineHeight: 22,
   },
   percentText: {
@@ -498,18 +498,18 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 12,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     color: '#373737',
     textAlign: 'center',
     lineHeight: 16,
-    fontWeight: '500',
   },
   text2: {
     fontSize: 16,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     color: '#2BB5F4',
     textAlign: 'center',
-    fontWeight: '500',
     marginTop: 8,
     lineHeight: 20,
   },

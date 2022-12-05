@@ -204,9 +204,9 @@ const styles = StyleSheet.create({
   },
   chapterName: {
     color: '#373737',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     fontSize: 12,
-    fontWeight: '500',
     lineHeight: 15,
   },
   chapterNumber: {
@@ -221,9 +221,9 @@ const styles = StyleSheet.create({
   },
   chapterText: {
     color: '#042C5C',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '600':'normal',
     fontSize: 16,
-    fontWeight: Platform.OS === 'ios' ? '600' : '700',
     lineHeight: 20,
   },
   chapterTime: {
