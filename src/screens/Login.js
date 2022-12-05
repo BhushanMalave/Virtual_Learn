@@ -86,15 +86,18 @@ export const Login = ({navigation}) => {
                     'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/login',
                     obj,
                   );
-                  console.log("Token : ",response.data.jwtToken);
+
+                  dispatch(mpUserDetails(token));
+                  console.log('token:', token);
                   if (response.data.jwtToken) {
                     dispatch(setToken(response.data.jwtToken));
                     dispatch(setNewUser(false));
-                    dispatch(mpUserDetails(token));
+                  } else {
+                    setWarning(true);
                   }
                 } catch (error) {
-                  console.log("err Token",error);
-                  
+                  console.log(error);
+                  setWarning(true);
         
                   
                 }
