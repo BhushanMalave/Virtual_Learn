@@ -14,7 +14,7 @@ export const RegisterSuccessfully = ({navigation}) => {
     <SafeAreaView style={styles.container}>
 
    <ScrollView showsVerticalScrollIndicator={false}>
-            <Image source={require('../assets/images/04.8_VirtualLearn_Register_success/img_Register_sucess_illustration.png')} resizeMode="contain" style={styles.image}/>
+            <Image source={require('../assets/images/img_Register_sucess_illustration.png')} resizeMode="contain" style={styles.image}/>
             <Text style={styles.text}>Success!</Text>
             <Text style={styles.description}>Your VirtualLearn account has been successfully created!</Text>
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -63,7 +63,7 @@ description:{
 button:{
   height:20,
   color:"#EE5C4D",
-  fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+  fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
   fontSize:16,
   fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
   letterSpacing:0.4,
