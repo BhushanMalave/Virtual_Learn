@@ -45,107 +45,139 @@ export const ModularTest = item => {
             alignItems: 'center',
             marginBottom: 30,
           }}>
-          {data?.enrolled ? (<>
-            <View style={{marginRight: 10}}>
-              {item?.completed ? (
-                <Image
-                  source={require('../../assets/images/icn_timeline_completed.png')}
-                />
-              ) : (
-                <Image
-                  source={require('../../assets/images/icn_timeline_inactive.png')}
-                />
-              )}
-            </View>
-            <View style={styles.container}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View style={{width: 40, marginLeft: 5}}>
-                <Image
-                  source={require('../../assets/images/icn_moduletest.png')}
-                  style={styles.image}
-                />
+          {data?.enrolled ? (
+            <>
+              <View style={{marginRight: 10}}>
+                {item?.completed ? (
+                  <Image
+                    source={require('../../assets/images/icn_timeline_completed.png')}
+                  />
+                ) : (
+                  <Image
+                    source={require('../../assets/images/icn_timeline_inactive.png')}
+                  />
+                )}
               </View>
 
-              <View style={styles.testNameContainer}>
+
+              <View style={styles.container}>
+              {item?.completed ? <>
                 <TouchableOpacity
-                  disabled={!!item?.disable}
-                  onPress={ async () => {
+                  disabled={false}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
+                    <View style={{width: 40, marginLeft: 5}}>
+                      <Image
+                        source={require('../../assets/images/icn_moduletest.png')}
+                        style={styles.image}
+                      />
+                    </View>
+
+                    <View style={styles.testNameContainer}>
+                      <Text style={styles.chapterText}>{item?.test}</Text>
+                      <Text style={styles.chapterTime}>
+                        {totalMinutes} mins | {item?.questions} Questions
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+
+              
+              </> : <>
+              <TouchableOpacity
+                  disabled={!item?.disable}
+                  style={{borderWidth:1,}}
+                  onPress={async () => {
                     {
                       if (item?.test === 'Final Test') {
                         const res = await FinalTest(token, item?.id);
                         dispatch(addFinalQuestionData(res));
-                        if(res){
-
+                        if (res) {
                           item.navigation.navigate('FinalTestStack');
                         }
                       } else {
                         const res = await ModuleTest(token, item?.id);
                         dispatch(addQuestionData(res));
-                        if(res){
+                        if (res) {
                           item.navigation.navigate('TestStack');
                         }
                       }
                     }
                   }}>
-                  <Text style={styles.chapterText}>{item?.test}</Text>
-                  <Text style={styles.chapterTime}>
-                    {totalMinutes} mins | {item?.questions} Questions
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            {item?.rate === -1 ? (
-              <></>
-            ) : (
-              <>
-                {item?.rate === 0 || item?.rate ? (
-                  <View style={styles.rateView}>
-                    <View style={styles.rateNumView}>
-                      <Text style={styles.rateNum}>
-                        {Number((item?.rate).toFixed(1))}
-                      </Text>
-                      <Text style={styles.ratePercent}>%</Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
+                    <View style={{width: 40, marginLeft: 5}}>
+                      <Image
+                        source={require('../../assets/images/icn_moduletest.png')}
+                        style={styles.image}
+                      />
                     </View>
-                    <Text style={styles.rateText}>Approval Rate</Text>
+
+                    <View style={styles.testNameContainer}>
+                      <Text style={styles.chapterText}>{item?.test}</Text>
+                      <Text style={styles.chapterTime}>
+                        {totalMinutes} mins | {item?.questions} Questions
+                      </Text>
+                    </View>
                   </View>
-                ) : (
+                </TouchableOpacity>
+              </>}
+
+
+               
+
+                {item?.rate === -1 ? (
                   <></>
+                ) : (
+                  <>
+                    {item?.rate === 0 || item?.rate ? (
+                      <View style={styles.rateView}>
+                        <View style={styles.rateNumView}>
+                          <Text style={styles.rateNum}>
+                            {Number((item?.rate).toFixed(1))}
+                          </Text>
+                          <Text style={styles.ratePercent}>%</Text>
+                        </View>
+                        <Text style={styles.rateText}>Approval Rate</Text>
+                      </View>
+                    ) : (
+                      <></>
+                    )}
+                    <></>
+                  </>
                 )}
-                <></>
-              </>
-            )}
-          </View>
+              </View>
             </>
           ) : (
             <>
-             <View style={styles.container2}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <View style={{width: 40, marginLeft: 5}}>
-                <Image
-                  source={require('../../assets/images/icn_moduletest.png')}
-                  style={styles.image}
-                />
-              </View>
+              <View style={styles.container2}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={{width: 40, marginLeft: 5}}>
+                    <Image
+                      source={require('../../assets/images/icn_moduletest.png')}
+                      style={styles.image}
+                    />
+                  </View>
 
-              <View style={styles.testNameContainer2}>
-                {/* <View > */}
-                <TouchableOpacity>
-                  <Text style={styles.chapterText}>{item?.test}</Text>
-                  <Text style={styles.chapterTime}>
-                    {totalMinutes} mins | {item?.questions} Questions
-                  </Text>
-                </TouchableOpacity>
+                  <View style={styles.testNameContainer2}>
+                    {/* <View > */}
+                    <TouchableOpacity>
+                      <Text style={styles.chapterText}>{item?.test}</Text>
+                      <Text style={styles.chapterTime}>
+                        {totalMinutes} mins | {item?.questions} Questions
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
-            </View>
-          </View>
-            
-            
             </>
           )}
-
-
-         
         </View>
       </View>
     </>
@@ -162,23 +194,23 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     width: '91%',
     height: 72,
-    justifyContent:'space-between'
+    justifyContent: 'space-between',
   },
   image: {
     marginRight: 6,
     height: 34,
     width: 24,
   },
-  testNameContainer:{
+  testNameContainer: {
     width: '70%',
-    marginRight:-30
+    marginRight: -30,
   },
   chapterText: {
     color: '#042C5C',
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     fontWeight: Platform.OS === 'ios' ? '600' : '700',
-    lineHeight: 20,
+    // lineHeight: 20,
   },
   chapterTime: {
     height: 15,
@@ -195,8 +227,7 @@ const styles = StyleSheet.create({
   rateNumView: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: Platform.OS === 'ios' ? 0 : -5
-    
+    marginBottom: Platform.OS === 'ios' ? 0 : -5,
   },
   rateNum: {
     color: '#1EAB0D',
@@ -208,15 +239,13 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: '#1EAB0D',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
-
   },
   rateText: {
     color: '#7A7A7A',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
 
     fontSize: 8,
-    marginTop: Platform.OS === 'ios' ? -3 : 5
-   
+    marginTop: Platform.OS === 'ios' ? -3 : 5,
   },
   container2: {
     backgroundColor: Platform.OS === 'ios' ? '#F9F9F9' : '#F9F9F9',
@@ -225,10 +254,10 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    width:'100%',
+    width: '100%',
     borderRadius: 6,
   },
-  testNameContainer2:{
-    width: '80%'
+  testNameContainer2: {
+    width: '80%',
   },
 });

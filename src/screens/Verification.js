@@ -27,7 +27,7 @@ export const Verification = ({navigation}) => {
 
     try {
       const response = await axios.post(
-        'https://virtual-learning-app-java.herokuapp.com/newUser/verify',
+        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/verify',
         obj,
       );
       console.log('=====', response.data.message);
@@ -78,7 +78,7 @@ export const Verification = ({navigation}) => {
 
               try {
                 const response = await axios.put(
-                  'https://virtual-learning-app-java.herokuapp.com/newUser/resend',
+                  'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/resend',
                   obj,
                 );
                 console.log('=====', response.data.message);

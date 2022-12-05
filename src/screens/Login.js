@@ -83,7 +83,7 @@ export const Login = ({navigation}) => {
 
                 try {
                   const response = await axios.put(
-                    'https://virtual-learning-app-java.herokuapp.com/login',
+                    'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/login',
                     obj,
                   );
 
@@ -96,7 +96,7 @@ export const Login = ({navigation}) => {
                     setWarning(true);
                   }
                 } catch (error) {
-                  // console.log(error);
+                  console.log(error);
                   setWarning(true);
         
                   

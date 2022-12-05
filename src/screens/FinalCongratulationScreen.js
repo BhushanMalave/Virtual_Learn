@@ -22,7 +22,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('MyCourse');
+          navigation.navigate('Chapters');
         }}>
         <Image
           source={require('../assets/images/icn_close_filter.png')}

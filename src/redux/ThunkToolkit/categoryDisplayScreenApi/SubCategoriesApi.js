@@ -12,7 +12,7 @@ export const cdsSubCategories = createAsyncThunk(
         };
         try{
             const response = await axios.get(
-                `https://virtual-learning-app-java.herokuapp.com/user/subCategoriesWP?categoryId=${id}`,
+                `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/subCategoriesWP?categoryId=${id}`,
                 options,
             );
             return response.data;
