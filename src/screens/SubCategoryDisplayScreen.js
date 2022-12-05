@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -17,6 +17,7 @@ import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScree
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
+import {Dimensions} from 'react-native';
 
 export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
@@ -26,6 +27,17 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const token = useSelector(state => state.userDetails.token);
   const item = route.params.itemCategory;
   const dispatch = useDispatch();
+  const [portrait, setPortrait] = useState(true);
+  const isPortrait = () => {
+    const dim = Dimensions.get('screen');
+    return dim.height >= dim.width;
+  };
+
+  useEffect(() => {
+    Dimensions.addEventListener('change', () => {
+      setPortrait(isPortrait());
+    });
+  }, []);
 
   return (
     <View style={styles.body}>
@@ -33,10 +45,10 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
         <View style={styles.topbar}>
           <TouchableOpacity
             onPress={() => {
-              dispatch(cdsbasicCourse({token, id:item?.categoryId}));
-              dispatch(cdsAdvanceCourse({token,id:  item?.categoryId}));
+              dispatch(cdsbasicCourse({token, id: item?.categoryId}));
+              dispatch(cdsAdvanceCourse({token, id: item?.categoryId}));
               dispatch(cdsAllCourseOfCategory({token, id: item?.categoryId}));
-              dispatch(cdsSubCategories({token,id : item?.categoryId}));
+              dispatch(cdsSubCategories({token, id: item?.categoryId}));
               navigation.navigate('CategoryDisplayScreen', {item});
             }}>
             <Image
@@ -55,37 +67,73 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
           style={{
             flex: 1,
             alignItems: 'center',
-            marginTop: 50,
+            // marginTop: 50,
             justifyContent: 'center',
           }}>
-          <ActivityIndicator
+          {/* <ActivityIndicator
             animating={
-              !basicCourse && !allcourse && !featuredCourse && !subCategories
+              !basicCourse && !allcourse && !featuredCourse
             }
             size="small"
             color="#373737"
-          />
+          /> */}
         </View>
         <Text style={styles.text1}>{route.params.item.categoryName}</Text>
-        <Text style={styles.text2}> Courses to get you started</Text>
-        <View style={styles.view1}>
-          <FlatList
-            data={basicCourse}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <View>
-                <CategoryDisplayCourseComponent
-                  courseName={item?.courseName}
-                  chapterCount={item?.chapterCount}
-                  courseDuration={item?.courseDuration}
-                  courseId={item?.courseId}
-                  coursePhoto={item?.coursePhoto}
-                  previewVideo={item?.previewVideo}
-                />
-              </View>
-            )}></FlatList>
-        </View>
+        {!basicCourse && !allcourse && !featuredCourse ? (
+          <>
+            {portrait ? (
+              <>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '35%',
+                  }}>
+                  <Text style={{color: 'black'}}>No courses found!</Text>
+                </View>
+              </>
+            ) : (
+              <>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '5%',
+                  }}>
+                  <Text style={{color: 'black'}}>No courses found!</Text>
+                </View>
+              </>
+            )}
+          </>
+        ) : (
+          <></>
+        )}
+        {basicCourse ? (
+          <>
+            <Text style={styles.text2}> Courses to get you started</Text>
+            <View style={styles.view1}>
+              <FlatList
+                data={basicCourse}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({item}) => (
+                  <View>
+                    <CategoryDisplayCourseComponent
+                      courseName={item?.courseName}
+                      chapterCount={item?.chapterCount}
+                      courseDuration={item?.courseDuration}
+                      courseId={item?.courseId}
+                      coursePhoto={item?.coursePhoto}
+                      previewVideo={item?.previewVideo}
+                    />
+                  </View>
+                )}></FlatList>
+            </View>
+          </>
+        ) : (
+          <></>
+        )}
+
         {featuredCourse && (
           <View style={styles.view1}>
             <Text style={styles.text2}>Featured courses</Text>
@@ -109,21 +157,26 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
             </View>
           </View>
         )}
-
-        <Text style={styles.text2}>All courses</Text>
-        <View style={{marginHorizontal: 24}}>
-          {allcourse?.map(item => (
-            <View key={item?.courseId}>
-              <SearchFoundComponent
-                courseName={item?.courseName}
-                chapterCount={item?.chapterCount}
-                categoryName={item?.categoryName}
-                coursePhoto={item?.coursePhoto}
-                courseId={item?.courseId}
-              />
+        {allcourse ? (
+          <>
+            <Text style={styles.text2}>All courses</Text>
+            <View style={{marginHorizontal: 24}}>
+              {allcourse?.map(item => (
+                <View key={item?.courseId}>
+                  <SearchFoundComponent
+                    courseName={item?.courseName}
+                    chapterCount={item?.chapterCount}
+                    categoryName={item?.categoryName}
+                    coursePhoto={item?.coursePhoto}
+                    courseId={item?.courseId}
+                  />
+                </View>
+              ))}
             </View>
-          ))}
-        </View>
+          </>
+        ) : (
+          <></>
+        )}
       </ScrollView>
     </View>
   );

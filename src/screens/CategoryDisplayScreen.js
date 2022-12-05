@@ -51,7 +51,6 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           style={{
             flex: 1,
             alignItems: 'center',
-            marginTop: 0,
             justifyContent: 'center',
           }}>
           <ActivityIndicator
@@ -63,7 +62,9 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           />
         </View>
         <Text style={styles.text1}>{route.params.item.categoryName}</Text>
-        <Text style={styles.text2}> Courses to get you started</Text>
+        {basicCourse?(
+          <>
+         <Text style={styles.text2}> Courses to get you started</Text>
         <View style={styles.view1}>
           <FlatList
             data={basicCourse}
@@ -83,6 +84,10 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
               </View>
             )}></FlatList>
         </View>
+          </>
+          
+        ):(<></>)}
+
         {featuredCourse && (
           <View style={styles.view1}>
             <Text style={styles.text2}>Featured courses</Text>
