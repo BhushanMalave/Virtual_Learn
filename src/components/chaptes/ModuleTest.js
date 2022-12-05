@@ -63,7 +63,7 @@ export const ModularTest = item => {
               <View style={styles.container}>
               {item?.completed ? <>
                 <TouchableOpacity
-                  disabled={false}>
+                  disabled={true}>
                   <View
                     style={{
                       flexDirection: 'row',
@@ -89,7 +89,6 @@ export const ModularTest = item => {
               </> : <>
               <TouchableOpacity
                   disabled={!item?.disable}
-                  style={{borderWidth:1,}}
                   onPress={async () => {
                     {
                       if (item?.test === 'Final Test') {
@@ -167,7 +166,9 @@ export const ModularTest = item => {
 
                   <View style={styles.testNameContainer2}>
                     {/* <View > */}
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                    disabled={true}
+                    >
                       <Text style={styles.chapterText}>{item?.test}</Text>
                       <Text style={styles.chapterTime}>
                         {totalMinutes} mins | {item?.questions} Questions
