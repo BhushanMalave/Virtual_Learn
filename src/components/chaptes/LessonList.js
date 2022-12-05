@@ -13,7 +13,6 @@ import {useDispatch} from 'react-redux';
 import {setPopUpState} from '../../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 
 export const LessonList = item => {
-  // console.log(item)
   const video = item => {
     item.nav.navigate('LessonVideoPlayer', {item});
   };
@@ -32,6 +31,7 @@ export const LessonList = item => {
     }
   }, [item?.duration]);
   const data = useSelector(state => state.chapterResponse.data);
+  // console.log(data.)
   const continueData = useSelector(state => state.chapterResponse.continueData);
   const dispatch = useDispatch();
   return (
@@ -69,7 +69,11 @@ export const LessonList = item => {
           <>
             <View style={styles.container}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={styles.chapterNumber}>0{item?.number}</Text>
+              {item?.number < 10 ? (
+                  <Text style={styles.chapterNumber}>0{item?.number}</Text>
+                ) : (
+                  <Text style={styles.chapterNumber}>{item?.number}</Text>
+                )}
                 <View style={{width: '75%'}}>
                   <Text style={styles.chapterText}>{item?.lessonName}</Text>
                   <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
@@ -122,7 +126,11 @@ export const LessonList = item => {
           <>
             <View style={styles.container2}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={styles.chapterNumber}>0{item?.number}</Text>
+                {item?.number < 10 ? (
+                  <Text style={styles.chapterNumber}>0{item?.number}</Text>
+                ) : (
+                  <Text style={styles.chapterNumber}>{item?.number}</Text>
+                )}
                 <View style={{width: '80%'}}>
                   <Text style={styles.chapterText}>{item?.lessonName}</Text>
                   <Text style={styles.chapterTime}>{totalMinutes} mins</Text>
