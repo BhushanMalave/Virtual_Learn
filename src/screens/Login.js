@@ -17,7 +17,6 @@ import { KeyboardAwareView } from 'react-native-keyboard-aware-view';
 import {ButtonComponent} from '../components/Buttons';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import icn_warning from '../assets/images/05.1_VirtualLearn_Login_error/warning/icn_warning.png';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
@@ -204,7 +203,7 @@ export const Login = ({navigation}) => {
       </View>
       {warning ? (
         <View style={styles.warningView}>
-          <Image source={icn_warning} />
+          <Image source={require('../assets/images/icn_warning.png')} />
           <Text style={styles.warningText}>
             Invalid Login Credentials.please try again
           </Text>
