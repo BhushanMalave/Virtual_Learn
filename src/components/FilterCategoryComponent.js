@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
   categorytext: {
     height: 15,
     color: '#2B2B2B',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 12,
     marginHorizontal: 5,
     marginVertical: 3,

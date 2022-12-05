@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
   },
   textcoursename: {
     fontSize: 16,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     marginTop: 10,
     color: '#FFFFFF',
     marginHorizontal: 24,
@@ -181,17 +181,17 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 12,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     color: '#373737',
     textAlign: 'center',
-    fontWeight: '500',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
   },
   text2: {
     fontSize: 16,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     color: '#2BB5F4',
     textAlign: 'center',
-    fontWeight: '500',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     marginTop: 10,
   },
   textlist: {

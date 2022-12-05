@@ -63,7 +63,8 @@ export const ModularTest = item => {
               <View style={styles.container}>
               {item?.completed ? <>
                 <TouchableOpacity
-                  disabled={true}>
+                  disabled={true}
+                  >
                   <View
                     style={{
                       flexDirection: 'row',
@@ -208,9 +209,9 @@ const styles = StyleSheet.create({
   },
   chapterText: {
     color: '#042C5C',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '600':'normal',
     fontSize: 16,
-    fontWeight: Platform.OS === 'ios' ? '600' : '700',
     // lineHeight: 20,
   },
   chapterTime: {

@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
     borderRadius:20
   },
   text2: {
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 14,
-    fontWeight: 'bold',
     marginLeft: 10,
     marginRight: 30,
     color: 'black',

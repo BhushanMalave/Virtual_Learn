@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
   viewCetificateButton: {
     height: 20,
     color: '#EE5C4D',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 16,
-    fontWeight: 'bold',
     letterSpacing: 0.4,
     lineHeight: 20,
     textAlign: 'center',

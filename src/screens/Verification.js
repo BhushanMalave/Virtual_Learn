@@ -212,8 +212,8 @@ const styles = StyleSheet.create({
   text4: {
     color: '#EE5C4D',
     fontSize: 17,
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     textAlign: 'center',
     marginBottom: Platform.OS == 'ios' ? 0 : 0,
   },

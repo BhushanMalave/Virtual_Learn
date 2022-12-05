@@ -281,8 +281,8 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 18,
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     marginLeft: 100,
   },
   img: {
@@ -297,8 +297,8 @@ const styles = StyleSheet.create({
   },
   texttopsearch: {
     fontSize: 18,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     color: '#2B2B2B',
   },
   viewcatin: {

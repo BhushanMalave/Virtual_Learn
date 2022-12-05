@@ -64,9 +64,9 @@ description:{
 button:{
   height:20,
   color:"#EE5C4D",
-  fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+  fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
   fontSize:16,
-  fontWeight:"bold",
+  fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
   letterSpacing:0.4,
   lineHeight:20,
   textAlign:"center",
