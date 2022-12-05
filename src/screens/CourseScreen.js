@@ -24,7 +24,6 @@ export const CourseScreen = ({navigation}) => {
           style={styles.header}>
           <TouchableOpacity onPress={() =>{ 
             dispatch(addChapterList());
-            // navigation.navigate('HomeScreen')
             navigation.goBack('HomeScreen')
           }}
             >
