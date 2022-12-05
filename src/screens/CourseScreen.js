@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
     height: 12,
 
     color: '#373737',
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     fontSize: 10,
-    fontWeight: '500',
     letterSpacing: 0,
     lineHeight: 9,
     alignSelf: 'center',

@@ -11,9 +11,8 @@ export const QuestionListComponent = props => {
             <Text
               style={{
                 fontSize: 14,
-                fontFamily:
-                  Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-                fontWeight: 'bold',
+                fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+                fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
                 color: '#373737',
               }}>
               Question {props.questionId}
@@ -22,9 +21,8 @@ export const QuestionListComponent = props => {
               <Text
                 style={{
                   fontSize: 12,
-                  fontFamily:
-                    Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-                  fontWeight: 'bold',
+                  fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+                  fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
                   color: '#1EAB0D',
                   marginTop: 10,
                 }}>
@@ -34,9 +32,8 @@ export const QuestionListComponent = props => {
               <Text
                 style={{
                   fontSize: 12,
-                  fontFamily:
-                    Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-                  fontWeight: 'bold',
+                  fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+                  fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
                   color: '#EA2626',
                   marginTop: 10,
                 }}>

@@ -87,16 +87,16 @@ const styles = StyleSheet.create({
   },
   chapterName: {
     color: '#373737',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
     fontSize: 12,
-    fontWeight: Platform.OS == 'ios' ? '500' : '600',
     lineHeight: 15,
   },
   chapterNameCompleted: {
     color: '#1EAB0D',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 12,
-    fontWeight: 'bold',
     lineHeight: 15,
   },
   chapterNumber: {
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
   },
   chapterText: {
     color: '#042C5C',
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 16,
-    fontWeight: 'bold',
     lineHeight: 20,
   },
   chapterTime: {

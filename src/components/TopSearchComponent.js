@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   },
   comtext: {
     fontSize: 13,
-    fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    fontWeight: 'bold',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     color: '#373737',
     marginHorizontal: 10,
     marginTop: 5,
