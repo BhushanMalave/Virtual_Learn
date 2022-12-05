@@ -7,12 +7,16 @@ import {
   Text,
   ScrollView,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import {CategoryDisplayCourseComponent} from '../components/CategoryDisplayCourseComponent';
 import {SearchFoundComponent} from '../components/SearchFoundComponent';
+import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
+import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
+import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector,useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
@@ -20,13 +24,21 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const subCategories = useSelector(state => state.subCategories.data);
   const allcourse = useSelector(state => state.allCourseOfCategory.data);
   const token = useSelector(state => state.userDetails.token);
-  const dispatch =useDispatch();
+  const item = route.params.itemCategory;
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.body}>
       <ScrollView showsHorizontalScrollIndicator={false}>
         <View style={styles.topbar}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(cdsbasicCourse({token, id:item?.categoryId}));
+              dispatch(cdsAdvanceCourse({token,id:  item?.categoryId}));
+              dispatch(cdsAllCourseOfCategory({token, id: item?.categoryId}));
+              dispatch(cdsSubCategories({token,id : item?.categoryId}));
+              navigation.navigate('CategoryDisplayScreen', {item});
+            }}>
             <Image
               source={require('../assets/images/icn_back_header.png')}
               style={styles.imgback}
@@ -40,17 +52,19 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
         <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          marginTop: 50,
-          justifyContent: 'center',
-        }}>
-        <ActivityIndicator
-          animating={!basicCourse && !allcourse && !featuredCourse && !subCategories}
-          size="small"
-          color="#373737"
-        />
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            marginTop: 50,
+            justifyContent: 'center',
+          }}>
+          <ActivityIndicator
+            animating={
+              !basicCourse && !allcourse && !featuredCourse && !subCategories
+            }
+            size="small"
+            color="#373737"
+          />
         </View>
         <Text style={styles.text1}>{route.params.item.categoryName}</Text>
         <Text style={styles.text2}> Courses to get you started</Text>
@@ -95,7 +109,7 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
             </View>
           </View>
         )}
-        
+
         <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
           {allcourse?.map(item => (
@@ -140,7 +154,7 @@ const styles = StyleSheet.create({
 
   text1: {
     fontSize: 26,
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     textAlign: 'left',
     color: '#2B2B2B',
