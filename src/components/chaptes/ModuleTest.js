@@ -75,6 +75,25 @@ export const ModularTest = item => {
                 {item?.completed ? (
                   <>
                     <TouchableOpacity disabled={true}>
+                    {/* <TouchableOpacity
+                      disabled={!item?.disable}
+                      onPress={async () => {
+                        {
+                          if (item?.test === 'Final Test') {
+                            const res = await FinalTest(token, item?.id);
+                            dispatch(addFinalQuestionData(res));
+                            if (res) {
+                              item.navigation.navigate('FinalTestStack');
+                            }
+                          } else {
+                            const res = await ModuleTest(token, item?.id);
+                            dispatch(addQuestionData(res));
+                            if (res) {
+                              item.navigation.navigate('TestStack');
+                            }
+                          }
+                        }
+                      }}> */}
                       <View
                         style={{
                           flexDirection: 'row',

@@ -46,6 +46,7 @@ export const ChaptersScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const coursedata = useSelector(state => state.courseData.overview);
   const data = useSelector(state => state.chapterResponse.data);
+  // console.log(data)
   const courseId = useSelector(state => state.chapterResponse.courseId);
   const [refreshing, setRefreshing] = useState(false);
   const continueData = useSelector(state => state.chapterResponse.continueData);
