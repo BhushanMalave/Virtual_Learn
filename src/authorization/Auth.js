@@ -238,7 +238,10 @@ export const continueApi = async (token, id) => {
       options,
     );
     if (response.data) {
+      if(response.data.message !== "null")
+      {
       return response.data;
+      } 
     }
   } catch (error) {
     // console.log(error.response.data);
@@ -584,7 +587,7 @@ export const SubmitFinalTest = async (token, Body) => {
     );
 
     if (response.data) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
   } catch (error) {

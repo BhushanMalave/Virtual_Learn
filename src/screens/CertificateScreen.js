@@ -63,10 +63,10 @@ export const CertificateScreen = ({route, navigation}) => {
     let date = new Date();
     let PictureDir =
       Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
-    var ext = 'pdf';
+    var ext = 'png';
     var file_ex = `certificate_${Math.floor(
       date.getTime() + date.getSeconds() / 2,
-    )}.pdf`;
+    )}.png`;
     const fPath = `${PictureDir}/${file_ex}`;
 
     const configOptons = Platform.select({
@@ -81,7 +81,7 @@ export const CertificateScreen = ({route, navigation}) => {
         appendEXt: ext,
         addAndroidDownloads: {
           useDownloadManager: true,
-          notification: false,
+          notification: true,
           path:
             PictureDir +
             '/me_' +
@@ -104,10 +104,8 @@ export const CertificateScreen = ({route, navigation}) => {
       config(configOptons)
         .fetch('GET', url)
         .progress((received, total) => {
-          console.log('progress', received / total);
         })
         .then(res => {
-          console.log('file_download', res);
           RNFetchBlob.android.actionViewIntent(res.path());
         })
         .catch(errorMessage => {

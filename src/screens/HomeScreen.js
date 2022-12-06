@@ -26,6 +26,7 @@ import {
   setNewestData,
   setPopularData,
 } from '../redux/ReduxPersist/ChoiceYourCourseSlice';
+import {addChapterList} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import {overViewData} from '../authorization/Auth';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
@@ -118,6 +119,7 @@ export const HomeScreen = ({navigation}) => {
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={async () => {
+                  dispatch(addChapterList());
                   dispatch(csChapterResponse({token, id: item.courseId}));
                   const res = await overViewData(token, item.courseId);
                   dispatch(addOverView(res));
@@ -159,6 +161,7 @@ export const HomeScreen = ({navigation}) => {
                   chapter={item?.completedChapter}
                   ctdchapter={item?.totalChapter}
                   onPress={async () => {
+                  dispatch(addChapterList());
                     dispatch(csChapterResponse({token, id: item.courseId}));
                     const res = await overViewData(token, item.courseId);
                     dispatch(addOverView(res));
@@ -291,6 +294,7 @@ export const HomeScreen = ({navigation}) => {
                 <View style={styles.btmcourseview} key={item?.courseId}>
                   <TouchableOpacity
                     onPress={async () => {
+                  dispatch(addChapterList());
                       dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
