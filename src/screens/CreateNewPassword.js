@@ -19,8 +19,6 @@ import Toast from 'react-native-simple-toast'
 
 export const CreateNewPassword = ({navigation,route}) => {
   const [info, setInfo] = useState(false);
-  const mobileNumber = route.params.mobileNumber;
-
   const registerValidationScheme = yup.object().shape({
     newpassword: yup
       .string()
@@ -57,7 +55,7 @@ export const CreateNewPassword = ({navigation,route}) => {
 
 
                 const obj = {
-                  mobileNumber: `+91${mobileNumber}`,
+                  mobileNumber: route.params.obj.mobileNumber,
                   oneTimePassword: values.newpassword,
                 };
                 console.log(obj);
@@ -67,7 +65,6 @@ export const CreateNewPassword = ({navigation,route}) => {
                     'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/resetPassword',
                     obj,
                   );
-                  console.log('=====', response.data.message);
                   if (
                     response.data.message === 'Password Changed Successfully'
                   ) {
@@ -159,6 +156,7 @@ export const CreateNewPassword = ({navigation,route}) => {
                             onChangeText={handleChange('confirmnewpassword')}
                             onBlur={handleBlur('confirmnewpassword')}
                             value={values.confirmnewpassword}
+                            secureTextEntry={true}
                             style={styles.textinput}
                           />
                               {values.confirmnewpassword ? (

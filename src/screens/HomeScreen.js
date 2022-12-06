@@ -65,7 +65,7 @@ export const HomeScreen = ({navigation}) => {
     }
   };
  
-
+  console.log(choiceYourCourse)
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     dispatch(hsTopHeaders(token));
@@ -311,7 +311,7 @@ export const HomeScreen = ({navigation}) => {
                           {item?.courseName}
                         </Text>
                         <Text style={styles.ChoiseCourseChapterNum}>
-                          Chapter {item?.chapterCount}
+                           {item?.chapterCount} Chapter
                         </Text>
                       </View>
                     </View>

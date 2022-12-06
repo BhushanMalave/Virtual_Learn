@@ -11,7 +11,7 @@ import {
 export const PasswordChange = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Image
           source={require('../assets/images/passwordchange.png')}
           resizeMode="contain"
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   image: {
     alignSelf: 'center',
     justifyContent: 'center',
-    marginTop: '50%',
+    marginTop: '40%',
     
   },
   text: {
