@@ -116,7 +116,9 @@ export const HomeSearch = ({navigation}) => {
       </View>
       {componentrender === 1 && (
         <View style={styles.defaultBody}>
-          <View style={styles.topsearchView}>
+
+          {topData?(<>
+            <View style={styles.topsearchView}>
             <Text style={styles.texttopsearch}>Top Searches</Text>
             <View style={styles.viewtopsearch}>
               {topData?.map(item => (
@@ -134,6 +136,9 @@ export const HomeSearch = ({navigation}) => {
               ))}
             </View>
           </View>
+          
+          </>):(<></>)}
+     
           <View style={styles.searchCatView}>
             <Text style={styles.texttopsearch}>Search From Categories</Text>
             <View style={styles.viewcatin}>
