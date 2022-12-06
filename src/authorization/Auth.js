@@ -398,7 +398,7 @@ export const applySearchFilter = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-     console.log(err);
+    console.log(err.response.data);
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };

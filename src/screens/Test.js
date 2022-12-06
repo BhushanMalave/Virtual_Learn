@@ -29,6 +29,7 @@ export const Test = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
   const userAnswers = useSelector(state => state.testdata.userAnswers);
+  
   const dispatch = useDispatch();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -204,6 +205,7 @@ if(data1?.testDuration)
               userAnswers: userAnswers,
             };
             const res = await SubmitTest(token, body);
+            dispatch(setTestPercentage(res));
             if (res) {
               navigation.navigate('CongratulationScreen');
               dispatch(removeAll());

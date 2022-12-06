@@ -5,12 +5,12 @@ import Slider from '@react-native-community/slider';
 import Orientation from 'react-native-orientation-locker';
 
 export const VideoPlayer = ({navigation, route}) => {
+
   const url = route.params.item.previewVideo;
   const title = route.params.item.courseName;
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState({currentTime: 0, endingTime: 1});
   const [fullScreen, setFullScreen] = useState(false);
-
   const FullScreen = () => {
     setFullScreen(!fullScreen);
     if (fullScreen) {
@@ -28,11 +28,13 @@ export const VideoPlayer = ({navigation, route}) => {
     const hr = digit(Math.floor((timesec / 3000) % 60));
     return `${min}:${sec}`;
   };
-  const videoRef = useRef();
 
+
+  const videoRef = useRef();
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
   };
+
   return (
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <Pressable
@@ -49,8 +51,8 @@ export const VideoPlayer = ({navigation, route}) => {
       </Pressable>
 
       <Video
+       ref={videoRef}
         muted={false}
-        ref={videoRef}
         resizeMode={fullScreen ? 'cover' : 'contain'}
         source={{
           uri: url,
@@ -79,7 +81,10 @@ export const VideoPlayer = ({navigation, route}) => {
             <Text style={styles.text2}>{title}</Text>
           </View>
           <Pressable onPress={() => FullScreen()}>
-            <Image source={require('../assets/images/icn_maximise.png')} style={{tintColor:"white"}}/>
+            <Image
+              source={require('../assets/images/icn_maximise.png')}
+              style={{tintColor: 'white'}}
+            />
           </Pressable>
         </View>
         <View style={styles.view2}>
@@ -87,27 +92,33 @@ export const VideoPlayer = ({navigation, route}) => {
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_playvideo-Play.png')}
-                style={{height: 16,tintColor:"white", width: 14}}
+                style={{height: 16, tintColor: 'white', width: 14}}
               />
             </Pressable>
           ) : (
             <Pressable onPress={() => setIsPlaying(!isPlaying)}>
               <Image
                 source={require('../assets/images/icn_pausevideo.png')}
-                style={{height: 16, tintColor:"white",width: 14, transform: [{rotate: '90 deg'}]}}
+                style={{
+                  height: 16,
+                  tintColor: 'white',
+                  width: 14,
+                  transform: [{rotate: '90 deg'}],
+                }}
               />
             </Pressable>
           )}
           <Slider
-            style={{width: '90%', height: 5, marginTop: -10, marginLeft: 10}}
+            style={{width: '90%', height: 5, marginTop:Platform.OS === 'ios' ? -10: 5, marginLeft: 10}}
             minimumValue={0}
             maximumValue={1}
             minimumTrackTintColor="#2BB5F4"
             maximumTrackTintColor="#3A4452"
             thumbTintColor="transparent"
-            value={time.currentTime / time.endingTime}
-            onValueChange={value => {
-              Platform.OS === 'ios' && handleslide(value);
+            value={time.currentTime/ time.endingTime}
+           // initialValue={time.currentTime / time.endingTime}
+            onValueChange={ value => {
+                   Platform.OS === 'ios' && handleslide(value)
             }}
           />
         </View>

@@ -11,7 +11,6 @@ export const CongratulationScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.testdata.question);
   const testpercentage = useSelector(state => state.testdata.testPercentage);
-  console.log(testpercentage)
 
   testName = 'Module Test';
   return (

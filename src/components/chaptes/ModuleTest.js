@@ -74,26 +74,7 @@ export const ModularTest = item => {
               <View style={styles.container}>
                 {item?.completed ? (
                   <>
-                    {/* <TouchableOpacity disabled={true}> */}
-                    <TouchableOpacity
-                      disabled={!item?.disable}
-                      onPress={async () => {
-                        {
-                          if (item?.test === 'Final Test') {
-                            const res = await FinalTest(token, item?.id);
-                            dispatch(addFinalQuestionData(res));
-                            if (res) {
-                              item.navigation.navigate('FinalTestStack');
-                            }
-                          } else {
-                            const res = await ModuleTest(token, item?.id);
-                            dispatch(addQuestionData(res));
-                            if (res) {
-                              item.navigation.navigate('TestStack');
-                            }
-                          }
-                        }
-                      }}>
+                    <TouchableOpacity disabled={true}>
                       <View
                         style={{
                           flexDirection: 'row',
@@ -193,7 +174,7 @@ export const ModularTest = item => {
                   </View>
 
                   <View style={styles.testNameContainer2}>
-                    {/* <View > */}
+                    {/ <View > /}
                     <TouchableOpacity disabled={true}>
                       <Text style={styles.chapterText}>{item?.test}</Text>
                       <Text style={styles.chapterTime}>
