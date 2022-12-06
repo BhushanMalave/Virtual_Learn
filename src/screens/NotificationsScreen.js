@@ -42,7 +42,6 @@ export const NotificationsScreen = ({navigation}) => {
     dispatch(notificationApiCall(token));
     refreshToken();
   }, []);
-  console.log(notificationData)
   return (
     <SafeAreaView style={styles.body}>
       <TouchableOpacity onPress={() => {

@@ -56,6 +56,7 @@ export const HomeScreen = ({navigation}) => {
 
   const refreshToken = async token => {
     const key = await getVerifiedKeys(token);
+    console.log("090909090",key);
     dispatch(setToken(key));
   };
   const allCourse = async () => {
@@ -68,15 +69,16 @@ export const HomeScreen = ({navigation}) => {
   console.log(choiceYourCourse)
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    dispatch(hsTopHeaders(token));
-    dispatch(hsCategories(token));
-    dispatch(hsTopCourses(token));
-    dispatch(mpUserDetails(token));
-    dispatch(OnGoing(token));
-    setClicked1(true);
-    setClicked2(false);
-    setClicked3(false);
-    allCourse();
+    // dispatch(hsTopHeaders(token));
+    // dispatch(hsCategories(token));
+    // dispatch(hsTopCourses(token));
+    // dispatch(mpUserDetails(token));
+    // dispatch(OnGoing(token));
+    // setClicked1(true);
+    // setClicked2(false);
+    // setClicked3(false);
+    // allCourse();
+    refreshToken(token);
     setRefreshing(false);
   }, [refreshing]);
 
