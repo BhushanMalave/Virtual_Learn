@@ -326,7 +326,7 @@ export const topSearchData = async token => {
     }
   } catch (error) {
     // console.log('=======', error);
-    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
+    // Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -395,7 +395,7 @@ export const applySearchFilter = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    // console.log(err);
+    console.log(err.response.data);
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
