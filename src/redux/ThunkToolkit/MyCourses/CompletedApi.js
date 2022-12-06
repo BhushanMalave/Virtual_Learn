@@ -19,7 +19,6 @@ export const Completed = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('comp', error.response.data);
-      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );

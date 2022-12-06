@@ -52,6 +52,7 @@ export const termsAndConditions = async () => {
       return response.data.message;
     }
   } catch (error) {
+    console.log(error)
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
@@ -170,6 +171,7 @@ export const mpChangeUserData = async (token, formBody) => {
       },
     );
     const jsonResponse = res;
+    console.log("/////",res.status)
     return res.status;
   } catch (err) {
     // console.log('-----', err);
@@ -326,7 +328,6 @@ export const topSearchData = async token => {
     }
   } catch (error) {
     // console.log('=======', error);
-    // Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -350,7 +351,6 @@ export const searchDataKeyword = async (token, obj) => {
     }
   } catch (error) {
     // console.log(error.response.status);
-    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
 
@@ -471,7 +471,7 @@ export const PauseTime = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };

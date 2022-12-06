@@ -53,9 +53,17 @@ export const ModularTest = item => {
                     source={require('../../assets/images/icn_timeline_completed.png')}
                   />
                 ) : (
-                  <Image
+<>
+                  {item?.disable ? (<>
+                  
+                    source={require('../../assets/images/icn_timeline_active.png')}
+                  
+                  </>):(<></>) }
+<Image
                     source={require('../../assets/images/icn_timeline_inactive.png')}
                   />
+</>
+                
                 )}
               </View>
 
