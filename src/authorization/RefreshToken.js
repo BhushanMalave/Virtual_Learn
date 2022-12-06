@@ -1,8 +1,9 @@
 import jwt_decode from 'jwt-decode';
 import {refreshToken} from './Auth';
 
-export const isTokenExpired = token => {
+const isTokenExpired = token => {
   var decoded = jwt_decode(token);
+  console.log(decoded.exp)
   if (decoded.exp < Date.now() / 1000) {
     return true;
   } else {

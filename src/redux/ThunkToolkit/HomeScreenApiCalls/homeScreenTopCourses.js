@@ -10,6 +10,11 @@ export const hsTopCourses = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       },
     };
+    // const refreshToken = async token => {
+    //   const key = await getVerifiedKeys(token);
+    //   console.log("090909090",key);
+    //   dispatch(setToken(key));
+    // };
 
     try {
       const response = await axios.get(
@@ -19,7 +24,6 @@ export const hsTopCourses = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('hstopcrs', error);
-   
     }
   },
 );
