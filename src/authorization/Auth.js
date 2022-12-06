@@ -238,7 +238,10 @@ export const continueApi = async (token, id) => {
       options,
     );
     if (response.data) {
+      if(response.data.message !== "null")
+      {
       return response.data;
+      } 
     }
   } catch (error) {
     // console.log(error.response.data);
@@ -471,7 +474,7 @@ export const PauseTime = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    console.log('contApi: ',err);
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
@@ -512,7 +515,7 @@ export const ResultAnswer = async (token, id) => {
       options,
     );
     if (response.data) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
   } catch (err) {
@@ -558,7 +561,7 @@ export const FinalTest = async (token, id) => {
       options,
     );
     if (response.data) {
-      console.log('===', response.data);
+      // console.log('===', response.data);
       return response.data;
     }
   } catch (err) {
@@ -584,7 +587,7 @@ export const SubmitFinalTest = async (token, Body) => {
     );
 
     if (response.data) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
   } catch (error) {
@@ -607,7 +610,7 @@ export const FinalTestResult = async (token, id) => {
       options,
     );
     if (response.data) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
   } catch (err) {

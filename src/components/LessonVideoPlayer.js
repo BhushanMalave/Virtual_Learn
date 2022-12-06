@@ -66,6 +66,19 @@ export const LessonVideoPlayer = ({route, navigation}) => {
     }
   };
 
+
+  let [startTimerr, setStartTime] = useState(0);
+
+  useEffect(() => {
+    const turn = timing();
+    // const turn = 5;
+    if (turn) {
+      startTimerr = turn;
+    }
+    startTiming();
+  }, []);
+
+
   const startTiming = () => {
     videoRef.current.seek(startTimerr * time.endingTime);
   };
@@ -74,14 +87,8 @@ export const LessonVideoPlayer = ({route, navigation}) => {
   const handleslide = value => {
     videoRef.current.seek(value * time.endingTime);
   };
-  let [startTimerr, setStartTime] = useState(0);
-  useEffect(() => {
-    const turn = timing();
-    if (turn) {
-      startTimerr = turn;
-    }
-    startTiming();
-  }, []);
+
+
   return (
     <View style={{flex: 1, backgroundColor: '#373737'}}>
       <TouchableOpacity
@@ -117,9 +124,7 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             lessonId: route.params.item.lessonId,
             chapterId: route.params.item.chapterId,
             courseId: data?.courseId,
-          };
-          // console.log(body);
-         
+          };    
           const res = await PauseTime(token, body);
           console.log(res);
           if (res.message == 'Updated SuccessFully') {

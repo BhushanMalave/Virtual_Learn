@@ -52,16 +52,17 @@ export const BottomPopup = () => {
       chapterStartCount: catSC,
       chapterEndCount: catEC,
     };
-    console.log(body);
     const res = await applySearchFilter(token, body);
-    console.log(res)
     if (res) {
       dispatch(setSearchData(res));
       dispatch(setFilterState());
       dispatch(setComponentRender(2));
       clearAll();
-    }
-  };
+    }else{
+      dispatch(setFilterState());
+      dispatch(setComponentRender(3));
+      clearAll();
+    }  };
   const clearAll = () => {
     setClick1(false);
     setClick3(false);
@@ -266,8 +267,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000AA',
   },
   modalView: {
-    marginTop: Platform.OS == 'ios' ? 300 : 250,
-    height: Platform.OS == 'ios' ?  600 : 500,
+    marginTop: Platform.OS == 'ios' ? 300 : 350,
+    height: Platform.OS == 'ios' ?  600 : 550,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,

@@ -46,6 +46,7 @@ export const ChaptersScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const coursedata = useSelector(state => state.courseData.overview);
   const data = useSelector(state => state.chapterResponse.data);
+  // console.log(data)
   const courseId = useSelector(state => state.chapterResponse.courseId);
   const [refreshing, setRefreshing] = useState(false);
   const continueData = useSelector(state => state.chapterResponse.continueData);
@@ -130,11 +131,12 @@ export const ChaptersScreen = ({navigation}) => {
     const isIOS = Platform.OS === 'ios';
     let date = new Date();
     let PictureDir =
+      // Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.PictureDir;
       Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
-    var ext = 'pdf';
+    var ext = 'png';
     var file_ex = `certificate_${Math.floor(
       date.getTime() + date.getSeconds() / 2,
-    )}.pdf`;
+    )}.png`;
     const fPath = `${PictureDir}/${file_ex}`;
 
     const configOptons = Platform.select({
@@ -149,7 +151,7 @@ export const ChaptersScreen = ({navigation}) => {
         appendEXt: ext,
         addAndroidDownloads: {
           useDownloadManager: true,
-          notification: false,
+          notification: true,
           path:
             PictureDir +
             '/me_' +
@@ -494,7 +496,7 @@ const styles = StyleSheet.create({
   },
   boxin: {
     marginTop: 20,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
   },
   text1: {
     fontSize: 12,
