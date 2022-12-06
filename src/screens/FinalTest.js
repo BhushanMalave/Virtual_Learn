@@ -183,9 +183,7 @@ export const FinalTest = ({navigation}) => {
               testId: data1?.testId,
               userAnswers: userAnswers,
             };
-            console.log('i am body', body);
             const res = await SubmitFinalTest(token, body);
-            console.log('+++++', res);
             dispatch(setTestPercentage(res));
             if (res) {
               navigation.navigate('FinalCongratulationScreen');
@@ -211,7 +209,7 @@ export const FinalTest = ({navigation}) => {
               userAnswers: userAnswers,
             };
             const res = await SubmitFinalTest(token, body);
-            console.log(res);
+            dispatch(setTestPercentage(res));
             if (res) {
               navigation.navigate('FinalCongratulationScreen');
               dispatch(removeAll());
