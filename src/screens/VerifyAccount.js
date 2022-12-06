@@ -18,6 +18,7 @@ export const VerifyAccount = ({navigation,route}) => {
   const [text, setText] = useState('');
   const [showError, setShowError] = useState(false);
   const mobileNumber = route.params.text;
+  
   const handleText = string => {
     setText(string);
     setShowError(false);
