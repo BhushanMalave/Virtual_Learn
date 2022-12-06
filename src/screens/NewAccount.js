@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 10,
+    color:"black"
   },
   text1: {
     height: 35,
