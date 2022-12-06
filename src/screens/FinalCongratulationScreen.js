@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity,ScrollView} from 'react-native';
 import {ResultHeader} from '../authorization/Auth';
 import {ResultAnswer} from '../authorization/Auth';
 import {useSelector, useDispatch} from 'react-redux';

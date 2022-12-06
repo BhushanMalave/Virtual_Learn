@@ -474,7 +474,7 @@ export const PauseTime = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err);
+    console.log('contApi: ',err);
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
@@ -515,7 +515,7 @@ export const ResultAnswer = async (token, id) => {
       options,
     );
     if (response.data) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
   } catch (err) {
@@ -561,7 +561,7 @@ export const FinalTest = async (token, id) => {
       options,
     );
     if (response.data) {
-      console.log('===', response.data);
+      // console.log('===', response.data);
       return response.data;
     }
   } catch (err) {
@@ -610,7 +610,7 @@ export const FinalTestResult = async (token, id) => {
       options,
     );
     if (response.data) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
   } catch (err) {
