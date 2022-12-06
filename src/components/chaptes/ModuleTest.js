@@ -53,92 +53,92 @@ export const ModularTest = item => {
                     source={require('../../assets/images/icn_timeline_completed.png')}
                   />
                 ) : (
-<>
-                  {item?.disable ? (<>
-                  
-                    source={require('../../assets/images/icn_timeline_active.png')}
-                  
-                  </>):(<></>) }
-<Image
-                    source={require('../../assets/images/icn_timeline_inactive.png')}
-                  />
-</>
-                
+                  <>
+                    {item?.disable ? (
+                      <>
+                        <Image
+                          source={require('../../assets/images/icn_timeline_active.png')}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          source={require('../../assets/images/icn_timeline_inactive.png')}
+                        />
+                      </>
+                    )}
+                  </>
                 )}
               </View>
 
-
               <View style={styles.container}>
-              {item?.completed ? <>
-                <TouchableOpacity
-                  disabled={true}
-                  >
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
-                    <View style={{width: 40, marginLeft: 5}}>
-                      <Image
-                        source={require('../../assets/images/icn_moduletest.png')}
-                        style={styles.image}
-                      />
-                    </View>
+                {item?.completed ? (
+                  <>
+                    <TouchableOpacity disabled={true}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                        }}>
+                        <View style={{width: 40, marginLeft: 5}}>
+                          <Image
+                            source={require('../../assets/images/icn_moduletest.png')}
+                            style={styles.image}
+                          />
+                        </View>
 
-                    <View style={styles.testNameContainer}>
-                      <Text style={styles.chapterText}>{item?.test}</Text>
-                      <Text style={styles.chapterTime}>
-                        {totalMinutes} mins | {item?.questions} Questions
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-
-              
-              </> : <>
-              <TouchableOpacity
-                  disabled={!item?.disable}
-                  onPress={async () => {
-                    {
-                      if (item?.test === 'Final Test') {
-                        const res = await FinalTest(token, item?.id);
-                        dispatch(addFinalQuestionData(res));
-                        if (res) {
-                          item.navigation.navigate('FinalTestStack');
+                        <View style={styles.testNameContainer}>
+                          <Text style={styles.chapterText}>{item?.test}</Text>
+                          <Text style={styles.chapterTime}>
+                            {totalMinutes} mins | {item?.questions} Questions
+                          </Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <>
+                    <TouchableOpacity
+                      disabled={!item?.disable}
+                      onPress={async () => {
+                        {
+                          if (item?.test === 'Final Test') {
+                            const res = await FinalTest(token, item?.id);
+                            dispatch(addFinalQuestionData(res));
+                            if (res) {
+                              item.navigation.navigate('FinalTestStack');
+                            }
+                          } else {
+                            const res = await ModuleTest(token, item?.id);
+                            dispatch(addQuestionData(res));
+                            if (res) {
+                              item.navigation.navigate('TestStack');
+                            }
+                          }
                         }
-                      } else {
-                        const res = await ModuleTest(token, item?.id);
-                        dispatch(addQuestionData(res));
-                        if (res) {
-                          item.navigation.navigate('TestStack');
-                        }
-                      }
-                    }
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
-                    <View style={{width: 40, marginLeft: 5}}>
-                      <Image
-                        source={require('../../assets/images/icn_moduletest.png')}
-                        style={styles.image}
-                      />
-                    </View>
+                      }}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                        }}>
+                        <View style={{width: 40, marginLeft: 5}}>
+                          <Image
+                            source={require('../../assets/images/icn_moduletest.png')}
+                            style={styles.image}
+                          />
+                        </View>
 
-                    <View style={styles.testNameContainer}>
-                      <Text style={styles.chapterText}>{item?.test}</Text>
-                      <Text style={styles.chapterTime}>
-                        {totalMinutes} mins | {item?.questions} Questions
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </>}
-
-
-               
+                        <View style={styles.testNameContainer}>
+                          <Text style={styles.chapterText}>{item?.test}</Text>
+                          <Text style={styles.chapterTime}>
+                            {totalMinutes} mins | {item?.questions} Questions
+                          </Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  </>
+                )}
 
                 {item?.rate === -1 ? (
                   <></>
@@ -174,10 +174,8 @@ export const ModularTest = item => {
                   </View>
 
                   <View style={styles.testNameContainer2}>
-                    {/* <View > */}
-                    <TouchableOpacity
-                    disabled={true}
-                    >
+                    {/ <View > /}
+                    <TouchableOpacity disabled={true}>
                       <Text style={styles.chapterText}>{item?.test}</Text>
                       <Text style={styles.chapterTime}>
                         {totalMinutes} mins | {item?.questions} Questions
@@ -218,7 +216,7 @@ const styles = StyleSheet.create({
   chapterText: {
     color: '#042C5C',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '600':'normal',
+    fontWeight: Platform.OS == 'ios' ? '600' : 'normal',
     fontSize: 16,
     // lineHeight: 20,
   },
