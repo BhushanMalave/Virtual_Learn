@@ -21,28 +21,6 @@ export const refreshToken = async token => {
     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
   }
 };
-export const drawerData = async token => {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  try {
-    const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/menu',
-      options,
-    );
-    if (response.data) {
-      return response.data;
-    }
-  } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
-  
-  }
-};
-
 export const termsAndConditions = async () => {
   try {
     const response = await axios.get(

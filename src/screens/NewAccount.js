@@ -57,6 +57,7 @@ export const NewAccount = ({navigation}) => {
           style={styles.textInput}
           onChangeText={handleText}
           keyboardType='number-pad'
+          maxLength={10}
         />
       </View>
       <View style={styles.button}>

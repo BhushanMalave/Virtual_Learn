@@ -32,7 +32,7 @@ export const ForgotPassword = ({navigation}) => {
       );
       console.log('===-----==', response.data.message);
       if (response.data.message === 'OTP Valid For 2 Minutes') {
-        navigation.navigate('Verification',{text});
+        navigation.navigate('Verification',{obj});
         setShowError(false);
         setText('');
       } else {
@@ -67,6 +67,7 @@ export const ForgotPassword = ({navigation}) => {
                 placeholder="Enter your mobile number"
                 placeholderTextColor={'#7A7A7A'}
                 style={styles.textInput}
+                maxLength={10}
                 onChangeText={handleText}
                keyboardType='numeric'
               />    

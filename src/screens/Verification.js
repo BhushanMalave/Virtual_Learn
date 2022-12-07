@@ -15,13 +15,19 @@ import Toast from 'react-native-simple-toast'
 
 export const Verification = ({navigation,route}) => {
   const [text, setText] = useState('');
-  const mobileNumber = route.params.text;
+  const mobileNumber = route.params.obj.mobileNumber;
   const [showError, setShowError] = useState(false);
+  console.log(mobileNumber)
+
+
   const handleText = async string => {
     setText(string);
     setShowError(false);
+  };
+
+  const handleProcess = async () => {
     const obj = {
-      mobileNumber: `+91${mobileNumber}`,
+      mobileNumber: mobileNumber,
       oneTimePassword: text,
     };
 
@@ -32,7 +38,7 @@ export const Verification = ({navigation,route}) => {
       );
       console.log('=====', response.data.message);
       if (response.data.message === 'Verified') {
-        navigation.navigate('CreateNewPassword',{mobileNumber});
+        navigation.navigate('CreateNewPassword',{obj});
         setShowError(false);
       } else {
         setShowError(true);
@@ -42,7 +48,6 @@ export const Verification = ({navigation,route}) => {
       Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   };
-
   return (
     <SafeAreaView style={styles.body}>
       <View style={{marginHorizontal: 24}}>
@@ -59,6 +64,7 @@ export const Verification = ({navigation,route}) => {
                 style={styles.textInput}
                 onChangeText={handleText}
                 keyboardType='numeric'
+                maxLength={4}
               />   
              
         </View>
@@ -93,7 +99,7 @@ export const Verification = ({navigation,route}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <ButtonComponent text="Submit" onPress={() => handleText()} />
+          <ButtonComponent text="Submit" onPress={() => handleProcess()} />
         </View>
       </View>
       {showError && (

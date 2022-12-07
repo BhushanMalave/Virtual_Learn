@@ -24,12 +24,10 @@ export const VerifyAccount = ({navigation,route}) => {
   };
 
   const handleProcess = async () => {
-    console.log(text);
     const obj = {
       mobileNumber: `+91${mobileNumber}`,
       oneTimePassword: text,
     };
-
     try {
       const response = await axios.post(
         'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/verify',
@@ -69,6 +67,7 @@ export const VerifyAccount = ({navigation,route}) => {
           style={styles.textInput}
           onChangeText={handleText}
           keyboardType='numeric'
+          maxLength={4}
         />
       </View>
       <View style={styles.textInputBorder}>

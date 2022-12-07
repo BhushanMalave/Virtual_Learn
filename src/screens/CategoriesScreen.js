@@ -68,7 +68,7 @@ export const CategoriesScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 25,
+    marginHorizontal: 24,
   },
   mainheader: {
     marginTop: Platform.OS === 'ios' ? 25 : 15,
