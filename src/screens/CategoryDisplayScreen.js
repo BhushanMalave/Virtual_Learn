@@ -117,7 +117,6 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           {subCategories ? (
             <>
               <Text style={styles.text2}>Subcategories</Text>
-
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
@@ -152,7 +151,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
             <></>
           )}
         </View>
-        <Text style={styles.text2}>All courses</Text>
+        {allcourse?(<>
+          <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
           {allcourse?.map(item => (
             <View key={item?.courseId}>
@@ -177,6 +177,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
             </View>
           ))}
         </View>
+        </>):(<></>)}
+  
       </ScrollView>
     </View>
   );
