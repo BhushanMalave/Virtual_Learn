@@ -41,6 +41,7 @@ export const EditProfile = ({navigation}) => {
   const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  console.log(userData)
   const [image, setImage] = useState(userData?.profilePhoto);
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
@@ -70,7 +71,7 @@ export const EditProfile = ({navigation}) => {
     let formData = new FormData();
     for (let key in obj) {
       if (key === 'profilePhoto') {
-        console.log(obj[key])
+        // console.log(obj[key])
         if(obj[key]){
           const imageData = obj[key];
           formData.append('profilePhoto', {
@@ -82,7 +83,16 @@ export const EditProfile = ({navigation}) => {
             });      
         } 
         } else {
-          formData.append(`${key}`, `${obj[key]}`);
+         console.log(obj[key])
+         if(obj[key]){
+          
+           formData.append(`${key}`, `${obj[key]}`);
+         }
+         else{
+          // if('twitterlink' === key){
+            formData.append(`${key}`, 'empty');
+          // }
+         }
         }
       }
       return formData;

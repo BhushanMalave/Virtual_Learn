@@ -49,7 +49,7 @@ export const MyCourse = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.view}>
-        <Pressable onPress={() => navigation.goBack()}>
+        <Pressable onPress={() => navigation.openDrawer()}>
           <Image source={require('../assets/images/icn_hamburgermenu.png')} />
         </Pressable>
         <TouchableOpacity onPress={() => navigation.navigate('HomeSearch')}>
