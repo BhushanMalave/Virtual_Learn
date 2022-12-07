@@ -34,7 +34,7 @@ import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreen
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {overViewData} from '../authorization/Auth';
 export const HomeSearch = ({navigation}) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState();
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const categoriesData = useSelector(state => state.categories.data);
@@ -46,7 +46,7 @@ export const HomeSearch = ({navigation}) => {
 
   const handleText = async string => {
     setText(string);
-    if (text === '') {
+    if (text.length === 0) {
       dispatch(setComponentRender(1));
       dispatch(setSearchData(null));
     } else {
@@ -56,6 +56,7 @@ export const HomeSearch = ({navigation}) => {
         dispatch(setSearchData(res));
       } else {
         dispatch(setComponentRender(3));
+        dispatch(setSearchData(null));
       }
     }
   };

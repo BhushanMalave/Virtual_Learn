@@ -39,6 +39,7 @@ import {OnGoingComponent} from '../components/OnGoingComponent';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import { ActivityIndicator } from 'react-native';
+import { drawerDataApiCall } from '../redux/ThunkToolkit/DrawerDataApi/DrawerData';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -56,7 +57,6 @@ export const HomeScreen = ({navigation}) => {
 
   const refreshToken = async token => {
     const key = await getVerifiedKeys(token);
-    console.log("090909090",key);
     dispatch(setToken(key));
   };
   const allCourse = async () => {
@@ -65,20 +65,18 @@ export const HomeScreen = ({navigation}) => {
       dispatch(setAllData(data1));
     }
   };
- 
-  console.log(choiceYourCourse)
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    // dispatch(hsTopHeaders(token));
-    // dispatch(hsCategories(token));
-    // dispatch(hsTopCourses(token));
-    // dispatch(mpUserDetails(token));
-    // dispatch(OnGoing(token));
-    // setClicked1(true);
-    // setClicked2(false);
-    // setClicked3(false);
-    // allCourse();
-    refreshToken(token);
+    dispatch(hsTopHeaders(token));
+    dispatch(hsCategories(token));
+    dispatch(hsTopCourses(token));
+    dispatch(mpUserDetails(token));
+    dispatch(OnGoing(token));
+    dispatch(drawerDataApiCall(token));
+    setClicked1(true);
+    setClicked2(false);
+    setClicked3(false);
+    allCourse();
     setRefreshing(false);
   }, [refreshing]);
 
@@ -88,11 +86,12 @@ export const HomeScreen = ({navigation}) => {
     dispatch(hsTopCourses(token));
     dispatch(OnGoing(token));
     dispatch(mpUserDetails(token));
+    dispatch(drawerDataApiCall(token));
     setClicked1(true);
     setClicked2(false);
     setClicked3(false);
     allCourse();
-    refreshToken(token);
+    //refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>

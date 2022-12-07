@@ -67,6 +67,7 @@ export const ForgotPassword = ({navigation}) => {
                 placeholder="Enter your mobile number"
                 placeholderTextColor={'#7A7A7A'}
                 style={styles.textInput}
+                maxLength={10}
                 onChangeText={handleText}
                keyboardType='numeric'
               />    
