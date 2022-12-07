@@ -17,7 +17,7 @@ export const NotificationsComponentUnseen = props => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <View style={styles.view}>
-        <View style={styles.viewin}>
+        <View style={styles.viewin1}>
           <Image source={{uri: props?.img}} style={styles.imageinc} />
           <View style={styles.viewtext}>
             <Text style={styles.text2}>{props?.desc}</Text>
@@ -67,10 +67,16 @@ const styles = StyleSheet.create({
   },
   viewin: {
     height: 73,
-    marginLeft: 24,
-    marginRight: 65,
+    marginHorizontal: 34,
     marginVertical: 22,
     flexDirection: 'row',
+  },
+  viewin1: {
+    height: 73,
+    marginHorizontal: 34,
+    marginVertical: 22,
+    flexDirection: 'row',
+    justifyContent:'space-around',
   },
   imageinc: {
     height: 28,
@@ -88,17 +94,19 @@ const styles = StyleSheet.create({
   text3: {
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 12,
-
     color: '#7A7A7A',
     marginLeft: 10,
     marginTop: 8,
+  },
+  viewtext:{
+     marginLeft:10,
   },
   borderpoint1: {
     height: 6,
     width: 6,
     backgroundColor: '#EE5C4D',
     borderRadius: 50,
-    marginRight: 10,
     marginTop: 30,
+    marginLeft:10,
   },
 });
