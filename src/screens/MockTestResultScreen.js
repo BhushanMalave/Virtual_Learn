@@ -102,6 +102,7 @@ export const MockTestResultScreen = ({navigation}) => {
         <Text style={styles.textlist}>List of Questions</Text>
         <View style={{marginTop: 30}}>
           {resultanswers?.map(item => (
+            <View key={item.id}>
             <QuestionListComponent
               questionId={item.questionId}
               state={item.userAnswerStatus}
@@ -110,6 +111,7 @@ export const MockTestResultScreen = ({navigation}) => {
                 dispatch(setMockstate());
               }}
             />
+            </View>
           ))}
         </View>
       </ScrollView>

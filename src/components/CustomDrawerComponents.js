@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 
 import {
   ImageBackground,
@@ -40,9 +40,12 @@ export const CustomDrawerComponent = props => {
   };
   const focus = useIsFocused();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(drawerDataApiCall(token));
   }, [focus]);
+
+
+
   return (
     <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? -52 : -4}}>
       <DrawerContentScrollView {...props}>

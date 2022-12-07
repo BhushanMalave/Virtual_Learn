@@ -50,6 +50,7 @@ export const TestBottomPopUp = () => {
         <View style={styles.modalContainer}>
           <View style={{flexDirection: 'row', marginLeft: 60}}>
             <Text style={styles.questionid}>Question{data2?.questionId}</Text>
+           
             <TouchableOpacity
               onPress={() => {
                 dispatch(setMockstate());

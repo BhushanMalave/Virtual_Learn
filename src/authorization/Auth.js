@@ -149,7 +149,7 @@ export const mpChangeUserData = async (token, formBody) => {
       },
     );
     const jsonResponse = res;
-    console.log("/////",res.status)
+    console.log("/////",res.data)
     return res.status;
   } catch (err) {
     // console.log('-----', err);
@@ -516,6 +516,7 @@ export const ModuleTest = async (token, id) => {
       options,
     );
     if (response.data) {
+      // console.log(response.data.questions)
       return response.data;
     }
   } catch (err) {
