@@ -196,6 +196,7 @@ export const ChangeYourPassword = ({navigation}) => {
                             onBlur={handleBlur('confirmnewpassword')}
                             value={values.confirmnewpassword}
                             style={styles.textinput}
+                            secureTextEntry
                           />
                           {values.confirmnewpassword ? (
                             <View style={styles.bottom}></View>

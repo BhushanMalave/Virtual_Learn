@@ -16,13 +16,13 @@ import {
 } from '@react-navigation/drawer';
 import {useSelector, useDispatch} from 'react-redux';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
-import {drawerData} from '../authorization/Auth';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
+import {drawerDataApiCall} from '../redux/ThunkToolkit/DrawerDataApi/DrawerData';
 
 export const CustomDrawerComponent = props => {
   const token = useSelector(state => state.userDetails.token);
-  const [data, setData] = useState(null);
   const dispatch = useDispatch();
+  const data = useSelector(state => state.drawerData.data);
   const log = () => {
     props.navigation.goBack();
     Alert.alert('', 'Are you sure want to Logout?', [
@@ -33,23 +33,16 @@ export const CustomDrawerComponent = props => {
       {
         text: 'Logout',
         onPress: () => {
-         
           dispatch(setToken(null));
         },
       },
     ]);
   };
-
-  const Call = async token => {
-    const res = await drawerData(token);
-    setData(res);
-  };
   const focus = useIsFocused();
+
   useEffect(() => {
-    Call(token); 
-
-  },[focus]);
-
+    dispatch(drawerDataApiCall(token));
+  }, [focus]);
   return (
     <View style={{flex: 1, marginTop: Platform.OS === 'ios' ? -52 : -4}}>
       <DrawerContentScrollView {...props}>
@@ -151,7 +144,7 @@ const styles = StyleSheet.create({
   },
   textname: {
     color: '#FFFFFF',
-    fontWeight:  Platform.OS == 'ios' ? 'bold': 'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 16,
     marginTop: 15,
@@ -160,14 +153,14 @@ const styles = StyleSheet.create({
   textdesc: {
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 12,
     marginTop: 10,
   },
   textlog: {
     color: '#373737',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova-Regular',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'500',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : '500',
     fontSize: 16,
     marginLeft: 21,
     marginTop: Platform.OS === 'ios' ? 1 : -3,
@@ -175,7 +168,7 @@ const styles = StyleSheet.create({
   notifyText: {
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 12,
     textAlign: 'center',
     marginTop: Platform.OS === 'ios' ? 4 : 1,

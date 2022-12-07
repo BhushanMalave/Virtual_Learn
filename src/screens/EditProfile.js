@@ -303,7 +303,7 @@ export const EditProfile = ({navigation}) => {
 
                     {values.gender || selected ? (
                       <View>
-                        <Text style={styles.text}>Occupation</Text>
+                        <Text style={styles.text}>Gender</Text>
                       </View>
                     ) : (
                       <></>
