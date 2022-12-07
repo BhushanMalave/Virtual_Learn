@@ -55,7 +55,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           }}>
           <ActivityIndicator
             animating={
-              !basicCourse && !allcourse && !featuredCourse && !subCategories
+              !basicCourse || !allcourse || !featuredCourse || !subCategories
             }
             size="small"
             color="#373737"

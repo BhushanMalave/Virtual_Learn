@@ -182,8 +182,8 @@ if(data1?.testDuration)
             const res = await SubmitTest(token, body);
             dispatch(setTestPercentage(res));
             if (res) {
-              navigation.navigate('CongratulationScreen');
               dispatch(removeAll());
+              navigation.navigate('CongratulationScreen');
             }
           },
         },
@@ -207,8 +207,8 @@ if(data1?.testDuration)
             const res = await SubmitTest(token, body);
             dispatch(setTestPercentage(res));
             if (res) {
-              navigation.navigate('CongratulationScreen');
               dispatch(removeAll());
+              navigation.navigate('CongratulationScreen');
             }
           },
         },

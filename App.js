@@ -11,8 +11,8 @@ import { FinalTest } from './src/screens/FinalTest';
 import { Test } from './src/screens/Test';
 
 let persistor = persistStore(store);
-// LogBox.ignoreAllLogs();
-// LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified.']);
+LogBox.ignoreAllLogs();
+LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified.']);
 const App = () => {
   return (
     <Provider store={store}>

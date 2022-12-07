@@ -29,8 +29,10 @@ export const EditProfile = ({navigation}) => {
   const genderData = [
     {genderId: 1, genderName: 'Female'},
     {genderId: 2, genderName: 'Male'},
+    {genderId: 3, genderName: 'Prefer not to say'},
   ];
   const [occupationData, setOccupationData] = useState(null);
+  console.log(occupationData)
   const [selected, setSelected] = useState();
   const [selectedOccu, setSelectedOccu] = useState();
   const [genderState, setGenderState] = useState(false);
@@ -60,21 +62,25 @@ export const EditProfile = ({navigation}) => {
       setImage(img.path);
       const {filename, mime, path} = img;
       setProfilePhoto({filename, mime, path});
+
     });
   };
-  
+ 
   const createFromData = obj => {
     let formData = new FormData();
     for (let key in obj) {
       if (key === 'profilePhoto') {
-        const imageData = obj[key];
-        formData.append('profilePhoto', {
-          uri: imageData.path,
-          type: imageData.mime,
-          name: `${imageData.filename}.${imageData.mime.substr(
-            imageData.mime.indexOf('/') + 1,
-            )}`,
-          });
+        console.log(obj[key])
+        if(obj[key]){
+          const imageData = obj[key];
+          formData.append('profilePhoto', {
+            uri: imageData?.path,
+            type: imageData?.mime,
+            name: `${imageData?.filename}.${imageData?.mime.substr(
+              imageData?.mime.indexOf('/') + 1,
+              )}`,
+            });      
+        } 
         } else {
           formData.append(`${key}`, `${obj[key]}`);
         }
@@ -303,7 +309,7 @@ export const EditProfile = ({navigation}) => {
 
                     {values.gender || selected ? (
                       <View>
-                        <Text style={styles.text}>Occupation</Text>
+                        <Text style={styles.text}>Gender</Text>
                       </View>
                     ) : (
                       <></>

@@ -23,6 +23,7 @@ import testdataReducer from '../ReduxPersist/TestSlice';
 import joinCourseReducer from '../ReduxPersist/JoinCourseRedux';
 import ChapterScreenReducer from '../ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import finaltestdataReducer from '../ReduxPersist/FinalTestSlice';
+import drawerDataReducer from '../ThunkToolkit/DrawerDataApi/DrawerData';
 
 const persistConfig = {
   key: 'root',
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   testdata: testdataReducer,
   chapterResponse: ChapterScreenReducer,
   finaltestdata: finaltestdataReducer,
+  drawerData:drawerDataReducer,
 });
 
 const persistRed = persistReducer(persistConfig, reducer);
