@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import {refreshToken} from './Auth';
 
 const isTokenExpired = token => {
@@ -14,14 +14,14 @@ const isTokenExpired = token => {
 };
 
 export const getVerifiedKeys = async token => {
-  console.log("=-=-=-=-=",token)
+  //console.log("=-=-=-=-=",token)
   if (token) {
     if (!isTokenExpired(token)) {
-      console.log("old",token)
+      //console.log("old",token)
       return token;
     } else {
       let response = await refreshToken(token);
-      console.log("new",token)
+      //console.log("new",token)
       return response;
     }
   } else {

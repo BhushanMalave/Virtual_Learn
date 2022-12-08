@@ -21,6 +21,8 @@ import {
   setTestPercentage,
 } from '../redux/ReduxPersist/FinalTestSlice';
 import Toast from 'react-native-simple-toast'
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 
 const data = {
   courseName: 'bcbd',
@@ -63,8 +65,13 @@ export const FinalTest = ({navigation}) => {
   let [ START_MINUTES , setStartMinutes] = useState(0);
   let [ START_SECOND, setStartSeconds] = useState(0);
   
-  
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+
   useEffect(()=>{
+    refreshToken(token);
   if(data1?.testDuration)
   {
     const dur = data1?.testDuration;

@@ -32,11 +32,16 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
     const dim = Dimensions.get('screen');
     return dim.height >= dim.width;
   };
-
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
   useEffect(() => {
     Dimensions.addEventListener('change', () => {
       setPortrait(isPortrait());
+      
     });
+    refreshToken(token);
   }, []);
 
   return (

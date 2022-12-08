@@ -38,7 +38,8 @@ import {
   addContinueData,
 } from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import {ActivityIndicator} from 'react-native';
-
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 import {CertificateDownload} from '../authorization/Auth';
 
 export const ChaptersScreen = ({navigation}) => {
@@ -56,6 +57,11 @@ export const ChaptersScreen = ({navigation}) => {
     const cont = await continueApi(token, coursedata?.courseId);
     dispatch(addContinueData(cont));
   };
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+ 
 
   const focus = useIsFocused();
 
@@ -65,6 +71,7 @@ export const ChaptersScreen = ({navigation}) => {
       continueCall();
       time();
       continueCall();
+      refreshToken(token);
     }
   }, [focus]);
   const [totalHours, setTotalHours] = useState(0);

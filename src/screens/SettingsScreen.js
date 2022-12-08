@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -10,18 +10,29 @@ import {
   Pressable,
   Platform,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import icn_back_header from '../assets/images/icn_back_header.png';
 import icn_notifiction_settings_Settings from '../assets/images/icn_notification_settings_Settings.png';
 import Locked from '../assets/images/Locked.png';
 import icn_TS_File from '../assets/images/icn_TS_File.png';
 import ToggleSwitch from 'toggle-switch-react-native';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 
 export function SettingsScreen({navigation}) {
   const [state, setState] = useState(false);
   const [state1, setState1] = useState(false);
-
+  const dispatch=useDispatch();
   const [view, setView] = useState(false);
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+
+  useEffect(() => {
+    refreshToken(token);
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>

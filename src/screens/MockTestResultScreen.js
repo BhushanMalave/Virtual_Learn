@@ -16,6 +16,8 @@ import {
   removeAnswers,
   setCorrectAnswers,
 } from '../redux/ReduxPersist/TestSlice';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
@@ -26,6 +28,15 @@ export const MockTestResultScreen = ({navigation}) => {
   const testpercentage = useSelector(state => state.testdata.testPercentage);
 
   const dispatch = useDispatch();
+
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+
+  useEffect(() => {
+    refreshToken(token);
+  }, []);
   return (
     <View style={{flex: 1}}>
       <View style={styles.bodytop}>

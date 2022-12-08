@@ -30,6 +30,8 @@ import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
 import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 import {searchData} from '../authorization/Auth';
 import {searchDataKeyword} from '../authorization/Auth';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 import {useSelector, useDispatch} from 'react-redux';
 
 export const ChoiceYourCourse = ({navigation}) => {
@@ -44,6 +46,10 @@ export const ChoiceYourCourse = ({navigation}) => {
   );
   const dispatch = useDispatch();
 
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
   const handleText = async string => {
     setText(string);
     if (text === '') {
@@ -70,7 +76,7 @@ export const ChoiceYourCourse = ({navigation}) => {
     dispatch(setComponentRender(1));
     dispatch(hsCategories(token));
     allCourse();
-    //refreshToken(token);
+    refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>

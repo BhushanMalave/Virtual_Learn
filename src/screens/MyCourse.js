@@ -23,6 +23,7 @@ import {Completed} from '../redux/ThunkToolkit/MyCourses/CompletedApi';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
+import {getVerifiedKeys} from '../authorization/RefreshToken';
 export const MyCourse = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
   const [clicked2, setClicked2] = useState(false);
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
   header: {
     height: 35,
     color: '#2B2B2B',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     fontSize: 26,
     letterSpacing: 0,
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 12,
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     letterSpacing: 0,
     lineHeight: 15,
     color: '#FFFFFF',
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 12,
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     letterSpacing: 0,
     lineHeight: 15,
     color: '#7A7A7A',
