@@ -40,7 +40,7 @@ export const NotificationsScreen = ({navigation}) => {
   }, [refreshing]);
   useEffect(() => {
     dispatch(notificationApiCall(token));
-    refreshToken();
+   // refreshToken();
   }, []);
   return (
     <SafeAreaView style={styles.body}>

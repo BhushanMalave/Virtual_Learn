@@ -36,18 +36,15 @@ export const MyProfile = ({navigation}) => {
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     continueCall();
+    refreshToken();
     setRefreshing(false);
   }, [refreshing]);
 
   const focus = useIsFocused();
   useLayoutEffect(() => {
     dispatch(mpUserDetails(token));
+   // refreshToken();
   }, [focus]);
-  // useEffect(() => {
-  //   dispatch(mpUserDetails(token));
-  //    //refreshToken();
-  // },[]);
-
   return (
     <ScrollView
       refreshControl={

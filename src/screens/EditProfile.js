@@ -105,7 +105,6 @@ export const EditProfile = ({navigation}) => {
     useEffect(() => {
       dispatch(mpUserDetails(token));
       occupation();
-   
     }, []);
     return (
       <View style={{flex: 1}}>
