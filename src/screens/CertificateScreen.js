@@ -141,7 +141,6 @@ export const CertificateScreen = ({route, navigation}) => {
                   token,
                   route.params.data?.courseId,
                 );
-                console.log(response);
                 url = response.certificate;
                 checkPremission();
               }}>
