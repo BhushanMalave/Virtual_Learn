@@ -539,12 +539,12 @@ const styles = StyleSheet.create({
   },
   ChoiseCourseChapterNum: {
     height: 9,
-    width: 35,
     color: '#7A7A7A',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontWeight: Platform.OS == 'ios' ? '500':'normal',
     fontSize: 8,
     lineHeight: 9,
+    
   },
   businessContainer: {
     backgroundColor: '#FFFFFF',

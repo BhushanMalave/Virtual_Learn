@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   Icon: {
     height: 37,
     width: 182,
-    // marginTop: 10,
+  
     marginTop: Platform.OS == 'ios' ? 30 : 0,
 
   },
