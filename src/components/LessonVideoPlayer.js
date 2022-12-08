@@ -100,9 +100,15 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             chapterId: route.params.item.chapterId,
             courseId: data?.courseId,
           };
-          console.log(body);
-          navigation.goBack();
-          PauseTime(token, body);
+          // console.log(body);
+          const res = await PauseTime(token, body);
+          if (res.message == 'Updated SuccessFully') {
+            {
+              fullScreen && FullScreen();
+            }
+
+            navigation.goBack();
+          }
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -126,11 +132,11 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             courseId: data?.courseId,
           };    
           const res = await PauseTime(token, body);
-          console.log(res);
           if (res.message == 'Updated SuccessFully') {
             {
               fullScreen && FullScreen();
             }
+
             navigation.goBack();
           }
         }}

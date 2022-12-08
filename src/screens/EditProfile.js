@@ -29,6 +29,7 @@ export const EditProfile = ({navigation}) => {
   const genderData = [
     {genderId: 1, genderName: 'Female'},
     {genderId: 2, genderName: 'Male'},
+    {genderId: 3, genderName: 'Prefer not to say'},
   ];
   const [occupationData, setOccupationData] = useState(null);
   const [selected, setSelected] = useState();
@@ -60,23 +61,36 @@ export const EditProfile = ({navigation}) => {
       setImage(img.path);
       const {filename, mime, path} = img;
       setProfilePhoto({filename, mime, path});
+
     });
   };
-  
+ 
   const createFromData = obj => {
     let formData = new FormData();
     for (let key in obj) {
       if (key === 'profilePhoto') {
-        const imageData = obj[key];
-        formData.append('profilePhoto', {
-          uri: imageData.path,
-          type: imageData.mime,
-          name: `${imageData.filename}.${imageData.mime.substr(
-            imageData.mime.indexOf('/') + 1,
-            )}`,
-          });
+        // console.log(obj[key])
+        if(obj[key]){
+          const imageData = obj[key];
+          formData.append('profilePhoto', {
+            uri: imageData?.path,
+            type: imageData?.mime,
+            name: `${imageData?.filename}.${imageData?.mime.substr(
+              imageData?.mime.indexOf('/') + 1,
+              )}`,
+            });      
+        } 
         } else {
-          formData.append(`${key}`, `${obj[key]}`);
+    
+         if(obj[key]){
+          
+           formData.append(`${key}`, `${obj[key]}`);
+         }
+         else{
+          // if('twitterlink' === key){
+            formData.append(`${key}`, 'empty');
+          // }
+         }
         }
       }
       return formData;
@@ -91,7 +105,6 @@ export const EditProfile = ({navigation}) => {
     useEffect(() => {
       dispatch(mpUserDetails(token));
       occupation();
-      // console.log(userData);
     }, []);
     return (
       <View style={{flex: 1}}>
@@ -175,9 +188,8 @@ export const EditProfile = ({navigation}) => {
                   const res = await mpChangeUserData(token, formBody);
                   // dispatch(setRemoveData());
                   if (res == 200) {   
-                    console.log(res)
                     navigation.navigate('Profile');
-                    // console.log(userData)
+                 
                   }
                 }}>
                 {({handleChange, handleSubmit, values}) => (

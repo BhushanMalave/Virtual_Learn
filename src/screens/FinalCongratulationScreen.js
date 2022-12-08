@@ -38,7 +38,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
       <TouchableOpacity
         onPress={async () => {
           const res = await FinalTestResult(token, data1.testId);
-          console.log('()())', res);
+        
 
           dispatch(setFinalResult(res));
           if (res) {

@@ -16,16 +16,27 @@ import {
   removeAnswers,
   setCorrectAnswers,
 } from '../redux/ReduxPersist/TestSlice';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
-  console.log(resultheader);
+
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
-  console.log(resultanswers);
+ 
   const testpercentage = useSelector(state => state.testdata.testPercentage);
 
   const dispatch = useDispatch();
+
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+
+  useEffect(() => {
+    //refreshToken(token);
+  }, []);
   return (
     <View style={{flex: 1}}>
       <View style={styles.bodytop}>
@@ -102,6 +113,7 @@ export const MockTestResultScreen = ({navigation}) => {
         <Text style={styles.textlist}>List of Questions</Text>
         <View style={{marginTop: 30}}>
           {resultanswers?.map(item => (
+            <View key={item.id}>
             <QuestionListComponent
               questionId={item.questionId}
               state={item.userAnswerStatus}
@@ -110,6 +122,7 @@ export const MockTestResultScreen = ({navigation}) => {
                 dispatch(setMockstate());
               }}
             />
+            </View>
           ))}
         </View>
       </ScrollView>

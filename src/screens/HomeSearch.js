@@ -74,7 +74,7 @@ export const HomeSearch = ({navigation}) => {
   useEffect(() => {
     dispatch(setComponentRender(1));
     topSearch();
-    // refreshToken();
+   // refreshToken();
   }, []);
 
   return (

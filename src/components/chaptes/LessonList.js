@@ -31,7 +31,7 @@ export const LessonList = item => {
     }
   }, [item?.duration]);
   const data = useSelector(state => state.chapterResponse.data);
-  // console.log(data.)
+
   const continueData = useSelector(state => state.chapterResponse.continueData);
   const dispatch = useDispatch();
   return (

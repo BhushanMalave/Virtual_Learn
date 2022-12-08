@@ -17,7 +17,7 @@ export const Verification = ({navigation,route}) => {
   const [text, setText] = useState('');
   const mobileNumber = route.params.obj.mobileNumber;
   const [showError, setShowError] = useState(false);
-  console.log(mobileNumber)
+
 
 
   const handleText = async string => {

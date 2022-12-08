@@ -21,6 +21,9 @@ import {
   setTestPercentage,
 } from '../redux/ReduxPersist/FinalTestSlice';
 import Toast from 'react-native-simple-toast'
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
+
 const data = {
   courseName: 'bcbd',
   chapterNumber: 2,
@@ -62,8 +65,13 @@ export const FinalTest = ({navigation}) => {
   let [ START_MINUTES , setStartMinutes] = useState(0);
   let [ START_SECOND, setStartSeconds] = useState(0);
   
-  
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+
   useEffect(()=>{
+   // refreshToken(token);
   if(data1?.testDuration)
   {
     const dur = data1?.testDuration;
@@ -185,9 +193,10 @@ export const FinalTest = ({navigation}) => {
             };
             const res = await SubmitFinalTest(token, body);
             dispatch(setTestPercentage(res));
+            dispatch(setSubmitState())
             if (res) {
-              navigation.navigate('FinalCongratulationScreen');
               dispatch(removeAll());
+              navigation.navigate('FinalCongratulationScreen');
             }
           },
         },
@@ -210,9 +219,10 @@ export const FinalTest = ({navigation}) => {
             };
             const res = await SubmitFinalTest(token, body);
             dispatch(setTestPercentage(res));
+            dispatch(setSubmitState())
             if (res) {
-              navigation.navigate('FinalCongratulationScreen');
               dispatch(removeAll());
+              navigation.navigate('FinalCongratulationScreen');
             }
           },
         },
@@ -464,6 +474,7 @@ export const FinalTest = ({navigation}) => {
             </>
           )}
         </View>
+        <SubmitModal/>
       </ScrollView>
     </View>
   );

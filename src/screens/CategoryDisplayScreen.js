@@ -20,6 +20,9 @@ import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScree
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {overViewData} from '../authorization/Auth';
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
+
 
 export const CategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
@@ -29,7 +32,14 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
   const token = useSelector(state => state.userDetails.token);
   const itemCategory = route.params.item;
   const dispatch = useDispatch();
-
+  
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
+  useEffect(() => {
+    //refreshToken(token);
+  }, []);
   return (
     <View style={styles.body}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -55,7 +65,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           }}>
           <ActivityIndicator
             animating={
-              !basicCourse && !allcourse && !featuredCourse && !subCategories
+              !basicCourse || !allcourse || !featuredCourse || !subCategories
             }
             size="small"
             color="#373737"
@@ -117,7 +127,6 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
           {subCategories ? (
             <>
               <Text style={styles.text2}>Subcategories</Text>
-
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
@@ -152,7 +161,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
             <></>
           )}
         </View>
-        <Text style={styles.text2}>All courses</Text>
+        {allcourse?(<>
+          <Text style={styles.text2}>All courses</Text>
         <View style={{marginHorizontal: 24}}>
           {allcourse?.map(item => (
             <View key={item?.courseId}>
@@ -177,6 +187,8 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
             </View>
           ))}
         </View>
+        </>):(<></>)}
+  
       </ScrollView>
     </View>
   );

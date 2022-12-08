@@ -11,7 +11,7 @@ export const MyCourseEmptyScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const token = useSelector(state => state.userDetails.token);
-  console.log(token);
+
   const categoriesData = useSelector(state => state.categories.data);
   return (
     <ScrollView>

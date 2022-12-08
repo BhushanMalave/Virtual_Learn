@@ -26,13 +26,12 @@ const data = {
 export const TestBottomPopUp = () => {
   let correctAnswer = data.correctAnswer;
   let wrongAnswer = data.userAnswer;
-  console.log(correctAnswer);
-  console.log(wrongAnswer);
+ 
 
   const dispatch = useDispatch();
   const mockState = useSelector(state => state.filterState.mockState);
   const data2 = useSelector(state => state.testdata.correctAnswers);
-  console.log(data2);
+
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
   return (
@@ -50,6 +49,7 @@ export const TestBottomPopUp = () => {
         <View style={styles.modalContainer}>
           <View style={{flexDirection: 'row', marginLeft: 60}}>
             <Text style={styles.questionid}>Question{data2?.questionId}</Text>
+           
             <TouchableOpacity
               onPress={() => {
                 dispatch(setMockstate());

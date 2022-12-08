@@ -22,7 +22,7 @@ export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  console.log(userData?.profilePhoto);
+ 
   const [refreshing, setRefreshing] = useState(false);
 
   const refreshToken = async () => {
@@ -36,18 +36,15 @@ export const MyProfile = ({navigation}) => {
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     continueCall();
+    refreshToken();
     setRefreshing(false);
   }, [refreshing]);
 
   const focus = useIsFocused();
   useLayoutEffect(() => {
     dispatch(mpUserDetails(token));
+   // refreshToken();
   }, [focus]);
-  // useEffect(() => {
-  //   dispatch(mpUserDetails(token));
-  //    //refreshToken();
-  // },[]);
-
   return (
     <ScrollView
       refreshControl={

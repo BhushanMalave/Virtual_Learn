@@ -18,7 +18,6 @@ export const CourseDataSlice = createSlice({
     changeChapterListStatus: (state, action) => {
       state.data.chapterResponses.map(item => {
         if (item.chapterId == action.payload.id) {
-          console.log(action.payload.id);
           item.chapterStatus = !item.chapterStatus;
         }
       });
@@ -31,7 +30,6 @@ export const CourseDataSlice = createSlice({
 
     setPopUpState: (state, action) => {
       state.popUpState = !state.popUpState;
-      console.log(state.popUpState);
     },
 
     addOverView: (state, action) => {
