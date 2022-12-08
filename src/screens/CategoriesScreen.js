@@ -15,7 +15,8 @@ import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/Bas
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
 import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
 import {cdsSubCategories} from '../redux/ThunkToolkit/categoryDisplayScreenApi/SubCategoriesApi';
-
+import { setToken } from '../redux/ReduxPersist/UserDetails';
+import { getVerifiedKeys } from '../authorization/RefreshToken';
 export const CategoriesScreen = ({navigation}) => {
   const token = useSelector(state => state.userDetails.token);
   const catData1 = useSelector(state => state.categories.data);
@@ -25,9 +26,14 @@ export const CategoriesScreen = ({navigation}) => {
     dispatch(setCatData(categories));
   };
 
+  const refreshToken = async token => {
+    const key = await getVerifiedKeys(token);
+    dispatch(setToken(key));
+  };
   const dispatch = useDispatch();
   useEffect(() => {
     call();
+    //refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
