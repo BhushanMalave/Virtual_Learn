@@ -14,6 +14,9 @@ export const CongratulationScreen = ({navigation}) => {
 
   testName = 'Module Test';
   return (
+    <View style={{ backgroundColor:"white",flex:1}}>
+
+   
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
@@ -43,6 +46,7 @@ export const CongratulationScreen = ({navigation}) => {
         <Text style={styles.result}>Result</Text>
       </TouchableOpacity>
     </View>
+    </View>
   );
 };
 
@@ -50,6 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 25,
+   
   },
   backImg: {
     marginTop:Platform.OS === 'ios'?70:30,

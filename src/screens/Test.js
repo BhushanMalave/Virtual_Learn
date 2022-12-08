@@ -467,6 +467,7 @@ if(data1?.testDuration)
 const styles = StyleSheet.create({
   maincontainer: {
     flex: 1,
+    backgroundColor:"white"
   },
   container: {
     margin: 25,

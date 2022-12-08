@@ -111,8 +111,8 @@ export const OverviewScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginHorizontal: 24}}>
-          <Text style={styles.text}>{coursedata.courseTagLine}</Text>
+        <View style={{marginHorizontal: 24, marginTop: 20,}}>
+          <Text style={styles.text}>{coursedata?.courseTagLine}</Text>
           <View style={styles.preview}>
             <Text style={styles.previewtext}>Preview this course</Text>
             <View style={styles.videoview}>
@@ -269,7 +269,8 @@ const styles = StyleSheet.create({
   container: {
     // margin: 25,
     flex: 1,
-    marginTop: 20,
+   
+    backgroundColor:"white"
   },
   text: {
     height: 40,

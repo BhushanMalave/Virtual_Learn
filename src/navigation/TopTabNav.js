@@ -11,7 +11,7 @@ const TopTabNav = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: {height: 55},
+        tabBarStyle: {height: 55,elevation:0},
         tabBarActiveTintColor: '#EE5C4D',
         tabBarInactiveTintColor: '#7A7A7A',
 
@@ -21,7 +21,9 @@ const TopTabNav = () => {
           backgroundColor: '#EE5C4D',
           height: 1,
           borderRadius: 1,
+          
         },
+      
         tabBarLabelStyle: {
           fontSize: 18,
           marginTop: 17,
@@ -29,7 +31,9 @@ const TopTabNav = () => {
           fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
           lineHeight: 21,
           fontWeight: '400',
+      
         },
+      
       }}>
       <Tab.Screen name="Overview" component={OverviewScreen} />
       <Tab.Screen name="Chapters" component={ChaptersScreen} />

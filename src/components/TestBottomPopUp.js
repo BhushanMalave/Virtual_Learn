@@ -47,8 +47,8 @@ export const TestBottomPopUp = () => {
       }}>
       <View style={styles.container}>
         <View style={styles.modalContainer}>
-          <View style={{flexDirection: 'row', marginLeft: 60}}>
-            <Text style={styles.questionid}>Question{data2?.questionId}</Text>
+          <View style={{flexDirection: 'row', marginLeft: 55}}>
+            <Text style={styles.questionid}>Question {data2?.questionId}</Text>
            
             <TouchableOpacity
               onPress={() => {
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   optionCheckView: {
     height: 46,
     borderRadius: 6,
-    backgroundColor: 'red',
+    backgroundColor: '#EA2626',
 
     marginBottom: 20,
     marginRight: 10,
@@ -265,11 +265,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 10,
     flexDirection: 'row',
-    shadowColor: '#000',
-    shadowOffset: {width: 1, height: 1},
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 5,
+    shadowColor: 'grey',
+    shadowOffset: {width: 1, height:1},
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 3,
     marginHorizontal: 20,
   },
   optionClicked: {
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
   },
   statusred: {
     height: 17,
-    color: 'red',
+    color: '#EA2626',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     fontSize: 14,

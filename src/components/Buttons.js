@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
   },
   text2: {
     textAlign: 'center',
-    height: 20,
     fontSize: 16,
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
