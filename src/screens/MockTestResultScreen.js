@@ -35,7 +35,7 @@ export const MockTestResultScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    refreshToken(token);
+    //refreshToken(token);
   }, []);
   return (
     <View style={{flex: 1}}>

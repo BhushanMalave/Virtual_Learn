@@ -33,7 +33,7 @@ export const CategoriesScreen = ({navigation}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     call();
-    refreshToken(token);
+    //refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>

@@ -41,7 +41,7 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
       setPortrait(isPortrait());
       
     });
-    refreshToken(token);
+   // refreshToken(token);
   }, []);
 
   return (

@@ -31,7 +31,7 @@ export function SettingsScreen({navigation}) {
   };
 
   useEffect(() => {
-    refreshToken(token);
+  //  refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>

@@ -44,7 +44,7 @@ export const MyProfile = ({navigation}) => {
   const focus = useIsFocused();
   useLayoutEffect(() => {
     dispatch(mpUserDetails(token));
-    refreshToken();
+   // refreshToken();
   }, [focus]);
   return (
     <ScrollView

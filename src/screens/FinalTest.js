@@ -71,7 +71,7 @@ export const FinalTest = ({navigation}) => {
   };
 
   useEffect(()=>{
-    refreshToken(token);
+   // refreshToken(token);
   if(data1?.testDuration)
   {
     const dur = data1?.testDuration;

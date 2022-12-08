@@ -38,7 +38,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
     dispatch(setToken(key));
   };
   useEffect(() => {
-    refreshToken(token);
+    //refreshToken(token);
   }, []);
   return (
     <View style={styles.body}>

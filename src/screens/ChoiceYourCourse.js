@@ -76,7 +76,7 @@ export const ChoiceYourCourse = ({navigation}) => {
     dispatch(setComponentRender(1));
     dispatch(hsCategories(token));
     allCourse();
-    refreshToken(token);
+   // refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={{flex: 1}}>

@@ -44,7 +44,7 @@ export const MyCourse = ({navigation}) => {
   useEffect(() => {
     dispatch(myCourses(token));
     dispatch(OnGoing(token));
-    refreshToken();
+   // refreshToken();
   }, []);
 
   return (

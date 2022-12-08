@@ -7,24 +7,27 @@ const isTokenExpired = token => {
   const time= new Date(decoded.exp)
   const time2= new Date(Date.now() / 1000)
   if (time.getTime() <= time2.getTime()) {
+    console.log("exp")
     return true;
   } else {
+    console.log("not exp")
     return false;
   }
 };
 
 export const getVerifiedKeys = async token => {
-  //console.log("=-=-=-=-=",token)
+  console.log("=-=-=-=-=",token)
   if (token) {
     if (!isTokenExpired(token)) {
-      //console.log("old",token)
+      console.log("old",token)
       return token;
     } else {
+      console.log("calling refresh token")
       let response = await refreshToken(token);
-      //console.log("new",token)
-      return response;
+      console.log("new",response)
+     // return response;
     }
   } else {
-    return null;
+    console.log("null=-=-=-=")
   }
 };

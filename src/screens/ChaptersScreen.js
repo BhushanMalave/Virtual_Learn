@@ -71,7 +71,7 @@ export const ChaptersScreen = ({navigation}) => {
       continueCall();
       time();
       continueCall();
-      refreshToken(token);
+     // refreshToken(token);
     }
   }, [focus]);
   const [totalHours, setTotalHours] = useState(0);
