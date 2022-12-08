@@ -19,10 +19,10 @@ import {
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
-  console.log(resultheader);
+
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
-  console.log(resultanswers);
+ 
   const testpercentage = useSelector(state => state.testdata.testPercentage);
 
   const dispatch = useDispatch();

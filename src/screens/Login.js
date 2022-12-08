@@ -85,7 +85,7 @@ export const Login = ({navigation}) => {
                     'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/login',
                     obj,
                   );
-                  console.log(response.data)
+                
                   dispatch(mpUserDetails(token));
                   if (response.data.jwtToken) {
                     dispatch(setToken(response.data.jwtToken));

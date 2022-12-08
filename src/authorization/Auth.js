@@ -149,7 +149,6 @@ export const mpChangeUserData = async (token, formBody) => {
       },
     );
     const jsonResponse = res;
-    console.log("/////",res.data)
     return res.status;
   } catch (err) {
     // console.log('-----', err);

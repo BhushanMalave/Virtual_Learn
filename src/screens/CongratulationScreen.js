@@ -35,7 +35,6 @@ export const CongratulationScreen = ({navigation}) => {
           const res = await ResultHeader(token, data1?.testId);
 
           const res2 = await ResultAnswer(token, data1?.testId);
-          console.log(res);
           dispatch(setResultHeader(res));
           dispatch(setResultAnswers(res2));
 
