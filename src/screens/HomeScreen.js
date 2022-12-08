@@ -77,6 +77,7 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
+    refreshToken(token);
     setRefreshing(false);
   }, [refreshing]);
 
@@ -91,7 +92,7 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
-    //refreshToken(token);
+    refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
