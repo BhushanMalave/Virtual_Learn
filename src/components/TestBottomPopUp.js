@@ -26,13 +26,12 @@ const data = {
 export const TestBottomPopUp = () => {
   let correctAnswer = data.correctAnswer;
   let wrongAnswer = data.userAnswer;
-  console.log(correctAnswer);
-  console.log(wrongAnswer);
+ 
 
   const dispatch = useDispatch();
   const mockState = useSelector(state => state.filterState.mockState);
   const data2 = useSelector(state => state.testdata.correctAnswers);
-  console.log(data2);
+
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
   return (

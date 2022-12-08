@@ -102,7 +102,6 @@ export const LessonVideoPlayer = ({route, navigation}) => {
           };
           // console.log(body);
           const res = await PauseTime(token, body);
-          console.log(res);
           if (res.message == 'Updated SuccessFully') {
             {
               fullScreen && FullScreen();
@@ -133,7 +132,6 @@ export const LessonVideoPlayer = ({route, navigation}) => {
             courseId: data?.courseId,
           };    
           const res = await PauseTime(token, body);
-          console.log(res);
           if (res.message == 'Updated SuccessFully') {
             {
               fullScreen && FullScreen();

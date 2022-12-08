@@ -32,7 +32,6 @@ export const EditProfile = ({navigation}) => {
     {genderId: 3, genderName: 'Prefer not to say'},
   ];
   const [occupationData, setOccupationData] = useState(null);
-  console.log(occupationData)
   const [selected, setSelected] = useState();
   const [selectedOccu, setSelectedOccu] = useState();
   const [genderState, setGenderState] = useState(false);
@@ -41,7 +40,6 @@ export const EditProfile = ({navigation}) => {
   const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  console.log(userData)
   const [image, setImage] = useState(userData?.profilePhoto);
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
@@ -83,7 +81,7 @@ export const EditProfile = ({navigation}) => {
             });      
         } 
         } else {
-         console.log(obj[key])
+    
          if(obj[key]){
           
            formData.append(`${key}`, `${obj[key]}`);
@@ -190,9 +188,8 @@ export const EditProfile = ({navigation}) => {
                   const res = await mpChangeUserData(token, formBody);
                   // dispatch(setRemoveData());
                   if (res == 200) {   
-                    console.log(res)
                     navigation.navigate('Profile');
-                    // console.log(userData)
+                 
                   }
                 }}>
                 {({handleChange, handleSubmit, values}) => (

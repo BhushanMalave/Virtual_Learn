@@ -22,8 +22,7 @@ export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  console.log(userData)
-  // console.log(userData?.profilePhoto);
+ 
   const [refreshing, setRefreshing] = useState(false);
 
   const refreshToken = async () => {
