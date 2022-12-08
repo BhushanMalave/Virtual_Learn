@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -16,15 +16,14 @@ import {
   removeAnswers,
   setCorrectAnswers,
 } from '../redux/ReduxPersist/TestSlice';
-import { setToken } from '../redux/ReduxPersist/UserDetails';
-import { getVerifiedKeys } from '../authorization/RefreshToken';
+import {setToken} from '../redux/ReduxPersist/UserDetails';
+import {getVerifiedKeys} from '../authorization/RefreshToken';
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
 
-
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
- 
+
   const testpercentage = useSelector(state => state.testdata.testPercentage);
 
   const dispatch = useDispatch();
@@ -38,7 +37,7 @@ export const MockTestResultScreen = ({navigation}) => {
     //refreshToken(token);
   }, []);
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.bodytop}>
         <TouchableOpacity
           onPress={() => {
@@ -53,7 +52,7 @@ export const MockTestResultScreen = ({navigation}) => {
         <View style={styles.bodytopin}>
           <View style={styles.bodytopinbox}>
             <Text style={styles.textno}>
-              {testpercentage?.chapterTestPercentage}
+              {testpercentage?.chapterTestPercentage.toFixed(0)}
             </Text>
           </View>
           <View>
@@ -75,8 +74,7 @@ export const MockTestResultScreen = ({navigation}) => {
               height: 40,
               backgroundColor: '#7A7A7A',
               width: 1,
-              borderWidth: 1,
-              opacity: 0.2,
+              opacity: 0.4,
               marginTop: 20,
             }}
           />
@@ -93,8 +91,8 @@ export const MockTestResultScreen = ({navigation}) => {
               height: 40,
               backgroundColor: '#7A7A7A',
               width: 1,
-              borderWidth: 1,
-              opacity: 0.2,
+         
+              opacity: 0.4,
               marginTop: 20,
             }}
           />
@@ -110,18 +108,20 @@ export const MockTestResultScreen = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{marginTop: 70, marginHorizontal: 24}}>
-        <Text style={styles.textlist}>List of Questions</Text>
-        <View style={{marginTop: 30}}>
+        <View style={{marginTop: Platform.OS === 'ios'?5:5}}>
+          <Text style={styles.textlist}>List of Questions</Text>
+        </View>
+        <View style={{marginTop: 20}}>
           {resultanswers?.map(item => (
             <View key={item.id}>
-            <QuestionListComponent
-              questionId={item.questionId}
-              state={item.userAnswerStatus}
-              onPress={() => {
-                dispatch(setCorrectAnswers(item));
-                dispatch(setMockstate());
-              }}
-            />
+              <QuestionListComponent
+                questionId={item.questionId}
+                state={item.userAnswerStatus}
+                onPress={() => {
+                  dispatch(setCorrectAnswers(item));
+                  dispatch(setMockstate());
+                }}
+              />
             </View>
           ))}
         </View>
@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bodytop: {
-    height: 315,
-    borderWidth: 1,
+    height: Platform.OS === 'ios'?314:280,
+    // borderWidth: 1,
     backgroundColor: '#042C5C',
   },
   bodytopin: {
@@ -150,17 +150,23 @@ const styles = StyleSheet.create({
     height: 68,
     width: 68,
     backgroundColor: '#FCBE4B',
-    alignItems: 'center',
+    // alignItems: 'center',
+    justifyContent:"center",
+    borderRadius:4
   },
   box: {
     backgroundColor: '#FFFFFF',
     height: 80,
     marginHorizontal: 24,
     borderRadius: 6,
-    shadowOpacity: 0.5,
-    marginTop: Platform.OS === 'ios' ? 50 : 70,
+    shadowOpacity: 0.2,
+    marginTop: Platform.OS === 'ios' ? 65 : 65,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOffset: {width: 1, height: 1},
+    shadowRadius: 3,
+    elevation: 6,
   },
   boxin: {
     marginTop: 20,
@@ -171,21 +177,22 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     marginTop: Platform.OS === 'ios' ? 17 : 5,
     color: '#FFFFFF',
+    textAlign:"center",
   },
   textchaptername: {
     fontSize: 26,
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     marginTop: 10,
     color: '#FFFFFF',
     marginLeft: 20,
     textAlign: 'left',
-    width: '60%',
+    width: '55%',
   },
   textcoursename: {
     fontSize: 16,
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     marginTop: 10,
     color: '#FFFFFF',
     marginHorizontal: 24,
@@ -197,20 +204,21 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     color: '#373737',
     textAlign: 'center',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
   },
   text2: {
     fontSize: 16,
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     color: '#2BB5F4',
     textAlign: 'center',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     marginTop: 10,
   },
   textlist: {
     fontSize: 14,
-    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'ProximaNova',
-    color: '#7A7A7A',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    color: Platform.OS === 'ios' ? '#7A7A7A' : '#7A7A7A',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
   },
   imgcross: {
     marginTop: Platform.OS === 'ios' ? 60 : 20,

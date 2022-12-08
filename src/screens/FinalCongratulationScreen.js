@@ -19,6 +19,9 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
 
   testName = 'Module Test';
   return (
+    <View style={{ backgroundColor:"white",flex:1}}>
+
+    
     <ScrollView style={styles.container}>
       <TouchableOpacity
         onPress={() => {
@@ -48,6 +51,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
         <Text style={styles.result}>Result</Text>
       </TouchableOpacity>
     </ScrollView>
+    </View>
   );
 };
 

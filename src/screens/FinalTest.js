@@ -193,7 +193,7 @@ export const FinalTest = ({navigation}) => {
             };
             const res = await SubmitFinalTest(token, body);
             dispatch(setTestPercentage(res));
-            dispatch(setSubmitState())
+     
             if (res) {
               dispatch(removeAll());
               navigation.navigate('FinalCongratulationScreen');
@@ -219,7 +219,7 @@ export const FinalTest = ({navigation}) => {
             };
             const res = await SubmitFinalTest(token, body);
             dispatch(setTestPercentage(res));
-            dispatch(setSubmitState())
+     
             if (res) {
               dispatch(removeAll());
               navigation.navigate('FinalCongratulationScreen');
@@ -474,7 +474,6 @@ export const FinalTest = ({navigation}) => {
             </>
           )}
         </View>
-        <SubmitModal/>
       </ScrollView>
     </View>
   );
@@ -483,6 +482,7 @@ export const FinalTest = ({navigation}) => {
 const styles = StyleSheet.create({
   maincontainer: {
     flex: 1,
+    backgroundColor:"white"
   },
   container: {
     margin: 25,
