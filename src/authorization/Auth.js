@@ -420,7 +420,7 @@ export const joinCourse = async (token, objBody) => {
     }
   } catch (error) {
     // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    
   }
 };
 
