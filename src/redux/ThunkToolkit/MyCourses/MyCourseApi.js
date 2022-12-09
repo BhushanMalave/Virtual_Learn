@@ -14,7 +14,7 @@ export const myCourses = createAsyncThunk('courses/myCourses', async token => {
       'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/checkMyCourses',
       options,
     );
-    console.log(response.data);
+   // console.log(response.data);
     return response.data;
   } catch (error) {
     console.log('mycrs', error.response.data);

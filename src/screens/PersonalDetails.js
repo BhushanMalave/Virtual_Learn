@@ -76,7 +76,6 @@ export const PersonalDetails = ({navigation,route}) => {
                   confirmpassword: '',
                 }}
                 onSubmit={async values => {
-                  console.log(values);
 
                   const obj = {
                     mobileNumber: `+91${mobileNumber}`,
@@ -85,6 +84,7 @@ export const PersonalDetails = ({navigation,route}) => {
                     email: values.email,
                     password: values.password,
                   };
+                  console.log(obj);
                   const userData = {
                     profilePhoto: null,
                     fullName: values.fullname,
@@ -109,7 +109,7 @@ export const PersonalDetails = ({navigation,route}) => {
                       navigation.navigate('Registration Successfull');
                     }
                   } catch (error) {
-                    // console.log(error.response.data);
+                    console.log(error.response.data);
                     Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
                   }
                 }}>
