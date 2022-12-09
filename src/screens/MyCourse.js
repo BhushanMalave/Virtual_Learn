@@ -29,12 +29,10 @@ export const MyCourse = ({navigation}) => {
   const [clicked2, setClicked2] = useState(false);
   const [initial, setInitial] = useState(1);
   const token = useSelector(state => state.userDetails.token);
-  const mycoursestatus = useSelector(state => state.courses.status);
+  const mycoursestatus = useSelector(state => state.courses.data);
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
   const completeddata = useSelector(state => state.completedcourse.data);
-
   const coursedata = useSelector(state => state.courseData.overview);
-
   const dispatch = useDispatch();
   const refreshToken = async () => {
     const key = await getVerifiedKeys(token);
@@ -62,7 +60,7 @@ export const MyCourse = ({navigation}) => {
       </View>
       <Text style={styles.header}>My Course</Text>
 
-      {mycoursestatus ? (
+      {mycoursestatus.message == true? (
         <>
           <View style={styles.buttontabs}>
             <TouchableOpacity

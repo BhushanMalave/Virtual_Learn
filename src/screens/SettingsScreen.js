@@ -21,8 +21,8 @@ import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
 
 export function SettingsScreen({navigation}) {
-  const [state, setState] = useState(false);
-  const [state1, setState1] = useState(false);
+  const [state, setState] = useState(true);
+  const [state1, setState1] = useState(true);
   const dispatch=useDispatch();
   const [view, setView] = useState(false);
   const refreshToken = async token => {
