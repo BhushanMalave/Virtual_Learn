@@ -62,7 +62,7 @@ export const MyCourse = ({navigation}) => {
       </View>
       <Text style={styles.header}>My Course</Text>
 
-      {mycoursestatus ? (
+      {mycoursestatus?.message ? (
         <>
           <View style={styles.buttontabs}>
             <TouchableOpacity
