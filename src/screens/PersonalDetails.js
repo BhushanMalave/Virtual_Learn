@@ -85,12 +85,13 @@ export const PersonalDetails = ({navigation,route}) => {
                     password: values.password,
                   };
                   console.log(obj);
+                  
                   const userData = {
                     profilePhoto: null,
                     fullName: values.fullname,
                     userName: values.username,
                     email: values.email,
-                    mobileNumber: {mobileNumber},
+                    mobileNumber:`+91${mobileNumber}`,
                     occupation: null,
                     gender: null,
                     dateOfBirth: null,

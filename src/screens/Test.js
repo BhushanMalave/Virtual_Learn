@@ -25,11 +25,11 @@ import {
 
 export const Test = ({navigation}) => {
   const data1 = useSelector(state => state.testdata.question);
-
+  
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
   const userAnswers = useSelector(state => state.testdata.userAnswers);
-  
+  console.log("+++",userAnswers)
   const dispatch = useDispatch();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -83,6 +83,7 @@ if(data1?.testDuration)
 
   const startHandler = () => {
     setDuration(parseInt(START_SECOND, 10) + 60 * parseInt(START_MINUTES, 10));
+
     setIsRunning(true);
   };
 
@@ -204,7 +205,9 @@ if(data1?.testDuration)
               testId: testid,
               userAnswers: userAnswers,
             };
+            console.log(userAnswers)
             const res = await SubmitTest(token, body);
+            console.log(res)
             dispatch(setTestPercentage(res));
             if (res) {
               dispatch(removeAll());
@@ -239,6 +242,7 @@ if(data1?.testDuration)
             <Text style={styles.countdown}>
               {' '}
               {currentMinutes}:{currentSeconds} secs remaining
+      
             </Text>
           </View>
 

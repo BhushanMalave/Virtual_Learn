@@ -490,13 +490,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   certificateOnPress: {
-    borderWidth: 1,
     width: 327,
-    height: 184,
+    height: 225,
     marginTop: 16,
   },
   certificate: {
-    height: 184,
+    height: 225,
     width: 327,
   },
   box: {
