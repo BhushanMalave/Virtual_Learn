@@ -211,7 +211,9 @@ export const ChaptersScreen = ({navigation}) => {
               </View>
             </>
           ) : (
-            <></>
+            <>
+            <View style={{marginTop:30}}></View>
+            </>
           )}
 
           <Text style={styles.contentText}>Course Content</Text>
@@ -405,13 +407,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+    
   },
   scrollContainer: {
     flex: 1,
+   
   },
   mainView: {
     flex: 1,
     marginHorizontal: 24,
+
   },
   continueButton: {
     marginTop: 29,
@@ -423,6 +428,7 @@ const styles = StyleSheet.create({
     fontWeight: Platform.OS == 'ios' ? '600':'normal',
     fontSize: 18,
     lineHeight: 22,
+    // marginTop: Platform.OS == 'ios' ? 0:25
   },
   contentDetailsView: {
     flexDirection: 'row',
