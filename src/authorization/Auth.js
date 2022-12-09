@@ -445,7 +445,7 @@ export const SubmitTest = async (token, Body) => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error.response.data);
+    console.log(error.response.data);
     Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
