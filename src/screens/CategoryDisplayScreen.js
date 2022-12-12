@@ -44,7 +44,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
     <View style={styles.body}>
       <ScrollView showsHorizontalScrollIndicator={false}>
         <View style={styles.topbar}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{padding:5}}>
             <Image
               source={require('../assets/images/icn_back_header.png')}
               style={styles.imgback}
@@ -202,9 +202,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginHorizontal: 24,
+    // borderWidth:1
   },
   view1: {
     marginTop: 0,
+  },
+  imgback:{
+    height: 14,
+  width: 22,
   },
   viewcatin: {
     marginTop: 15,
@@ -222,9 +227,8 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
     textAlign: 'left',
     color: '#2B2B2B',
-    marginTop: Platform.OS == 'ios' ? 5 : 0,
+    marginTop: Platform.OS == 'ios' ? 0 : -5,
     marginHorizontal: 24,
-  
   },
   text2: {
     fontSize: 18,

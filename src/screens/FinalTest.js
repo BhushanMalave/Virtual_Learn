@@ -659,5 +659,7 @@ const styles = StyleSheet.create({
   },
   back: {
     marginTop:Platform.OS === 'ios'?40:0,
+    height: 14.5,
+    width: 14.5,
   },
 });

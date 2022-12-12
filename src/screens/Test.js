@@ -233,7 +233,7 @@ if(data1?.testDuration)
             />
           </TouchableOpacity>
           <Text style={styles.testname}>{data1?.testName}</Text>
-          <View style={{flexDirection: 'row', marginLeft: 185, marginTop: Platform.OS==='ios'?20:0}}>
+          <View style={{flexDirection: 'row', marginLeft: 185, marginTop: Platform.OS==='ios'?20:10}}>
             <Image
               source={require('../assets/images/icn_testduration.png')}
               style={{marginTop: 9}}
@@ -256,7 +256,7 @@ if(data1?.testDuration)
                 {data1?.questions[currentQuestion].questionName}
               </Text>
 
-              <View style={{marginTop: 40}}>
+              <View style={{marginTop: Platform.OS === 'ios' ? 30:30}}>
                 <View>
                   <TouchableOpacity
                     onPress={() => {
@@ -564,7 +564,6 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   question: {
-    height: 52,
     color: '#2B2B2B',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 18,
@@ -632,7 +631,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   countdown: {
-    height: 20,
+    // height: 20,
     color: '#2BB5F4',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 14,
@@ -647,6 +646,9 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   back: {
-    marginTop:Platform.OS==='ios'?40:0,
+    marginTop:Platform.OS === 'ios'?40:0,
+    height: 14.5,
+    width: 14.5,
+    tintColor:'#373737'
   },
 });
