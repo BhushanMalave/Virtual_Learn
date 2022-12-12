@@ -395,6 +395,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     textAlign: 'center',
+    color:"white"
   },
   categoryview: {
     width: '100%',
