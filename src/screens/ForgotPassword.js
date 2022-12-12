@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
-import Toast from 'react-native-simple-toast'
+import Toast from 'react-native-simple-toast';
 
 export const ForgotPassword = ({navigation}) => {
   const [text, setText] = useState('');
@@ -25,22 +25,24 @@ export const ForgotPassword = ({navigation}) => {
     const obj = {
       mobileNumber: `+91${text}`,
     };
-    try {
-      const response = await axios.put(
-        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/resend',
-        obj,
-      );
-      console.log('===-----==', response.data.message);
-      if (response.data.message === 'OTP Valid For 2 Minutes') {
-        navigation.navigate('Verification',{obj});
-        setShowError(false);
-        setText('');
-      } else {
+    if (text.length == 10) {
+      try {
+        const response = await axios.put(
+          'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/resend',
+          obj,
+        );
+        console.log('forgot pwd', response.data.message);
+        if (response.data.message === 'OTP Valid For 2 Minutes') {
+          navigation.navigate('Verification', {obj});
+          setShowError(false);
+          setText('');
+        } else {
+          setShowError(true);
+        }
+      } catch (error) {
+        console.log(error);
         setShowError(true);
       }
-    } catch (error) {
-      console.log(error);
-      setShowError(true);
     }
   };
 
@@ -60,17 +62,17 @@ export const ForgotPassword = ({navigation}) => {
             new password.
           </Text>
         </View>
-        <View style={styles.textinputView} >
-        <Text style={styles.textno} >+91</Text>
-        <TextInput
-                name="text"
-                placeholder="Enter your mobile number"
-                placeholderTextColor={'#7A7A7A'}
-                style={styles.textInput}
-                maxLength={10}
-                onChangeText={handleText}
-               keyboardType='numeric'
-              />    
+        <View style={styles.textinputView}>
+          <Text style={styles.textno}>+91</Text>
+          <TextInput
+            name="text"
+            placeholder="Enter your mobile number"
+            placeholderTextColor={'#7A7A7A'}
+            style={styles.textInput}
+            maxLength={10}
+            onChangeText={handleText}
+            keyboardType="numeric"
+          />
         </View>
         <View style={styles.button}>
           <ButtonComponent text="Send" onPress={() => handleProcess()} />
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {

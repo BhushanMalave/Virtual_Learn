@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {
-  createNativeStackNavigator,
-  CardStyleInterpolators,
+  createNativeStackNavigator
 } from '@react-navigation/native-stack';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 import {MyCourse} from '../screens/MyCourse';
 import {CourseScreen} from '../screens/CourseScreen';
 import {TestStack} from './TestStack';
