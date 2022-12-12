@@ -22,7 +22,6 @@ import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {overViewData} from '../authorization/Auth';
 import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
-import { useEffect } from 'react';
 
 
 export const CategoryDisplayScreen = ({navigation, route}) => {
