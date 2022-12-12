@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 import {HomeScreen} from '../screens/HomeScreen';
 import {CategoriesScreen} from '../screens/CategoriesScreen';
 import {HomeSearch} from '../screens/HomeSearch';
@@ -25,84 +26,132 @@ export const HomeStack = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="HomeSearch"
         component={HomeSearch}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="CategoriesScreen"
         component={CategoriesScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="ChoiceCourse"
         component={ChoiceYourCourse}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="CategoryDisplayScreen"
         component={CategoryDisplayScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="SubCategoryDisplayScreen"
         component={SubCategoryDisplayScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="CourseScreen"
         component={CourseScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="VideoPlayer"
         component={VideoPlayer}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="CourseComponent"
         component={CourseComponent}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="OnGoingComponent"
         component={OnGoingComponent}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="LessonVideoPlayer"
         component={LessonVideoPlayer}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
 
       <Stack.Screen
         name="ContinuePopUp"
         component={ContinuePopUp}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="TestStack"
         component={TestStack}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="FinalTestStack"
         component={FinalTestStack}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="CertificateScreen"
         component={CertificateScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
 
       <Stack.Screen
         name="ModularTest"
         component={ModularTest}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
     </Stack.Navigator>
   );

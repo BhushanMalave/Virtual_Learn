@@ -53,7 +53,7 @@ export const VideoPlayer = ({navigation, route}) => {
       <Video
        ref={videoRef}
         muted={false}
-        resizeMode={fullScreen ? 'cover' : 'contain'}
+        resizeMode={fullScreen ? 'contain' : 'contain'}
         source={{
           uri: url,
         }}

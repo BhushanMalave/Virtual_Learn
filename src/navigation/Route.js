@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {OnboardingStack} from './OnboardingStack';
 import {WelcomeStack} from './WelcomeStack';
@@ -40,20 +41,29 @@ export const Router = () => {
           <Stack.Screen
             name="Onboarding"
             component={OnboardingStack}
-            options={{headerShown: false}}
+            options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
           />
         )}
         {token === null ? (
           <Stack.Screen
             name="WelcomeStack"
             component={WelcomeStack}
-            options={{headerShown: false}}
+            options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
           />
         ) : (
           <Stack.Screen
             name="Drawer"
             component={DrawerNav}
-            options={{headerShown: false}}
+            options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
           />
         )}
       </Stack.Navigator>

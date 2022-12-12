@@ -10,7 +10,6 @@ import {
 
 export const NotificationsComponentUnseen = props => {
   const notify = props.notify;
-
   useEffect(() => {
     notify();
   }, []);
@@ -31,6 +30,7 @@ export const NotificationsComponentUnseen = props => {
 };
 
 export const NotificationsComponentSeen = props => {
+  console.log(time);
   return (
     <View style={styles.viewin}>
       <Image source={{uri: props?.img}} style={styles.imageinc} />
