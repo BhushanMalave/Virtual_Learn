@@ -19,8 +19,7 @@ export const drawerDataApiCall = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      // console.log(error);
-      Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+      console.log("drawer Data",error);
     }
   },
 );

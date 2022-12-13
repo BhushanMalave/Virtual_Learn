@@ -21,7 +21,6 @@ export const hsTopHeaders = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('hstophead',error);
-      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
 );
