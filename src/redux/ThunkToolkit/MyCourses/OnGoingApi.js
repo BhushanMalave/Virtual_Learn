@@ -19,7 +19,7 @@ export const OnGoing = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-     // console.log('ongoing', error);
+      console.log('ongoing', error);
    
     }
   },
