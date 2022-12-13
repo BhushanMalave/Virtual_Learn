@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 import {CourseCompletedScreen} from '../screens/CourseCompletedScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {FinalTest} from '../screens/FinalTest';
@@ -16,40 +17,61 @@ export const FinalTestStack = () => {
       <Stack.Screen
         name="FinalTest"
         component={FinalTest}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="FinalCongratulationScreen"
         component={FinalCongratulationScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
 
       <Stack.Screen
         name="CourseCompletedScreen"
         component={CourseCompletedScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
 
       <Stack.Screen
         name="CertificateScreen"
         component={CertificateScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
 
       <Stack.Screen
         name="CourseScreen"
         component={CourseScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
       <Stack.Screen
         name="ModularTest"
         component={ModularTest}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
       />
     </Stack.Navigator>
   );

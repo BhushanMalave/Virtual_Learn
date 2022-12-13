@@ -30,6 +30,7 @@ export const MyCourse = ({navigation}) => {
   const [initial, setInitial] = useState(1);
   const token = useSelector(state => state.userDetails.token);
   const mycoursestatus = useSelector(state => state.courses.data);
+
   console.log(mycoursestatus)
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
   const completeddata = useSelector(state => state.completedcourse.data);
@@ -61,8 +62,7 @@ export const MyCourse = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <Text style={styles.header}>My Course</Text>
-
-      {!mycoursestatus?.message == true? (
+      {mycoursestatus?.message == true? (
         <>
           <View style={styles.buttontabs}>
             <TouchableOpacity

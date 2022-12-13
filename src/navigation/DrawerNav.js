@@ -1,5 +1,4 @@
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Dimensions} from 'react-native';
 import {CourseStack} from './CourseStack';
 import {HomeStack} from './HomeStack';
@@ -9,6 +8,7 @@ import {NotificationsScreen} from '../screens/NotificationsScreen';
 import {CustomDrawerComponent} from '../components/CustomDrawerComponents';
 import Icon from 'react-native-vector-icons/Feather';
 import Icons from 'react-native-vector-icons/Ionicons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export const Drawer = createDrawerNavigator();
 

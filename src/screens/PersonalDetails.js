@@ -106,6 +106,7 @@ export const PersonalDetails = ({navigation,route}) => {
                       obj,
                     );
                     console.log('=====', response.data.message);
+                    Toast.show(response.data.message, Toast.SHORT);
                     if (response.data.message === 'User Created') {
                       navigation.navigate('Registration Successfull');
                     }
@@ -143,7 +144,7 @@ export const PersonalDetails = ({navigation,route}) => {
                         <View>
                           <TextInput
                             name="fullname"
-                            placeholder="FullName"
+                            placeholder="Full name"
                             placeholderTextColor={'#7A7A7A'}
                             onChangeText={handleChange('fullname')}
                             onBlur={handleBlur('fullname')}
@@ -181,7 +182,7 @@ export const PersonalDetails = ({navigation,route}) => {
                           <TextInput
                             name="Username"
                             placeholder="Username"
-                            // keyboardType='text'
+                            keyboardType='default'
                             placeholderTextColor={'#7A7A7A'}
                             onChangeText={handleChange('username')}
                             onBlur={handleBlur('username')}
@@ -219,7 +220,7 @@ export const PersonalDetails = ({navigation,route}) => {
                           <TextInput
                             name="email"
                             placeholder="Email"
-                            // keyboardType='text'
+                            keyboardType='email-address'
                             placeholderTextColor={'#7A7A7A'}
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
@@ -268,7 +269,9 @@ export const PersonalDetails = ({navigation,route}) => {
                             placeholderTextColor={'#7A7A7A'}
                           />
                           {values.password ? (
-                            <></>
+                            <>
+                            {setInfo(false)}
+                            </>
                           ) : (
                             <>
                               <TouchableOpacity
@@ -317,7 +320,7 @@ export const PersonalDetails = ({navigation,route}) => {
 
                               <TextInput
                                 name="confirm password"
-                                placeholder="confirm Password"
+                                placeholder="Confirm password"
                                 placeholderTextColor={'#7A7A7A'}
                                 onChangeText={handleChange('confirmpassword')}
                                 onBlur={handleBlur('confrmpassword')}
@@ -338,7 +341,7 @@ export const PersonalDetails = ({navigation,route}) => {
                                   letter.
                                 </Text>
                             </View>
-                            {/* <View style={styles.infobottom}></View> */}
+                         
                           </>
                         )}
                               {values.confirmpassword ? (
@@ -356,6 +359,7 @@ export const PersonalDetails = ({navigation,route}) => {
                         <ButtonComponent
                           text={'Register'}
                           onPress={handleSubmit}
+                          disable={!isValid}
                         />
                       </View>
                     </View>
@@ -473,6 +477,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
     borderRadius: 12.5,
+    marginBottom: Platform.OS == 'ios' ? 0 :12
   },
 
   infoText1: {

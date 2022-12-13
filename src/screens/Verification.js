@@ -30,23 +30,27 @@ export const Verification = ({navigation,route}) => {
       mobileNumber: mobileNumber,
       oneTimePassword: text,
     };
-
-    try {
-      const response = await axios.post(
-        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/verify',
-        obj,
-      );
-      console.log('=====', response.data.message);
-      if (response.data.message === 'Verified') {
-        navigation.navigate('CreateNewPassword',{obj});
-        setShowError(false);
-      } else {
-        setShowError(true);
+     if(text.length == 4){
+      try {
+        const response = await axios.post(
+          'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/verify',
+          obj,
+        );
+        // console.log('=====', response.data.message);
+        Toast.show(response.data.message, Toast.SHORT);
+        if (response.data.message === 'Verified') {
+          navigation.navigate('CreateNewPassword',{obj});
+          setShowError(false);
+        } else {
+          setShowError(true);
+        }
+      } catch (error) {
+        // console.log(error);
+        Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
       }
-    } catch (error) {
-      // console.log(error);
-      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
-    }
+
+     }
+  
   };
   return (
     <SafeAreaView style={styles.body}>

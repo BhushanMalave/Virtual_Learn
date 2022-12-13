@@ -120,7 +120,7 @@ export const Login = ({navigation}) => {
                     <TextInput
                       name="Username"
                       placeholder="Username"
-                      // keyboardType='text'
+                      keyboardType='default'
                       placeholderTextColor={'grey'}
                       onChangeText={handleChange('username')}
                       onBlur={handleBlur('username')}
@@ -180,7 +180,7 @@ export const Login = ({navigation}) => {
                   </View>
 
                   <View style={styles.button}>
-                    <ButtonComponent text={'Login'} onPress={handleSubmit} />
+                    <ButtonComponent text={'Login'} onPress={handleSubmit} disable={!isValid} />
                   </View>
                 </>
               )}
@@ -189,6 +189,7 @@ export const Login = ({navigation}) => {
               <Text style={styles.registerText1}>Don’t have a account?</Text>
               <TouchableOpacity
                 onPress={() => {
+                  setWarning(false)
                   navigation.navigate('RegisterStack');
                 }}>
                 <Text style={styles.registerText2}>Register</Text>

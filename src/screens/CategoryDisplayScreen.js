@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   },
   viewcatin: {
     marginTop: 15,
-    height: 80,
+    // height: 80,
     width: '100%',
     flexDirection: 'column',
     flexWrap: 'wrap',
