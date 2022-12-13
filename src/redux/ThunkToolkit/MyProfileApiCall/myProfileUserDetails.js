@@ -17,7 +17,7 @@ export const mpUserDetails = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-     // console.log('myprof', error.response.data);
+     console.log('myprof', error.response.data);
     }
   },
 );

@@ -20,7 +20,7 @@ export const hsCategories = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log('hscat', error);
-      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
+    
     }
   },
 );

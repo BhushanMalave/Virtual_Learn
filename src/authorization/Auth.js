@@ -105,7 +105,7 @@ export const newest = async token => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
+     console.log("newest",error);
     Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
@@ -471,7 +471,6 @@ export const PauseTime = async (token, objBody) => {
     }
   } catch (err) {
     console.log('contApi: ', err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
