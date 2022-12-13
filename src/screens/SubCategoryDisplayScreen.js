@@ -23,9 +23,10 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
   const basicCourse = useSelector(state => state.basicCourse.data);
   const featuredCourse = useSelector(state => state.advanceCourse.data);
   const subCategories = useSelector(state => state.subCategories.data);
-  const allcourse = useSelector(state => state.allCourseOfCategory.data);
+  const allcourse = useSelector(state => state.allCourseOfSubCategory.data);
   const token = useSelector(state => state.userDetails.token);
-  const item = route.params.itemCategory;
+  const id = route.params.id;
+  const item = route.params.item;
   const dispatch = useDispatch();
   const [portrait, setPortrait] = useState(true);
   const isPortrait = () => {
@@ -39,7 +40,6 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
   useEffect(() => {
     Dimensions.addEventListener('change', () => {
       setPortrait(isPortrait());
-      
     });
    // refreshToken(token);
   }, []);
@@ -58,13 +58,12 @@ export const SubCategoryDisplayScreen = ({navigation, route}) => {
             }}>
             <Image
               source={require('../assets/images/icn_back_header.png')}
-              style={styles.imgback}
+             
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('HomeSearch')}>
+          <TouchableOpacity onPress={() => navigation.navigate('CategorySearch',{id})}>
             <Image
               source={require('../assets/images/icn_search-Search.png')}
-              style={{marginRight: 20}}
             />
           </TouchableOpacity>
         </View>

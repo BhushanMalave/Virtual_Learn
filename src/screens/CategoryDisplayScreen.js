@@ -16,7 +16,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
 import {cdsAdvanceCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AdvanceCourseApi';
-import {cdsAllCourseOfCategory} from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfCategoryApi';
+import { cdsAllCourseOfSubCategory } from '../redux/ThunkToolkit/categoryDisplayScreenApi/AllCourseOfSubCategories';
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {overViewData} from '../authorization/Auth';
@@ -30,7 +30,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
   const subCategories = useSelector(state => state.subCategories.data);
   const allcourse = useSelector(state => state.allCourseOfCategory.data);
   const token = useSelector(state => state.userDetails.token);
-  const itemCategory = route.params.item;
+  const id = route.params.item.categoryId;
   const dispatch = useDispatch();
   
   const refreshToken = async token => {
@@ -50,10 +50,9 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
               style={styles.imgback}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('HomeSearch')}>
+          <TouchableOpacity onPress={() => navigation.navigate('CategorySearch',{id})}>
             <Image
               source={require('../assets/images/icn_search-Search.png')}
-              style={{marginRight: 20}}
             />
           </TouchableOpacity>
         </View>
@@ -142,14 +141,14 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
                           cdsAdvanceCourse({token, id: item?.subCategoryId}),
                         );
                         dispatch(
-                          cdsAllCourseOfCategory({
+                          cdsAllCourseOfSubCategory({
                             token,
                             id: item?.subCategoryId,
                           }),
                         );
                         navigation.navigate('SubCategoryDisplayScreen', {
                           item,
-                          itemCategory,
+                          id,
                         });
                       }}
                     />
