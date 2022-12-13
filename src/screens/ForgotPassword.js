@@ -28,7 +28,7 @@ export const ForgotPassword = ({navigation}) => {
     if (text.length == 10) {
       try {
         const response = await axios.put(
-          'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/resend',
+          'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/resend',
           obj,
         );
         // console.log('forgot pwd', response.data.message);

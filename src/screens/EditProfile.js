@@ -36,11 +36,11 @@ export const EditProfile = ({navigation}) => {
   const [selectedOccu, setSelectedOccu] = useState();
   const [genderState, setGenderState] = useState(false);
   const [occupationState, setOccupationState] = useState(false);
-  const [text, setText] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState(userData?.profilePhoto);
+  const [profilePhoto, setProfilePhoto] = useState(data?.profilePhoto);
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
-  const [image, setImage] = useState(userData?.profilePhoto);
+  const data = useSelector(state => state.drawerData.data);
+  const [image, setImage] = useState(data?.profilePhoto);
   const changeProfileImageFromLibrary = () => {
     ImagePicker.openPicker({
       width: 110,
@@ -150,11 +150,11 @@ export const EditProfile = ({navigation}) => {
             <View style={styles.container}>
               <Formik
                 initialValues={{
-                  fullname: userData?.fullName,
+                  fullname: data?.fullName,
                   username: userData?.userName,
                   email: userData?.email,
                   mobilenumber: userData?.mobileNumber,
-                  occupation: userData?.occupation,
+                  occupation: data?.occupation,
                   gender: userData?.gender,
                   dateofbirth: userData?.dateOfBirth,
                   twitterlink: userData?.twitterLink,

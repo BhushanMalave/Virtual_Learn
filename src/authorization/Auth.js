@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Toast from 'react-native-simple-toast';
 
 // export const refreshToken = async token => {
 //   const options = {
@@ -10,7 +9,7 @@ import Toast from 'react-native-simple-toast';
 
 //   try {
 //     const response = await axios.get(
-//       'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/refreshToken',
+//       'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/refreshToken',
 //       options,
 //     );
 //     console.log("==-=--=-=",response.data.jwtToken)
@@ -25,7 +24,7 @@ import Toast from 'react-native-simple-toast';
 export const refreshToken = async token => {
   try {
     let res = await fetch(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/refreshToken',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/refreshToken',
       {
         method: 'get',
         headers: {
@@ -34,39 +33,34 @@ export const refreshToken = async token => {
       },
     );
     let data = await res.json();
-    console.log('090909', data);
-    //return res; 
+    return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  
 };
 
 export const termsAndConditions = async () => {
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/termsAndConditions',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/termsAndConditions',
     );
     if (response.data.message) {
       return response.data.message;
     }
   } catch (error) {
     console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
 export const privacyPolicy = async () => {
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/privacyPolicy',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/privacyPolicy',
     );
     if (response.data.message) {
       return response.data.message;
     }
-  } catch (error) {
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
-  }
+  } catch (error) {}
 };
 
 export const all = async token => {
@@ -77,14 +71,14 @@ export const all = async token => {
   };
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course/all',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/all',
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('all course', error);
   }
 };
 
@@ -97,7 +91,7 @@ export const newest = async token => {
 
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course/newest',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/newest',
       options,
     );
     //console.log("=====",response.data);
@@ -105,8 +99,7 @@ export const newest = async token => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('newest', error);
   }
 };
 
@@ -119,15 +112,14 @@ export const popular = async token => {
 
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/home/course/popular',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/home/course/popular',
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('Popular course', error);
   }
 };
 
@@ -142,7 +134,7 @@ export const mpChangePassword = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/changePassword',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/changePassword',
       body,
       options,
     );
@@ -151,15 +143,14 @@ export const mpChangePassword = async (token, objBody) => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('mpPasword', error);
   }
 };
 
 export const mpChangeUserData = async (token, formBody) => {
   try {
     let res = await fetch(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/save',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/save',
       {
         method: 'put',
         body: formBody,
@@ -172,31 +163,7 @@ export const mpChangeUserData = async (token, formBody) => {
     const jsonResponse = res;
     return res.status;
   } catch (err) {
-    // console.log('-----', err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
-  }
-};
-
-export const changeUserData = async (token, formBody) => {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
-    },
-  };
-
-  try {
-    const response = await axios.put(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/save',
-      formBody,
-      options,
-    );
-    if (response.data) {
-      return response.data;
-    }
-  } catch (error) {
-    // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('mpUserData', err);
   }
 };
 
@@ -210,15 +177,14 @@ export const overViewData = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/courseOverView?courseId=${id}`,
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('overView data', error.response.data);
   }
 };
 
@@ -232,7 +198,7 @@ export const continueApi = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/continue?courseId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/continue?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -241,8 +207,7 @@ export const continueApi = async (token, id) => {
       }
     }
   } catch (error) {
-    // console.log(error.response.data);
-    // Toast.show('Continue Api : Something Went Wrong,Try Again!!!',Toast.SHORT)
+    console.log('continue api', error.response.data);
   }
 };
 
@@ -256,7 +221,7 @@ export const searchData = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${string}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/search?searchKey=${string}`,
       options,
     );
     // console.log(response.data);
@@ -264,7 +229,7 @@ export const searchData = async (token, string) => {
       return response.data;
     }
   } catch (error) {
-    //console.log(error.response.data);
+    console.log('serach data', error.response.data);
   }
 };
 
@@ -277,15 +242,14 @@ export const searchCategoriesdata = async token => {
 
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/categoriesWP',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/categoriesWP',
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('search cat data', error);
   }
 };
 
@@ -298,15 +262,14 @@ export const getOccupationData = async token => {
 
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/allSubCategoriesWP',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/allSubCategoriesWP',
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('occupationData', error);
   }
 };
 
@@ -319,14 +282,14 @@ export const topSearchData = async token => {
 
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/topSearches',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/topSearches',
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    // console.log('=======', error);
+    console.log('topsearchdata', error);
   }
 };
 
@@ -341,7 +304,7 @@ export const searchDataKeyword = async (token, obj) => {
 
   try {
     const response = await axios.put(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/keywords',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/keywords',
       body,
       options,
     );
@@ -349,7 +312,7 @@ export const searchDataKeyword = async (token, obj) => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error.response.status);
+    console.log('search keyword', error.response.status);
   }
 };
 
@@ -363,15 +326,14 @@ export const searchByKeyword = async (token, string) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${string}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/searchByKeyword?keyword=${string}`,
       options,
     );
     if (response.data) {
       return response.data;
     }
   } catch (error) {
-    //console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('search by data', error.response.data);
   }
 };
 
@@ -386,7 +348,7 @@ export const applySearchFilter = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/applyFilter',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/applyFilter',
       body,
       options,
     );
@@ -394,8 +356,7 @@ export const applySearchFilter = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('filter', err.response.data);
   }
 };
 
@@ -410,7 +371,7 @@ export const joinCourse = async (token, objBody) => {
 
   try {
     const response = await axios.post(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/enroll',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/enroll',
       body,
       options,
     );
@@ -420,7 +381,6 @@ export const joinCourse = async (token, objBody) => {
     }
   } catch (error) {
     // console.log(error.response.data);
-    
   }
 };
 
@@ -435,7 +395,7 @@ export const SubmitTest = async (token, Body) => {
 
   try {
     const response = await axios.post(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/submit',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/submit',
       body,
       options,
     );
@@ -446,7 +406,6 @@ export const SubmitTest = async (token, Body) => {
     }
   } catch (error) {
     console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -461,7 +420,7 @@ export const PauseTime = async (token, objBody) => {
 
   try {
     const response = await axios.put(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/pauseTime',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pauseTime',
       body,
       options,
     );
@@ -471,7 +430,6 @@ export const PauseTime = async (token, objBody) => {
     }
   } catch (err) {
     console.log('contApi: ', err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -484,7 +442,7 @@ export const ResultHeader = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/resultHeader?testId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/resultHeader?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -493,7 +451,6 @@ export const ResultHeader = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -507,7 +464,7 @@ export const ResultAnswer = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/resultAnswers?testId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/resultAnswers?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -516,7 +473,6 @@ export const ResultAnswer = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -530,7 +486,7 @@ export const ModuleTest = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/moduleTest?testId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/moduleTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -539,7 +495,6 @@ export const ModuleTest = async (token, id) => {
     }
   } catch (err) {
     // console.log(err.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -553,7 +508,7 @@ export const FinalTest = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/finalTest?testId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/finalTest?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -562,7 +517,6 @@ export const FinalTest = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -578,7 +532,7 @@ export const SubmitFinalTest = async (token, Body) => {
 
   try {
     const response = await axios.post(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/finalSubmit',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/finalSubmit',
       body,
       options,
     );
@@ -589,7 +543,6 @@ export const SubmitFinalTest = async (token, Body) => {
     }
   } catch (error) {
     // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -603,7 +556,7 @@ export const FinalTestResult = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/result?testId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/result?testId=${id}`,
       options,
     );
     if (response.data) {
@@ -612,7 +565,6 @@ export const FinalTestResult = async (token, id) => {
     }
   } catch (err) {
     // console.log(err.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -626,7 +578,7 @@ export const CertificateDownload = async (token, id) => {
 
   try {
     const response = await axios.get(
-      `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${id}`,
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/pdf?courseId=${id}`,
       options,
     );
     if (response.data) {
@@ -634,6 +586,26 @@ export const CertificateDownload = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+  }
+};
+
+export const fcmToken = async (token, Body) => {
+  const body = Body;
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/fcmToken',
+      body,
+      options,
+    );
+    return response;
+  } catch (error) {
+    console.log('///////', error);
   }
 };

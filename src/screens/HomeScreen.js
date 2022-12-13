@@ -48,6 +48,7 @@ export const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const data = useSelector(state => state.drawerData.data);
   const topHeaderData = useSelector(state => state.topHeader.value);
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
   const categoriesData = useSelector(state => state.categories.data);
@@ -112,7 +113,7 @@ export const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
-        <Text style={styles.name}>{userData?.fullName}</Text>
+        <Text style={styles.name}>{data?.fullName}</Text>
         <View>
           <FlatList
             data={topHeaderData}

@@ -13,13 +13,13 @@ export const OnGoing = createAsyncThunk(
 
     try {
       const response = await axios.get(
-        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/ongoingCourses',
+        'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/ongoingCourses',
         options,
       );
 
       return response.data;
     } catch (error) {
-     // console.log('ongoing', error);
+      console.log('ongoing', error);
    
     }
   },

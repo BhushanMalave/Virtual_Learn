@@ -102,7 +102,7 @@ export const PersonalDetails = ({navigation,route}) => {
 
                   try {
                     const response = await axios.post(
-                      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/register',
+                      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/register',
                       obj,
                     );
                     console.log('=====', response.data.message);
