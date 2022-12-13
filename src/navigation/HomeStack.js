@@ -4,6 +4,7 @@ import { CardStyleInterpolators } from '@react-navigation/stack';
 import {HomeScreen} from '../screens/HomeScreen';
 import {CategoriesScreen} from '../screens/CategoriesScreen';
 import {HomeSearch} from '../screens/HomeSearch';
+import { CategorySearch } from '../screens/CategorySearchScreen';
 import {ChoiceYourCourse} from '../screens/ChoiceYourCourse';
 import {CategoryDisplayScreen} from '../screens/CategoryDisplayScreen';
 import {SubCategoryDisplayScreen} from '../screens/SubCategoryDisplayScreen';
@@ -34,6 +35,14 @@ export const HomeStack = () => {
       <Stack.Screen
         name="HomeSearch"
         component={HomeSearch}
+        options={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+       <Stack.Screen
+        name="CategorySearch"
+        component={CategorySearch}
         options={{
           headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
