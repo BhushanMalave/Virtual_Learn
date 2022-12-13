@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Toast from 'react-native-simple-toast';
 
 // export const refreshToken = async token => {
 //   const options = {
@@ -34,12 +33,10 @@ export const refreshToken = async token => {
       },
     );
     let data = await res.json();
-    console.log('090909', data);
-    //return res; 
+    return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  
 };
 
 export const termsAndConditions = async () => {
@@ -52,7 +49,6 @@ export const termsAndConditions = async () => {
     }
   } catch (error) {
     console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -64,9 +60,7 @@ export const privacyPolicy = async () => {
     if (response.data.message) {
       return response.data.message;
     }
-  } catch (error) {
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
-  }
+  } catch (error) {}
 };
 
 export const all = async token => {
@@ -84,7 +78,7 @@ export const all = async token => {
       return response.data;
     }
   } catch (error) {
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('all course', error);
   }
 };
 
@@ -105,8 +99,7 @@ export const newest = async token => {
       return response.data;
     }
   } catch (error) {
-     console.log("newest",error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('newest', error);
   }
 };
 
@@ -126,8 +119,7 @@ export const popular = async token => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('Popular course', error);
   }
 };
 
@@ -151,8 +143,7 @@ export const mpChangePassword = async (token, objBody) => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('mpPasword', error);
   }
 };
 
@@ -172,31 +163,7 @@ export const mpChangeUserData = async (token, formBody) => {
     const jsonResponse = res;
     return res.status;
   } catch (err) {
-    // console.log('-----', err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
-  }
-};
-
-export const changeUserData = async (token, formBody) => {
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
-    },
-  };
-
-  try {
-    const response = await axios.put(
-      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/save',
-      formBody,
-      options,
-    );
-    if (response.data) {
-      return response.data;
-    }
-  } catch (error) {
-    // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('mpUserData', err);
   }
 };
 
@@ -217,8 +184,7 @@ export const overViewData = async (token, id) => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('overView data', error.response.data);
   }
 };
 
@@ -241,8 +207,7 @@ export const continueApi = async (token, id) => {
       }
     }
   } catch (error) {
-    // console.log(error.response.data);
-    // Toast.show('Continue Api : Something Went Wrong,Try Again!!!',Toast.SHORT)
+    console.log('continue api', error.response.data);
   }
 };
 
@@ -264,7 +229,7 @@ export const searchData = async (token, string) => {
       return response.data;
     }
   } catch (error) {
-    //console.log(error.response.data);
+    console.log('serach data', error.response.data);
   }
 };
 
@@ -284,8 +249,7 @@ export const searchCategoriesdata = async token => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('search cat data', error);
   }
 };
 
@@ -305,8 +269,7 @@ export const getOccupationData = async token => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('occupationData', error);
   }
 };
 
@@ -326,7 +289,7 @@ export const topSearchData = async token => {
       return response.data;
     }
   } catch (error) {
-    // console.log('=======', error);
+    console.log('topsearchdata', error);
   }
 };
 
@@ -349,7 +312,7 @@ export const searchDataKeyword = async (token, obj) => {
       return response.data;
     }
   } catch (error) {
-    // console.log(error.response.status);
+    console.log('search keyword', error.response.status);
   }
 };
 
@@ -370,8 +333,7 @@ export const searchByKeyword = async (token, string) => {
       return response.data;
     }
   } catch (error) {
-    //console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('search by data', error.response.data);
   }
 };
 
@@ -394,8 +356,7 @@ export const applySearchFilter = async (token, objBody) => {
       return response.data;
     }
   } catch (err) {
-    console.log(err.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+    console.log('filter', err.response.data);
   }
 };
 
@@ -420,7 +381,6 @@ export const joinCourse = async (token, objBody) => {
     }
   } catch (error) {
     // console.log(error.response.data);
-    
   }
 };
 
@@ -446,7 +406,6 @@ export const SubmitTest = async (token, Body) => {
     }
   } catch (error) {
     console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -492,7 +451,6 @@ export const ResultHeader = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -515,7 +473,6 @@ export const ResultAnswer = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -538,7 +495,6 @@ export const ModuleTest = async (token, id) => {
     }
   } catch (err) {
     // console.log(err.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -561,7 +517,6 @@ export const FinalTest = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -587,7 +542,6 @@ export const SubmitFinalTest = async (token, Body) => {
     }
   } catch (error) {
     // console.log(error.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -610,7 +564,6 @@ export const FinalTestResult = async (token, id) => {
     }
   } catch (err) {
     // console.log(err.response.data);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
   }
 };
 
@@ -632,6 +585,26 @@ export const CertificateDownload = async (token, id) => {
     }
   } catch (err) {
     // console.log(err);
-    Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
+  }
+};
+
+export const fcmToken = async (token, Body) => {
+  const body = Body;
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/fcmToken',
+      body,
+      options,
+    );
+    return response;
+  } catch (error) {
+    console.log('///////', error);
   }
 };

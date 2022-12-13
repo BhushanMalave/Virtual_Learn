@@ -18,7 +18,7 @@ export const csChapterResponse = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      // console.log('chpscr', error);
+       console.log('chpscr', error);
      // Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
