@@ -110,7 +110,7 @@ export const OverviewScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
         <View style={{marginHorizontal: 24, marginTop: 20,}}>
           <Text style={styles.text}>{coursedata?.courseTagLine}</Text>
           <View style={styles.preview}>
@@ -216,7 +216,7 @@ export const OverviewScreen = ({navigation}) => {
             <View style={styles.instructorinner}>
               <Image
                 source={{uri: coursedata?.profilePhoto}}
-                style={{height: 40, width: 40}}
+                style={{height: 40, width: 40,borderRadius:4}}
               />
               <View style={styles.textview}>
                 <Text style={styles.name}>{coursedata?.instructorName}</Text>
@@ -229,14 +229,15 @@ export const OverviewScreen = ({navigation}) => {
                 renderTruncatedFooter={renderTruncatedFooter}
                 renderRevealedFooter={renderRevealedFooter}>
                 <Text style={styles.instructordescription}>
-                  {coursedata?.instructorDescription}
+                {coursedata?.instructorDescription}
                 </Text>
               </ReadMore>
             </View>
           </View>
         </View>
         {coursedata?.enrolled ? (
-          <></>
+          <View style={{padding:20}}>
+          </View>
         ) : (
           <>
             <TouchableOpacity
@@ -270,7 +271,7 @@ const styles = StyleSheet.create({
     // margin: 25,
     flex: 1,
    
-    backgroundColor:"white"
+    backgroundColor:"white",
   },
   text: {
     height: 40,
@@ -403,6 +404,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     letterSpacing: 0,
     lineHeight: 20,
+    
   },
   button: {
     height: 56,

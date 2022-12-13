@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {ButtonComponent} from '../components/Buttons';
 import axios from 'axios';
-import Toast from 'react-native-simple-toast'
+import Toast from 'react-native-simple-toast';
 
 export const NewAccount = ({navigation}) => {
   const [text, setText] = useState('');
@@ -23,19 +23,21 @@ export const NewAccount = ({navigation}) => {
     const obj = {
       mobileNumber: `+91${text}`,
     };
-    try {
-      const response = await axios.put(
-        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/continue',
-        obj,
-      );
-      console.log('=====', response.data.message);
-      if (response.data.message === 'OTP Valid For 2 Minutes') {
-        navigation.navigate('VerifyAccount',{text});
-        setText('');
+    if (text.length == 10) {
+      try {
+        const response = await axios.put(
+          'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/continue',
+          obj,
+        );
+        console.log('=====', response.data.message);
+        if (response.data.message === 'OTP Valid For 2 Minutes') {
+          navigation.navigate('VerifyAccount', {text});
+          setText('');
+        }
+      } catch (error) {
+        console.log(error);
+        Toast.show('Something Went Wrong,Try Again!!!', Toast.SHORT);
       }
-    } catch (error) {
-      console.log(error);
-      Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   };
 
@@ -56,7 +58,7 @@ export const NewAccount = ({navigation}) => {
           placeholderTextColor={'grey'}
           style={styles.textInput}
           onChangeText={handleText}
-          keyboardType='number-pad'
+          keyboardType="number-pad"
           maxLength={10}
         />
       </View>
@@ -126,13 +128,13 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     textAlign: 'center',
     marginTop: 10,
-    color:"black"
+    color: 'black',
   },
   text1: {
     height: 35,
     color: '#2B2B2B',
     fontSize: 26,
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Bold',
   },
   text2: {
@@ -155,12 +157,9 @@ const styles = StyleSheet.create({
     color: '#EE5C4D',
     fontSize: 17,
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
-
-    
   },
   images: {
     height: 43,
     width: 165,
   },
-
 });
