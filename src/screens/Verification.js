@@ -33,7 +33,7 @@ export const Verification = ({navigation,route}) => {
      if(text.length == 4){
       try {
         const response = await axios.post(
-          'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/verify',
+          'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/verify',
           obj,
         );
         console.log('=====', response.data.message);
@@ -87,7 +87,7 @@ export const Verification = ({navigation,route}) => {
 
               try {
                 const response = await axios.put(
-                  'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/newUser/resend',
+                  'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/resend',
                   obj,
                 );
                 console.log('=====', response.data.message);

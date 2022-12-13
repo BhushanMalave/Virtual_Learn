@@ -13,7 +13,7 @@ export const notificationApiCall = createAsyncThunk(
 
     try {
       const response = await axios.get(
-        'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/notifications',
+        'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/notifications',
         options,
       );
       if(response.data.message !== "No notifications")

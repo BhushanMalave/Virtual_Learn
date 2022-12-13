@@ -11,7 +11,7 @@ export const myCourses = createAsyncThunk('courses/myCourses', async token => {
 
   try {
     const response = await axios.get(
-      'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/checkMyCourses',
+      'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/checkMyCourses',
       options,
     );
    // console.log(response.data);

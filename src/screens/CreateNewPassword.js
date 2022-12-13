@@ -62,7 +62,7 @@ export const CreateNewPassword = ({navigation,route}) => {
 
                 try {
                   const response = await axios.post(
-                    'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/resetPassword',
+                    'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/resetPassword',
                     obj,
                   );
                   if (

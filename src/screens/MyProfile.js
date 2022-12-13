@@ -13,6 +13,7 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {mpUserDetails} from '../redux/ThunkToolkit/MyProfileApiCall/myProfileUserDetails';
+import { drawerDataApiCall } from '../redux/ThunkToolkit/DrawerDataApi/DrawerData';
 import { setToken } from '../redux/ReduxPersist/UserDetails';
 import { getVerifiedKeys } from '../authorization/RefreshToken';
 import { useIsFocused } from '@react-navigation/native';
@@ -22,7 +23,7 @@ export const MyProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
- 
+  const data = useSelector(state => state.drawerData.data);
   const [refreshing, setRefreshing] = useState(false);
 
   const refreshToken = async () => {
@@ -43,6 +44,7 @@ export const MyProfile = ({navigation}) => {
   const focus = useIsFocused();
   useLayoutEffect(() => {
     dispatch(mpUserDetails(token));
+    dispatch(drawerDataApiCall(token));
    // refreshToken();
   }, [focus]);
   return (
@@ -52,7 +54,7 @@ export const MyProfile = ({navigation}) => {
       }>
       <View>
         <ImageBackground
-          source={{uri: userData?.profilePhoto}}
+          source={{uri: data?.profilePhoto}}
           style={styles.backgroundimg}>
           <View style={styles.imageBlur}>
             <TouchableOpacity
@@ -75,12 +77,12 @@ export const MyProfile = ({navigation}) => {
             </View>
             <View style={styles.topinfo}>
               <Image
-                source={{uri: userData?.profilePhoto}}
+                source={{uri: data?.profilePhoto}}
                 style={styles.imgProfile}
               />
               <View style={styles.topinfotext}>
-                <Text style={styles.textname}>{userData?.fullName}</Text>
-                <Text style={styles.textdesc}>{userData?.occupation}</Text>
+                <Text style={styles.textname}>{data?.fullName}</Text>
+                <Text style={styles.textdesc}>{data?.occupation}</Text>
               </View>
             </View>
           </View>
@@ -103,7 +105,7 @@ export const MyProfile = ({navigation}) => {
         <Text style={styles.textdetails}>Personal Details</Text>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Name</Text>
-          <Text style={styles.texttitle}>{userData?.fullName}</Text>
+          <Text style={styles.texttitle}>{data?.fullName}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Username</Text>
@@ -119,7 +121,7 @@ export const MyProfile = ({navigation}) => {
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Occupation</Text>
-          <Text style={styles.texttitle}>{userData?.occupation}</Text>
+          <Text style={styles.texttitle}>{data?.occupation}</Text>
         </View>
         <View style={styles.viewinfo}>
           <Text style={styles.texttag}>Date of Birth</Text>
