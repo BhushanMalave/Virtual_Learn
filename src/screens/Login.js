@@ -82,13 +82,12 @@ export const Login = ({navigation}) => {
 
                 try {
                   const response = await axios.put(
-                    'http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/login',
+                    'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/login',
                     obj,
                   );
-                
                   dispatch(mpUserDetails(token));
-                  if (response.data.jwtToken) {
-                    dispatch(setToken(response.data.jwtToken));
+                  if (response.headers["jwt-token"]) {
+                    dispatch(setToken(response.headers["jwt-token"]));
                     dispatch(setNewUser(false));
                   } else {
                     setWarning(true);
