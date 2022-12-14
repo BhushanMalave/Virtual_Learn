@@ -1,7 +1,4 @@
 import * as React from 'react';
-
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import {CourseCompletedScreen} from '../screens/CourseCompletedScreen';
 import {CourseScreen} from '../screens/CourseScreen';
 import {FinalTest} from '../screens/FinalTest';
@@ -10,7 +7,9 @@ import {CertificateScreen} from '../screens/CertificateScreen';
 import {HomeScreen} from '../screens/HomeScreen';
 import {ModularTest} from '../components/chaptes/ModuleTest';
 
-const Stack = createNativeStackNavigator();
+
+import { CardStyleInterpolators ,createStackNavigator} from '@react-navigation/stack';
+const Stack = createStackNavigator();
 export const FinalTestStack = () => {
   return (
     <Stack.Navigator>

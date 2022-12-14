@@ -33,13 +33,15 @@ const styles = StyleSheet.create({
     height: 140,
 
     borderRadius: 6,
-
+    
     marginBottom: 12,
+  
   },
   image: {
     height: 140,
-
+  
     marginBottom: 12,
+
   },
   contbutton: {
     height: 26,

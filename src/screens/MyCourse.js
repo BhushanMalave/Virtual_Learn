@@ -30,6 +30,7 @@ export const MyCourse = ({navigation}) => {
   const [initial, setInitial] = useState(1);
   const token = useSelector(state => state.userDetails.token);
   const mycoursestatus = useSelector(state => state.courses.data);
+
   console.log(mycoursestatus)
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
   const completeddata = useSelector(state => state.completedcourse.data);
@@ -61,7 +62,6 @@ export const MyCourse = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <Text style={styles.header}>My Course</Text>
-
       {mycoursestatus?.message == true? (
         <>
           <View style={styles.buttontabs}>
@@ -159,12 +159,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 25,
+    
   },
   search: {
     height: 16.5,
     border: 0.5,
     color: '#373737',
-    marginRight: 20,
+    marginRight:-5
+   
+   
   },
   header: {
     height: 35,

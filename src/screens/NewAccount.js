@@ -29,7 +29,8 @@ export const NewAccount = ({navigation}) => {
           'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/continue',
           obj,
         );
-        console.log('=====', response.data.message);
+        // console.log('=====', response.data.message);
+        Toast.show(response.data.message, Toast.SHORT);
         if (response.data.message === 'OTP Valid For 2 Minutes') {
           navigation.navigate('VerifyAccount', {text});
           setText('');
@@ -63,7 +64,7 @@ export const NewAccount = ({navigation}) => {
         />
       </View>
       <View style={styles.button}>
-        <ButtonComponent text="Continue" onPress={() => handleProcess()} />
+        <ButtonComponent text="Continue" onPress={() => handleProcess()}/>
       </View>
       <View style={styles.textView2}>
         <Text style={styles.text3}>Already have an account? </Text>

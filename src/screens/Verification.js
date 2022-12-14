@@ -36,7 +36,8 @@ export const Verification = ({navigation,route}) => {
           'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/verify',
           obj,
         );
-        console.log('=====', response.data.message);
+        // console.log('=====', response.data.message);
+        Toast.show(response.data.message, Toast.SHORT);
         if (response.data.message === 'Verified') {
           navigation.navigate('CreateNewPassword',{obj});
           setShowError(false);
