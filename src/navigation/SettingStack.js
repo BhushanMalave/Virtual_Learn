@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import {SettingsScreen} from '../screens/SettingsScreen';
 import {TermServicesScreen} from '../screens/TermServicesScreen';
 import {PrivacyPolicyScreen} from '../screens/PrivacyPolicyScreen';
-const Stack = createNativeStackNavigator();
+
+import { CardStyleInterpolators ,createStackNavigator} from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
 export const SettingStack = () => {
   return (

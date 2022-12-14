@@ -31,6 +31,7 @@ export const TestBottomPopUp = () => {
   const dispatch = useDispatch();
   const mockState = useSelector(state => state.filterState.mockState);
   const data2 = useSelector(state => state.testdata.correctAnswers);
+  console.log(data2)
 
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
@@ -48,7 +49,7 @@ export const TestBottomPopUp = () => {
       <View style={styles.container}>
         <View style={styles.modalContainer}>
           <View style={{flexDirection: 'row', marginLeft: 55}}>
-            <Text style={styles.questionid}>Question {data2?.questionId}</Text>
+            <Text style={styles.questionid}>Question {data2?.questionNumber}</Text>
            
             <TouchableOpacity
               onPress={() => {

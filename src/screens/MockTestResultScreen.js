@@ -21,9 +21,10 @@ import {getVerifiedKeys} from '../authorization/RefreshToken';
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
+  console.log("++++",resultheader)
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
-
+  console.log("____",resultanswers)
   const testpercentage = useSelector(state => state.testdata.testPercentage);
 
   const dispatch = useDispatch();
@@ -115,7 +116,7 @@ export const MockTestResultScreen = ({navigation}) => {
           {resultanswers?.map(item => (
             <View key={item.id}>
               <QuestionListComponent
-                questionId={item.questionId}
+                questionId={item.questionNumber}
                 state={item.userAnswerStatus}
                 onPress={() => {
                   dispatch(setCorrectAnswers(item));

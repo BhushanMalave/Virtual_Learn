@@ -46,7 +46,7 @@ export const NotificationsScreen = ({navigation}) => {
     <SafeAreaView style={styles.body}>
       <TouchableOpacity onPress={() => {
         //  dispatch(setNotificationData());
-          navigation.goBack()
+          navigation.openDrawer()
         }}
         >
         <Image

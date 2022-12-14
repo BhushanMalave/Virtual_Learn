@@ -158,12 +158,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 25,
+    
   },
   search: {
     height: 16.5,
     border: 0.5,
     color: '#373737',
-    marginRight: 20,
+    marginRight:-5
+   
+   
   },
   header: {
     height: 35,

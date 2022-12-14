@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import {NewAccount} from '../screens/NewAccount';
 import {VerifyAccount} from '../screens/VerifyAccount';
 import {PersonalDetails} from '../screens/PersonalDetails';
 import {RegisterSuccessfully} from '../screens/RegisterSuccessfully';
 
-const Stack = createNativeStackNavigator();
+
+import { CardStyleInterpolators ,createStackNavigator} from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
 export const RegistrationStack = () => {
   return (

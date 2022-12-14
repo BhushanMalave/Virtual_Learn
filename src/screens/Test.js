@@ -28,6 +28,7 @@ export const Test = ({navigation}) => {
   
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
+  console.log(testid)
   const userAnswers = useSelector(state => state.testdata.userAnswers);
   const dispatch = useDispatch();
 

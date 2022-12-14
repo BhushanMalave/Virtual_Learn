@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import {OnBoardingScreen1} from '../screens/OnBoardingScreen1';
 import {OnBoardingScreen2} from '../screens/OnBoardingScreen2';
 import {OnBoardingScreen3} from '../screens/OnBoardingScreen3';
 import {WelcomeStack} from './WelcomeStack';
 
-const Stack = createNativeStackNavigator();
+
+import { CardStyleInterpolators ,createStackNavigator} from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
 export const OnboardingStack = () => {
   return (

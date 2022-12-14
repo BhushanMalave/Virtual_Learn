@@ -162,7 +162,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
         </View>
         {allcourse?(<>
           <Text style={styles.text2}>All courses</Text>
-        <View style={{marginHorizontal: 24}}>
+        <View style={{marginHorizontal: 24,marginBottom:30}}>
           {allcourse?.map(item => (
             <View key={item?.courseId}>
               <SearchFoundComponent
