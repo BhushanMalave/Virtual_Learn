@@ -12,13 +12,13 @@ export const csChapterResponse = createAsyncThunk(
     };
     try {
       const response = await axios.get(
-        `http://virtuallearn-env.eba-b8h9bw3u.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=${id}`,
+        `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/courseChapterResponse?courseId=${id}`,
         options,
       );
 
       return response.data;
     } catch (error) {
-      // console.log('chpscr', error);
+       console.log('chpscr', error);
      // Toast.show('Something Went Wrong,Try Again!!!',Toast.SHORT)
     }
   },
