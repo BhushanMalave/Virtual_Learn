@@ -69,6 +69,7 @@ export const NotificationsScreen = ({navigation}) => {
         />
       </View>
       <ScrollView  
+      showsVerticalScrollIndicator={false}
        refreshControl={
        <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
       >
