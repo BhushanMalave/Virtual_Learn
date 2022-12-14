@@ -14,6 +14,7 @@ import Slider from '@react-native-community/slider';
 import {PauseTime} from '../authorization/Auth';
 import {useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
+import Orientation from 'react-native-orientation-locker';
 
 export const LessonVideoPlayer = ({route, navigation}) => {
   const token = useSelector(state => state.userDetails.token);
@@ -102,6 +103,7 @@ export const LessonVideoPlayer = ({route, navigation}) => {
           };
           // console.log(body);
           const res = await PauseTime(token, body);
+          console.log(res)
           if (res.message == 'Updated SuccessFully') {
             {
               fullScreen && FullScreen();
