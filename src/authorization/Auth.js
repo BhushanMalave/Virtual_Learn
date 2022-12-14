@@ -233,6 +233,28 @@ export const searchData = async (token, string) => {
   }
 };
 
+export const searchCategoryData = async (token, text, id) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const response = await axios.get(
+      `http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/user/searchOfCategory?categoryId=${id}&searchKey=${text}`,
+      options,
+    );
+     console.log("=-=-=-",response.data);
+    if (response.data) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log('serach category data', error.response.data);
+  }
+};
+
 export const searchCategoriesdata = async token => {
   const options = {
     headers: {

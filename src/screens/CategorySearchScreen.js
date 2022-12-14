@@ -17,7 +17,7 @@ import {SearchFoundComponent} from '../components/SearchFoundComponent';
 import {BottomPopup} from '../components/BottomPopup';
 import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
 import {useSelector, useDispatch} from 'react-redux';
-import {searchData} from '../authorization/Auth';
+import {searchCategoryData} from '../authorization/Auth';
 import {setSearchData} from '../redux/ReduxPersist/searchDataSlice';
 import {setComponentRender} from '../redux/ReduxPersist/searchDataSlice';
 import {cdsbasicCourse} from '../redux/ThunkToolkit/categoryDisplayScreenApi/BasicCoursesApi';
@@ -33,24 +33,28 @@ import {getVerifiedKeys} from '../authorization/RefreshToken';
 import {csChapterResponse} from '../redux/ThunkToolkit/ChaptersApi/ChapterScreenApi';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 import {overViewData} from '../authorization/Auth';
-export const HomeSearch = ({navigation}) => {
-  const [text, setText] = useState("");
+
+
+
+export const CategorySearch = ({navigation,route}) => {
+  const [text, setText] = useState();
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const categoriesData = useSelector(state => state.categories.data);
   const data = useSelector(state => state.searchData.data);
   const topData = useSelector(state => state.searchData.topSearchData);
+  const id = route.params.id;
   const componentrender = useSelector(
     state => state.searchData.componentRender,
   );
 
   const handleText = async string => {
-    setText(string);  
+    setText(string);
     if (text.length <= 1 ) {
-      dispatch(setComponentRender(1));
-      dispatch(setSearchData(null));
-    } else if(text.length >=2 ) {
-      const res = await searchData(token, text);
+        dispatch(setComponentRender(1));
+        dispatch(setSearchData(null));
+      } else if(text.length >=2 ) {
+      const res = await searchCategoryData(token, text, id);
       if (res) {
         dispatch(setComponentRender(2));
         dispatch(setSearchData(res));
@@ -70,7 +74,6 @@ export const HomeSearch = ({navigation}) => {
       dispatch(setTopSearchData(res));
     }
   };
- 
 
   useEffect(() => {
     dispatch(setComponentRender(1));
