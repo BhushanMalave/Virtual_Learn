@@ -28,8 +28,8 @@ export const Test = ({navigation}) => {
   
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
+  console.log(testid)
   const userAnswers = useSelector(state => state.testdata.userAnswers);
-  console.log("+++",userAnswers)
   const dispatch = useDispatch();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -205,9 +205,8 @@ if(data1?.testDuration)
               testId: testid,
               userAnswers: userAnswers,
             };
-            console.log(userAnswers)
+            console.log("+++",userAnswers)
             const res = await SubmitTest(token, body);
-            console.log(res)
             dispatch(setTestPercentage(res));
             if (res) {
               dispatch(removeAll());

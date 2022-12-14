@@ -8,6 +8,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import {Router} from './src/navigation/Route';
 import { Test } from './src/screens/Test';
+import { FinalTest } from './src/screens/FinalTest';
 
 
 let persistor = persistStore(store);
@@ -18,7 +19,6 @@ const App = () => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
        <Router/>
-    
       </PersistGate>
     </Provider>
   );

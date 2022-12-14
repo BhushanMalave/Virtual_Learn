@@ -82,7 +82,7 @@
     return render_date(get_format());
   }
 
-  console.log(humanized_time_span)
+  // console.log(humanized_time_span)
 
 
 

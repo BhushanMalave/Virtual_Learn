@@ -2,9 +2,9 @@ import React from 'react';
 
 import {StyleSheet, Text, View, TouchableOpacity, Platform} from 'react-native';
 
-export const ButtonComponent = ({text, onPress}) => {
+export const ButtonComponent = ({text, onPress,disable}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.body}>
+    <TouchableOpacity onPress={onPress} style={styles.body} disabled={disable}>
       <View>
         <Text style={styles.text}>{text}</Text>
       </View>
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
     color: '#FFFFFF',
-    marginTop: Platform.OS == 'ios' ? 14 : 10,
+    marginTop: Platform.OS == 'ios' ? 14 : 12
+   
   },
   body1: {
     backgroundColor: '#FFFFFF',

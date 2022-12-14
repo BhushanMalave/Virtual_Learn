@@ -12,8 +12,8 @@ import {ScrollView} from 'react-native-gesture-handler';
 import ReadMore from 'react-native-read-more-text';
 import {useDispatch, useSelector} from 'react-redux';
 import {joinCourse} from '../authorization/Auth';
-import {useState, useEffect } from 'react';
-import Toast from 'react-native-simple-toast'
+import {useState, useEffect} from 'react';
+import Toast from 'react-native-simple-toast';
 import {overViewData} from '../authorization/Auth';
 import {addOverView} from '../redux/ThunkToolkit/ChaptersApi/CourseDataRedux';
 
@@ -37,6 +37,7 @@ const details = [
 
 export const OverviewScreen = ({navigation}) => {
   const coursedata = useSelector(state => state.courseData.overview);
+  console.log(coursedata);
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   renderTruncatedFooter = handlePress => {
@@ -88,7 +89,6 @@ export const OverviewScreen = ({navigation}) => {
     navigation.navigate('VideoPlayer', {item});
   };
 
-
   const [totalMinutes, setTotalMinutes] = useState(0);
 
   useEffect(() => {
@@ -104,14 +104,10 @@ export const OverviewScreen = ({navigation}) => {
     }
   }, [coursedata?.previewVideoDuration]);
 
-
-
-
-
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
-        <View style={{marginHorizontal: 24, marginTop: 20,}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
+        <View style={{marginHorizontal: 24, marginTop: 20}}>
           <Text style={styles.text}>{coursedata?.courseTagLine}</Text>
           <View style={styles.preview}>
             <Text style={styles.previewtext}>Preview this course</Text>
@@ -190,14 +186,14 @@ export const OverviewScreen = ({navigation}) => {
 
           <View style={styles.coursecontainer}>
             <Text style={styles.header}>What you'll learn</Text>
-            <View style={styles.coursecontent}>
-              <Image source={require('../assets/images/Circle.png')} />
-              {coursedata?.learningOutCome.map(item => (
+            {coursedata?.learningOutCome.map(item => (
+              <View style={styles.coursecontent}>
+                <Image source={require('../assets/images/Circle.png')} />
                 <View key={item.id}>
                   <Text style={styles.outcomedescription}>{item}</Text>
                 </View>
-              ))}
-            </View>
+              </View>
+            ))}
           </View>
 
           <View style={styles.coursecontainer}>
@@ -216,11 +212,13 @@ export const OverviewScreen = ({navigation}) => {
             <View style={styles.instructorinner}>
               <Image
                 source={{uri: coursedata?.profilePhoto}}
-                style={{height: 40, width: 40,borderRadius:4}}
+                style={{height: 40, width: 40, borderRadius: 4}}
               />
               <View style={styles.textview}>
                 <Text style={styles.name}>{coursedata?.instructorName}</Text>
-                <Text style={styles.desp}>{coursedata?.url}</Text>
+                <Text style={styles.desp}>
+                  {coursedata?.designation} {coursedata?.url}
+                </Text>
               </View>
             </View>
             <View style={{marginTop: 10}}>
@@ -229,15 +227,14 @@ export const OverviewScreen = ({navigation}) => {
                 renderTruncatedFooter={renderTruncatedFooter}
                 renderRevealedFooter={renderRevealedFooter}>
                 <Text style={styles.instructordescription}>
-                {coursedata?.instructorDescription}
+                  {coursedata?.instructorDescription}
                 </Text>
               </ReadMore>
             </View>
           </View>
         </View>
         {coursedata?.enrolled ? (
-          <View style={{padding:20}}>
-          </View>
+          <View style={{padding: 20}}></View>
         ) : (
           <>
             <TouchableOpacity
@@ -253,7 +250,7 @@ export const OverviewScreen = ({navigation}) => {
                 );
                 dispatch(addOverView(response));
                 console.log(res);
-                if(res){
+                if (res) {
                   navigation.navigate('Chapters');
                 }
               }}>
@@ -270,15 +267,15 @@ const styles = StyleSheet.create({
   container: {
     // margin: 25,
     flex: 1,
-   
-    backgroundColor:"white",
+
+    backgroundColor: 'white',
   },
   text: {
     height: 40,
     color: '#2BB5F4',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
     fontSize: 14,
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     letterSpacing: 0,
     lineHeight: 20,
   },
@@ -404,7 +401,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     letterSpacing: 0,
     lineHeight: 20,
-    
   },
   button: {
     height: 56,
@@ -430,7 +426,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 18,
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
   },
   introview: {
     marginTop: 22,

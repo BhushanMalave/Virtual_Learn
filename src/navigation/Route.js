@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {OnboardingStack} from './OnboardingStack';
 import {WelcomeStack} from './WelcomeStack';
@@ -10,7 +8,10 @@ import {setToken} from '../redux/ReduxPersist/UserDetails';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
 import RNBootSplash from 'react-native-bootsplash';
 
-const Stack = createNativeStackNavigator();
+
+import { CardStyleInterpolators ,createStackNavigator} from '@react-navigation/stack';
+const Stack = createStackNavigator();
+
 export const Router = () => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);

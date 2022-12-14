@@ -28,6 +28,7 @@ export const CourseComponent = (props)=> {
           data={props.data}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{marginStart:25,paddingRight:25}}
           renderItem={({item}) => (
             <View>
               
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     height: 134,
     width: 288,
     justifyContent: 'space-between',
-    marginLeft: 25,
+  
     marginTop: 20,
   },
   businessview: {
