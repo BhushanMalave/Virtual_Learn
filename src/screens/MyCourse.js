@@ -98,6 +98,7 @@ export const MyCourse = ({navigation}) => {
           {clicked1 ? (
             <>
               <FlatList
+              showsVerticalScrollIndicator={false}
                 data={ongoingdata}
                 renderItem={({item}) => (
                   <OnGoingComponent

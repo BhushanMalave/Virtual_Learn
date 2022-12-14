@@ -97,6 +97,7 @@ export const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
+        showsHorizontalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
@@ -117,7 +118,7 @@ export const HomeScreen = ({navigation}) => {
           <FlatList
             data={topHeaderData}
             horizontal={true}
-            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={async () => {
