@@ -43,6 +43,7 @@ export const HomeSearch = ({navigation}) => {
   const componentrender = useSelector(
     state => state.searchData.componentRender,
   );
+
   const handleText = async string => {
     setText(string);  
     if (text.length <= 1 ) {
