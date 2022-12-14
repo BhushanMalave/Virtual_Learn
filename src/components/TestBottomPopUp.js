@@ -31,7 +31,7 @@ export const TestBottomPopUp = () => {
   const dispatch = useDispatch();
   const mockState = useSelector(state => state.filterState.mockState);
   const data2 = useSelector(state => state.testdata.correctAnswers);
-  console.log(data2)
+
 
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);

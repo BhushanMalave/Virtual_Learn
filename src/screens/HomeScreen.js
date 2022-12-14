@@ -51,7 +51,7 @@ export const HomeScreen = ({navigation}) => {
   const data = useSelector(state => state.drawerData.data);
   const topHeaderData = useSelector(state => state.topHeader.value);
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
-  console.log(choiceYourCourse)
+
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
@@ -116,68 +116,75 @@ export const HomeScreen = ({navigation}) => {
         </View>
         <Text style={styles.toptext}>Hello!</Text>
         <Text style={styles.name}>{data?.fullName}</Text>
-        <View>
-          <FlatList
-            data={topHeaderData}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{marginStart: 25, paddingRight: 25}}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                onPress={async () => {
-                  dispatch(addChapterList());
-                  dispatch(csChapterResponse({token, id: item.courseId}));
-                  const res = await overViewData(token, item.courseId);
-                  dispatch(addOverView(res));
-                  navigation.navigate('CourseScreen');
-                }}>
-                <View style={styles.itemContainer} key={item.id}>
-                  <ImageBackground
-                    source={{uri: item?.coursePhoto}}
-                    style={{
-                      height: 140,
-                      width: 260,
-                      borderRadius: 5,
-                      overflow: 'hidden',
-                    }}>
-                    <View
-                      style={{
-                        height: 45,
-                        marginTop: 90,
-                        justifyContent: 'center',
-                        margin: 13,
-                      }}>
-                      <Text style={styles.courseText}>{item?.courseName}</Text>
-                    </View>
-                  </ImageBackground>
-                </View>
-              </TouchableOpacity>
-            )}></FlatList>
-        </View>
-        <View>
-          <FlatList
-            data={ongoingdata}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{marginStart: 25, paddingRight:25}}
-            renderItem={({item}) => (
-              <View style={styles.itemContainer2} key={item.id}>
-                <OnGoingComponent
-                  source={{uri: item?.coursePhoto}}
-                  name={item?.courseName}
-                  chapter={item?.completedChapter}
-                  ctdchapter={item?.totalChapter}
+        {topHeaderData && (
+          <View>
+            <FlatList
+              data={topHeaderData}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{marginStart: 25, paddingRight: 25}}
+              renderItem={({item}) => (
+                <TouchableOpacity
                   onPress={async () => {
                     dispatch(addChapterList());
                     dispatch(csChapterResponse({token, id: item.courseId}));
                     const res = await overViewData(token, item.courseId);
                     dispatch(addOverView(res));
                     navigation.navigate('CourseScreen');
-                  }}
-                />
-              </View>
-            )}></FlatList>
-        </View>
+                  }}>
+                  <View style={styles.itemContainer} key={item.id}>
+                    <ImageBackground
+                      source={{uri: item?.coursePhoto}}
+                      style={{
+                        height: 140,
+                        width: 260,
+                        borderRadius: 5,
+                        overflow: 'hidden',
+                      }}>
+                      <View
+                        style={{
+                          height: 45,
+                          marginTop: 90,
+                          justifyContent: 'center',
+                          margin: 13,
+                        }}>
+                        <Text style={styles.courseText}>
+                          {item?.courseName}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                  </View>
+                </TouchableOpacity>
+              )}></FlatList>
+          </View>
+        )}
+{ongoingdata && 
+  <View>
+  <FlatList
+    data={ongoingdata}
+    horizontal={true}
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={{marginStart: 25, paddingRight: 25}}
+    renderItem={({item}) => (
+      <View style={styles.itemContainer2} key={item.id}>
+        <OnGoingComponent
+          source={{uri: item?.coursePhoto}}
+          name={item?.courseName}
+          chapter={item?.completedChapter}
+          ctdchapter={item?.totalChapter}
+          onPress={async () => {
+            dispatch(addChapterList());
+            dispatch(csChapterResponse({token, id: item.courseId}));
+            const res = await overViewData(token, item.courseId);
+            dispatch(addOverView(res));
+            navigation.navigate('CourseScreen');
+          }}
+        />
+      </View>
+    )}></FlatList>
+</View>
+}
+      
 
         {categoriesData && choiceYourCourse && topCoursesData ? (
           <></>
@@ -476,20 +483,17 @@ const styles = StyleSheet.create({
     height: 12,
     borderRadius: 3,
     backgroundColor: '#FCBE4B',
-    marginTop:67,
-    marginRight:3,
-    paddingLeft:5,
-    paddingRight:5,
-    justifyContent:"center"
-
- 
-
+    marginTop: 67,
+    marginRight: 3,
+    paddingLeft: 5,
+    paddingRight: 5,
+    justifyContent: 'center',
   },
   design: {
-    height:9,
+    height: 9,
     color: '#373737',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     fontSize: 8,
     letterSpacing: 0,
     lineHeight: 9,
@@ -575,7 +579,7 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 5,
     borderTopEndRadius: 5,
     overflow: 'hidden',
-    alignItems:'flex-end'
+    alignItems: 'flex-end',
   },
   btmitemContainer: {
     backgroundColor: '#FFFFFF',
@@ -608,7 +612,7 @@ const styles = StyleSheet.create({
     fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     fontSize: 8,
     lineHeight: 9,
-    marginTop:3
+    marginTop: 3,
   },
   businessContainer: {
     backgroundColor: '#FFFFFF',

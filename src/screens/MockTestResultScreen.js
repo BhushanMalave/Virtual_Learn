@@ -21,10 +21,9 @@ import {getVerifiedKeys} from '../authorization/RefreshToken';
 
 export const MockTestResultScreen = ({navigation}) => {
   const resultheader = useSelector(state => state.testdata.resultHeader);
-  console.log("++++",resultheader)
 
   const resultanswers = useSelector(state => state.testdata.resultAnswers);
-  console.log("____",resultanswers)
+
   const testpercentage = useSelector(state => state.testdata.testPercentage);
 
   const dispatch = useDispatch();
@@ -92,7 +91,7 @@ export const MockTestResultScreen = ({navigation}) => {
               height: 40,
               backgroundColor: '#7A7A7A',
               width: 1,
-         
+
               opacity: 0.4,
               marginTop: 20,
             }}
@@ -109,7 +108,7 @@ export const MockTestResultScreen = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{marginTop: 70, marginHorizontal: 24}}>
-        <View style={{marginTop: Platform.OS === 'ios'?5:5}}>
+        <View style={{marginTop: Platform.OS === 'ios' ? 5 : 5}}>
           <Text style={styles.textlist}>List of Questions</Text>
         </View>
         <View style={{marginTop: 20}}>
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bodytop: {
-    height: Platform.OS === 'ios'?314:280,
+    height: Platform.OS === 'ios' ? 314 : 280,
     // borderWidth: 1,
     backgroundColor: '#042C5C',
   },
@@ -152,8 +151,8 @@ const styles = StyleSheet.create({
     width: 68,
     backgroundColor: '#FCBE4B',
     // alignItems: 'center',
-    justifyContent:"center",
-    borderRadius:4
+    justifyContent: 'center',
+    borderRadius: 4,
   },
   box: {
     backgroundColor: '#FFFFFF',
@@ -178,7 +177,7 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS == 'ios' ? 'Biko' : 'Biko_Regular',
     marginTop: Platform.OS === 'ios' ? 17 : 5,
     color: '#FFFFFF',
-    textAlign:"center",
+    textAlign: 'center',
   },
   textchaptername: {
     fontSize: 26,
