@@ -38,8 +38,8 @@ import {OnGoing} from '../redux/ThunkToolkit/MyCourses/OnGoingApi';
 import {OnGoingComponent} from '../components/OnGoingComponent';
 import {getVerifiedKeys} from '../authorization/RefreshToken';
 import {setToken} from '../redux/ReduxPersist/UserDetails';
-import { ActivityIndicator } from 'react-native';
-import { drawerDataApiCall } from '../redux/ThunkToolkit/DrawerDataApi/DrawerData';
+import {ActivityIndicator} from 'react-native';
+import {drawerDataApiCall} from '../redux/ThunkToolkit/DrawerDataApi/DrawerData';
 
 export const HomeScreen = ({navigation}) => {
   const [clicked1, setClicked1] = useState(true);
@@ -48,8 +48,10 @@ export const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const userData = useSelector(state => state.userData.data);
+  const data = useSelector(state => state.drawerData.data);
   const topHeaderData = useSelector(state => state.topHeader.value);
   const choiceYourCourse = useSelector(state => state.choiceYourCourse.data);
+
   const categoriesData = useSelector(state => state.categories.data);
   const topCoursesData = useSelector(state => state.topCourses.data);
   const ongoingdata = useSelector(state => state.ongoingcourse.data);
@@ -77,7 +79,7 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
-   // refreshToken(token);
+    // refreshToken(token);
     setRefreshing(false);
   }, [refreshing]);
 
@@ -92,12 +94,12 @@ export const HomeScreen = ({navigation}) => {
     setClicked2(false);
     setClicked3(false);
     allCourse();
-   // refreshToken(token);
+    // refreshToken(token);
   }, []);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
@@ -113,58 +115,64 @@ export const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <Text style={styles.toptext}>Hello!</Text>
-        <Text style={styles.name}>{userData?.fullName}</Text>
+        <Text style={styles.name}>{data?.fullName}</Text>
         <View>
-          <FlatList
-            data={topHeaderData}
-            horizontal={true}
-            showsVerticalScrollIndicator={false}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                onPress={async () => {
-                  dispatch(addChapterList());
-                  dispatch(csChapterResponse({token, id: item.courseId}));
-                  const res = await overViewData(token, item.courseId);
-                  dispatch(addOverView(res));
-                  navigation.navigate('CourseScreen');
-                }}>
-                <View style={styles.itemContainer} key={item.id}>
-                  <ImageBackground
-                    source={{uri: item?.coursePhoto}}
-                    style={{
-                      height: 140,
-                      width: 260,
-                      borderRadius: 5,
-                      overflow: 'hidden',
-                    }}>
-                    <View
+          {topHeaderData &&
+              <FlatList
+              data={topHeaderData}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{marginStart: 25, paddingRight: 25}}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  onPress={async () => {
+                    dispatch(addChapterList());
+                    dispatch(csChapterResponse({token, id: item.courseId}));
+                    const res = await overViewData(token, item.courseId);
+                    dispatch(addOverView(res));
+                    navigation.navigate('CourseScreen');
+                  }}>
+                  <View style={styles.itemContainer} key={item.id}>
+                    <ImageBackground
+                      source={{uri: item?.coursePhoto}}
                       style={{
-                        height: 45,
-                        marginTop: 90,
-                        justifyContent: 'center',
-                        margin: 13,
+                        height: 140,
+                        width: 260,
+                        borderRadius: 5,
+                        overflow: 'hidden',
                       }}>
-                      <Text style={styles.courseText}>{item?.courseName}</Text>
-                    </View>
-                  </ImageBackground>
-                </View>
-              </TouchableOpacity>
-            )}></FlatList>
+                      <View
+                        style={{
+                          height: 45,
+                          marginTop: 90,
+                          justifyContent: 'center',
+                          margin: 13,
+                        }}>
+                        <Text style={styles.courseText}>{item?.courseName}</Text>
+                      </View>
+                    </ImageBackground>
+                  </View>
+                </TouchableOpacity>
+              )}></FlatList>
+          
+          }
+         
         </View>
         <View>
           <FlatList
             data={ongoingdata}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{marginStart: 25, paddingRight:25}}
             renderItem={({item}) => (
-              <View style={styles.itemContainer} key={item.id}>
+              <View style={styles.itemContainer2} key={item.id}>
                 <OnGoingComponent
                   source={{uri: item?.coursePhoto}}
                   name={item?.courseName}
                   chapter={item?.completedChapter}
                   ctdchapter={item?.totalChapter}
                   onPress={async () => {
-                  dispatch(addChapterList());
+                    dispatch(addChapterList());
                     dispatch(csChapterResponse({token, id: item.courseId}));
                     const res = await overViewData(token, item.courseId);
                     dispatch(addOverView(res));
@@ -175,15 +183,25 @@ export const HomeScreen = ({navigation}) => {
             )}></FlatList>
         </View>
 
-
-{categoriesData && choiceYourCourse && topCoursesData ?(
-  <></>
-):(
-<View style={{  flex: 1,alignItems:"center",marginTop:50,
-    justifyContent: "center"}}>
-            <ActivityIndicator animating={!categoriesData && !choiceYourCourse && !topCoursesData} size="small" color="#373737"/>
-            </View>
-)}
+        {categoriesData && choiceYourCourse && topCoursesData ? (
+          <></>
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              marginTop: 50,
+              justifyContent: 'center',
+            }}>
+            <ActivityIndicator
+              animating={
+                !categoriesData && !choiceYourCourse && !topCoursesData
+              }
+              size="small"
+              color="#373737"
+            />
+          </View>
+        )}
         <View style={{marginTop: 30}}>
           <View style={styles.categoryview}>
             <Text style={styles.category}>Categories</Text>
@@ -292,37 +310,42 @@ export const HomeScreen = ({navigation}) => {
             <FlatList
               data={choiceYourCourse}
               horizontal={true}
+              contentContainerStyle={{
+                marginStart: 25,
+                paddingRight: 40,
+                marginTop: 5,
+              }}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
                 <View style={styles.btmcourseview} key={item?.courseId}>
                   <TouchableOpacity
                     onPress={async () => {
-                  dispatch(addChapterList());
+                      dispatch(addChapterList());
                       dispatch(csChapterResponse({token, id: item.courseId}));
                       const res = await overViewData(token, item.courseId);
                       dispatch(addOverView(res));
                       navigation.navigate('CourseScreen');
                     }}>
-                    <Image
+                    <ImageBackground
                       source={{uri: item?.coursePhoto}}
-                      style={styles.imgview}
-                    />
-
+                      style={styles.imgview}>
+                      <View style={styles.designview}>
+                        <Text style={styles.design}>{item?.categoryName}</Text>
+                      </View>
+                    </ImageBackground>
                     <View style={styles.btmitemContainer}>
                       <View>
                         <Text style={styles.btmcourseText} ellipsizeMode="tail">
                           {item?.courseName}
                         </Text>
                         <Text style={styles.ChoiseCourseChapterNum}>
-                           {item?.chapterCount} Chapter
+                          {item?.chapterCount} Chapter
                         </Text>
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
               )}></FlatList>
-
-            {/* </View> */}
           </View>
         </View>
 
@@ -387,16 +410,33 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 140,
     width: 260,
-    justifyContent: 'space-between',
-    marginLeft: 25,
+    // justifyContent: 'space-between',
+    marginRight: 20,
     marginTop: 20,
+    // marginEnd:10,
+    // marginStart:25,
+    // marginLeft:25
+  },
+  itemContainer2: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 5,
+    height: 140,
+    // width:"75%",
+    // justifyContent: 'space-between',
+
+    marginTop: 20,
+    flex: 1,
+    width: 345,
+    // marginHorizontal:40,
+    // marginEnd:20,
+    marginRight: 20,
   },
 
   courseText: {
     fontFamily: Platform.OS == 'ios' ? 'Proxima Nova' : 'ProximaNova',
     fontSize: 16,
     textAlign: 'center',
-    color:"white"
+    color: 'white',
   },
   categoryview: {
     width: '100%',
@@ -409,7 +449,7 @@ const styles = StyleSheet.create({
 
     color: '#2B2B2B',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '600':'normal',
+    fontWeight: Platform.OS == 'ios' ? '600' : 'normal',
     fontSize: 18,
     letterSpacing: 0,
     lineHeight: 22,
@@ -423,7 +463,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
-    marginRight: 30,
+    marginRight: 20,
   },
   categorycontainer: {
     borderRadius: 6,
@@ -436,11 +476,34 @@ const styles = StyleSheet.create({
     borderColor: '#D3D3D3',
     flexDirection: 'row',
   },
+  designview: {
+    height: 12,
+    borderRadius: 3,
+    backgroundColor: '#FCBE4B',
+    marginTop:67,
+    marginRight:3,
+    paddingLeft:5,
+    paddingRight:5,
+    justifyContent:"center"
+
+ 
+
+  },
+  design: {
+    height:9,
+    color: '#373737',
+    fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
+    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontSize: 8,
+    letterSpacing: 0,
+    lineHeight: 9,
+    textAlign: 'center',
+  },
   categorytext: {
     height: 15,
     color: '#2B2B2B',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
@@ -467,10 +530,9 @@ const styles = StyleSheet.create({
   buttonActive: {
     height: 26,
     width: 50,
-
     textAlign: 'center',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
@@ -486,12 +548,10 @@ const styles = StyleSheet.create({
   button: {
     height: 26,
     width: 50,
-
     borderRadius: 6,
-
     textAlign: 'center',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
@@ -500,26 +560,29 @@ const styles = StyleSheet.create({
   },
   btmcourseview: {
     height: 138,
-    width: 142,
+    // width: 142,
     borderRadius: 5,
     flexDirection: 'row',
-
+    justifyContent: 'space-between',
     flexDirection: 'column',
     marginTop: 25,
-    margin: 6,
+    //  marginHorizontal:10
+    // marginStart:25,
+    marginRight: 14,
   },
   imgview: {
     width: 142,
-    height: 82,
-    borderTopStartRadius:5,
-    borderTopEndRadius:5,
+    height: 86,
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 5,
     overflow: 'hidden',
+    alignItems:'flex-end'
   },
   btmitemContainer: {
     backgroundColor: '#FFFFFF',
     borderBottomLeftRadius: 6,
     borderBottomRightRadius: 6,
-    height: 63,
+    height: 57,
     width: 142,
     justifyContent: 'space-between',
 
@@ -543,10 +606,10 @@ const styles = StyleSheet.create({
     height: 9,
     color: '#7A7A7A',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     fontSize: 8,
     lineHeight: 9,
-    
+    marginTop:3
   },
   businessContainer: {
     backgroundColor: '#FFFFFF',

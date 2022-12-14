@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '600':'normal',
+    fontWeight: Platform.OS == 'ios' ? '600' : 'normal',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 11.33,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     height: 20,
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? '500':'normal',
+    fontWeight: Platform.OS == 'ios' ? '500' : 'normal',
     fontSize: 16,
     letterSpacing: 0,
     lineHeight: 20,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
     color: '#FFFFFF',
     fontFamily: Platform.OS === 'ios' ? 'Proxima Nova' : 'proximanova-semibold',
-    fontWeight: Platform.OS == 'ios' ? 'bold':'normal',
+    fontWeight: Platform.OS == 'ios' ? 'bold' : 'normal',
     fontSize: 12,
     letterSpacing: 0,
     lineHeight: 15,
