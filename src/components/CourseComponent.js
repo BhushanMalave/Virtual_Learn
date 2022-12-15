@@ -30,7 +30,7 @@ export const CourseComponent = (props)=> {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{marginStart:25,paddingRight:25}}
           renderItem={({item}) => (
-            <View>
+            <View style={{marginRight:22}}>
               
               <View style={styles.imageContainer}>
                 <TouchableOpacity
@@ -54,7 +54,7 @@ export const CourseComponent = (props)=> {
               </View>
 
               <Text style={styles.courseName}>{item.courseName}</Text>
-              <View style={{flexDirection: 'row', marginLeft: 25}}>
+              <View style={{flexDirection: 'row'}}>
                 <Text style={styles.chapterCount}>
                   {item.chapterCount} Chapter
                 </Text>
@@ -113,8 +113,8 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   courseName: {
-    marginLeft: 25,
-    margin: 3,
+    marginTop:5,
+    marginBottom:4,
     fontWeight: '300',
     letterSpacing: 0,
     lineHeight: 20,
