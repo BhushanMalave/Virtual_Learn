@@ -36,7 +36,8 @@ export const FinalTest = ({navigation}) => {
 
   const token = useSelector(state => state.userDetails.token);
   const testid = useSelector(state => state.testdata.testId);
-  const userAnswers = useSelector(state => state.testdata.userAnswers);
+  const userAnswers = useSelector(state => state.finaltestdata.userAnswers);
+  console.log("=-=-=-=",userAnswers);
   const dispatch = useDispatch();
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -133,7 +134,7 @@ export const FinalTest = ({navigation}) => {
       const interval = setInterval(function () {
         if (--timer == -1) {
           stopHandler();
-          timeOver();
+          timeOver(userAnswers);
         } else {
           minutes = parseInt(timer / 60, 10);
           seconds = parseInt(timer % 60, 10);
@@ -203,7 +204,7 @@ export const FinalTest = ({navigation}) => {
       ],
     );
 
-  const timeOver = () =>
+  const timeOver = (userAnswers) =>
     Alert.alert(
       'Time is up!',
       'Click on Submit to Submit the Test',
@@ -217,10 +218,11 @@ export const FinalTest = ({navigation}) => {
               testId: data1?.testId,
               userAnswers: userAnswers,
             };
+            
             const res = await SubmitFinalTest(token, body);
-            dispatch(setTestPercentage(res));
-     
+              console.log(res)
             if (res) {
+              dispatch(setTestPercentage(res));
               dispatch(removeAll());
               navigation.navigate('FinalCongratulationScreen');
             }

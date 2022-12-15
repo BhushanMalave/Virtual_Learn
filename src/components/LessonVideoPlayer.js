@@ -94,21 +94,27 @@ export const LessonVideoPlayer = ({route, navigation}) => {
       <TouchableOpacity
         style={styles.imgbackView}
         onPress={async () => {
-          const body = {
-            pauseTime: timeformat1(time.currentTime),
-            lessonId: route.params.item.lessonId,
-            chapterId: route.params.item.chapterId,
-            courseId: data?.courseId,
-          };
-          // console.log(body);
-          const res = await PauseTime(token, body);
-          if (res.message == 'Updated SuccessFully') {
-            {
-              fullScreen && FullScreen();
+          if(!route.params.item.completed)
+          {
+            const body = {
+              pauseTime: timeformat1(time.currentTime),
+              lessonId: route.params.item.lessonId,
+              chapterId: route.params.item.chapterId,
+              courseId: data?.courseId,
+            };
+            // console.log(body);
+            const res = await PauseTime(token, body);
+            if (res.message == 'Updated SuccessFully') {
+              {
+                fullScreen && FullScreen();
+              }
+  
+              navigation.goBack();
             }
-
+          } else {
             navigation.goBack();
           }
+  
         }}>
         <Image
           source={require('../assets/images/icn_back_header.png')}
@@ -125,20 +131,26 @@ export const LessonVideoPlayer = ({route, navigation}) => {
         paused={isPlaying}
         fullscreen={true}
         onEnd={async () => {
-          const body = {
-            pauseTime: timeformat1(time.currentTime),
-            lessonId: route.params.item.lessonId,
-            chapterId: route.params.item.chapterId,
-            courseId: data?.courseId,
-          };    
-          const res = await PauseTime(token, body);
-          if (res.message == 'Updated SuccessFully') {
-            {
-              fullScreen && FullScreen();
+          if(!route.params.item.completed)
+          {
+            const body = {
+              pauseTime: timeformat1(time.currentTime),
+              lessonId: route.params.item.lessonId,
+              chapterId: route.params.item.chapterId,
+              courseId: data?.courseId,
+            };
+            const res = await PauseTime(token, body);
+            if (res.message == 'Updated SuccessFully') {
+              {
+                fullScreen && FullScreen();
+              }
+  
+              navigation.goBack();
             }
-
+          } else {
             navigation.goBack();
           }
+  
         }}
         onProgress={data => {
           setTime({...time, currentTime: data.currentTime});

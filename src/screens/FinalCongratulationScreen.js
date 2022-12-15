@@ -9,7 +9,7 @@ import {setFilterState} from '../redux/ReduxPersist/FilterSlice';
 import {setFinalResult} from '../redux/ReduxPersist/FinalTestSlice';
 
 export const FinalCongratulationScreen = ({navigation, route}) => {
-  console.log(route.params);
+
   const dispatch = useDispatch();
   const token = useSelector(state => state.userDetails.token);
   const data1 = useSelector(state => state.finaltestdata.questionData);
@@ -40,7 +40,7 @@ export const FinalCongratulationScreen = ({navigation, route}) => {
       <Text style={styles.coursename}>You have completed Chapter <Text style={{color:"#5A5A5A",fontWeight:"bold"}}>{testpercentage?.chapterNumber}<Text> - </Text>{testpercentage?.chapterName}</Text> from Course <Text style={{color:"#5A5A5A",fontWeight:"bold"}}>{testpercentage?.courseName}</Text></Text>
       <TouchableOpacity
         onPress={async () => {
-          const res = await FinalTestResult(token, data1.testId);
+          const res = await FinalTestResult(token, data1?.testId);
         
 
           dispatch(setFinalResult(res));

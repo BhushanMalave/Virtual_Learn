@@ -31,7 +31,8 @@ export const ForgotPassword = ({navigation}) => {
           'http://virtuallearn-env.eba-6xmym3vf.ap-south-1.elasticbeanstalk.com/newUser/resend',
           obj,
         );
-        console.log('forgot pwd', response.data.message);
+        // console.log('forgot pwd', response.data.message);
+        Toast.show(response.data.message, Toast.SHORT);
         if (response.data.message === 'OTP Valid For 2 Minutes') {
           navigation.navigate('Verification', {obj});
           setShowError(false);

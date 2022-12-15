@@ -162,7 +162,7 @@ export const CategoryDisplayScreen = ({navigation, route}) => {
         </View>
         {allcourse?(<>
           <Text style={styles.text2}>All courses</Text>
-        <View style={{marginHorizontal: 24}}>
+        <View style={{marginHorizontal: 24,marginBottom:30}}>
           {allcourse?.map(item => (
             <View key={item?.courseId}>
               <SearchFoundComponent
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   viewcatin: {
     marginTop: 15,
-    height: 80,
+    // height: 80,
     width: '100%',
     flexDirection: 'column',
     flexWrap: 'wrap',

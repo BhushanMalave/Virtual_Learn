@@ -215,8 +215,8 @@ export const BottomPopup = () => {
                 <Pressable
                   onPress={() => {
                     setClick5(!click5);
-                    catSC.push(50);
-                    catEC.push(100);
+                    dispatch(setChaSc(50));
+                    dispatch(setChaEc(100));
                   }}>
                   <View style={styles.durview}>
                     <Text style={styles.durtext}>50+ Chapters</Text>
