@@ -153,11 +153,13 @@ export const Login = ({navigation}) => {
                   <TextInput
                     name="password"
                     placeholder="Password"
+                    keyboardType='default'
                     placeholderTextColor={'grey'}
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
                     value={values.password}
                     style={styles.textinput}
+                    secureTextEntry={true}
                   />
                   <View style={styles.bottom}></View>
 
